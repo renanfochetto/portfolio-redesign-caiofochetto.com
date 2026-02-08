@@ -6,8 +6,9 @@ import { AboutSection } from "@/components/about-section"
 import { Footer } from "@/components/footer"
 
 export default function Home() {
+  console.log("[v0] Home page rendering")
   return (
-    <>
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
         <Hero />
@@ -16,6 +17,6 @@ export default function Home() {
         <AboutSection />
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
