@@ -1,0 +1,92 @@
+{
+  "header": {
+    "work": "Trabalho",
+    "experience": "Experiencia",
+    "about": "Sobre",
+    "contact": "Contato"
+  },
+  "hero": {
+    "badge": "Aberto a novas oportunidades",
+    "headingLine1": "Conectando marca, cultura",
+    "headingLine2": "e performance atraves",
+    "headingLine3": "de creators e dados.",
+    "subtitle": "15+ anos liderando estrategias de Creator Economy e Marketing de Performance para marcas globais na America Latina.",
+    "revenueGrowth": "Crescimento de receita",
+    "campaignReach": "Alcance de campanhas",
+    "engagementRate": "Taxa de engajamento",
+    "yearsExperience": "Anos de experiencia",
+    "cta": "Ver trabalhos",
+    "trustedBy": "Marcas que confiam"
+  },
+  "work": {
+    "sectionLabel": "Trabalhos selecionados",
+    "heading": "Cases que geram resultado",
+    "viewCase": "Ver case completo"
+  },
+  "experience": {
+    "sectionLabel": "Trajetoria",
+    "heading": "Experiencia profissional",
+    "present": "Atual"
+  },
+  "about": {
+    "sectionLabel": "Sobre",
+    "heading": "Caio Fochetto",
+    "p1": "Profissional de marketing com mais de 15 anos de experiencia conectando marca, cultura e performance. Especialista em Creator Economy, marketing de influencia e estrategia digital.",
+    "p2": "Ja liderei projetos para marcas como Samsung, Heineken, Red Bull, Airbnb, entre outras, sempre com foco em resultados mensuraveis e construcao de marca a longo prazo.",
+    "p3": "Experiencia global com foco na America Latina, atuando na interseccao entre criatividade, dados e tecnologia.",
+    "coreExpertise": "Especialidades",
+    "expertise": ["Creator Economy", "Marketing de Performance", "Influencer Marketing", "Estrategia Digital", "Brand Building", "Gestao de Equipes"]
+  },
+  "footer": {
+    "cta": "Vamos conversar?",
+    "ctaDescription": "Aberto a oportunidades em Creator Economy, Performance Marketing e lideranca de marketing.",
+    "ctaButton": "Enviar email",
+    "copyright": "Todos os direitos reservados."
+  },
+  "cases": {
+    "samsung-gaming": {
+      "title": "Gaming & Creator Economy",
+      "description": "Estrategia completa de creator economy para Samsung Gaming, conectando a marca ao universo gamer atraves de influenciadores e conteudo de performance.",
+      "challenge": "A Samsung precisava se posicionar no mercado de gaming na America Latina, competindo com marcas nativas do segmento que ja tinham forte presenca na comunidade gamer.",
+      "solution": "Desenvolvemos uma estrategia de creator economy integrada, combinando influenciadores de gaming com campanhas de performance e conteudo original para plataformas digitais.",
+      "insights": [
+        "Creators nativos do segmento geram 3x mais engajamento que celebridades tradicionais",
+        "Conteudo co-criado com creators teve CPM 40% menor que anuncios tradicionais",
+        "Estrategia always-on superou campanhas pontuais em awareness e conversao"
+      ]
+    },
+    "heineken-creators": {
+      "title": "Creator Marketing & Eventos",
+      "description": "Programa de creator marketing para Heineken, integrando influenciadores em campanhas de marca e eventos ao vivo para maximizar alcance e engajamento.",
+      "challenge": "Heineken buscava rejuvenescer sua comunicacao e conectar-se com o publico millennial e Gen Z sem perder a essencia premium da marca.",
+      "solution": "Criamos um programa de creators de longo prazo, integrando influenciadores em momentos-chave da marca como festivais, lancamentos e campanhas sazonais.",
+      "insights": [
+        "Programa de embaixadores de longo prazo gera 2x mais autenticidade percebida",
+        "Integracao de creators em eventos ao vivo amplifica o alcance em 5x nas redes sociais",
+        "Mix de micro e macro influenciadores otimiza custo-beneficio da campanha"
+      ]
+    },
+    "redbull-content": {
+      "title": "Estrategia de Conteudo Digital",
+      "description": "Lideranca da estrategia de conteudo digital para Red Bull, criando um ecossistema de conteudo escalavel com creators e formatos nativos de cada plataforma.",
+      "challenge": "Red Bull precisava escalar sua producao de conteudo digital mantendo a qualidade e autenticidade que definem a marca.",
+      "solution": "Estruturamos um hub de conteudo com creators especializados, produzindo conteudo nativo para cada plataforma com um sistema de producao agil e metricas claras de performance.",
+      "insights": [
+        "Conteudo nativo de plataforma gera 4x mais engajamento que conteudo adaptado",
+        "Hub de creators reduz custo de producao em 60% comparado a agencias tradicionais",
+        "Formatos curtos (Reels/TikTok) tiveram maior taxa de compartilhamento organico"
+      ]
+    },
+    "airbnb-experiences": {
+      "title": "Creator Partnerships LATAM",
+      "description": "Estrategia de parcerias com creators para Airbnb Experiences na America Latina, conectando anfitrioes locais com influenciadores para impulsionar reservas.",
+      "challenge": "Airbnb Experiences tinha baixa penetracao na America Latina e precisava gerar awareness e conversao simultaneamente com budget limitado.",
+      "solution": "Desenvolvemos parcerias com creators de viagem e lifestyle em mercados-chave da LATAM, criando conteudo autentico que conectava experiencias locais com o publico digital.",
+      "insights": [
+        "Creators locais geram taxa de conversao 3x maior que campanhas globais adaptadas",
+        "Conteudo de experiencia autentica teve ROI 5x maior que anuncios pagos tradicionais",
+        "Estrategia de SEO local combinada com creator content ampliou trafego organico em 280%"
+      ]
+    }
+  }
+}
