@@ -1,0 +1,92 @@
+{
+  "header": {
+    "work": "Work",
+    "experience": "Experience",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Open to new opportunities",
+    "headingLine1": "Connecting brand, culture",
+    "headingLine2": "and performance through",
+    "headingLine3": "creators and data.",
+    "subtitle": "15+ years leading Creator Economy and Performance Marketing strategies for global brands across Latin America.",
+    "revenueGrowth": "Revenue growth",
+    "campaignReach": "Campaign reach",
+    "engagementRate": "Engagement rate",
+    "yearsExperience": "Years of experience",
+    "cta": "View work",
+    "trustedBy": "Trusted by"
+  },
+  "work": {
+    "sectionLabel": "Selected work",
+    "heading": "Cases that drive results",
+    "viewCase": "View full case"
+  },
+  "experience": {
+    "sectionLabel": "Career",
+    "heading": "Professional experience",
+    "present": "Present"
+  },
+  "about": {
+    "sectionLabel": "About",
+    "heading": "Caio Fochetto",
+    "p1": "Marketing professional with 15+ years of experience connecting brand, culture, and performance. Expert in Creator Economy, influencer marketing, and digital strategy.",
+    "p2": "Led projects for brands like Samsung, Heineken, Red Bull, Airbnb, and others, always focused on measurable results and long-term brand building.",
+    "p3": "Global experience focused on Latin America, working at the intersection of creativity, data, and technology.",
+    "coreExpertise": "Core Expertise",
+    "expertise": ["Creator Economy", "Performance Marketing", "Influencer Marketing", "Digital Strategy", "Brand Building", "Team Leadership"]
+  },
+  "footer": {
+    "cta": "Let's talk?",
+    "ctaDescription": "Open to opportunities in Creator Economy, Performance Marketing, and marketing leadership.",
+    "ctaButton": "Send email",
+    "copyright": "All rights reserved."
+  },
+  "cases": {
+    "samsung-gaming": {
+      "title": "Gaming & Creator Economy",
+      "description": "Full creator economy strategy for Samsung Gaming, connecting the brand to the gaming universe through influencers and performance content.",
+      "challenge": "Samsung needed to position itself in the LATAM gaming market, competing with segment-native brands that already had a strong presence in the gaming community.",
+      "solution": "We developed an integrated creator economy strategy, combining gaming influencers with performance campaigns and original content for digital platforms.",
+      "insights": [
+        "Segment-native creators generate 3x more engagement than traditional celebrities",
+        "Co-created content with creators had 40% lower CPM than traditional ads",
+        "Always-on strategy outperformed one-off campaigns in awareness and conversion"
+      ]
+    },
+    "heineken-creators": {
+      "title": "Creator Marketing & Events",
+      "description": "Creator marketing program for Heineken, integrating influencers into brand campaigns and live events to maximize reach and engagement.",
+      "challenge": "Heineken sought to rejuvenate its communication and connect with millennial and Gen Z audiences without losing the brand's premium essence.",
+      "solution": "We created a long-term creator program, integrating influencers at key brand moments such as festivals, launches, and seasonal campaigns.",
+      "insights": [
+        "Long-term ambassador programs generate 2x more perceived authenticity",
+        "Integrating creators in live events amplifies social reach by 5x",
+        "Mix of micro and macro influencers optimizes campaign cost-effectiveness"
+      ]
+    },
+    "redbull-content": {
+      "title": "Digital Content Strategy",
+      "description": "Led the digital content strategy for Red Bull, creating a scalable content ecosystem with creators and platform-native formats.",
+      "challenge": "Red Bull needed to scale its digital content production while maintaining the quality and authenticity that define the brand.",
+      "solution": "We structured a content hub with specialized creators, producing platform-native content with an agile production system and clear performance metrics.",
+      "insights": [
+        "Platform-native content generates 4x more engagement than adapted content",
+        "Creator hub reduces production costs by 60% compared to traditional agencies",
+        "Short formats (Reels/TikTok) had the highest organic sharing rate"
+      ]
+    },
+    "airbnb-experiences": {
+      "title": "Creator Partnerships LATAM",
+      "description": "Creator partnership strategy for Airbnb Experiences in Latin America, connecting local hosts with influencers to boost bookings.",
+      "challenge": "Airbnb Experiences had low penetration in Latin America and needed to generate awareness and conversion simultaneously with limited budget.",
+      "solution": "We developed partnerships with travel and lifestyle creators in key LATAM markets, creating authentic content that connected local experiences with digital audiences.",
+      "insights": [
+        "Local creators generate 3x higher conversion rate than adapted global campaigns",
+        "Authentic experience content had 5x higher ROI than traditional paid ads",
+        "Local SEO strategy combined with creator content increased organic traffic by 280%"
+      ]
+    }
+  }
+}

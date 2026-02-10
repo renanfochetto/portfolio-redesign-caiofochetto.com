@@ -1,88 +1,54 @@
+"use client";
+
+import { useI18n } from "@/lib/i18n";
+import { Briefcase } from "lucide-react";
+
 const experiences = [
-  {
-    period: "2023 - 2026",
-    role: "Director, Creator & Influence",
-    company: "Octagon (IPG)",
-    description:
-      "Led creator economy strategy for major brands including Betfair, Ambev, and Budweiser. Managed multi-million dollar influencer campaigns with data-driven optimization.",
-    brands: ["Betfair", "Ambev", "Budweiser"],
-  },
-  {
-    period: "2021 - 2023",
-    role: "LATAM Operations Lead",
-    company: "Jellysmack",
-    description:
-      "Spearheaded Latin American expansion for the world's largest creator company. Built operational frameworks for creator partnerships and content monetization.",
-    brands: ["Creator Partnerships", "LATAM Expansion"],
-  },
-  {
-    period: "2020 - 2021",
-    role: "Content & Product Manager",
-    company: "Playground",
-    description:
-      "Managed content strategy and product development, bridging creative vision with technical execution for digital-first entertainment.",
-    brands: ["Content Strategy", "Product Development"],
-  },
-  {
-    period: "2012 - 2019",
-    role: "Digital Platforms Manager",
-    company: "A+E Networks",
-    description:
-      "Led digital transformation across HISTORY, A&E, Lifetime, and Formula E channels. Achieved +634% revenue growth and +231% watch time through strategic social distribution.",
-    brands: ["HISTORY", "A&E", "Lifetime", "Formula E"],
-  },
-]
+  { role: "Director of Creator Economy", company: "Octagon", period: "2022 - ", location: "Sao Paulo, BR" },
+  { role: "LATAM Lead", company: "Jellysmack", period: "2021 - 2022", location: "Remote" },
+  { role: "Head of Digital Strategy", company: "Agencia XYZ", period: "2018 - 2021", location: "Sao Paulo, BR" },
+  { role: "Senior Marketing Manager", company: "Agency ABC", period: "2015 - 2018", location: "Sao Paulo, BR" },
+  { role: "Digital Marketing Analyst", company: "StartupCo", period: "2012 - 2015", location: "Sao Paulo, BR" },
+];
 
 export function ExperienceSection() {
+  const { t } = useI18n();
+
   return (
     <section id="experience" className="px-6 py-24 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-12">
-          <p className="text-xs font-medium uppercase tracking-widest text-primary">
-            Career Path
-          </p>
-          <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">
-            Experience
-          </h2>
-        </div>
+        <p className="text-xs font-medium uppercase tracking-widest text-primary">
+          {t.experience.sectionLabel}
+        </p>
+        <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">
+          {t.experience.heading}
+        </h2>
 
-        <div className="flex flex-col gap-0">
-          {experiences.map((exp) => (
+        <div className="mt-12 space-y-0">
+          {experiences.map((exp, i) => (
             <div
-              key={exp.period}
-              className="group grid gap-4 border-t border-border py-8 transition-colors hover:bg-secondary/30 md:grid-cols-[200px_1fr] md:gap-8 md:px-4"
+              key={i}
+              className="flex gap-6 border-b border-border py-6 first:border-t"
             >
-              <div className="flex-shrink-0">
+              <div className="w-32 flex-shrink-0">
                 <p className="font-mono text-sm text-muted-foreground">
-                  {exp.period}
+                  {exp.period.endsWith("- ") ? `${exp.period}${t.experience.present}` : exp.period}
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-foreground">
+                <h3 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+                  <Briefcase className="h-4 w-4 text-primary" />
                   {exp.role}
                 </h3>
-                <p className="mt-0.5 text-sm font-medium text-primary">
+                <p className="mt-0.5 ml-6 text-sm font-medium text-primary">
                   {exp.company}
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {exp.description}
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {exp.brands.map((brand) => (
-                    <span
-                      key={brand}
-                      className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
-                    >
-                      {brand}
-                    </span>
-                  ))}
-                </div>
+                <p className="ml-6 text-xs text-muted-foreground">{exp.location}</p>
               </div>
             </div>
           ))}
-          <div className="border-t border-border" />
         </div>
       </div>
     </section>
-  )
+  );
 }

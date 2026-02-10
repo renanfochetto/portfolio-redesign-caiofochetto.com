@@ -1,73 +1,53 @@
-const skills = [
-  "Creator Economy",
-  "Influencer Marketing",
-  "Performance Marketing",
-  "Brand Strategy",
-  "Digital Transformation",
-  "Content Strategy",
-  "Community Building",
-  "Data Analytics",
-  "Campaign Management",
-  "Team Leadership",
-  "Stakeholder Management",
-  "P&L Management",
-]
+"use client";
+
+import { useI18n } from "@/lib/i18n";
+import { Sparkles, Globe } from "lucide-react";
 
 export function AboutSection() {
+  const { t } = useI18n();
+
   return (
     <section id="about" className="px-6 py-24 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-12 md:grid-cols-[1fr_1.5fr]">
-          {/* Left column */}
-          <div>
-            <p className="text-xs font-medium uppercase tracking-widest text-primary">
-              About
+        <p className="text-xs font-medium uppercase tracking-widest text-primary">
+          {t.about.sectionLabel}
+        </p>
+        <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">
+          {t.about.heading}
+        </h2>
+
+        <div className="mt-10 max-w-3xl">
+          <div className="space-y-4">
+            <p className="text-base leading-relaxed text-muted-foreground">
+              {t.about.p1}
             </p>
-            <h2 className="mt-2 text-3xl font-bold text-foreground md:text-4xl">
-              Translating culture into brand strategy
-            </h2>
+            <p className="text-base leading-relaxed text-muted-foreground">
+              {t.about.p2}
+            </p>
+            <p className="flex items-start gap-2 text-base leading-relaxed text-muted-foreground">
+              <Globe className="mt-1 h-4 w-4 flex-shrink-0 text-primary/60" />
+              {t.about.p3}
+            </p>
           </div>
 
-          {/* Right column */}
-          <div className="flex flex-col gap-6">
-            <p className="text-base leading-relaxed text-muted-foreground">
-              I am a marketing leader with 15+ years of experience at the
-              intersection of brand, culture, and performance. My career spans
-              global media companies, creator-economy startups, and leading
-              agencies, always with a focus on building strategies that create
-              genuine cultural impact.
+          <div className="mt-8">
+            <p className="mb-3 flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              {t.about.coreExpertise}
             </p>
-            <p className="text-base leading-relaxed text-muted-foreground">
-              I specialize in connecting brands to audiences through creators and
-              data-driven strategies. From leading digital transformation at A&E
-              Networks to scaling influencer campaigns for Budweiser during the
-              FIFA World Cup, my work has consistently delivered measurable results
-              while building lasting brand equity.
-            </p>
-            <p className="text-base leading-relaxed text-muted-foreground">
-              Based in Brazil with global experience across LATAM, North America,
-              and Europe. Fluent in Portuguese, English, and Spanish.
-            </p>
-
-            {/* Skills */}
-            <div className="mt-4">
-              <p className="mb-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                Core Expertise
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-2">
+              {t.about.expertise.map((skill: string) => (
+                <span
+                  key={skill}
+                  className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium text-primary"
+                >
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

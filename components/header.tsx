@@ -1,94 +1,90 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Menu, X } from "lucide-react"
-
-const navLinks = [
-  { label: "Work", href: "#work" },
-  { label: "Experience", href: "#experience" },
-  { label: "About", href: "#about" },
-]
+import Link from "next/link";
+import { useI18n } from "@/lib/i18n";
+import { Menu, X, Globe } from "lucide-react";
+import { useState } from "react";
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const { locale, t } = useI18n();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20)
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  const otherLocale = locale === "pt" ? "en" : "pt";
+  const localeHref = `/${otherLocale}`;
+
+  const navItems = [
+    { label: t.header.work, href: `/${locale}#work` },
+    { label: t.header.experience, href: `/${locale}#experience` },
+    { label: t.header.about, href: `/${locale}#about` },
+    { label: t.header.contact, href: `/${locale}#contact` },
+  ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 lg:px-8">
+    <header className="fixed top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
+      <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link
-          href="/"
-          className="text-lg font-semibold tracking-tight text-foreground"
+          href={`/${locale}`}
+          className="text-sm font-bold tracking-tight text-foreground"
         >
-          Caio Fochetto
+          CF<span className="text-primary">.</span>
         </Link>
 
-        {/* Desktop Nav */}
+        {/* Desktop nav */}
         <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              {link.label}
-            </a>
+              {item.label}
+            </Link>
           ))}
-          <a
-            href="mailto:caiofochetto@gmail.com"
-            className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+          <Link
+            href={localeHref}
+            className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
           >
-            Get in Touch
-          </a>
+            <Globe className="h-3.5 w-3.5" />
+            {otherLocale.toUpperCase()}
+          </Link>
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          type="button"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground md:hidden"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-        >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        {/* Mobile toggle */}
+        <div className="flex items-center gap-3 md:hidden">
+          <Link
+            href={localeHref}
+            className="flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground"
+          >
+            <Globe className="h-3 w-3" />
+            {otherLocale.toUpperCase()}
+          </Link>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-foreground"
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </nav>
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="border-t border-border bg-background/95 backdrop-blur-md md:hidden">
-          <div className="flex flex-col gap-1 px-6 py-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-3 py-3 text-base text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="border-t border-border bg-background px-6 py-4 md:hidden">
+          <div className="flex flex-col gap-4">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                {link.label}
-              </a>
+                {item.label}
+              </Link>
             ))}
-            <a
-              href="mailto:caiofochetto@gmail.com"
-              className="mt-2 inline-flex h-12 items-center justify-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground"
-            >
-              Get in Touch
-            </a>
           </div>
         </div>
       )}
     </header>
-  )
+  );
 }
