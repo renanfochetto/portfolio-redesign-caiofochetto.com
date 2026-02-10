@@ -1,4 +1,10 @@
+import type { Config } from "tailwindcss";
+
 export default {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       colors: {
@@ -12,10 +18,6 @@ export default {
         "secondary-foreground": "var(--secondary-foreground)",
         muted: "var(--muted)",
         "muted-foreground": "var(--muted-foreground)",
-        accent: "var(--accent)",
-        "accent-foreground": "var(--accent-foreground)",
-        destructive: "var(--destructive)",
-        "destructive-foreground": "var(--destructive-foreground)",
         border: "var(--border)",
         input: "var(--input)",
       },
@@ -24,11 +26,6 @@ export default {
         serif: ["var(--font-playfair)", "Playfair Display", "Georgia", "serif"],
         mono: ["Geist Mono", "monospace"],
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
     },
   },
-};
+} satisfies Config;

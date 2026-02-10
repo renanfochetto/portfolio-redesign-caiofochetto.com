@@ -2,33 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #0a0a0a;
-  --foreground: #fafafa;
-  --card: #111111;
-  --card-foreground: #fafafa;
-  --primary: #caff00;
-  --primary-foreground: #0a0a0a;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #fafafa;
-  --muted: #1a1a1a;
-  --muted-foreground: #737373;
-  --border: #262626;
-  --input: #262626;
-  --ring: #caff00;
-}
+@layer base {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #fafafa;
+    --card: #111111;
+    --card-foreground: #fafafa;
+    --primary: #caff00;
+    --primary-foreground: #0a0a0a;
+    --secondary: #1a1a1a;
+    --secondary-foreground: #fafafa;
+    --muted: #1a1a1a;
+    --muted-foreground: #737373;
+    --border: #262626;
+    --input: #262626;
+    --ring: #caff00;
+    --font-inter: "Inter";
+    --font-playfair: "Playfair Display";
+  }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: inherit;
-}
+  html {
+    scroll-behavior: smooth;
+  }
 
-html {
-  scroll-behavior: smooth;
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
 }
 
 ::selection {
-  background-color: #caff00;
-  color: #0a0a0a;
+  @apply bg-primary text-primary-foreground;
 }
