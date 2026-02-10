@@ -1,7 +1,8 @@
-@import "@tailwindcss/postcss";
-@import "tw-animate-css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@custom-variant dark (&:is(.dark *));
+@import "tw-animate-css";
 
 :root {
   --background: #0a0a0a;
