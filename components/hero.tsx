@@ -3,8 +3,7 @@
 import { useI18n } from "@/lib/i18n";
 import { ArrowDown, TrendingUp, Users, Target, Clock } from "lucide-react";
 import { AnimatedCounter } from "./animated-counter";
-
-const brands = ["Samsung", "Heineken", "Red Bull", "Airbnb", "Jellysmack", "Octagon"];
+import { LogoCarousel } from "./logo-carousel";
 
 export function Hero() {
   const { t } = useI18n();
@@ -73,16 +72,7 @@ export function Hero() {
         </div>
 
         <div className="mt-10 border-t border-border pt-6">
-          <p className="mb-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-            {t.hero.trustedBy}
-          </p>
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
-            {brands.map((b) => (
-              <span key={b} className="text-sm font-medium text-muted-foreground/60">
-                {b}
-              </span>
-            ))}
-          </div>
+          <LogoCarousel />
         </div>
       </div>
     </section>
