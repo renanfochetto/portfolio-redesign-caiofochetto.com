@@ -35,22 +35,13 @@
     "p2": "I built and led influencer marketing operations for brands like Budweiser, Betfair, and Ambev at Octagon, and scaled Jellysmack's operations across Latin America from the ground up. Before that, I spent nearly 8 years at A+E Networks managing digital platforms for HISTORY, A&E, Lifetime, and Formula E.",
     "p3": "I work at the intersection of creativity, data, and culture — where global brands need to speak to real communities.",
     "coreExpertise": "Core Expertise",
-    "expertise": [
-      "Creator Economy",
-      "Performance Marketing",
-      "Influencer Marketing",
-      "Digital Strategy",
-      "Brand Building",
-      "Team Leadership"
-    ]
+    "expertise": ["Creator Economy", "Performance Marketing", "Influencer Marketing", "Digital Strategy", "Brand Building", "Team Leadership"]
   },
   "footer": {
     "cta": "Let's talk?",
     "ctaDescription": "Open to opportunities in Creator Economy, Performance Marketing, and marketing leadership.",
     "ctaButton": "Send email",
-    "copyright": "All rights reserved.",
-    "developedBy": "Developed by",
-    "developerName": "Renan Fochetto"
+    "copyright": "All rights reserved."
   },
   "cases": {
     "history-ae-digital-transformation": {
@@ -102,79 +93,12 @@
       "year": "2024",
       "description": "Always-on influencer marketing strategy for Betfair, master sponsor of Vasco da Gama and Cruzeiro, transforming sponsorship into continuous cultural presence inside fan communities.",
       "challenge": "In a highly competitive sports betting market, Betfair needed to go beyond logo exposure and transform its sponsorship into genuine cultural presence — speaking the language of supporters, not corporate marketing.",
-      "solution": "Developed an always-on strategy with niche creator squads deeply embedded in each club's fan culture. The approach combined platform-native content, editorial alignment with the football calendar, and real-time performance monitoring via a Power BI dashboard built with BI teams — enabling continuous optimization of creators, formats, and narratives.",
+      "solution": "Developed an always-on strategy with niche creator squads deeply embedded in each club's fan culture. The approach combined platform-native content, editorial alignment with the football calendar, and real-time performance monitoring via a Power BI dashboard built with BI teams.",
       "insights": [
         "Niche communities deliver more authentic engagement than mass reach campaigns",
         "Creators culturally embedded in the fan base produce content that doesn't feel like advertising",
         "Data-driven optimization (Power BI) ensures sustained performance instead of isolated spikes"
       ]
     }
-  },
-  "experience": {
-    "jobs": [
-      {
-        "id": "octagon",
-        "role": "Director of Digital Content, Influencer Marketing & Talent",
-        "company": "Octagon",
-        "location": "São Paulo, BR",
-        "startYear": 2023,
-        "endYear": 2026,
-        "description": "Led digital content and influencer marketing operations for brands including Betfair, Ambev, and Budweiser. Managed creator ecosystems, always-on strategies, and activations for global sports events.",
-        "skills": [
-          "Creator Economy",
-          "Influencer Marketing",
-          "Brand Experience",
-          "Digital Media",
-          "Project Management"
-        ]
-      },
-      {
-        "id": "jellysmack",
-        "role": "LATAM Operations Lead",
-        "company": "Jellysmack",
-        "location": "Remote",
-        "startYear": 2021,
-        "endYear": 2023,
-        "description": "Responsible for the company's operations across Latin America, scaling the business from zero in markets like Brazil, Mexico, and Argentina. Managed creator partnerships, strategic deals, and regional revenue expansion.",
-        "skills": [
-          "Creator Economy",
-          "Leadership",
-          "Digital Strategy",
-          "Social Media",
-          "Business Expansion"
-        ]
-      },
-      {
-        "id": "playground",
-        "role": "Content and Product Manager",
-        "company": "Playground",
-        "location": "São Paulo, BR",
-        "startYear": 2020,
-        "endYear": 2021,
-        "description": "Managed content and editorial projects, developing distribution and monetization strategies for digital content creators.",
-        "skills": [
-          "Creator Economy",
-          "Project Management",
-          "Content Strategy",
-          "Social Media Marketing"
-        ]
-      },
-      {
-        "id": "aeNetworks",
-        "role": "Digital Platforms Manager",
-        "company": "A+E Networks",
-        "location": "São Paulo, BR",
-        "startYear": 2012,
-        "endYear": 2019,
-        "description": "Managed digital platforms for HISTORY, A&E, Lifetime, and Formula E. Led On Demand content programming, new business development, and Branded Content initiatives. Delivered +634% revenue growth across the brands' digital channels.",
-        "skills": [
-          "Digital Strategy",
-          "Branded Content",
-          "Platform Monetization",
-          "Leadership",
-          "Brand Marketing"
-        ]
-      }
-    ]
   }
 }
