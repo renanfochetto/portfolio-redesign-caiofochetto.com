@@ -15,6 +15,7 @@ export function Hero() {
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
           <span className="text-xs font-medium text-primary">{t.hero.badge}</span>
         </div>
+        <p className="mt-2 text-xs text-muted-foreground">São Paulo · Disponível para trabalho remoto</p>
 
         <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-6xl lg:text-7xl">
           <span className="text-balance">
@@ -46,28 +47,28 @@ export function Hero() {
             <p className="text-3xl font-bold text-primary md:text-4xl">
               <AnimatedCounter value={634} prefix="+" suffix="%" />
             </p>
-            <p className="text-sm text-muted-foreground">{t.hero.revenueGrowth}</p>
+            <p className="text-sm text-foreground/70">{t.hero.revenueGrowth}</p>
           </div>
           <div className="flex flex-col gap-2">
             <Users className="h-5 w-5 text-muted-foreground" />
             <p className="text-3xl font-bold text-foreground md:text-4xl">
               <AnimatedCounter value={75} suffix="M+" />
             </p>
-            <p className="text-sm text-muted-foreground">{t.hero.campaignReach}</p>
+            <p className="text-sm text-foreground/70">{t.hero.campaignReach}</p>
           </div>
           <div className="flex flex-col gap-2">
             <Target className="h-5 w-5 text-muted-foreground" />
             <p className="text-3xl font-bold text-foreground md:text-4xl">
               <AnimatedCounter value={7} suffix=".5%" />
             </p>
-            <p className="text-sm text-muted-foreground">{t.hero.engagementRate}</p>
+            <p className="text-sm text-foreground/70">{t.hero.engagementRate}</p>
           </div>
           <div className="flex flex-col gap-2">
             <Clock className="h-5 w-5 text-muted-foreground" />
             <p className="text-3xl font-bold text-foreground md:text-4xl">
               <AnimatedCounter value={15} suffix="+" />
             </p>
-            <p className="text-sm text-muted-foreground">{t.hero.yearsExperience}</p>
+            <p className="text-sm text-foreground/70">{t.hero.yearsExperience}</p>
           </div>
         </div>
 

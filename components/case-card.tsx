@@ -37,7 +37,7 @@ export function CaseCard({
         <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
       </div>
 
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+      <p className="mt-3 text-sm leading-relaxed text-foreground/75">
         {description}
       </p>
 
