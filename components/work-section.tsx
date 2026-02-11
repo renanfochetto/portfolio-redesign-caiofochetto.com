@@ -2,6 +2,7 @@
 
 import { useI18n } from "@/lib/i18n";
 import { CaseCard } from "./case-card";
+import { AnimatedSection, AnimatedItem } from "./animated-section";
 import { caseStudies } from "@/lib/cases";
 
 const metricLabels: Record<string, Record<string, string>> = {
@@ -32,7 +33,7 @@ export function WorkSection() {
 
   return (
     <section id="work" className="px-6 py-24 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <AnimatedSection className="mx-auto max-w-6xl">
         <p className="text-xs font-medium uppercase tracking-widest text-primary">
           {t.work.sectionLabel}
         </p>
@@ -41,26 +42,27 @@ export function WorkSection() {
         </h2>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {caseStudies.map((study) => {
+          {caseStudies.map((study, idx) => {
             const caseT = casesDict[study.slug];
             return (
-              <CaseCard
-                key={study.slug}
-                href={`/${locale}/case/${study.slug}`}
-                brand={study.brand}
-                title={caseT?.title || study.brand}
-                description={caseT?.description || ""}
-                metrics={study.metrics.map((m) => ({
-                  value: m.value,
-                  label: labels[m.labelKey] || m.labelKey,
-                }))}
-                tags={study.tags}
-                viewCaseLabel={t.work.viewCase}
-              />
+              <AnimatedItem key={study.slug} index={idx}>
+                <CaseCard
+                  href={`/${locale}/case/${study.slug}`}
+                  brand={study.brand}
+                  title={caseT?.title || study.brand}
+                  description={caseT?.description || ""}
+                  metrics={study.metrics.map((m) => ({
+                    value: m.value,
+                    label: labels[m.labelKey] || m.labelKey,
+                  }))}
+                  tags={study.tags}
+                  viewCaseLabel={t.work.viewCase}
+                />
+              </AnimatedItem>
             );
           })}
         </div>
-      </div>
+      </AnimatedSection>
     </section>
   );
 }

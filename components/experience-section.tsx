@@ -1,6 +1,7 @@
 "use client";
 import { useI18n } from "@/lib/i18n";
 import { Briefcase } from "lucide-react";
+import { AnimatedSection, AnimatedItem } from "./animated-section";
 
 const experiences = [
   {
@@ -37,7 +38,7 @@ export function ExperienceSection() {
   const { t, locale } = useI18n();
   return (
     <section id="experience" className="px-6 py-24 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <AnimatedSection className="mx-auto max-w-6xl">
         <p className="text-xs font-medium uppercase tracking-widest text-primary">
           {t.experience.sectionLabel}
         </p>
@@ -46,8 +47,9 @@ export function ExperienceSection() {
         </h2>
         <div className="mt-12 space-y-0">
           {experiences.map((exp, i) => (
-            <div
+            <AnimatedItem
               key={i}
+              index={i}
               className="flex gap-6 border-b border-border py-6 first:border-t"
             >
               <div className="w-32 flex-shrink-0">
@@ -65,10 +67,10 @@ export function ExperienceSection() {
                 <p className="mt-1 text-sm font-medium text-primary">{exp.company}</p>
                 <p className="mt-0.5 text-sm text-muted-foreground">{exp.location}</p>
               </div>
-            </div>
+            </AnimatedItem>
           ))}
         </div>
-      </div>
+      </AnimatedSection>
     </section>
   );
 }

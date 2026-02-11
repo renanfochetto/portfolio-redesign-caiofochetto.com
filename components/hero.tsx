@@ -2,6 +2,7 @@
 
 import { useI18n } from "@/lib/i18n";
 import { ArrowDown, TrendingUp, Users, Target, Clock } from "lucide-react";
+import { AnimatedCounter } from "./animated-counter";
 
 const brands = ["Samsung", "Heineken", "Red Bull", "Airbnb", "Jellysmack", "Octagon"];
 
@@ -43,22 +44,30 @@ export function Hero() {
         <div className="mt-12 grid grid-cols-2 gap-6 border-t border-border pt-8 md:grid-cols-4 md:gap-8">
           <div className="flex flex-col gap-2">
             <TrendingUp className="h-5 w-5 text-primary" />
-            <p className="text-3xl font-bold text-primary md:text-4xl">+634%</p>
+            <p className="text-3xl font-bold text-primary md:text-4xl">
+              <AnimatedCounter value={634} prefix="+" suffix="%" />
+            </p>
             <p className="text-sm text-muted-foreground">{t.hero.revenueGrowth}</p>
           </div>
           <div className="flex flex-col gap-2">
             <Users className="h-5 w-5 text-muted-foreground" />
-            <p className="text-3xl font-bold text-foreground md:text-4xl">75M+</p>
+            <p className="text-3xl font-bold text-foreground md:text-4xl">
+              <AnimatedCounter value={75} suffix="M+" />
+            </p>
             <p className="text-sm text-muted-foreground">{t.hero.campaignReach}</p>
           </div>
           <div className="flex flex-col gap-2">
             <Target className="h-5 w-5 text-muted-foreground" />
-            <p className="text-3xl font-bold text-foreground md:text-4xl">7.5%</p>
+            <p className="text-3xl font-bold text-foreground md:text-4xl">
+              <AnimatedCounter value={7} suffix=".5%" />
+            </p>
             <p className="text-sm text-muted-foreground">{t.hero.engagementRate}</p>
           </div>
           <div className="flex flex-col gap-2">
             <Clock className="h-5 w-5 text-muted-foreground" />
-            <p className="text-3xl font-bold text-foreground md:text-4xl">15+</p>
+            <p className="text-3xl font-bold text-foreground md:text-4xl">
+              <AnimatedCounter value={15} suffix="+" />
+            </p>
             <p className="text-sm text-muted-foreground">{t.hero.yearsExperience}</p>
           </div>
         </div>
