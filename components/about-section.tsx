@@ -26,7 +26,7 @@ export function AboutSection() {
               width={280}
               height={350}
               className="h-auto w-full max-w-sm rounded-lg object-cover shadow-lg"
-              quality={90}
+              quality={75}
               priority={false}
             />
           </AnimatedItem>
