@@ -39,7 +39,7 @@ export function Hero() {
           </a>
         </div>
 
-        <div className="mt-12 border-t border-border pt-6">
+        <div className="mt-12 pt-6">
           <LogoCarousel />
         </div>
       </div>

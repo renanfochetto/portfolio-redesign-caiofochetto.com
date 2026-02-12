@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useI18n } from "@/lib/i18n";
 import { Menu, X, Globe } from "lucide-react";
@@ -25,16 +24,8 @@ export function Header() {
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link
           href={`/${locale}`}
-          className="flex items-center gap-2.5 text-sm font-bold tracking-tight text-foreground hover:opacity-80 transition-opacity"
+          className="text-sm font-bold tracking-tight text-foreground"
         >
-          <Image
-            src="/icon.jpg"
-            alt="Caio Fochetto Logo"
-            width={28}
-            height={28}
-            className="rounded"
-            unoptimized={true}
-          />
           CAIO FOCHETTO<span className="text-primary">.</span>
         </Link>
 
