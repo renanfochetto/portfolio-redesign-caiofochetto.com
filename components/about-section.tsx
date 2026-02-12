@@ -21,7 +21,7 @@ export function AboutSection() {
         <div className="mt-12 grid gap-8 md:gap-12 lg:grid-cols-[280px_1fr]">
           <AnimatedItem index={0} className="flex justify-center md:justify-start">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/foto_caio-8eYCZSezNfHyJMQL1bcpUm9GBoB5aw.jpeg"
+              src="/images/foto_caio.jpeg"
               alt="Caio Fochetto em evento de marketing"
               width={280}
               height={350}
