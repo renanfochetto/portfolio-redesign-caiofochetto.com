@@ -24,62 +24,52 @@ export function Footer() {
             <p className="mt-2 max-w-md text-sm text-muted-foreground">
               {t.footer.ctaDescription}
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
               <a
                 href="https://linkedin.com/in/caiofochetto"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-primary bg-primary/5 px-6 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:border-blue-600 hover:bg-blue-600/10 hover:text-blue-400"
               >
                 <Linkedin className="h-4 w-4" />
                 LinkedIn
               </a>
               <a
                 href="mailto:caiofochetto@gmail.com"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/30 hover:text-primary"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:border-emerald-600 hover:bg-emerald-600/10 hover:text-emerald-400"
               >
                 <Mail className="h-4 w-4" />
                 Email
               </a>
+              <a
+                href="https://youtube.com/@caiofochetto"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:border-red-600 hover:bg-red-600/10 hover:text-red-400"
+              >
+                <Youtube className="h-4 w-4" />
+                YouTube
+              </a>
             </div>
           </AnimatedItem>
-
-          <div className="flex gap-4">
-            {socialLinks.slice(2).map((link, idx) => (
-              <AnimatedItem key={link.label} index={idx + 2}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
-                  aria-label={link.label}
-                >
-                  <link.icon className="h-4 w-4" />
-                </a>
-              </AnimatedItem>
-            ))}
-          </div>
         </div>
 
         <div className="mt-12 border-t border-border pt-8" />
 
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <div className="flex flex-col gap-2 text-center md:text-left">
-            <p className="text-xs text-muted-foreground">
-              &copy; {new Date().getFullYear()} Caio Fochetto. {t.footer.copyright}
-            </p>
-            <p className="text-xs text-muted-foreground">
-              Desenvolvido por{" "}
-              <a
-                href="https://renanfochetto.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground/70 transition-colors hover:text-primary"
-              >
-                Renan Fochetto
-              </a>
-            </p>
-          </div>
+        <div className="flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground md:flex-row">
+          <p>&copy; {new Date().getFullYear()} Caio Fochetto.</p>
+          <p>{t.footer.copyright}</p>
+          <p>
+            Desenvolvido por{" "}
+            <a
+              href="https://renanfochetto.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground/70 transition-colors hover:text-primary"
+            >
+              Renan Fochetto
+            </a>
+          </p>
         </div>
       </AnimatedSection>
     </footer>
