@@ -54,6 +54,7 @@ export function WorkSection() {
                   metrics={study.metrics.map((m) => ({
                     value: m.value,
                     label: labels[m.labelKey] || m.labelKey,
+                    labelKey: m.labelKey,
                   }))}
                   tags={study.tags}
                   viewCaseLabel={t.work.viewCase}
