@@ -41,7 +41,7 @@ export function WorkSection() {
           {t.work.heading}
         </h2>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <div className="mt-12 grid gap-6 md:grid-cols-2 md:gap-8">
           {caseStudies.map((study, idx) => {
             const caseT = casesDict[study.slug];
             return (

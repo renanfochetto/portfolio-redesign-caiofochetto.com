@@ -9,7 +9,7 @@ export function Hero() {
   const { t } = useI18n();
 
   return (
-    <section className="relative flex min-h-screen flex-col justify-center px-6 pt-20 lg:px-8">
+    <section className="relative flex min-h-screen flex-col justify-center px-6 py-24 lg:px-8">
       <div className="mx-auto w-full max-w-6xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />

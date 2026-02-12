@@ -17,7 +17,7 @@ export function AboutSection() {
           {t.about.heading}
         </h2>
 
-        <div className="mt-10 max-w-3xl">
+        <div className="mt-12 max-w-3xl">
           <div className="space-y-4">
             <AnimatedItem index={0}>
               <p className="text-base leading-relaxed text-muted-foreground">
