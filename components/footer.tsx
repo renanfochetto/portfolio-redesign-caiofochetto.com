@@ -29,7 +29,7 @@ export function Footer() {
                 href="https://linkedin.com/in/caiofochetto"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:border-blue-600 hover:bg-blue-600/10 hover:text-blue-400"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white px-4 py-2.5 text-sm font-medium text-white transition-all hover:border-white hover:bg-[#0a66c2]"
               >
                 <Linkedin className="h-4 w-4" />
                 LinkedIn
@@ -45,7 +45,7 @@ export function Footer() {
                 href="https://youtube.com/@caiofochetto"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:border-red-600 hover:bg-red-600/10 hover:text-red-400"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white px-4 py-2.5 text-sm font-medium text-white transition-all hover:border-white hover:bg-[#FF0000]"
               >
                 <Youtube className="h-4 w-4" />
                 YouTube
