@@ -7,10 +7,10 @@
   },
   "hero": {
     "badge": "Disponível para novas oportunidades",
-    "headingLine1": "Transformei creators em +634%",
-    "headingLine2": "de receita e 75M de alcance",
-    "headingLine3": "para as maiores marcas do Brasil e LATAM.",
-    "subtitle": "15 anos liderando Creator Economy para Budweiser, Betfair, Ambev, Jellysmack e A+E Networks — traduzindo cultura em performance mensurável.",
+    "headingLine1": "Conectando marca, cultura",
+    "headingLine2": "e performance através",
+    "headingLine3": "de creators e dados.",
+    "subtitle": "15 anos liderando estratégias de Creator Economy para Budweiser, Betfair, Ambev, Jellysmack e A+E Networks na América Latina.",
     "revenueGrowth": "Crescimento de receita",
     "campaignReach": "Alcance de campanhas",
     "engagementRate": "Taxa de engajamento",
@@ -31,18 +31,10 @@
   "about": {
     "sectionLabel": "Sobre",
     "heading": "Caio Fochetto",
-    "intro": "Líder em Creator Economy e Performance Marketing com 15 anos transformando cultura em resultado para marcas globais.",
-    "highlightsTitle": "HIGHLIGHTS DA CARREIRA",
-    "highlights": [
-      "+634% de crescimento em receita digital (A+E Networks)",
-      "75M+ de alcance em campanhas de influência (Budweiser)",
-      "7.5% de engajamento orgânico sustentado (Betfair — acima de benchmarks)",
-      "Escalei a Jellysmack na América Latina do zero",
-      "8 anos gerenciando plataformas digitais de HISTORY, A&E, Lifetime e Formula E"
-    ],
-    "howIWorkTitle": "COMO TRABALHO",
-    "howIWork": "Atuo na interseção entre dados, criatividade e cultura — construindo estratégias de creators que geram performance real, não apenas buzz. Especialista em traduzir comportamento de audiência em decisões de negócio, liderar times multidisciplinares e transformar patrocínios em presença cultural genuína.",
-    "coreExpertise": "ESPECIALIDADES",
+    "p1": "Líder em Creator Economy e Marketing de Performance com mais de 15 anos conectando marca, cultura e resultado. Especialista em traduzir comportamento de audiência em estratégia — combinando dados, criatividade e inteligência de plataforma.",
+    "p2": "Construí e liderei operações de marketing de influência para marcas como Budweiser, Betfair e Ambev na Octagon, e escalei a operação da Jellysmack na América Latina do zero. Antes disso, passei quase 8 anos na A+E Networks gerenciando plataformas digitais de HISTORY, A&E, Lifetime e Formula E.",
+    "p3": "Atuo na interseção entre criatividade, dados e cultura — onde marcas globais precisam falar com comunidades reais.",
+    "coreExpertise": "Especialidades",
     "expertise": [
       "Creator Economy",
       "Marketing de Performance",
@@ -53,14 +45,14 @@
     ]
   },
   "footer": {
-    "cta": "Pronto para transformar creators em performance real?",
-    "ctaDescription": "Liderança em Creator Economy, Performance Marketing e estratégia de marca para empresas globais e regionais.",
+    "cta": "Vamos conversar?",
+    "ctaDescription": "Aberto a oportunidades em Creator Economy, Performance Marketing e liderança de marketing.",
     "ctaButton": "Enviar e-mail",
     "copyright": "Todos os direitos reservados."
   },
   "cases": {
     "history-ae-digital-transformation": {
-      "title": "+634% de Receita: Como Social Virou Plataforma de Monetização",
+      "title": "Monetização de Plataformas Digitais: +634% de Crescimento",
       "client": "HISTORY, A&E, Lifetime",
       "company": "A+E Networks",
       "year": "2015",
@@ -74,7 +66,7 @@
       ]
     },
     "formula-e-community": {
-      "title": "7% de Engajamento: Construindo Comunidade do Zero para um Campeonato Global",
+      "title": "Construção de Comunidade para a Formula E: 7% de Engajamento",
       "client": "Formula E",
       "company": "A+E Networks",
       "year": "2016",
@@ -88,7 +80,7 @@
       ]
     },
     "budweiser-fifa-influencer": {
-      "title": "75M de Alcance: Influencer Marketing em Escala no FIFA Club World Cup",
+      "title": "Influencer Marketing em Escala: 75M de Alcance no FIFA",
       "client": "Budweiser",
       "company": "Octagon",
       "year": "2023",
@@ -102,7 +94,7 @@
       ]
     },
     "betfair-always-on": {
-      "title": "7.5% de Engajamento Orgânico: Always-On com Creators Nichados",
+      "title": "Estratégia Always-On para Betfair: 7.5% de Engajamento",
       "client": "Betfair",
       "company": "Octagon",
       "year": "2024",
