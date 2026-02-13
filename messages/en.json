@@ -99,6 +99,34 @@
         "Creators culturally embedded in the fan base produce content that doesn't feel like advertising",
         "Data-driven optimization (Power BI) ensures sustained performance instead of isolated spikes"
       ]
+    },
+    "netflix-creators": {
+      "title": "Creator Ecosystem for Content Launches",
+      "client": "Netflix",
+      "company": "Jellysmack",
+      "year": "2023",
+      "description": "Influencer marketing strategy for Netflix content activations across Latin America, structuring a creator ecosystem to amplify debuts and drive new subscriber conversions.",
+      "challenge": "Compete for attention in a saturated streaming market where each launch needs to generate massive social media buzz — especially in a highly competitive market like Latin America.",
+      "solution": "Developed and managed an ecosystem of 200+ creators with differentiated roles: mega influencers for initial amplification, mid-tier for authentic storytelling, and community creators for conversion and retention. Integrated with Netflix product and marketing teams for strategic alignment.",
+      "insights": [
+        "Coordination across multiple creators generates greater buzz than single-point activations",
+        "Role differentiation by influencer profile optimizes each stage of the funnel",
+        "Content launch timing across creators maximizes velocity of propagation"
+      ]
+    },
+    "spotify-campaigns": {
+      "title": "Performance Marketing for Artists and Playlists",
+      "client": "Spotify",
+      "company": "Jellysmack",
+      "year": "2022",
+      "description": "Influencer marketing strategy for Spotify, focusing on amplification of emerging artists and strategic playlists through creators specialized in music and lifestyle content.",
+      "challenge": "Support emerging artists in competing for attention on saturated platforms, ensuring consistent growth in plays and followers — while building organic demand through communities.",
+      "solution": "Led marketing strategy with creator squads specialized in music, lifestyle, and dance content. Integrated with Spotify's performance dashboards for real-time optimization, A/B test validation, and automated impact reporting.",
+      "insights": [
+        "Platform-native content (TikTok, YouTube Shorts) drives more plays than traditional advertising",
+        "Creators with highly niche audiences convert better to artist followers than mega influencers",
+        "Activation timing aligned with artist debuts and playlist calendar maximizes performance"
+      ]
     }
   }
 }
