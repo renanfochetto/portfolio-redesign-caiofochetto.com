@@ -1,21 +1,20 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const brands = [
-  "Budweiser",
-  "Betfair",
-  "A+E Networks",
-  "HISTORY",
-  "Formula E",
-  "Jellysmack",
-  "Octagon",
-  "Ambev",
-  "Lifetime",
-  "A&E",
-  "Vasco",
-  "Cruzeiro",
+const logos = [
+  { src: "/logos/ae-networks.png", alt: "A+E Networks" },
+  { src: "/logos/betfair.png", alt: "Betfair" },
+  { src: "/logos/budweiser.png", alt: "Budweiser" },
+  { src: "/logos/formula-e.png", alt: "Formula E" },
+  { src: "/logos/history.png", alt: "History Channel" },
+  { src: "/logos/jellysmack.png", alt: "Jellysmack" },
+  { src: "/logos/octagon.png", alt: "Octagon" },
+  { src: "/logos/ambev.png", alt: "Ambev" },
+  { src: "/logos/lifetime.png", alt: "Lifetime" },
+  { src: "/logos/cruzeiro.png", alt: "Cruzeiro" },
 ];
 
 export function LogoCarousel() {
@@ -31,7 +30,7 @@ export function LogoCarousel() {
   }, []);
 
   // Duplicar array para loop seamless
-  const duplicatedBrands = [...brands, ...brands];
+  const duplicatedLogos = [...logos, ...logos];
 
   return (
     <div className="mt-10 border-t border-border pt-6">
@@ -41,45 +40,50 @@ export function LogoCarousel() {
 
       <div className="relative overflow-hidden">
         <motion.div
-          className="flex gap-8 md:gap-12"
+          className="flex gap-12 md:gap-16"
           animate={
             prefersReducedMotion
               ? {}
               : {
-                  x: [0, -1200],
+                  x: [0, -2400],
                 }
           }
           transition={
             prefersReducedMotion
               ? {}
               : {
-                  duration: 30,
+                  duration: 40,
                   repeat: Infinity,
                   ease: "linear",
                   repeatType: "loop",
                 }
           }
         >
-          {duplicatedBrands.map((brand, idx) => (
+          {duplicatedLogos.map((logo, idx) => (
             <div
               key={idx}
-              className="flex-shrink-0 transition-all duration-300"
+              className="flex-shrink-0 flex items-center justify-center h-16 w-32 transition-all duration-300 group cursor-pointer"
               style={{
-                filter: "grayscale(1)",
-                opacity: 0.6,
+                filter: "grayscale(1) brightness(1.1) invert(1)",
+                opacity: 0.7,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.filter = "grayscale(0)";
+                e.currentTarget.style.filter = "grayscale(0) brightness(1.3) invert(1)";
                 e.currentTarget.style.opacity = "1";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.filter = "grayscale(1)";
-                e.currentTarget.style.opacity = "0.6";
+                e.currentTarget.style.filter = "grayscale(1) brightness(1.1) invert(1)";
+                e.currentTarget.style.opacity = "0.7";
               }}
             >
-              <span className="whitespace-nowrap text-sm font-medium text-muted-foreground">
-                {brand}
-              </span>
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={120}
+                height={48}
+                className="object-contain object-center h-full w-full"
+                unoptimized={true}
+              />
             </div>
           ))}
         </motion.div>

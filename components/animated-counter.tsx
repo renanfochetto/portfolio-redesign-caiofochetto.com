@@ -31,10 +31,10 @@ export function AnimatedCounter({
   const shouldReduce = prefersReducedMotion();
 
   return (
-    <div ref={ref}>
+    <span ref={ref}>
       {prefix}
       {shouldReduce ? value : displayValue}
       {suffix}
-    </div>
+    </span>
   );
 }
