@@ -62,7 +62,7 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary/80;
+    background-color: hsl(var(--primary) / 0.8);
   }
 
   /* Firefox scrollbar */
