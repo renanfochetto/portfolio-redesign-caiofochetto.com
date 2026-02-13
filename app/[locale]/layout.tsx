@@ -89,6 +89,24 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const saved = localStorage.getItem('theme');
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  const theme = saved || (prefersDark ? 'dark' : 'light');
+                  if (theme === 'light') {
+                    document.documentElement.classList.add('light');
+                  }
+                } catch (e) {}
+              })()
+            `,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased">
         <script
           type="application/ld+json"

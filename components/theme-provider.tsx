@@ -13,7 +13,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
-  const [mounted, setMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     // Verificar preferência salva ou usar preferência do sistema
@@ -23,7 +23,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
     setTheme(initialTheme);
     applyTheme(initialTheme);
-    setMounted(true);
+    setIsMounted(true);
   }, []);
 
   const applyTheme = (newTheme: Theme) => {
@@ -41,11 +41,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     applyTheme(newTheme);
     localStorage.setItem("theme", newTheme);
   };
-
-  // Evitar flash de conteúdo com tema errado
-  if (!mounted) {
-    return <>{children}</>;
-  }
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
