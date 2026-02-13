@@ -1,3 +1,5 @@
+import { locales } from "@/lib/dictionaries";
+
 export default async function LocaleLayout({
   children,
   params,
