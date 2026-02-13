@@ -88,7 +88,11 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
+    <html
+      lang={locale}
+      className={`${inter.variable} ${playfair.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
