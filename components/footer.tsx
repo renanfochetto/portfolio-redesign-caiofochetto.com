@@ -58,7 +58,6 @@ export function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground md:flex-row">
           <p>&copy; {new Date().getFullYear()} Caio Fochetto.</p>
-          <p>{t.footer.copyright}</p>
           <p>
             Desenvolvido por{" "}
             <a
