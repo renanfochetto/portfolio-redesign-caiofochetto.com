@@ -29,14 +29,14 @@ export function Footer() {
                 href="https://linkedin.com/in/caiofochetto"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white px-4 py-2.5 text-sm font-medium text-white transition-all hover:border-white hover:bg-[#0a66c2]"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-500 px-4 py-2.5 text-sm font-medium text-gray-400 transition-all hover:border-white hover:bg-[#0a66c2] hover:text-white"
               >
                 <Linkedin className="h-4 w-4" />
                 LinkedIn
               </a>
               <a
                 href="mailto:caiofochetto@gmail.com"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:border-emerald-600 hover:bg-emerald-600/10 hover:text-emerald-400"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-500 px-4 py-2.5 text-sm font-medium text-gray-400 transition-all hover:border-white hover:bg-primary hover:text-white"
               >
                 <Mail className="h-4 w-4" />
                 Email
@@ -45,7 +45,7 @@ export function Footer() {
                 href="https://youtube.com/@caiofochetto"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white px-4 py-2.5 text-sm font-medium text-white transition-all hover:border-white hover:bg-[#FF0000]"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-500 px-4 py-2.5 text-sm font-medium text-gray-400 transition-all hover:border-white hover:bg-[#FF0000] hover:text-white"
               >
                 <Youtube className="h-4 w-4" />
                 YouTube
