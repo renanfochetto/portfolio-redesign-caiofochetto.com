@@ -57,12 +57,12 @@ export function ExperienceSection() {
               index={i}
               className="flex gap-4 border-b border-border py-6 first:border-t"
             >
-              <div>
+              <div className="flex items-center justify-center">
                 <Image
                   src={exp.logo}
                   alt={`${exp.company} logo`}
-                  width={40}
-                  height={40}
+                  width={64}
+                  height={64}
                   className="rounded object-contain"
                   unoptimized={true}
                 />
