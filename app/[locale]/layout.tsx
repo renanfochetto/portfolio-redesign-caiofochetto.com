@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { notFound } from "next/navigation";
 import { I18nProvider } from "@/lib/i18n";
+import { ThemeProvider } from "@/components/theme-provider";
 import { getDictionary } from "@/lib/dictionaries";
 import { locales } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/dictionaries";
@@ -108,7 +109,9 @@ export default async function LocaleLayout({
             }),
           }}
         />
-        <I18nProvider locale={locale as Locale}>{children}</I18nProvider>
+        <I18nProvider locale={locale as Locale}>
+          <ThemeProvider>{children}</ThemeProvider>
+        </I18nProvider>
         <Analytics />
       </body>
     </html>
