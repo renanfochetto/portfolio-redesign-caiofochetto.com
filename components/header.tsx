@@ -26,9 +26,9 @@ export function Header() {
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link
           href={`/${locale}`}
-          className="text-sm font-bold tracking-tight text-foreground"
+          className="text-md font-bold tracking-tight text-foreground"
         >
-          CAIO FOCHETTO<span className="text-primary">.</span>
+          CAIO FOCHETTO<span className="text-primary"></span>
         </Link>
 
         {/* Desktop nav */}
