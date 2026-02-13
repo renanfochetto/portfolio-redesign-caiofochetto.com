@@ -64,16 +64,16 @@ export function LogoCarousel() {
               key={idx}
               className="flex-shrink-0 flex items-center justify-center h-16 w-32 transition-all duration-300 group cursor-pointer"
               style={{
-                filter: "brightness(0.7) contrast(1.1)",
-                opacity: 0.6,
+                filter: "grayscale(1) brightness(1.1) invert(1)",
+                opacity: 0.7,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.filter = "brightness(1) contrast(1)";
+                e.currentTarget.style.filter = "grayscale(0) brightness(1.3) invert(1)";
                 e.currentTarget.style.opacity = "1";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.filter = "brightness(0.7) contrast(1.1)";
-                e.currentTarget.style.opacity = "0.6";
+                e.currentTarget.style.filter = "grayscale(1) brightness(1.1) invert(1)";
+                e.currentTarget.style.opacity = "0.7";
               }}
             >
               <Image

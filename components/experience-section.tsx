@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import { Briefcase } from "lucide-react";
 import { AnimatedSection, AnimatedItem } from "./animated-section";
@@ -8,8 +9,7 @@ const experiences = [
     role: "Diretor de Conteúdo Digital, Marketing de Influência e Talentos",
     roleEn: "Director of Digital Content, Influencer Marketing & Talent",
     company: "Octagon",
-    initial: "O",
-    color: "#E31837",
+    logo: "/companies/octagon.avif",
     period: "2023 - ",
     location: "São Paulo, BR"
   },
@@ -17,8 +17,7 @@ const experiences = [
     role: "Líder de Operações LATAM",
     roleEn: "LATAM Operations Lead",
     company: "Jellysmack",
-    initial: "J",
-    color: "#7C3AED",
+    logo: "/companies/jellysmack.avif",
     period: "2021 - 2023",
     location: "Remote"
   },
@@ -26,8 +25,7 @@ const experiences = [
     role: "Content and Product Manager",
     roleEn: "Content and Product Manager",
     company: "Playground",
-    initial: "P",
-    color: "#059669",
+    logo: "/companies/playground.avif",
     period: "2020 - 2021",
     location: "São Paulo, BR"
   },
@@ -35,8 +33,7 @@ const experiences = [
     role: "Digital Platforms Manager",
     roleEn: "Digital Platforms Manager",
     company: "A+E Networks",
-    initial: "A",
-    color: "#1D4ED8",
+    logo: "/companies/aenetworks.avif",
     period: "2012 - 2019",
     location: "São Paulo, BR"
   },
@@ -61,14 +58,14 @@ export function ExperienceSection() {
               className="flex gap-4 border-b border-border py-6 first:border-t"
             >
               <div>
-                <div
-                  className="flex h-10 w-10 items-center justify-center rounded lg:h-10 lg:w-10"
-                  style={{
-                    backgroundColor: exp.color,
-                  }}
-                >
-                  <span className="text-xs font-bold text-white">{exp.initial}</span>
-                </div>
+                <Image
+                  src={exp.logo}
+                  alt={`${exp.company} logo`}
+                  width={40}
+                  height={40}
+                  className="rounded object-contain"
+                  unoptimized={true}
+                />
               </div>
               <div className="flex-1">
                 <p className="font-mono text-xs text-muted-foreground md:text-sm">
