@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useI18n } from "@/lib/i18n";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, Moon, Sun } from "lucide-react";
 import { useState } from "react";
+import { useTheme } from "./theme-provider";
 
 export function Header() {
   const { locale, t } = useI18n();
+  const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const otherLocale = locale === "pt" ? "en" : "pt";
@@ -24,7 +26,7 @@ export function Header() {
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link
           href={`/${locale}`}
-          className="text-sm font-bold tracking-tight text-foreground"
+          className="text-lg font-bold tracking-tight text-foreground"
         >
           CAIO FOCHETTO<span className="text-primary">.</span>
         </Link>
@@ -40,6 +42,17 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <button
+            onClick={toggleTheme}
+            className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? (
+              <Sun className="h-3.5 w-3.5" />
+            ) : (
+              <Moon className="h-3.5 w-3.5" />
+            )}
+          </button>
           <Link
             href={localeHref}
             className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
@@ -51,6 +64,17 @@ export function Header() {
 
         {/* Mobile toggle */}
         <div className="flex items-center gap-3 md:hidden">
+          <button
+            onClick={toggleTheme}
+            className="flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? (
+              <Sun className="h-3 w-3" />
+            ) : (
+              <Moon className="h-3 w-3" />
+            )}
+          </button>
           <Link
             href={localeHref}
             className="flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground"

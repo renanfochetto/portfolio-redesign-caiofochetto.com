@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { notFound } from "next/navigation";
 import { I18nProvider } from "@/lib/i18n";
+import { ThemeProvider } from "@/components/theme-provider";
 import { getDictionary } from "@/lib/dictionaries";
 import { locales } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/dictionaries";
@@ -88,6 +89,24 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const saved = localStorage.getItem('theme');
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  const theme = saved || (prefersDark ? 'dark' : 'light');
+                  if (theme === 'light') {
+                    document.documentElement.classList.add('light');
+                  }
+                } catch (e) {}
+              })()
+            `,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased">
         <script
           type="application/ld+json"
@@ -108,7 +127,9 @@ export default async function LocaleLayout({
             }),
           }}
         />
-        <I18nProvider locale={locale as Locale}>{children}</I18nProvider>
+        <I18nProvider locale={locale as Locale}>
+          <ThemeProvider>{children}</ThemeProvider>
+        </I18nProvider>
         <Analytics />
       </body>
     </html>

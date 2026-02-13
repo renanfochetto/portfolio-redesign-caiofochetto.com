@@ -10,7 +10,7 @@
     "headingLine1": "Conectando marca, cultura",
     "headingLine2": "e performance através",
     "headingLine3": "de creators e dados.",
-    "subtitle": "15+ anos liderando estratégias de Creator Economy e Marketing de Performance para marcas globais na América Latina.",
+    "subtitle": "15 anos liderando estratégias de Creator Economy para Budweiser, Betfair, Ambev, Jellysmack e A+E Networks na América Latina.",
     "revenueGrowth": "Crescimento de receita",
     "campaignReach": "Alcance de campanhas",
     "engagementRate": "Taxa de engajamento",
@@ -33,9 +33,16 @@
     "heading": "Caio Fochetto",
     "p1": "Líder em Creator Economy e Marketing de Performance com mais de 15 anos conectando marca, cultura e resultado. Especialista em traduzir comportamento de audiência em estratégia — combinando dados, criatividade e inteligência de plataforma.",
     "p2": "Construí e liderei operações de marketing de influência para marcas como Budweiser, Betfair e Ambev na Octagon, e escalei a operação da Jellysmack na América Latina do zero. Antes disso, passei quase 8 anos na A+E Networks gerenciando plataformas digitais de HISTORY, A&E, Lifetime e Formula E.",
-    "p3": "Atuo na intersecção entre criatividade, dados e cultura — onde marcas globais precisam falar com comunidades reais.",
+    "p3": "Atuo na interseção entre criatividade, dados e cultura — onde marcas globais precisam falar com comunidades reais.",
     "coreExpertise": "Especialidades",
-    "expertise": ["Creator Economy", "Marketing de Performance", "Influencer Marketing", "Estratégia Digital", "Brand Building", "Liderança de Equipes"]
+    "expertise": [
+      "Creator Economy",
+      "Marketing de Performance",
+      "Influencer Marketing",
+      "Estratégia Digital",
+      "Brand Building",
+      "Liderança de Equipes"
+    ]
   },
   "footer": {
     "cta": "Vamos conversar?",
@@ -45,7 +52,7 @@
   },
   "cases": {
     "history-ae-digital-transformation": {
-      "title": "Monetização e Performance de Plataformas Digitais",
+      "title": "Monetização de Plataformas Digitais: +634% de Crescimento",
       "client": "HISTORY, A&E, Lifetime",
       "company": "A+E Networks",
       "year": "2015",
@@ -59,7 +66,7 @@
       ]
     },
     "formula-e-community": {
-      "title": "Construção de Comunidade em Ambiente de Alta Performance",
+      "title": "Construção de Comunidade para a Formula E: 7% de Engajamento",
       "client": "Formula E",
       "company": "A+E Networks",
       "year": "2016",
@@ -73,7 +80,7 @@
       ]
     },
     "budweiser-fifa-influencer": {
-      "title": "Marketing de Influência em Escala para um Momento Esportivo Global",
+      "title": "Influencer Marketing em Escala: 75M de Alcance no FIFA",
       "client": "Budweiser",
       "company": "Octagon",
       "year": "2023",
@@ -87,7 +94,7 @@
       ]
     },
     "betfair-always-on": {
-      "title": "Estratégia Always-On para Comunidades de Fãs de Futebol",
+      "title": "Estratégia Always-On para Betfair: 7.5% de Engajamento",
       "client": "Betfair",
       "company": "Octagon",
       "year": "2024",

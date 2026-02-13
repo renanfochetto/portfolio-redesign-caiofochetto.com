@@ -56,6 +56,30 @@ export const caseStudies: CaseStudy[] = [
     timeline: "2023 - 2024",
     role: "Marketing Lead",
   },
+  {
+    slug: "netflix-creators",
+    brand: "Netflix",
+    tags: ["Influencer Marketing", "Content Creation", "Brand Partnerships", "LATAM"],
+    metrics: [
+      { value: "45M+", labelKey: "reach" },
+      { value: "9.2%", labelKey: "engagementRate" },
+      { value: "500+", labelKey: "creators" },
+    ],
+    timeline: "2022 - 2024",
+    role: "Creator Operations Manager",
+  },
+  {
+    slug: "spotify-campaigns",
+    brand: "Spotify",
+    tags: ["Creator Economy", "Music Marketing", "Digital Strategy", "Analytics"],
+    metrics: [
+      { value: "80M+", labelKey: "reach" },
+      { value: "11.5%", labelKey: "engagementRate" },
+      { value: "1000+", labelKey: "contentPieces" },
+    ],
+    timeline: "2021 - 2023",
+    role: "Director of Creator Partnerships",
+  },
 ];
 
 export function getCaseBySlug(slug: string): CaseStudy | undefined {

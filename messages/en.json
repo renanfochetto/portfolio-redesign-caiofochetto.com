@@ -7,10 +7,10 @@
   },
   "hero": {
     "badge": "Open to new opportunities",
-    "headingLine1": "Connecting brand, culture",
-    "headingLine2": "and performance through",
-    "headingLine3": "creators and data.",
-    "subtitle": "15+ years leading Creator Economy and Performance Marketing strategies for global brands across Latin America.",
+    "headingLine1": "I turned creators into +634%",
+    "headingLine2": "revenue growth and 75M+ reach",
+    "headingLine3": "for Brazil and LATAM's biggest brands.",
+    "subtitle": "15 years leading Creator Economy for Budweiser, Betfair, Ambev, Jellysmack, and A+E Networks — turning culture into measurable performance.",
     "revenueGrowth": "Revenue growth",
     "campaignReach": "Campaign reach",
     "engagementRate": "Engagement rate",
@@ -31,21 +31,36 @@
   "about": {
     "sectionLabel": "About",
     "heading": "Caio Fochetto",
-    "p1": "Creator Economy and Performance Marketing leader with 15+ years connecting brand, culture, and measurable results. I specialize in translating audience behavior into strategy — combining data, creativity, and platform intelligence.",
-    "p2": "I built and led influencer marketing operations for brands like Budweiser, Betfair, and Ambev at Octagon, and scaled Jellysmack's operations across Latin America from the ground up. Before that, I spent nearly 8 years at A+E Networks managing digital platforms for HISTORY, A&E, Lifetime, and Formula E.",
-    "p3": "I work at the intersection of creativity, data, and culture — where global brands need to speak to real communities.",
-    "coreExpertise": "Core Expertise",
-    "expertise": ["Creator Economy", "Performance Marketing", "Influencer Marketing", "Digital Strategy", "Brand Building", "Team Leadership"]
+    "intro": "Creator Economy and Performance Marketing leader with 15 years turning culture into measurable results for global brands.",
+    "highlightsTitle": "CAREER HIGHLIGHTS",
+    "highlights": [
+      "+634% digital revenue growth (A+E Networks)",
+      "75M+ reach across influencer campaigns (Budweiser)",
+      "7.5% sustained organic engagement (Betfair — above benchmarks)",
+      "Scaled Jellysmack across Latin America from scratch",
+      "8 years managing digital platforms for HISTORY, A&E, Lifetime, and Formula E"
+    ],
+    "howIWorkTitle": "HOW I WORK",
+    "howIWork": "I operate at the intersection of data, creativity, and culture — building creator strategies that drive real performance, not just buzz. I specialize in translating audience behavior into business decisions, leading cross-functional teams, and transforming sponsorships into genuine cultural presence.",
+    "coreExpertise": "CORE EXPERTISE",
+    "expertise": [
+      "Creator Economy",
+      "Performance Marketing",
+      "Influencer Marketing",
+      "Digital Strategy",
+      "Brand Building",
+      "Team Leadership"
+    ]
   },
   "footer": {
-    "cta": "Let's talk?",
-    "ctaDescription": "Open to opportunities in Creator Economy, Performance Marketing, and marketing leadership.",
+    "cta": "Ready to turn creators into real performance?",
+    "ctaDescription": "Creator Economy leadership, Performance Marketing, and brand strategy for global and regional companies.",
     "ctaButton": "Send email",
     "copyright": "All rights reserved."
   },
   "cases": {
     "history-ae-digital-transformation": {
-      "title": "Monetization and Performance of Digital Streaming Platforms",
+      "title": "+634% Revenue: How Social Became a Monetization Platform",
       "client": "HISTORY, A&E, Lifetime",
       "company": "A+E Networks",
       "year": "2015",
@@ -59,7 +74,7 @@
       ]
     },
     "formula-e-community": {
-      "title": "Community Building in a High-Performance Environment",
+      "title": "7% Engagement: Building Community from Scratch for a Global Championship",
       "client": "Formula E",
       "company": "A+E Networks",
       "year": "2016",
@@ -73,7 +88,7 @@
       ]
     },
     "budweiser-fifa-influencer": {
-      "title": "Influencer Marketing at Scale for a Global Sports Moment",
+      "title": "75M Reach: Influencer Marketing at Scale for FIFA Club World Cup",
       "client": "Budweiser",
       "company": "Octagon",
       "year": "2023",
@@ -87,7 +102,7 @@
       ]
     },
     "betfair-always-on": {
-      "title": "Always-On Influencer Strategy for Football Fan Communities",
+      "title": "7.5% Organic Engagement: Always-On Strategy with Niche Creators",
       "client": "Betfair",
       "company": "Octagon",
       "year": "2024",
