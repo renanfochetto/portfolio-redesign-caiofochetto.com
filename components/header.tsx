@@ -28,7 +28,7 @@ export function Header() {
           href={`/${locale}`}
           className="text-lg font-bold tracking-tight text-foreground"
         >
-          Caio Fochetto<span className="text-primary"></span>
+          CAIO FOCHETTO<span className="text-primary">.</span>
         </Link>
 
         {/* Desktop nav */}
