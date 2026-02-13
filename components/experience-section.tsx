@@ -1,7 +1,8 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
-import { Briefcase } from "lucide-react";
+import { Briefcase, ChevronDown, ChevronUp } from "lucide-react";
 import { AnimatedSection, AnimatedItem } from "./animated-section";
 
 const experiences = [
@@ -41,6 +42,8 @@ const experiences = [
 
 export function ExperienceSection() {
   const { t, locale } = useI18n();
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <section id="experience" className="px-6 py-24 lg:px-8">
       <AnimatedSection className="mx-auto max-w-6xl">
@@ -82,6 +85,71 @@ export function ExperienceSection() {
               </div>
             </AnimatedItem>
           ))}
+
+          {/* Experiências antigas expandíveis */}
+          <div
+            className={`
+              grid transition-all duration-500 ease-in-out
+              ${isExpanded 
+                ? 'grid-rows-[1fr] opacity-100' 
+                : 'grid-rows-[0fr] opacity-0'
+              }
+            `}
+          >
+            <div className="overflow-hidden">
+              <div className="space-y-0 pt-8">
+                {experiences.map((exp, i) => (
+                  <AnimatedItem
+                    key={`old-${i}`}
+                    index={i}
+                    className="flex gap-4 border-b border-border py-6"
+                  >
+                    <div className="flex items-center justify-center">
+                      <Image
+                        src={exp.logo}
+                        alt={`${exp.company} logo`}
+                        width={64}
+                        height={64}
+                        className="rounded object-contain"
+                        unoptimized={true}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-mono text-xs text-muted-foreground md:text-sm">
+                        {exp.period.endsWith("- ")
+                          ? `${exp.period}${t.experience.present}`
+                          : exp.period}
+                      </p>
+                      <h3 className="mt-2 flex items-center gap-2 text-lg font-semibold text-foreground">
+                        <Briefcase className="h-4 w-4 text-primary" />
+                        {locale === "en" ? exp.roleEn : exp.role}
+                      </h3>
+                      <p className="mt-1 text-sm font-medium text-primary">{exp.company}</p>
+                      <p className="mt-0.5 text-sm text-muted-foreground">{exp.location}</p>
+                    </div>
+                  </AnimatedItem>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Botão expansor */}
+          <div className="flex justify-center pt-8">
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              id="expand-button"
+              className="group flex items-center gap-2 rounded-full border border-border px-4 py-2 transition-all hover:border-primary/50"
+            >
+              <span className="text-sm text-muted-foreground transition-colors group-hover:text-primary">
+                {isExpanded ? "Ver menos" : "Ver experiências anteriores"}
+              </span>
+              {isExpanded ? (
+                <ChevronUp className="h-4 w-4 text-muted-foreground transition-all group-hover:text-primary group-hover:-translate-y-0.5" />
+              ) : (
+                <ChevronDown className="h-4 w-4 text-muted-foreground transition-all group-hover:text-primary group-hover:translate-y-0.5" />
+              )}
+            </button>
+          </div>
         </div>
       </AnimatedSection>
     </section>
