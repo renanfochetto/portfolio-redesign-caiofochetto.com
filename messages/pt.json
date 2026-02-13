@@ -7,10 +7,10 @@
   },
   "hero": {
     "badge": "Disponível para novas oportunidades",
-    "headingLine1": "Conectando marca, cultura",
-    "headingLine2": "e performance através",
-    "headingLine3": "de creators e dados.",
-    "subtitle": "15+ anos liderando estratégias de Creator Economy e Marketing de Performance para marcas globais na América Latina.",
+    "headingLine1": "Transformei creators em +634%",
+    "headingLine2": "de receita e 75M de alcance",
+    "headingLine3": "para as maiores marcas do Brasil e LATAM.",
+    "subtitle": "15 anos liderando Creator Economy para Budweiser, Betfair, Ambev, Jellysmack e A+E Networks — traduzindo cultura em performance mensurável.",
     "revenueGrowth": "Crescimento de receita",
     "campaignReach": "Alcance de campanhas",
     "engagementRate": "Taxa de engajamento",
@@ -31,21 +31,36 @@
   "about": {
     "sectionLabel": "Sobre",
     "heading": "Caio Fochetto",
-    "p1": "Líder em Creator Economy e Marketing de Performance com mais de 15 anos conectando marca, cultura e resultado. Especialista em traduzir comportamento de audiência em estratégia — combinando dados, criatividade e inteligência de plataforma.",
-    "p2": "Construí e liderei operações de marketing de influência para marcas como Budweiser, Betfair e Ambev na Octagon, e escalei a operação da Jellysmack na América Latina do zero. Antes disso, passei quase 8 anos na A+E Networks gerenciando plataformas digitais de HISTORY, A&E, Lifetime e Formula E.",
-    "p3": "Atuo na intersecção entre criatividade, dados e cultura — onde marcas globais precisam falar com comunidades reais.",
-    "coreExpertise": "Especialidades",
-    "expertise": ["Creator Economy", "Marketing de Performance", "Influencer Marketing", "Estratégia Digital", "Brand Building", "Liderança de Equipes"]
+    "intro": "Líder em Creator Economy e Performance Marketing com 15 anos transformando cultura em resultado para marcas globais.",
+    "highlightsTitle": "HIGHLIGHTS DA CARREIRA",
+    "highlights": [
+      "+634% de crescimento em receita digital (A+E Networks)",
+      "75M+ de alcance em campanhas de influência (Budweiser)",
+      "7.5% de engajamento orgânico sustentado (Betfair — acima de benchmarks)",
+      "Escalei a Jellysmack na América Latina do zero",
+      "8 anos gerenciando plataformas digitais de HISTORY, A&E, Lifetime e Formula E"
+    ],
+    "howIWorkTitle": "COMO TRABALHO",
+    "howIWork": "Atuo na interseção entre dados, criatividade e cultura — construindo estratégias de creators que geram performance real, não apenas buzz. Especialista em traduzir comportamento de audiência em decisões de negócio, liderar times multidisciplinares e transformar patrocínios em presença cultural genuína.",
+    "coreExpertise": "ESPECIALIDADES",
+    "expertise": [
+      "Creator Economy",
+      "Marketing de Performance",
+      "Influencer Marketing",
+      "Estratégia Digital",
+      "Brand Building",
+      "Liderança de Equipes"
+    ]
   },
   "footer": {
-    "cta": "Vamos conversar?",
-    "ctaDescription": "Aberto a oportunidades em Creator Economy, Performance Marketing e liderança de marketing.",
+    "cta": "Pronto para transformar creators em performance real?",
+    "ctaDescription": "Liderança em Creator Economy, Performance Marketing e estratégia de marca para empresas globais e regionais.",
     "ctaButton": "Enviar e-mail",
     "copyright": "Todos os direitos reservados."
   },
   "cases": {
     "history-ae-digital-transformation": {
-      "title": "Monetização e Performance de Plataformas Digitais",
+      "title": "+634% de Receita: Como Social Virou Plataforma de Monetização",
       "client": "HISTORY, A&E, Lifetime",
       "company": "A+E Networks",
       "year": "2015",
@@ -59,7 +74,7 @@
       ]
     },
     "formula-e-community": {
-      "title": "Construção de Comunidade em Ambiente de Alta Performance",
+      "title": "7% de Engajamento: Construindo Comunidade do Zero para um Campeonato Global",
       "client": "Formula E",
       "company": "A+E Networks",
       "year": "2016",
@@ -73,7 +88,7 @@
       ]
     },
     "budweiser-fifa-influencer": {
-      "title": "Marketing de Influência em Escala para um Momento Esportivo Global",
+      "title": "75M de Alcance: Influencer Marketing em Escala no FIFA Club World Cup",
       "client": "Budweiser",
       "company": "Octagon",
       "year": "2023",
@@ -87,7 +102,7 @@
       ]
     },
     "betfair-always-on": {
-      "title": "Estratégia Always-On para Comunidades de Fãs de Futebol",
+      "title": "7.5% de Engajamento Orgânico: Always-On com Creators Nichados",
       "client": "Betfair",
       "company": "Octagon",
       "year": "2024",
@@ -98,34 +113,6 @@
         "Comunidades nichadas entregam mais autenticidade e engajamento real do que alcance massivo",
         "Creators culturalmente inseridos na torcida geram conteúdo que não parece publicidade",
         "Otimização baseada em dados (Power BI) garante performance sustentada em vez de picos isolados"
-      ]
-    },
-    "netflix-creators": {
-      "title": "Ecossistema de Creators para Lançamentos de Conteúdo",
-      "client": "Netflix",
-      "company": "Jellysmack",
-      "year": "2023",
-      "description": "Estratégia de influencer marketing para ativações de lançamentos Netflix na América Latina, estruturando um ecossistema de creators para amplificar estreias e conversão de novos assinantes.",
-      "challenge": "Competir pela atenção em um mercado de streaming saturado, onde cada lançamento precisa gerar buzz massivo nas redes sociais — especialmente em um mercado tão competitivo quanto a América Latina.",
-      "solution": "Desenvolvimento e gestão de um ecossistema de 200+ creators com roles diferenciados: mega influenciadores para amplificação inicial, mid-tier para storytelling autêntico e creators de comunidade para conversão e retenção. Integração com equipes de produto e marketing Netflix para alinhamento estratégico.",
-      "insights": [
-        "Coordenação entre múltiplos creators gera buzz maior do que ativações pontuais",
-        "Diferenciação de papéis por perfil de influenciador otimiza cada etapa do funil",
-        "Timing de lançamento de conteúdo entre creators maximiza velocidade de propagação"
-      ]
-    },
-    "spotify-campaigns": {
-      "title": "Marketing de Performance para Artistas e Playlists",
-      "client": "Spotify",
-      "company": "Jellysmack",
-      "year": "2022",
-      "description": "Estratégia de influencer marketing para Spotify, focando em amplificação de artistas emergentes e playlists estratégicas através de creators especializados em conteúdo musical e lifestyle.",
-      "challenge": "Apoiar artistas emergentes na competição por atençãoem plataformas saturadas, garantindo consistência de crescimento de plays e seguidores — além de criar demanda orgânica através de comunidades.",
-      "solution": "Liderança da estratégia de marketing com squads de creators especializados em conteúdo musical, lifestyle e dança. Integração com dashboards de performance do Spotify para otimização em tempo real, validação de A/B testing e relatório automático de impacto.",
-      "insights": [
-        "Conteúdo nativo de plataforma (TikTok, YouTube Shorts) amplifica mais plays do que anúncios tradicionais",
-        "Creators com audiência altamente nicha convertem melhor em seguidores de artista do que mega influenciadores",
-        "Timing de ativação alinhado com lançamentos de artista e calendário de playlists maximiza performance"
       ]
     }
   }
