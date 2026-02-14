@@ -132,7 +132,7 @@ export function ExperienceSection() {
             `}
           >
             <div className="overflow-hidden">
-              <div className="space-y-0 pt-2">
+              <div className="space-y-0">
                 {experiencesOlder.map((exp, i) => (
                   <AnimatedItem
                     key={`old-${i}`}
