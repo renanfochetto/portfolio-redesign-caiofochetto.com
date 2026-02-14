@@ -5,31 +5,8 @@ import { CaseCard } from "./case-card";
 import { AnimatedSection, AnimatedItem } from "./animated-section";
 import { caseStudies } from "@/lib/cases";
 
-const metricLabels: Record<string, Record<string, string>> = {
-  pt: {
-    revenueGrowth: "Crescimento de receita",
-    reach: "Alcance",
-    engagementRate: "Taxa de engajamento",
-    creators: "Creators",
-    views: "Visualizacoes",
-    contentPieces: "Pecas de conteudo",
-    bookingGrowth: "Crescimento de reservas",
-  },
-  en: {
-    revenueGrowth: "Revenue growth",
-    reach: "Reach",
-    engagementRate: "Engagement rate",
-    creators: "Creators",
-    views: "Views",
-    contentPieces: "Content pieces",
-    bookingGrowth: "Booking growth",
-  },
-};
-
 export function WorkSection() {
   const { locale, t } = useI18n();
-  const labels = metricLabels[locale] || metricLabels.pt;
-  const casesDict = t.cases as Record<string, { title: string; description: string }>;
 
   return (
     <section id="work" className="px-6 py-24 lg:px-8">
@@ -43,19 +20,29 @@ export function WorkSection() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 md:gap-8">
           {caseStudies.map((study, idx) => {
-            const caseT = casesDict[study.slug];
+            // Extrair título baseado no locale
+            const title = locale === 'pt' ? study.title_pt : study.title_en;
+
+            // Extrair brand (pode ser string ou array)
+            const brand = Array.isArray(study.brand)
+              ? study.brand.join(', ')
+              : study.brand;
+
+            // Extrair primeiras 3 métricas com labels traduzidos
+            const metrics = study.metrics.slice(0, 3).map(m => ({
+              value: m.value,
+              label: locale === 'pt' ? m.label_pt : m.label_en,
+              labelKey: '' // Mantém compatibilidade com CaseCard se necessário
+            }));
+
             return (
               <AnimatedItem key={study.slug} index={idx}>
                 <CaseCard
                   href={`/${locale}/case/${study.slug}`}
-                  brand={study.brand}
-                  title={caseT?.title || study.brand}
-                  description={caseT?.description || ""}
-                  metrics={study.metrics.map((m) => ({
-                    value: m.value,
-                    label: labels[m.labelKey] || m.labelKey,
-                    labelKey: m.labelKey,
-                  }))}
+                  brand={brand}
+                  title={title}
+                  description="" // Pode remover ou adicionar se quiser
+                  metrics={metrics}
                   tags={study.tags}
                   viewCaseLabel={t.work.viewCase}
                 />
