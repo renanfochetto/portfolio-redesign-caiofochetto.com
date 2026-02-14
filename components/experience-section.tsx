@@ -125,14 +125,14 @@ export function ExperienceSection() {
           <div
             className={`
               grid transition-all duration-500 ease-in-out
-              ${isExpanded 
-                ? 'grid-rows-[1fr] opacity-100' 
+              ${isExpanded
+                ? 'grid-rows-[1fr] opacity-100'
                 : 'grid-rows-[0fr] opacity-0'
               }
             `}
           >
             <div className="overflow-hidden">
-              <div className="space-y-0 pt-8">
+              <div className="space-y-0 pt-2">
                 {experiencesOlder.map((exp, i) => (
                   <AnimatedItem
                     key={`old-${i}`}
