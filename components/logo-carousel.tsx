@@ -47,9 +47,6 @@ export function LogoCarousel() {
   if (!mounted) {
     return (
       <div className="mt-10 border-t border-border pt-6">
-        <p className="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-          Trusted by Global Brands
-        </p>
         <div className="relative h-16 overflow-hidden">
           {/* Placeholder vazio */}
         </div>
