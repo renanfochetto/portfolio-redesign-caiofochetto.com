@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
 
 const logos = [
   { name: "ae", alt: "A+E Networks" },
@@ -18,7 +17,6 @@ const logos = [
 ];
 
 export function LogoCarousel() {
-  const { theme, systemTheme } = useTheme();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -36,13 +34,6 @@ export function LogoCarousel() {
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Determinar tema atual
-  const currentTheme = theme === "system" ? systemTheme : theme;
-  const isDark = currentTheme === "dark";
-
-  // Folder: white para dark mode, black para light mode
-  const logoFolder = isDark ? "white" : "black";
 
   // Duplicar logos para loop seamless
   const duplicatedLogos = [...logos, ...logos];
@@ -103,7 +94,7 @@ export function LogoCarousel() {
               }}
             >
               <Image
-                src={`/logos/${logoFolder}/${logo.name}_${logoFolder}.svg`}
+                src={`/logos/${logo.name}.svg`}
                 alt={logo.alt}
                 width={120}
                 height={48}
