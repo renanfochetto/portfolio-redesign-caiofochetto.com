@@ -20,6 +20,7 @@ export interface CaseData {
   year_display: string;
   industry: string;
   type: string;
+  icon?: string;
 
   // Content
   challenge_pt: string;
