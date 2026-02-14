@@ -1,10 +1,21 @@
 // app/[locale]/case/[slug]/page.tsx
-// VERSÃO FINAL - Com navegação PREV/NEXT e SEM CTA "Vamos conversar"
+// VERSÃO COMPLETA COM TODAS AS MELHORIAS
 
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CheckCircle, Tag, ArrowRight } from "lucide-react";
+import {
+  ArrowLeft,
+  CheckCircle,
+  Tag,
+  ArrowRight,
+  Target,
+  Lightbulb,
+  TrendingUp,
+  BookOpen,
+  Building2,
+  Calendar
+} from "lucide-react";
 import { Header } from "@/components/header";
 import { locales } from "@/lib/dictionaries";
 import { caseStudies, getCaseBySlug, getAllSlugs } from "@/lib/cases";
@@ -81,10 +92,10 @@ export default async function CaseStudyPage({ params }: PageProps) {
       capabilities: "Competências",
       role: "Função",
       period: "Período",
+      company: "Empresa",
       back: "Voltar",
       previous: "Anterior",
-      next: "Próximo",
-      allCases: "Ver todos os cases"
+      next: "Próximo"
     }
     : {
       challenge: "Challenge",
@@ -94,16 +105,15 @@ export default async function CaseStudyPage({ params }: PageProps) {
       capabilities: "Capabilities",
       role: "Role",
       period: "Period",
+      company: "Company",
       back: "Back",
       previous: "Previous",
-      next: "Next",
-      allCases: "View all cases"
+      next: "Next"
     };
 
   // Navegação circular (prev + next)
   const currentIndex = caseStudies.findIndex((c) => c.slug === slug);
 
-  // Previous case (circular)
   const prevCase = currentIndex > 0
     ? caseStudies[currentIndex - 1]
     : caseStudies[caseStudies.length - 1];
@@ -112,7 +122,6 @@ export default async function CaseStudyPage({ params }: PageProps) {
     ? prevCase.brand.join(', ')
     : prevCase.brand;
 
-  // Next case (circular)
   const nextCase = currentIndex < caseStudies.length - 1
     ? caseStudies[currentIndex + 1]
     : caseStudies[0];
@@ -160,51 +169,68 @@ export default async function CaseStudyPage({ params }: PageProps) {
             </h1>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-6 border-t border-border pt-6">
-            <div>
-              <p className="text-xs text-muted-foreground">{sectionLabels.role}</p>
-              <p className="text-sm font-medium text-foreground">{role}</p>
+          {/* Meta Info - NOVO LAYOUT */}
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
+            {/* Esquerda: Logo + Company + Role */}
+            <div className="flex items-center gap-4">
+              {/* Placeholder para logo - você adiciona depois */}
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card">
+                <Building2 className="h-6 w-6 text-muted-foreground" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">{study.company}</p>
+                <p className="text-xs text-muted-foreground">{role}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-xs text-muted-foreground">{sectionLabels.period}</p>
-              <p className="text-sm font-medium text-foreground">{study.period}</p>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground">{study.company}</p>
-              <p className="text-sm font-medium text-foreground">{study.year_display}</p>
+
+            {/* Direita: Período */}
+            <div className="flex items-center gap-2 text-sm">
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <span className="font-medium text-foreground">{study.period}</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Challenge & Solution */}
-      <section className="px-6 py-16 lg:px-8">
-        <div className="mx-auto grid max-w-4xl gap-12 md:grid-cols-2">
-          <div>
+      {/* Challenge - COLUNA (vertical) */}
+      <section className="px-6 py-12 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex items-center gap-2 mb-4">
+            <Target className="h-4 w-4 text-primary" />
             <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
               {sectionLabels.challenge}
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              {challenge}
-            </p>
           </div>
-          <div>
+          <p className="text-base leading-relaxed text-muted-foreground">
+            {challenge}
+          </p>
+        </div>
+      </section>
+
+      {/* Solution - COLUNA (vertical) */}
+      <section className="px-6 py-12 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex items-center gap-2 mb-4">
+            <Lightbulb className="h-4 w-4 text-primary" />
             <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
               {sectionLabels.solution}
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              {solution}
-            </p>
           </div>
+          <p className="text-base leading-relaxed text-muted-foreground">
+            {solution}
+          </p>
         </div>
       </section>
 
       {/* Results - SEMPRE FUNDO PRETO */}
       <section className="bg-neutral-950 px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-xs font-medium uppercase tracking-widest text-primary mb-6">
-            {sectionLabels.results}
-          </h2>
+          <div className="flex items-center gap-2 mb-8">
+            <TrendingUp className="h-4 w-4 text-primary" />
+            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.results}
+            </h2>
+          </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {study.metrics.map((metric, index) => {
               const label = locale === 'pt' ? metric.label_pt : metric.label_en;
@@ -225,10 +251,13 @@ export default async function CaseStudyPage({ params }: PageProps) {
       {/* Key Learnings */}
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-            {sectionLabels.learnings}
-          </h2>
-          <ul className="mt-6 space-y-4">
+          <div className="flex items-center gap-2 mb-6">
+            <BookOpen className="h-4 w-4 text-primary" />
+            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.learnings}
+            </h2>
+          </div>
+          <ul className="space-y-4">
             {learnings.map((learning, i) => (
               <li key={i} className="flex gap-3">
                 <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
@@ -242,15 +271,15 @@ export default async function CaseStudyPage({ params }: PageProps) {
       {/* Capabilities Tags */}
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <div className="mb-3 flex items-center gap-2">
-            <Tag className="h-4 w-4 text-muted-foreground" />
-            <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+          <div className="mb-4 flex items-center gap-2">
+            <Tag className="h-4 w-4 text-primary" />
+            <p className="text-xs font-medium uppercase tracking-widest text-primary">
               {sectionLabels.capabilities}
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             {capabilities.map((capability, index) => (
-              <span key={index} className="rounded-full border-2 border-primary px-4 py-2 text-sm font-medium text-primary">
+              <span key={index} className="rounded-full border-2 border-primary px-4 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-background transition-colors">
                 {capability}
               </span>
             ))}
@@ -258,15 +287,15 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Navigation - PREV + ALL + NEXT */}
+      {/* Navigation - APENAS PREV + NEXT (2 colunas) */}
       <section className="px-6 py-16 lg:px-8">
-        <div className="mx-auto max-w-6xl border-t border-border pt-12">
-          <div className="grid gap-6 md:grid-cols-3">
+        <div className="mx-auto max-w-4xl border-t border-border pt-12">
+          <div className="grid gap-6 md:grid-cols-2">
 
             {/* Previous Case */}
             <Link
               href={`/${locale}/case/${prevCase.slug}`}
-              className="group flex flex-col gap-3 rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card"
+              className="group flex flex-col gap-3 rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card/50"
             >
               <div className="flex items-center gap-2 text-xs font-semibold text-primary">
                 <ArrowLeft className="h-4 w-4" />
@@ -274,26 +303,16 @@ export default async function CaseStudyPage({ params }: PageProps) {
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">{prevCaseBrand}</p>
-                <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary">
+                <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors">
                   {prevCaseTitle}
                 </h3>
               </div>
             </Link>
 
-            {/* All Cases */}
-            <Link
-              href={`/${locale}/#work`}
-              className="flex items-center justify-center rounded-lg border-2 border-dashed border-border p-6 text-center transition-all hover:border-primary hover:bg-card"
-            >
-              <span className="text-sm font-bold text-foreground hover:text-primary">
-                {sectionLabels.allCases}
-              </span>
-            </Link>
-
             {/* Next Case */}
             <Link
               href={`/${locale}/case/${nextCase.slug}`}
-              className="group flex flex-col gap-3 rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card"
+              className="group flex flex-col gap-3 rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card/50"
             >
               <div className="flex items-center justify-end gap-2 text-xs font-semibold text-primary">
                 {sectionLabels.next}
@@ -301,7 +320,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
               </div>
               <div className="text-right">
                 <p className="text-xs text-muted-foreground">{nextCaseBrand}</p>
-                <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary">
+                <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors">
                   {nextCaseTitle}
                 </h3>
               </div>
@@ -311,7 +330,8 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </div>
       </section>
 
-      <Footer />
+      {/* Footer SEM CTA "Vamos conversar?" */}
+      <Footer hideContact={true} />
     </div>
   );
 }
