@@ -1,9 +1,14 @@
 // app/[locale]/case/[slug]/page.tsx
-// VERSÃO COMPLETA COM TODAS AS MELHORIAS
+// VERSÃO COM LOGOS E ÍCONES NAS MÉTRICAS
+
+"use client";
 
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useTheme } from "@/components/theme-provider";
 import {
   ArrowLeft,
   CheckCircle,
@@ -13,8 +18,15 @@ import {
   Lightbulb,
   TrendingUp,
   BookOpen,
-  Building2,
-  Calendar
+  Calendar,
+  Users,
+  Eye,
+  Heart,
+  MessageCircle,
+  DollarSign,
+  MousePointerClick,
+  Play,
+  BarChart3
 } from "lucide-react";
 import { Header } from "@/components/header";
 import { locales } from "@/lib/dictionaries";
@@ -23,52 +35,79 @@ import { Footer } from "@/components/footer";
 
 const SITE_URL = "https://www.caiofochetto.com";
 
+// Mapeamento de empresas para seus logos
+const companyLogos: Record<string, string> = {
+  "Octagon": "octagon",
+  "A+E Networks": "ae",
+};
+
+// Mapeamento de brands para seus logos (mesmo do CaseCard)
+const brandLogos: Record<string, string> = {
+  "Betfair": "betfair",
+  "Budweiser": "budweiser",
+  "Formula E": "formulae",
+  "HISTORY": "history",
+  "A&E": "ae",
+  "Lifetime": "lifetime",
+};
+
+// Mapeamento de ícones por tipo de métrica (mesmo do CaseCard)
+const getMetricIcon = (label: string) => {
+  const lowerLabel = label.toLowerCase();
+
+  if (lowerLabel.includes("alcance") || lowerLabel.includes("reach")) {
+    return Users;
+  }
+  if (lowerLabel.includes("impressões") || lowerLabel.includes("impressions")) {
+    return Eye;
+  }
+  if (lowerLabel.includes("engajamento") || lowerLabel.includes("engagement")) {
+    return Heart;
+  }
+  if (lowerLabel.includes("interações") || lowerLabel.includes("interactions")) {
+    return MessageCircle;
+  }
+  if (lowerLabel.includes("crescimento") || lowerLabel.includes("growth")) {
+    return TrendingUp;
+  }
+  if (lowerLabel.includes("receita") || lowerLabel.includes("revenue")) {
+    return DollarSign;
+  }
+  if (lowerLabel.includes("cliques") || lowerLabel.includes("ctr")) {
+    return MousePointerClick;
+  }
+  if (lowerLabel.includes("views") || lowerLabel.includes("visualizações")) {
+    return Play;
+  }
+
+  // Default
+  return BarChart3;
+};
+
 type PageProps = { params: Promise<{ locale: string; slug: string }> };
 
-export async function generateStaticParams() {
-  const slugs = getAllSlugs();
-  const params: { locale: string; slug: string }[] = [];
-  for (const locale of locales) {
-    for (const slug of slugs) {
-      params.push({ locale, slug });
-    }
+export default function CaseStudyPage({ params }: PageProps) {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [resolvedParams, setResolvedParams] = useState<{ locale: string; slug: string } | null>(null);
+
+  // Evitar flash SSR
+  useEffect(() => {
+    setMounted(true);
+    params.then(setResolvedParams);
+  }, [params]);
+
+  if (!mounted || !resolvedParams) {
+    return null; // ou loading skeleton
   }
-  return params;
-}
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale, slug } = await params;
-  const study = getCaseBySlug(slug);
-  if (!study) return { title: "Case Study Not Found" };
-
-  const title = locale === 'pt' ? study.meta_title_pt : study.meta_title_en;
-  const description = locale === 'pt' ? study.meta_description_pt : study.meta_description_en;
-
-  return {
-    title,
-    description,
-    alternates: { canonical: `/${locale}/case/${slug}` },
-    openGraph: {
-      title,
-      description,
-      url: `${SITE_URL}/${locale}/case/${slug}`,
-      type: "article",
-      images: [study.og_image],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [study.og_image],
-    },
-  };
-}
-
-export default async function CaseStudyPage({ params }: PageProps) {
-  const { locale, slug } = await params;
+  const { locale, slug } = resolvedParams;
   const study = getCaseBySlug(slug);
 
   if (!study) notFound();
+
+  // Determinar pasta de logos baseado no tema
+  const logoFolder = theme === "dark" ? "white" : "black";
 
   // Extrair dados traduzidos
   const title = locale === 'pt' ? study.title_pt : study.title_en;
@@ -81,6 +120,13 @@ export default async function CaseStudyPage({ params }: PageProps) {
   const brandDisplay = Array.isArray(study.brand)
     ? study.brand.join(', ')
     : study.brand;
+
+  // Pegar logo da empresa
+  const companyLogo = companyLogos[study.company];
+
+  // Pegar logo da brand (se for string única)
+  const firstBrand = Array.isArray(study.brand) ? study.brand[0] : study.brand;
+  const brandLogo = brandLogos[firstBrand];
 
   // Labels traduzidos
   const sectionLabels = locale === "pt"
@@ -160,23 +206,49 @@ export default async function CaseStudyPage({ params }: PageProps) {
             {sectionLabels.back}
           </Link>
 
+          {/* Logo da Brand + Título */}
           <div className="mt-8">
-            <p className="text-xs font-medium uppercase tracking-widest text-primary">
-              {brandDisplay}
-            </p>
+            {/* Logo da Brand (se existir) */}
+            {brandLogo && (
+              <div className="mb-6 flex h-16 w-32 items-center justify-start">
+                <Image
+                  src={`/logos/${logoFolder}/${brandLogo}.svg`}
+                  alt={`${firstBrand} logo`}
+                  width={128}
+                  height={64}
+                  className="h-full w-auto max-w-full object-contain object-left"
+                  unoptimized
+                />
+              </div>
+            )}
+
             <h1 className="mt-3 text-3xl font-bold text-foreground md:text-5xl">
               {title}
             </h1>
           </div>
 
-          {/* Meta Info - NOVO LAYOUT */}
+          {/* Meta Info - Logo da Empresa + Company + Role + Período */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
-            {/* Esquerda: Logo + Company + Role */}
+            {/* Esquerda: Logo da Empresa + Company + Role */}
             <div className="flex items-center gap-4">
-              {/* Placeholder para logo - você adiciona depois */}
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card">
-                <Building2 className="h-6 w-6 text-muted-foreground" />
-              </div>
+              {/* Logo da Empresa */}
+              {companyLogo ? (
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card p-2">
+                  <Image
+                    src={`/logos/${logoFolder}/${companyLogo}.svg`}
+                    alt={`${study.company} logo`}
+                    width={48}
+                    height={48}
+                    className="h-full w-full object-contain"
+                    unoptimized
+                  />
+                </div>
+              ) : (
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card">
+                  <Building2 className="h-6 w-6 text-muted-foreground" />
+                </div>
+              )}
+
               <div>
                 <p className="text-sm font-semibold text-foreground">{study.company}</p>
                 <p className="text-xs text-muted-foreground">{role}</p>
@@ -222,7 +294,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Results - SEMPRE FUNDO PRETO */}
+      {/* Results - SEMPRE FUNDO PRETO COM ÍCONES */}
       <section className="bg-neutral-950 px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-2 mb-8">
@@ -235,10 +307,15 @@ export default async function CaseStudyPage({ params }: PageProps) {
             {study.metrics.map((metric, index) => {
               const label = locale === 'pt' ? metric.label_pt : metric.label_en;
               const description = locale === 'pt' ? metric.description_pt : metric.description_en;
+              const IconComponent = getMetricIcon(label);
 
               return (
                 <div key={index} className="rounded-lg border border-neutral-800 bg-neutral-900 p-6 transition-colors hover:border-primary">
-                  <p className="text-4xl font-bold text-primary md:text-5xl">{metric.value}</p>
+                  {/* Ícone + Valor */}
+                  <div className="flex items-center gap-3 mb-2">
+                    <IconComponent className="h-6 w-6 text-primary flex-shrink-0" />
+                    <p className="text-4xl font-bold text-primary md:text-5xl">{metric.value}</p>
+                  </div>
                   <p className="mt-2 text-sm font-semibold text-neutral-50">{label}</p>
                   <p className="mt-1 text-xs text-neutral-400">{description}</p>
                 </div>
