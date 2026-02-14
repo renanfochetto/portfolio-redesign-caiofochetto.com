@@ -279,7 +279,10 @@ export default async function CaseStudyPage({ params }: PageProps) {
           </div>
           <div className="flex flex-wrap gap-2">
             {capabilities.map((capability, index) => (
-              <span key={index} className="rounded-full border-2 border-primary px-4 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-background transition-colors">
+              <span
+                key={index}
+                className="rounded-full border border-neutral-700 px-4 py-2 text-sm font-medium text-neutral-400 hover:border-primary hover:text-primary transition-colors"
+              >
                 {capability}
               </span>
             ))}
