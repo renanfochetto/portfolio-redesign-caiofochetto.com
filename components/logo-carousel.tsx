@@ -47,6 +47,8 @@ export function LogoCarousel() {
   if (!mounted) {
     return (
       <div className="mt-10 border-t border-border pt-6">
+        <p className="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+        </p>
         <div className="relative h-16 overflow-hidden">
           {/* Placeholder vazio */}
         </div>
@@ -56,6 +58,9 @@ export function LogoCarousel() {
 
   return (
     <div className="mt-10 border-t border-border pt-6">
+      <p className="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+      </p>
+
       <div className="relative overflow-hidden">
         <motion.div
           className="flex gap-12 md:gap-16"
