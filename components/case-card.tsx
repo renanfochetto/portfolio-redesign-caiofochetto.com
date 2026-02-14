@@ -97,15 +97,6 @@ export function CaseCard({
       const folder = isDark ? "white" : "black";
 
       setLogoFolder(folder);
-
-      // Debug detalhado
-      console.log(`[CaseCard ${brand}]`, {
-        hasDarkClass,
-        dataTheme,
-        bodyBg,
-        isDark,
-        folder
-      });
     };
 
     // Check inicial com delay para garantir que DOM está pronto
@@ -134,28 +125,21 @@ export function CaseCard({
     >
       <div className="relative overflow-hidden rounded-lg border border-border bg-card p-6 transition-all duration-300 hover:border-primary hover:bg-card/80">
 
-        {/* Header: Logo + Brand + Arrow */}
-        <div className="mb-4 flex items-start justify-between">
-          <div className="flex items-center gap-3">
-            {/* Logo da empresa (se disponível) */}
-            {mounted && brandLogo && (
-              <div className="flex h-14 w-14 items-center justify-center">
-                <Image
-                  src={`/logos/${logoFolder}/${brandLogo}.svg`}
-                  alt={`${brand} logo`}
-                  width={56}
-                  height={56}
-                  className="h-full w-full object-contain"
-                  unoptimized
-                />
-              </div>
-            )}
-
-            {/* Brand name */}
-            <p className="text-xs font-medium uppercase tracking-widest text-primary">
-              {brand}
-            </p>
-          </div>
+        {/* Header: LOGO APENAS + Arrow */}
+        <div className="mb-6 flex items-start justify-between">
+          {/* Logo da empresa (sem texto da marca) */}
+          {mounted && brandLogo && (
+            <div className="flex h-16 w-16 items-center justify-start">
+              <Image
+                src={`/logos/${logoFolder}/${brandLogo}.svg`}
+                alt={`${brand} logo`}
+                width={64}
+                height={64}
+                className="h-full w-auto max-w-[100px] object-contain object-left"
+                unoptimized
+              />
+            </div>
+          )}
 
           {/* Arrow */}
           <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
