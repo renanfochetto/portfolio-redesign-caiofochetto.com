@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTheme } from "./theme-provider";
 
 const logos = [
   { name: "ae", alt: "A+E Networks" },
@@ -17,6 +18,7 @@ const logos = [
 ];
 
 export function LogoCarousel() {
+  const { theme } = useTheme();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -37,6 +39,9 @@ export function LogoCarousel() {
 
   // Duplicar logos para loop seamless
   const duplicatedLogos = [...logos, ...logos];
+
+  // Determinar pasta baseado no tema: white para dark, black para light
+  const logoFolder = theme === "dark" ? "white" : "black";
 
   // Não renderizar até montar (evita mismatch)
   if (!mounted) {
@@ -94,13 +99,13 @@ export function LogoCarousel() {
               }}
             >
               <Image
-                src={`/logos/${logo.name}.svg`}
+                src={`/logos/${logoFolder}/${logo.name}.svg`}
                 alt={logo.alt}
                 width={120}
                 height={48}
                 className="h-full w-full object-contain object-center"
                 unoptimized={true}
-                priority={idx < 9} // Priorizar primeira volta
+                priority={idx < 9}
               />
             </div>
           ))}
