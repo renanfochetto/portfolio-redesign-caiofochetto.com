@@ -143,8 +143,8 @@ export function CaseCard({
                 <Image
                   src={`/logos/${logoFolder}/${brandLogo}.svg`}
                   alt={`${brand} logo`}
-                  width={56}
-                  height={56}
+                  width={72}
+                  height={72}
                   className="h-full w-full object-contain"
                   unoptimized
                 />
