@@ -281,13 +281,12 @@ export default async function CaseStudyPage({ params }: PageProps) {
             {capabilities.map((capability, index) => (
               <span
                 key={index}
-                className="rounded-full border border-neutral-700 px-4 py-2 text-sm font-medium text-neutral-400 hover:border-primary hover:text-primary transition-colors"
+                className="rounded-full border border-neutral-800 px-4 py-2 text-sm font-medium text-muted-foreground hover:border-primary hover:bg-primary/10 hover:text-primary transition-all"
               >
                 {capability}
               </span>
             ))}
-          </div>
-        </div>
+          </div>        </div>
       </section>
 
       {/* Navigation - APENAS PREV + NEXT (2 colunas) */}
