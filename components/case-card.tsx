@@ -75,42 +75,41 @@ export function CaseCard({
   const [mounted, setMounted] = useState(false);
   const [logoFolder, setLogoFolder] = useState("white"); // Default white para dark mode
 
-  // Detectar tema pela classe 'dark' no HTML e também pelo background-color
+  // Detectar tema pela classe 'dark' no HTML
   useEffect(() => {
     setMounted(true);
 
     const checkTheme = () => {
       const htmlElement = document.documentElement;
-
-      // Método 1: Verificar classe 'dark'
       const hasDarkClass = htmlElement.classList.contains('dark');
+      const newFolder = hasDarkClass ? "white" : "black";
 
-      // Método 2: Verificar data-theme attribute (alguns temas usam isso)
-      const dataTheme = htmlElement.getAttribute('data-theme');
-
-      // Método 3: Verificar computed background color do body
-      const bodyBg = window.getComputedStyle(document.body).backgroundColor;
-      const isDarkBg = bodyBg === 'rgb(0, 0, 0)' || bodyBg === 'rgb(10, 10, 10)';
-
-      // Combinar métodos (se qualquer um indicar dark, usa white logos)
-      const isDark = hasDarkClass || dataTheme === 'dark' || isDarkBg;
-      const folder = isDark ? "white" : "black";
-
-      setLogoFolder(folder);
+      // Só atualiza se mudou para evitar re-renders desnecessários
+      setLogoFolder(prev => prev !== newFolder ? newFolder : prev);
     };
 
-    // Check inicial com delay para garantir que DOM está pronto
-    setTimeout(checkTheme, 100);
+    // Check inicial
+    checkTheme();
 
     // Observer para mudanças de tema
-    const observer = new MutationObserver(checkTheme);
+    const observer = new MutationObserver((mutations) => {
+      // Verificar se alguma mutação foi na classe
+      const classChanged = mutations.some(
+        mutation => mutation.attributeName === 'class'
+      );
+
+      if (classChanged) {
+        checkTheme();
+      }
+    });
+
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class', 'data-theme', 'style']
+      attributeFilter: ['class']
     });
 
     return () => observer.disconnect();
-  }, [brand]);
+  }, []); // ✅ Sem dependências - só executa uma vez
 
   // Limitar tags a 3
   const displayTags = tags.slice(0, 3);
