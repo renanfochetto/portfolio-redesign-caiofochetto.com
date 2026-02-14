@@ -73,7 +73,7 @@ export function CaseCard({
   locale
 }: CaseCardProps) {
   const [mounted, setMounted] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true); // Default dark para evitar flash
 
   // Detectar tema pela classe 'dark' no HTML
   useEffect(() => {
@@ -85,7 +85,7 @@ export function CaseCard({
       setIsDark(hasDarkClass);
 
       // Debug
-      console.log(`[CaseCard ${brand}] Dark class: ${hasDarkClass}, Folder: ${hasDarkClass ? 'white' : 'black'}`);
+      console.log(`[CaseCard ${brand}] HTML has dark class: ${hasDarkClass}, Will use folder: ${hasDarkClass ? 'white' : 'black'}`);
     };
 
     // Check inicial
@@ -114,7 +114,12 @@ export function CaseCard({
       href={`/${locale}/case/${slug}`}
       className="group relative block"
     >
-      <div className="relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900 p-6 transition-all duration-300 hover:border-primary hover:bg-neutral-900/80">
+      {/* 
+        FUNDO RESPONSIVO AO TEMA:
+        - Dark mode: bg-neutral-900 border-neutral-800
+        - Light mode: bg-card border-border
+      */}
+      <div className="relative overflow-hidden rounded-lg border border-border bg-card p-6 transition-all duration-300 hover:border-primary hover:bg-card/80">
 
         {/* Header: Logo + Brand + Arrow */}
         <div className="mb-4 flex items-start justify-between">
@@ -144,11 +149,11 @@ export function CaseCard({
           </div>
 
           {/* Arrow */}
-          <ArrowUpRight className="h-5 w-5 text-neutral-600 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
+          <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
         </div>
 
         {/* Título */}
-        <h3 className="mb-6 text-xl font-bold leading-tight text-neutral-50 transition-colors group-hover:text-primary md:text-2xl">
+        <h3 className="mb-6 text-xl font-bold leading-tight text-foreground transition-colors group-hover:text-primary md:text-2xl">
           {title}
         </h3>
 
@@ -165,7 +170,7 @@ export function CaseCard({
                     {metric.value}
                   </p>
                 </div>
-                <p className="text-xs text-neutral-400">
+                <p className="text-xs text-muted-foreground">
                   {metric.label}
                 </p>
               </div>
@@ -178,7 +183,7 @@ export function CaseCard({
           {displayTags.map((tag, index) => (
             <span
               key={index}
-              className="rounded-full border border-neutral-700 px-3 py-1 text-xs font-medium text-neutral-400 transition-colors hover:border-primary hover:text-primary"
+              className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary"
             >
               {tag}
             </span>
