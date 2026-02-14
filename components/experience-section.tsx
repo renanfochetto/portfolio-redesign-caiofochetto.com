@@ -10,7 +10,7 @@ const experiences = [
     role: "Diretor de Conteúdo Digital, Marketing de Influência e Talentos",
     roleEn: "Director of Digital Content, Influencer Marketing & Talent",
     company: "Octagon",
-    logo: "/companies/octagon.svg",
+    logo: "/companies/octagon.avif",
     period: "2023 - 2026",
     location: "São Paulo, BR"
   },
@@ -18,7 +18,7 @@ const experiences = [
     role: "Líder de Operações LATAM",
     roleEn: "LATAM Operations Lead",
     company: "Jellysmack",
-    logo: "/companies/jellysmack.svg",
+    logo: "/companies/jellysmack.avif",
     period: "2021 - 2023",
     location: "São Paulo, BR"
   },
@@ -26,7 +26,7 @@ const experiences = [
     role: "Content and Product Manager",
     roleEn: "Content and Product Manager",
     company: "Playground",
-    logo: "/companies/playground.svg",
+    logo: "/companies/playground.avif",
     period: "2020 - 2021",
     location: "São Paulo, BR"
   },
@@ -34,7 +34,7 @@ const experiences = [
     role: "Digital Platforms Manager",
     roleEn: "Digital Platforms Manager",
     company: "A+E Networks",
-    logo: "/companies/aenetworks.svg",
+    logo: "/companies/aenetworks.avif",
     period: "2012 - 2019",
     location: "São Paulo, BR"
   },
@@ -45,7 +45,7 @@ const experiencesOlder = [
     role: "Digital Content Producer",
     roleEn: "Digital Content Producer",
     company: "Portal R7",
-    logo: "/companies/r7.svg",
+    logo: "/companies/portalr7.avif",
     period: "2010 - 2012",
     location: "São Paulo, BR"
   },
@@ -53,7 +53,7 @@ const experiencesOlder = [
     role: "Digital Content Producer",
     roleEn: "Digital Content Producer",
     company: "TV Cultura",
-    logo: "/companies/tvcultura.svg",
+    logo: "/companies/tvcultura.avif",
     period: "2009 - 2010",
     location: "São Paulo, BR"
   },
@@ -61,7 +61,7 @@ const experiencesOlder = [
     role: "Web Content Producer",
     roleEn: "Web Content Producer",
     company: "Rede Boa Nova",
-    logo: "/companies/redeboa nova.svg",
+    logo: "/companies/redeboanova.avif",
     period: "2009 - 2010",
     location: "São Paulo, BR"
   },
@@ -69,7 +69,7 @@ const experiencesOlder = [
     role: "TV Producer Coordinator",
     roleEn: "TV Producer Coordinator",
     company: "TV Mundo Maior",
-    logo: "/companies/tvmundomaior.svg",
+    logo: "/companies/tvmundomaior.avif",
     period: "2005 - 2008",
     location: "São Paulo, BR"
   },
