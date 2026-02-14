@@ -5,6 +5,20 @@ import { CaseCard } from "./case-card";
 import { AnimatedSection, AnimatedItem } from "./animated-section";
 import { caseStudies } from "@/lib/cases";
 
+// Mapeamento de brand → logo filename
+// Baseado nos logos que você tem em /public/logos/white e /black
+const brandLogoMap: Record<string, string> = {
+  "Betfair": "betfair",
+  "Budweiser": "budweiser",
+  "Formula E": "formulae",
+  "HISTORY": "history",
+  "A&E": "ae",
+  "Lifetime": "lifetime",
+  "Octagon": "octagon",
+  "Ambev": "ambev",
+  "Jellysmack": "jellysmack",
+};
+
 export function WorkSection() {
   const { locale, t } = useI18n();
 
@@ -24,28 +38,31 @@ export function WorkSection() {
             const title = locale === 'pt' ? study.title_pt : study.title_en;
 
             // Extrair brand (pode ser string ou array)
-            const brand = Array.isArray(study.brand)
-              ? study.brand.join(', ')
-              : study.brand;
+            const brandArray = Array.isArray(study.brand) ? study.brand : [study.brand];
+            const brandDisplay = brandArray.join(', ');
 
-            // Extrair primeiras 3 métricas com labels traduzidos
-            const metrics = study.metrics.slice(0, 3).map(m => ({
+            // Pegar logo do primeiro brand (se houver múltiplos)
+            const brandLogo = brandLogoMap[brandArray[0]] || undefined;
+
+            // Extrair métricas com labels traduzidos
+            const metrics = study.metrics.map(m => ({
               value: m.value,
               label: locale === 'pt' ? m.label_pt : m.label_en,
-              labelKey: '' // Mantém compatibilidade com CaseCard se necessário
             }));
+
+            // Tags já vêm prontas
+            const tags = study.tags;
 
             return (
               <AnimatedItem key={study.slug} index={idx}>
                 <CaseCard
-                  href={`/${locale}/case/${study.slug}`}
-                  brand={brand}
+                  slug={study.slug}
+                  brand={brandDisplay}
+                  brandLogo={brandLogo}
                   title={title}
-                  description="" // Pode remover ou adicionar se quiser
                   metrics={metrics}
-                  tags={study.tags}
-                  viewCaseLabel={t.work.viewCase}
-                  caseIcon={study.icon}
+                  tags={tags}
+                  locale={locale}
                 />
               </AnimatedItem>
             );
