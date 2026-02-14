@@ -11,7 +11,7 @@ const experiences = [
     roleEn: "Director of Digital Content, Influencer Marketing & Talent",
     company: "Octagon",
     logo: "/companies/octagon.avif",
-    period: "2023 - ",
+    period: "2023 - 2026",
     location: "São Paulo, BR"
   },
   {
@@ -20,7 +20,7 @@ const experiences = [
     company: "Jellysmack",
     logo: "/companies/jellysmack.avif",
     period: "2021 - 2023",
-    location: "Remote"
+    location: "São Paulo, BR"
   },
   {
     role: "Content and Product Manager",
@@ -36,6 +36,41 @@ const experiences = [
     company: "A+E Networks",
     logo: "/companies/aenetworks.avif",
     period: "2012 - 2019",
+    location: "São Paulo, BR"
+  },
+];
+
+const experiencesOlder = [
+  {
+    role: "Digital Content Producer",
+    roleEn: "Digital Content Producer",
+    company: "Portal R7",
+    logo: "/companies/portalr7.avif",
+    period: "2010 - 2012",
+    location: "São Paulo, BR"
+  },
+  {
+    role: "Digital Content Producer",
+    roleEn: "Digital Content Producer",
+    company: "TV Cultura",
+    logo: "/companies/tvcultura.avif",
+    period: "2009 - 2010",
+    location: "São Paulo, BR"
+  },
+  {
+    role: "Web Content Producer",
+    roleEn: "Web Content Producer",
+    company: "Rede Boa Nova",
+    logo: "/companies/redeboanova.avif",
+    period: "2009 - 2010",
+    location: "São Paulo, BR"
+  },
+  {
+    role: "TV Producer Coordinator",
+    roleEn: "TV Producer Coordinator",
+    company: "TV Mundo Maior",
+    logo: "/companies/tvmundomaior.avif",
+    period: "2005 - 2008",
     location: "São Paulo, BR"
   },
 ];
@@ -90,15 +125,15 @@ export function ExperienceSection() {
           <div
             className={`
               grid transition-all duration-500 ease-in-out
-              ${isExpanded 
-                ? 'grid-rows-[1fr] opacity-100' 
+              ${isExpanded
+                ? 'grid-rows-[1fr] opacity-100'
                 : 'grid-rows-[0fr] opacity-0'
               }
             `}
           >
             <div className="overflow-hidden">
-              <div className="space-y-0 pt-8">
-                {experiences.map((exp, i) => (
+              <div className="space-y-0">
+                {experiencesOlder.map((exp, i) => (
                   <AnimatedItem
                     key={`old-${i}`}
                     index={i}

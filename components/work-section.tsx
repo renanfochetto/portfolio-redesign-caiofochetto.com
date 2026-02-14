@@ -5,31 +5,22 @@ import { CaseCard } from "./case-card";
 import { AnimatedSection, AnimatedItem } from "./animated-section";
 import { caseStudies } from "@/lib/cases";
 
-const metricLabels: Record<string, Record<string, string>> = {
-  pt: {
-    revenueGrowth: "Crescimento de receita",
-    reach: "Alcance",
-    engagementRate: "Taxa de engajamento",
-    creators: "Creators",
-    views: "Visualizacoes",
-    contentPieces: "Pecas de conteudo",
-    bookingGrowth: "Crescimento de reservas",
-  },
-  en: {
-    revenueGrowth: "Revenue growth",
-    reach: "Reach",
-    engagementRate: "Engagement rate",
-    creators: "Creators",
-    views: "Views",
-    contentPieces: "Content pieces",
-    bookingGrowth: "Booking growth",
-  },
+// Mapeamento de brand → logo filename
+// ATUALIZADO: Usa "ae" para o case HISTORY/A&E/Lifetime
+const brandLogoMap: Record<string, string> = {
+  "Betfair": "betfair",
+  "Budweiser": "budweiser",
+  "Formula E": "formulae",
+  "HISTORY": "ae",        // ✅ Mudou de "history" para "ae"
+  "A&E": "ae",
+  "Lifetime": "lifetime",
+  "Octagon": "octagon",
+  "Ambev": "ambev",
+  "Jellysmack": "jellysmack",
 };
 
 export function WorkSection() {
   const { locale, t } = useI18n();
-  const labels = metricLabels[locale] || metricLabels.pt;
-  const casesDict = t.cases as Record<string, { title: string; description: string }>;
 
   return (
     <section id="work" className="px-6 py-24 lg:px-8">
@@ -43,21 +34,35 @@ export function WorkSection() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 md:gap-8">
           {caseStudies.map((study, idx) => {
-            const caseT = casesDict[study.slug];
+            // Extrair título baseado no locale
+            const title = locale === 'pt' ? study.title_pt : study.title_en;
+
+            // Extrair brand (pode ser string ou array)
+            const brandArray = Array.isArray(study.brand) ? study.brand : [study.brand];
+            const brandDisplay = brandArray.join(', ');
+
+            // Pegar logo do primeiro brand (se houver múltiplos)
+            const brandLogo = brandLogoMap[brandArray[0]] || undefined;
+
+            // Extrair métricas com labels traduzidos
+            const metrics = study.metrics.map(m => ({
+              value: m.value,
+              label: locale === 'pt' ? m.label_pt : m.label_en,
+            }));
+
+            // Tags já vêm prontas
+            const tags = study.tags;
+
             return (
               <AnimatedItem key={study.slug} index={idx}>
                 <CaseCard
-                  href={`/${locale}/case/${study.slug}`}
-                  brand={study.brand}
-                  title={caseT?.title || study.brand}
-                  description={caseT?.description || ""}
-                  metrics={study.metrics.map((m) => ({
-                    value: m.value,
-                    label: labels[m.labelKey] || m.labelKey,
-                    labelKey: m.labelKey,
-                  }))}
-                  tags={study.tags}
-                  viewCaseLabel={t.work.viewCase}
+                  slug={study.slug}
+                  brand={brandDisplay}
+                  brandLogo={brandLogo}
+                  title={title}
+                  metrics={metrics}
+                  tags={tags}
+                  locale={locale}
                 />
               </AnimatedItem>
             );
