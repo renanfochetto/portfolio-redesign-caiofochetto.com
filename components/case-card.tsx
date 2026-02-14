@@ -4,6 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useTheme } from "./theme-provider";
 import {
   ArrowUpRight,
   Users,
@@ -72,44 +73,16 @@ export function CaseCard({
   tags,
   locale
 }: CaseCardProps) {
+  const { theme } = useTheme(); // ✅ Usar o mesmo hook do LogoCarousel
   const [mounted, setMounted] = useState(false);
-  const [logoFolder, setLogoFolder] = useState("white"); // Default white para dark mode
 
-  // Detectar tema pela classe 'dark' no HTML
+  // Evitar flash SSR
   useEffect(() => {
     setMounted(true);
+  }, []);
 
-    const checkTheme = () => {
-      const htmlElement = document.documentElement;
-      const hasDarkClass = htmlElement.classList.contains('dark');
-      const newFolder = hasDarkClass ? "white" : "black";
-
-      // Só atualiza se mudou para evitar re-renders desnecessários
-      setLogoFolder(prev => prev !== newFolder ? newFolder : prev);
-    };
-
-    // Check inicial
-    checkTheme();
-
-    // Observer para mudanças de tema
-    const observer = new MutationObserver((mutations) => {
-      // Verificar se alguma mutação foi na classe
-      const classChanged = mutations.some(
-        mutation => mutation.attributeName === 'class'
-      );
-
-      if (classChanged) {
-        checkTheme();
-      }
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-
-    return () => observer.disconnect();
-  }, []); // ✅ Sem dependências - só executa uma vez
+  // Determinar pasta baseado no tema: white para dark, black para light
+  const logoFolder = theme === "dark" ? "white" : "black";
 
   // Limitar tags a 3
   const displayTags = tags.slice(0, 3);
