@@ -45,6 +45,7 @@ export function WorkSection() {
                   metrics={metrics}
                   tags={study.tags}
                   viewCaseLabel={t.work.viewCase}
+                  caseIcon={study.icon}
                 />
               </AnimatedItem>
             );

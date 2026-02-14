@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Users, Radio, Heart, MessageCircle, TrendingUp, Eye, Star, Play, Zap } from "lucide-react";
+import { ArrowUpRight, Users, Radio, Heart, MessageCircle, TrendingUp, Eye, Star, Play, Zap, BarChart3, Megaphone, Target, Sparkles } from "lucide-react";
 
 const metricIconMap: Record<string, any> = {
   reach: Users,
@@ -10,10 +10,32 @@ const metricIconMap: Record<string, any> = {
   views: Play,
   contentPieces: Eye,
   impressions: Eye,
+  interactions: MessageCircle,
+  sentiment: Sparkles,
+  ctR: Target,
+  watchTime: Play,
+  revenue: BarChart3,
+};
+
+const caseIconMap: Record<string, any> = {
+  Users: Users,
+  TrendingUp: TrendingUp,
+  Zap: Zap,
+  Play: Play,
+  Star: Star,
+  MessageCircle: MessageCircle,
+  Eye: Eye,
+  BarChart3: BarChart3,
+  Megaphone: Megaphone,
+  Target: Target,
 };
 
 function getMetricIcon(labelKey: string) {
   return metricIconMap[labelKey] || Eye;
+}
+
+function getCaseIcon(icon?: string) {
+  return icon && caseIconMap[icon] ? caseIconMap[icon] : Eye;
 }
 
 interface CaseCardProps {
@@ -24,6 +46,7 @@ interface CaseCardProps {
   metrics: { value: string; label: string; labelKey?: string }[];
   tags: string[];
   viewCaseLabel: string;
+  caseIcon?: string;
 }
 
 export function CaseCard({
@@ -34,22 +57,28 @@ export function CaseCard({
   metrics,
   tags,
   viewCaseLabel,
+  caseIcon,
 }: CaseCardProps) {
+  const CardIconComponent = getCaseIcon(caseIcon);
+
   return (
     <Link
       href={href}
       className="group flex flex-col rounded-lg border border-border bg-card p-6 transition-all hover:border-primary/30 hover:bg-card/80 md:p-8"
     >
       <div className="flex items-start justify-between">
-        <div>
-          <p className="text-xs font-medium uppercase tracking-widest text-primary">
-            {brand}
-          </p>
-          <h3 className="mt-2 text-xl font-semibold text-foreground md:text-2xl">
-            {title}
-          </h3>
+        <div className="flex gap-3">
+          <CardIconComponent className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+          <div>
+            <p className="text-xs font-medium uppercase tracking-widest text-primary">
+              {brand}
+            </p>
+            <h3 className="mt-2 text-xl font-semibold text-foreground md:text-2xl">
+              {title}
+            </h3>
+          </div>
         </div>
-        <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
+        <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary flex-shrink-0" />
       </div>
 
       <p className="mt-3 text-sm leading-relaxed text-foreground/75">

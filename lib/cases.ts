@@ -14,6 +14,7 @@ export const caseStudies: CaseData[] = [
     year_display: '2024',
     industry: 'Sports Betting',
     type: 'Always-On Influencer Strategy',
+    icon: 'Users', // Ícone para "comunidades"
 
     challenge_pt: 'Em um mercado de apostas esportivas altamente competitivo e como patrocinadora máster do Vasco da Gama e do Cruzeiro, a Betfair precisava ir além da exposição de logo e transformar o patrocínio em presença cultural contínua.',
     challenge_en: 'In a highly competitive sports betting market, and as master sponsor of Vasco da Gama and Cruzeiro, Betfair needed to move beyond logo exposure and transform sponsorship into continuous cultural presence.',
@@ -104,6 +105,7 @@ export const caseStudies: CaseData[] = [
     year_display: '2023',
     industry: 'Sports Marketing',
     type: 'Influencer at Scale',
+    icon: 'TrendingUp', // Ícone para "escala"
 
     challenge_pt: 'Ativar um evento esportivo global de enorme relevância cultural, garantindo forte presença de marca nas plataformas digitais, equilibrando escala, autenticidade e performance.',
     challenge_en: 'Activate a global sports event with massive cultural relevance, ensuring strong brand presence across digital platforms while balancing scale, authenticity, and performance.',
@@ -189,6 +191,7 @@ export const caseStudies: CaseData[] = [
     year_display: '2016',
     industry: 'Sports',
     type: 'Community Building',
+    icon: 'Zap', // Ícone para "performance"
 
     challenge_pt: 'Estabelecer presença digital local e construir relacionamento com comunidades para um campeonato global.',
     challenge_en: 'Establish a local digital presence and build community relationships for a global championship.',
@@ -274,6 +277,7 @@ export const caseStudies: CaseData[] = [
     year_display: '2015',
     industry: 'Media',
     type: 'Digital Transformation',
+    icon: 'Play', // Ícone para "streaming"
 
     challenge_pt: 'Expandir audiências digitais e criar oportunidades de monetização em cenário fragmentado.',
     challenge_en: 'Expand digital audiences and create monetization opportunities in fragmented landscape.',
@@ -358,6 +362,7 @@ export const caseStudies: CaseData[] = [
     year_display: '2023',
     industry: 'Sports Betting',
     type: 'Brand Ambassadors',
+    icon: 'Star', // Ícone para "embaixadores"
 
     challenge_pt: 'Embaixadores subutilizados sem calendário estratégico claro.',
     challenge_en: 'Underutilized ambassadors without clear strategic calendar.',
@@ -442,6 +447,7 @@ export const caseStudies: CaseData[] = [
     year_display: '2024',
     industry: 'Music',
     type: 'Fan Activation',
+    icon: 'MessageCircle', // Ícone para "conversas"
 
     challenge_pt: 'Gerar buzz orgânico para plataforma de música sem mídia paga.',
     challenge_en: 'Generate organic buzz for music platform without paid media.',
