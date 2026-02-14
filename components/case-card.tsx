@@ -1,119 +1,176 @@
+// components/case-card.tsx
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Users, Radio, Heart, MessageCircle, TrendingUp, Eye, Star, Play, Zap, BarChart3, Megaphone, Target, Sparkles } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useState, useEffect } from "react";
+import {
+  ArrowUpRight,
+  Users,
+  Eye,
+  Heart,
+  MessageCircle,
+  TrendingUp,
+  DollarSign,
+  MousePointerClick,
+  Play,
+  BarChart3
+} from "lucide-react";
 
-const metricIconMap: Record<string, any> = {
-  reach: Users,
-  revenueGrowth: TrendingUp,
-  bookingGrowth: TrendingUp,
-  engagementRate: Heart,
-  creators: Star,
-  views: Play,
-  contentPieces: Eye,
-  impressions: Eye,
-  interactions: MessageCircle,
-  sentiment: Sparkles,
-  ctR: Target,
-  watchTime: Play,
-  revenue: BarChart3,
+// Mapeamento de ícones por tipo de métrica
+const getMetricIcon = (label: string) => {
+  const lowerLabel = label.toLowerCase();
+
+  if (lowerLabel.includes("alcance") || lowerLabel.includes("reach")) {
+    return Users;
+  }
+  if (lowerLabel.includes("impressões") || lowerLabel.includes("impressions")) {
+    return Eye;
+  }
+  if (lowerLabel.includes("engajamento") || lowerLabel.includes("engagement")) {
+    return Heart;
+  }
+  if (lowerLabel.includes("interações") || lowerLabel.includes("interactions")) {
+    return MessageCircle;
+  }
+  if (lowerLabel.includes("crescimento") || lowerLabel.includes("growth")) {
+    return TrendingUp;
+  }
+  if (lowerLabel.includes("receita") || lowerLabel.includes("revenue")) {
+    return DollarSign;
+  }
+  if (lowerLabel.includes("cliques") || lowerLabel.includes("ctr")) {
+    return MousePointerClick;
+  }
+  if (lowerLabel.includes("views") || lowerLabel.includes("visualizações")) {
+    return Play;
+  }
+
+  // Default
+  return BarChart3;
 };
-
-const caseIconMap: Record<string, any> = {
-  Users: Users,
-  TrendingUp: TrendingUp,
-  Zap: Zap,
-  Play: Play,
-  Star: Star,
-  MessageCircle: MessageCircle,
-  Eye: Eye,
-  BarChart3: BarChart3,
-  Megaphone: Megaphone,
-  Target: Target,
-};
-
-function getMetricIcon(labelKey: string) {
-  return metricIconMap[labelKey] || Eye;
-}
-
-function getCaseIcon(icon?: string) {
-  return icon && caseIconMap[icon] ? caseIconMap[icon] : Eye;
-}
 
 interface CaseCardProps {
-  href: string;
+  slug: string;
   brand: string;
+  brandLogo?: string; // e.g. "betfair" (busca em /logos/white ou /black)
   title: string;
-  description: string;
-  metrics: { value: string; label: string; labelKey?: string }[];
+  metrics: Array<{
+    value: string;
+    label: string;
+  }>;
   tags: string[];
-  viewCaseLabel: string;
-  caseIcon?: string;
+  locale: string;
 }
 
 export function CaseCard({
-  href,
+  slug,
   brand,
+  brandLogo,
   title,
-  description,
   metrics,
   tags,
-  viewCaseLabel,
-  caseIcon,
+  locale
 }: CaseCardProps) {
-  const CardIconComponent = getCaseIcon(caseIcon);
+  const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
+  const isDark = currentTheme === "dark";
+  const logoFolder = isDark ? "white" : "black";
+
+  // Limitar tags a 3
+  const displayTags = tags.slice(0, 3);
+
+  // Limitar métricas a 3 (as principais)
+  const displayMetrics = metrics.slice(0, 3);
 
   return (
     <Link
-      href={href}
-      className="group flex flex-col rounded-lg border border-border bg-card p-6 transition-all hover:border-primary/30 hover:bg-card/80 md:p-8"
+      href={`/${locale}/case/${slug}`}
+      className="group relative block"
     >
-      <div className="flex items-start justify-between">
-        <div className="flex gap-3">
-          <CardIconComponent className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
-          <div>
+      <div className="relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900 p-6 transition-all duration-300 hover:border-primary hover:bg-neutral-900/80">
+
+        {/* Header: Logo + Brand + Arrow */}
+        <div className="mb-4 flex items-start justify-between">
+          <div className="flex items-center gap-3">
+            {/* Logo da empresa (se disponível) */}
+            {mounted && brandLogo && (
+              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-neutral-800/50 p-1.5">
+                <Image
+                  src={`/logos/${logoFolder}/${brandLogo}_${logoFolder}.svg`}
+                  alt={`${brand} logo`}
+                  width={24}
+                  height={24}
+                  className="h-full w-full object-contain"
+                  unoptimized
+                />
+              </div>
+            )}
+
+            {/* Brand name */}
             <p className="text-xs font-medium uppercase tracking-widest text-primary">
               {brand}
             </p>
-            <h3 className="mt-2 text-xl font-semibold text-foreground md:text-2xl">
-              {title}
-            </h3>
           </div>
+
+          {/* Arrow */}
+          <ArrowUpRight className="h-5 w-5 text-neutral-600 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
         </div>
-        <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary flex-shrink-0" />
-      </div>
 
-      <p className="mt-3 text-sm leading-relaxed text-foreground/75">
-        {description}
-      </p>
+        {/* Título */}
+        <h3 className="mb-6 text-xl font-bold leading-tight text-neutral-50 transition-colors group-hover:text-primary md:text-2xl">
+          {title}
+        </h3>
 
-      <div className="mt-6 flex flex-wrap gap-6">
-        {metrics.map((m) => {
-          const IconComponent = getMetricIcon(m.labelKey || "");
-          return (
-            <div key={m.label} className="flex items-start gap-2">
-              <IconComponent className="mt-0.5 h-4 w-4 text-primary/50" />
-              <div>
-                <p className="text-lg font-bold text-foreground">{m.value}</p>
-                <p className="text-xs text-muted-foreground">{m.label}</p>
+        {/* Métricas com ícones variados */}
+        <div className="mb-6 grid grid-cols-3 gap-4">
+          {displayMetrics.map((metric, index) => {
+            const IconComponent = getMetricIcon(metric.label);
+
+            return (
+              <div key={index} className="flex flex-col gap-1">
+                <div className="flex items-center gap-1.5">
+                  <IconComponent className="h-4 w-4 text-primary" />
+                  <p className="text-lg font-bold text-primary md:text-xl">
+                    {metric.value}
+                  </p>
+                </div>
+                <p className="text-xs text-neutral-400">
+                  {metric.label}
+                </p>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
 
-      <div className="mt-6 flex flex-wrap gap-2">
-        {tags.map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full border border-border px-2.5 py-1 text-xs text-muted-foreground"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
+        {/* Tags sutis */}
+        <div className="flex flex-wrap gap-2">
+          {displayTags.map((tag, index) => (
+            <span
+              key={index}
+              className="rounded-full border border-neutral-700 px-3 py-1 text-xs font-medium text-neutral-400 transition-colors hover:border-primary hover:text-primary"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
 
-      <p className="mt-6 text-sm font-medium text-primary">
-        {viewCaseLabel} &rarr;
-      </p>
+        {/* CTA (sempre visível) */}
+        <div className="mt-6 flex items-center gap-2 text-sm font-medium text-primary">
+          <span>{locale === "pt" ? "Ver case completo" : "View full case"}</span>
+          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+        </div>
+
+        {/* Hover border glow */}
+        <div className="pointer-events-none absolute inset-0 rounded-lg border-2 border-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      </div>
     </Link>
   );
 }
