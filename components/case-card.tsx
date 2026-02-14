@@ -1,4 +1,5 @@
 // components/case-card.tsx
+// VERSÃO: LOGO APENAS - 72px
 "use client";
 
 import Image from "next/image";
@@ -73,45 +74,27 @@ export function CaseCard({
   locale
 }: CaseCardProps) {
   const [mounted, setMounted] = useState(false);
-  const [logoFolder, setLogoFolder] = useState("white"); // Default white para dark mode
+  const [logoFolder, setLogoFolder] = useState("white");
 
-  // Detectar tema pela classe 'dark' no HTML e também pelo background-color
+  // Detectar tema
   useEffect(() => {
     setMounted(true);
 
     const checkTheme = () => {
       const htmlElement = document.documentElement;
-
-      // Método 1: Verificar classe 'dark'
       const hasDarkClass = htmlElement.classList.contains('dark');
-
-      // Método 2: Verificar data-theme attribute (alguns temas usam isso)
       const dataTheme = htmlElement.getAttribute('data-theme');
-
-      // Método 3: Verificar computed background color do body
       const bodyBg = window.getComputedStyle(document.body).backgroundColor;
       const isDarkBg = bodyBg === 'rgb(0, 0, 0)' || bodyBg === 'rgb(10, 10, 10)';
 
-      // Combinar métodos (se qualquer um indicar dark, usa white logos)
       const isDark = hasDarkClass || dataTheme === 'dark' || isDarkBg;
       const folder = isDark ? "white" : "black";
 
       setLogoFolder(folder);
-
-      // Debug detalhado
-      console.log(`[CaseCard ${brand}]`, {
-        hasDarkClass,
-        dataTheme,
-        bodyBg,
-        isDark,
-        folder
-      });
     };
 
-    // Check inicial com delay para garantir que DOM está pronto
     setTimeout(checkTheme, 100);
 
-    // Observer para mudanças de tema
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, {
       attributes: true,
@@ -119,12 +102,9 @@ export function CaseCard({
     });
 
     return () => observer.disconnect();
-  }, [brand]);
+  }, []);
 
-  // Limitar tags a 3
   const displayTags = tags.slice(0, 3);
-
-  // Limitar métricas a 3 (as principais)
   const displayMetrics = metrics.slice(0, 3);
 
   return (
@@ -134,28 +114,21 @@ export function CaseCard({
     >
       <div className="relative overflow-hidden rounded-lg border border-border bg-card p-6 transition-all duration-300 hover:border-primary hover:bg-card/80">
 
-        {/* Header: Logo + Brand + Arrow */}
-        <div className="mb-4 flex items-start justify-between">
-          <div className="flex items-center gap-3">
-            {/* Logo da empresa (se disponível) */}
-            {mounted && brandLogo && (
-              <div className="flex h-14 w-14 items-center justify-center">
-                <Image
-                  src={`/logos/${logoFolder}/${brandLogo}.svg`}
-                  alt={`${brand} logo`}
-                  width={56}
-                  height={56}
-                  className="h-full w-full object-contain"
-                  unoptimized
-                />
-              </div>
-            )}
-
-            {/* Brand name */}
-            <p className="text-xs font-medium uppercase tracking-widest text-primary">
-              {brand}
-            </p>
-          </div>
+        {/* Header: LOGO APENAS + Arrow */}
+        <div className="mb-6 flex items-start justify-between">
+          {/* Logo da empresa (MAIOR, SEM TEXTO) */}
+          {mounted && brandLogo && (
+            <div className="flex h-18 w-18 items-center justify-start">
+              <Image
+                src={`/logos/${logoFolder}/${brandLogo}.svg`}
+                alt={`${brand} logo`}
+                width={72}
+                height={72}
+                className="h-full w-auto max-w-[120px] object-contain object-left"
+                unoptimized
+              />
+            </div>
+          )}
 
           {/* Arrow */}
           <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
