@@ -3,7 +3,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import {
   ArrowUpRight,
@@ -73,23 +72,36 @@ export function CaseCard({
   tags,
   locale
 }: CaseCardProps) {
-  const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
+  // Detectar tema pela classe 'dark' no HTML
   useEffect(() => {
     setMounted(true);
-  }, []);
 
-  const currentTheme = theme === "system" ? systemTheme : theme;
-  const isDark = currentTheme === "dark";
+    const checkTheme = () => {
+      const htmlElement = document.documentElement;
+      const hasDarkClass = htmlElement.classList.contains('dark');
+      setIsDark(hasDarkClass);
+
+      // Debug
+      console.log(`[CaseCard ${brand}] Dark class: ${hasDarkClass}, Folder: ${hasDarkClass ? 'white' : 'black'}`);
+    };
+
+    // Check inicial
+    checkTheme();
+
+    // Observer para mudanças de tema
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
+  }, [brand]);
+
   const logoFolder = isDark ? "white" : "black";
-
-  // DEBUG - REMOVER DEPOIS
-  useEffect(() => {
-    if (mounted && brandLogo) {
-      console.log(`[CaseCard ${brand}] Theme: ${theme}, System: ${systemTheme}, Current: ${currentTheme}, isDark: ${isDark}, Folder: ${logoFolder}`);
-    }
-  }, [mounted, theme, systemTheme, currentTheme, isDark, logoFolder, brand, brandLogo]);
 
   // Limitar tags a 3
   const displayTags = tags.slice(0, 3);
@@ -109,7 +121,7 @@ export function CaseCard({
           <div className="flex items-center gap-3">
             {/* Logo da empresa (se disponível) */}
             {mounted && brandLogo && (
-              <div className="flex h-14 w-14 items-center justify-center">
+              <div className="relative flex h-14 w-14 items-center justify-center">
                 <Image
                   src={`/logos/${logoFolder}/${brandLogo}.svg`}
                   alt={`${brand} logo`}
@@ -118,7 +130,7 @@ export function CaseCard({
                   className="h-full w-full object-contain"
                   unoptimized
                 />
-                {/* DEBUG - REMOVER DEPOIS */}
+                {/* DEBUG - Badge mostrando folder */}
                 <span className="absolute -top-2 -left-2 rounded bg-red-500 px-1 text-[8px] text-white">
                   {logoFolder}
                 </span>
