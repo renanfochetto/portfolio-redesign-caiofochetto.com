@@ -54,7 +54,7 @@ const getMetricIcon = (label: string) => {
 interface CaseCardProps {
   slug: string;
   brand: string;
-  brandLogo?: string; // e.g. "betfair" (busca em /logos/white ou /black)
+  brandLogo?: string;
   title: string;
   metrics: Array<{
     value: string;
@@ -84,6 +84,13 @@ export function CaseCard({
   const isDark = currentTheme === "dark";
   const logoFolder = isDark ? "white" : "black";
 
+  // DEBUG - REMOVER DEPOIS
+  useEffect(() => {
+    if (mounted && brandLogo) {
+      console.log(`[CaseCard ${brand}] Theme: ${theme}, System: ${systemTheme}, Current: ${currentTheme}, isDark: ${isDark}, Folder: ${logoFolder}`);
+    }
+  }, [mounted, theme, systemTheme, currentTheme, isDark, logoFolder, brand, brandLogo]);
+
   // Limitar tags a 3
   const displayTags = tags.slice(0, 3);
 
@@ -111,6 +118,10 @@ export function CaseCard({
                   className="h-full w-full object-contain"
                   unoptimized
                 />
+                {/* DEBUG - REMOVER DEPOIS */}
+                <span className="absolute -top-2 -left-2 rounded bg-red-500 px-1 text-[8px] text-white">
+                  {logoFolder}
+                </span>
               </div>
             )}
 
