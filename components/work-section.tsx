@@ -6,12 +6,12 @@ import { AnimatedSection, AnimatedItem } from "./animated-section";
 import { caseStudies } from "@/lib/cases";
 
 // Mapeamento de brand → logo filename
-// Baseado nos logos que você tem em /public/logos/white e /black
+// ATUALIZADO: Usa "ae" para o case HISTORY/A&E/Lifetime
 const brandLogoMap: Record<string, string> = {
   "Betfair": "betfair",
   "Budweiser": "budweiser",
   "Formula E": "formulae",
-  "HISTORY": "history",
+  "HISTORY": "ae",        // ✅ Mudou de "history" para "ae"
   "A&E": "ae",
   "Lifetime": "lifetime",
   "Octagon": "octagon",
