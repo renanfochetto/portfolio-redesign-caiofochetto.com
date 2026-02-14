@@ -10,23 +10,23 @@ const experiences = [
     role: "Diretor de Conteúdo Digital, Marketing de Influência e Talentos",
     roleEn: "Director of Digital Content, Influencer Marketing & Talent",
     company: "Octagon",
-    logo: "/companies/octagon.avif",
-    period: "2023 - ",
+    logo: "/companies/octagon.svg",
+    period: "2023 - 2026",
     location: "São Paulo, BR"
   },
   {
     role: "Líder de Operações LATAM",
     roleEn: "LATAM Operations Lead",
     company: "Jellysmack",
-    logo: "/companies/jellysmack.avif",
+    logo: "/companies/jellysmack.svg",
     period: "2021 - 2023",
-    location: "Remote"
+    location: "São Paulo, BR"
   },
   {
     role: "Content and Product Manager",
     roleEn: "Content and Product Manager",
     company: "Playground",
-    logo: "/companies/playground.avif",
+    logo: "/companies/playground.svg",
     period: "2020 - 2021",
     location: "São Paulo, BR"
   },
@@ -34,8 +34,43 @@ const experiences = [
     role: "Digital Platforms Manager",
     roleEn: "Digital Platforms Manager",
     company: "A+E Networks",
-    logo: "/companies/aenetworks.avif",
+    logo: "/companies/aenetworks.svg",
     period: "2012 - 2019",
+    location: "São Paulo, BR"
+  },
+];
+
+const experiencesOlder = [
+  {
+    role: "Digital Content Producer",
+    roleEn: "Digital Content Producer",
+    company: "Portal R7",
+    logo: "/companies/r7.svg",
+    period: "2010 - 2012",
+    location: "São Paulo, BR"
+  },
+  {
+    role: "Digital Content Producer",
+    roleEn: "Digital Content Producer",
+    company: "TV Cultura",
+    logo: "/companies/tvcultura.svg",
+    period: "2009 - 2010",
+    location: "São Paulo, BR"
+  },
+  {
+    role: "Web Content Producer",
+    roleEn: "Web Content Producer",
+    company: "Rede Boa Nova",
+    logo: "/companies/redeboa nova.svg",
+    period: "2009 - 2010",
+    location: "São Paulo, BR"
+  },
+  {
+    role: "TV Producer Coordinator",
+    roleEn: "TV Producer Coordinator",
+    company: "TV Mundo Maior",
+    logo: "/companies/tvmundomaior.svg",
+    period: "2005 - 2008",
     location: "São Paulo, BR"
   },
 ];
@@ -98,7 +133,7 @@ export function ExperienceSection() {
           >
             <div className="overflow-hidden">
               <div className="space-y-0 pt-8">
-                {experiences.map((exp, i) => (
+                {experiencesOlder.map((exp, i) => (
                   <AnimatedItem
                     key={`old-${i}`}
                     index={i}
