@@ -102,12 +102,12 @@ export function CaseCard({
           <div className="flex items-center gap-3">
             {/* Logo da empresa (se disponível) */}
             {mounted && brandLogo && (
-              <div className="flex h-10 w-10 items-center justify-center">
+              <div className="flex h-14 w-14 items-center justify-center">
                 <Image
                   src={`/logos/${logoFolder}/${brandLogo}.svg`}
                   alt={`${brand} logo`}
-                  width={40}
-                  height={40}
+                  width={56}
+                  height={56}
                   className="h-full w-full object-contain"
                   unoptimized
                 />
