@@ -1,10 +1,10 @@
 // app/[locale]/case/[slug]/page.tsx
-// VERSÃO CORRIGIDA - USA /lib/cases.ts DIRETAMENTE
+// VERSÃO FINAL - Com navegação PREV/NEXT e SEM CTA "Vamos conversar"
 
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, CheckCircle, Tag } from "lucide-react";
+import { ArrowLeft, CheckCircle, Tag, ArrowRight } from "lucide-react";
 import { Header } from "@/components/header";
 import { locales } from "@/lib/dictionaries";
 import { caseStudies, getCaseBySlug, getAllSlugs } from "@/lib/cases";
@@ -30,7 +30,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const study = getCaseBySlug(slug);
   if (!study) return { title: "Case Study Not Found" };
 
-  // Usar dados de /lib/cases.ts diretamente
   const title = locale === 'pt' ? study.meta_title_pt : study.meta_title_en;
   const description = locale === 'pt' ? study.meta_description_pt : study.meta_description_en;
 
@@ -58,20 +57,16 @@ export default async function CaseStudyPage({ params }: PageProps) {
   const { locale, slug } = await params;
   const study = getCaseBySlug(slug);
 
-  // Se não encontrar o case, retorna 404
   if (!study) notFound();
 
-  // Extrair dados traduzidos de /lib/cases.ts
+  // Extrair dados traduzidos
   const title = locale === 'pt' ? study.title_pt : study.title_en;
   const challenge = locale === 'pt' ? study.challenge_pt : study.challenge_en;
   const solution = locale === 'pt' ? study.solution_pt : study.solution_en;
   const learnings = locale === 'pt' ? study.key_learnings_pt : study.key_learnings_en;
   const capabilities = locale === 'pt' ? study.capabilities_pt : study.capabilities_en;
-
-  // Extrair role traduzido
   const role = locale === 'pt' ? study.role_pt : study.role_en;
 
-  // Extrair brand (pode ser array)
   const brandDisplay = Array.isArray(study.brand)
     ? study.brand.join(', ')
     : study.brand;
@@ -87,7 +82,9 @@ export default async function CaseStudyPage({ params }: PageProps) {
       role: "Função",
       period: "Período",
       back: "Voltar",
-      nextCase: "Próximo case"
+      previous: "Anterior",
+      next: "Próximo",
+      allCases: "Ver todos os cases"
     }
     : {
       challenge: "Challenge",
@@ -98,12 +95,27 @@ export default async function CaseStudyPage({ params }: PageProps) {
       role: "Role",
       period: "Period",
       back: "Back",
-      nextCase: "Next case"
+      previous: "Previous",
+      next: "Next",
+      allCases: "View all cases"
     };
 
-  // Navegação circular
+  // Navegação circular (prev + next)
   const currentIndex = caseStudies.findIndex((c) => c.slug === slug);
-  const nextCase = caseStudies[(currentIndex + 1) % caseStudies.length];
+
+  // Previous case (circular)
+  const prevCase = currentIndex > 0
+    ? caseStudies[currentIndex - 1]
+    : caseStudies[caseStudies.length - 1];
+  const prevCaseTitle = locale === 'pt' ? prevCase.title_pt : prevCase.title_en;
+  const prevCaseBrand = Array.isArray(prevCase.brand)
+    ? prevCase.brand.join(', ')
+    : prevCase.brand;
+
+  // Next case (circular)
+  const nextCase = currentIndex < caseStudies.length - 1
+    ? caseStudies[currentIndex + 1]
+    : caseStudies[0];
   const nextCaseTitle = locale === 'pt' ? nextCase.title_pt : nextCase.title_en;
   const nextCaseBrand = Array.isArray(nextCase.brand)
     ? nextCase.brand.join(', ')
@@ -246,17 +258,56 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Next Case */}
+      {/* Navigation - PREV + ALL + NEXT */}
       <section className="px-6 py-16 lg:px-8">
-        <div className="mx-auto max-w-4xl border-t border-border pt-12">
-          <p className="text-xs text-muted-foreground">{sectionLabels.nextCase}</p>
-          <Link
-            href={`/${locale}/case/${nextCase.slug}`}
-            className="group mt-2 inline-flex items-center gap-2 text-2xl font-bold text-foreground transition-colors hover:text-primary md:text-3xl"
-          >
-            {nextCaseBrand} &mdash; {nextCaseTitle}
-            <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
+        <div className="mx-auto max-w-6xl border-t border-border pt-12">
+          <div className="grid gap-6 md:grid-cols-3">
+
+            {/* Previous Case */}
+            <Link
+              href={`/${locale}/case/${prevCase.slug}`}
+              className="group flex flex-col gap-3 rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card"
+            >
+              <div className="flex items-center gap-2 text-xs font-semibold text-primary">
+                <ArrowLeft className="h-4 w-4" />
+                {sectionLabels.previous}
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">{prevCaseBrand}</p>
+                <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary">
+                  {prevCaseTitle}
+                </h3>
+              </div>
+            </Link>
+
+            {/* All Cases */}
+            <Link
+              href={`/${locale}/#work`}
+              className="flex items-center justify-center rounded-lg border-2 border-dashed border-border p-6 text-center transition-all hover:border-primary hover:bg-card"
+            >
+              <span className="text-sm font-bold text-foreground hover:text-primary">
+                {sectionLabels.allCases}
+              </span>
+            </Link>
+
+            {/* Next Case */}
+            <Link
+              href={`/${locale}/case/${nextCase.slug}`}
+              className="group flex flex-col gap-3 rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card"
+            >
+              <div className="flex items-center justify-end gap-2 text-xs font-semibold text-primary">
+                {sectionLabels.next}
+                <ArrowRight className="h-4 w-4" />
+              </div>
+              <div className="text-right">
+                <p className="text-xs text-muted-foreground">{nextCaseBrand}</p>
+                <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary">
+                  {nextCaseTitle}
+                </h3>
+              </div>
+            </Link>
+
+          </div>
         </div>
       </section>
 
