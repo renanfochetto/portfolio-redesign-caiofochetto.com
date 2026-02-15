@@ -23,7 +23,7 @@ export function Footer({ hideContact = false }: FooterProps) {
                 <h2 className="text-3xl font-bold text-foreground md:text-4xl">
                   {t.footer.cta}
                 </h2>
-                <p className="mt-2 max-w-md text-sm text-muted-foreground">
+                <p className="mt-2 max-w-md text-base text-muted-foreground">
                   {t.footer.ctaDescription}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
