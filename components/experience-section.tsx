@@ -93,7 +93,7 @@ export function ExperienceSection() {
             <AnimatedItem
               key={i}
               index={i}
-              className="flex gap-4 border-b border-neutral-200 py-6 first:border-t"
+              className="flex gap-4 border-b border-neutral-600 py-6 first:border-t"
             >
               <div className="flex items-center justify-center">
                 <Image
