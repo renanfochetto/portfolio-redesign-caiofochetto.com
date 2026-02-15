@@ -304,7 +304,7 @@ export default function CaseStudyPage({ params }: PageProps) {
       </section>
 
       {/* Results - Adapta ao tema */}
-      <section className="light:bg-neutral-100 px-6 py-16 bg-neutral-950 lg:px-8">
+      <section className="bg-neutral-100 px-6 py-16 dark:bg-neutral-950 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-2 mb-8">
             <TrendingUp className="h-4 w-4 text-primary" />
