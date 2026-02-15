@@ -51,7 +51,7 @@ export function CaseResults({ metrics, locale }: CaseResultsProps) {
   };
 
   return (
-    <section className="border-t border-border bg-card/50 py-16 md:py-24">
+    <section className="border-t border-border py-16 md:py-24" style={{ backgroundColor: `hsl(var(--card) / 0.5)` }}>
       <div className="mx-auto max-w-6xl px-6">
         <p className="mb-4 text-xs font-medium uppercase tracking-widest text-primary">
           Resultados
@@ -63,9 +63,13 @@ export function CaseResults({ metrics, locale }: CaseResultsProps) {
             return (
               <div
                 key={index}
-                className="rounded-lg border border-border bg-card p-8 transition-all hover:border-primary/50"
+                className="rounded-lg border transition-all hover:border-primary/50"
+                style={{ 
+                  backgroundColor: `hsl(var(--card))`,
+                  borderColor: `hsl(var(--border))`
+                }}
               >
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 p-8">
                   <IconComponent className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                   <div className="flex-1">
                     <p className="text-5xl font-bold text-primary md:text-6xl">
