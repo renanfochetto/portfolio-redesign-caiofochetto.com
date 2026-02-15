@@ -95,7 +95,7 @@ export function CaseCard({
       href={`/${locale}/case/${slug}`}
       className="group relative block"
     >
-      <div className="relative overflow-hidden rounded-lg border border-border bg-card p-6 transition-all duration-300 hover:border-primary hover:bg-card/80">
+      <div className="relative overflow-hidden rounded-lg border border-neutral-600 bg-card p-6 transition-all duration-300 hover:border-primary hover:bg-card/80">
 
         {/* Header: LOGO APENAS + Arrow */}
         <div className="mb-6 flex items-start justify-between">

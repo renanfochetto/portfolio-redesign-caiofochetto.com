@@ -46,7 +46,7 @@ export function LogoCarousel() {
   // Não renderizar até montar (evita mismatch)
   if (!mounted) {
     return (
-      <div className="mt-10 border-t border-border pt-6">
+      <div className="mt-10 border-t border-neutral-600 pt-6">
         <p className="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground">
         </p>
         <div className="relative h-16 overflow-hidden">
@@ -57,7 +57,7 @@ export function LogoCarousel() {
   }
 
   return (
-    <div className="mt-10 border-t border-border pt-6">
+    <div className="mt-10 border-t border-neutral-600 pt-6">
       <p className="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground">
       </p>
 
