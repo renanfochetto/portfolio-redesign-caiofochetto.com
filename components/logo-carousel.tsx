@@ -101,8 +101,8 @@ export function LogoCarousel() {
                 alt={logo.alt}
                 width={120}
                 height={48}
-                style={{ width: "auto", height: "auto" }}
-                className="max-h-full max-w-full object-contain object-center"
+                style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
+                className="object-contain object-center"
                 unoptimized={true}
                 priority={idx < 9}
               />

@@ -25,7 +25,8 @@ export function AboutSection() {
               alt="Caio Fochetto em evento de marketing"
               width={280}
               height={350}
-              className="h-auto w-full max-w-sm rounded-lg object-cover shadow-lg"
+              style={{ width: "auto", height: "auto" }}
+              className="w-full max-w-sm rounded-lg object-cover shadow-lg"
               unoptimized={true}
               priority={false}
             />
