@@ -16,14 +16,12 @@ export function Hero() {
             <span className="text-xs font-medium text-primary">{t.hero.badge}</span>
           </div>
 
-          <h1 className="mt-8 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            <span className="text-balance">
-              {t.hero.headingLine1}
-              <br />
-              {t.hero.headingLine2}
-              <br />
-              <span className="text-primary">{t.hero.headingLine3}</span>
-            </span>
+          <h1 className="mt-8 display-2xl text-balance">
+            {t.hero.headingLine1}
+            <br />
+            {t.hero.headingLine2}
+            <br />
+            <span className="text-primary">{t.hero.headingLine3}</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
