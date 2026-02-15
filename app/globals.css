@@ -44,6 +44,41 @@
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
+  /* Display Headings - Fraunces (Editorial, memorable) */
+  .display-3xl {
+    @apply font-display text-display-3xl font-bold;
+  }
+
+  .display-2xl {
+    @apply font-display text-display-2xl font-bold;
+  }
+
+  .display-xl {
+    @apply font-display text-display-xl font-bold;
+  }
+
+  /* Headings - Space Grotesk (Modern, impactful) */
+  h1 {
+    @apply font-heading text-h1;
+  }
+
+  h2 {
+    @apply font-heading text-h2;
+  }
+
+  h3 {
+    @apply font-heading text-h3;
+  }
+
+  h4 {
+    @apply font-heading text-h4;
+  }
+
+  /* Body - Manrope (Humanist, legible) */
+  p, span, a, li {
+    @apply font-sans text-body-base;
+  }
+
   /* Scrollbar styling - WebKit (Chrome, Safari) */
   ::-webkit-scrollbar {
     width: 10px;
