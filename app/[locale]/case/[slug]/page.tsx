@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { useTheme } from "@/components/theme-provider";
 import {
   ArrowLeft,
+  ArrowUpRight,
   CheckCircle,
   Tag,
   ArrowRight,
