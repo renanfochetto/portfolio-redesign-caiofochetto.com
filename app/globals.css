@@ -37,6 +37,8 @@
 
   html {
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--primary)) rgb(var(--background));
   }
 
   body {
@@ -61,12 +63,6 @@
 
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-primary/80;
-  }
-
-  /* Firefox scrollbar */
-  html {
-    scrollbar-width: thin;
-    scrollbar-color: rgb(var(--primary)) rgb(var(--background));
   }
 }
 
