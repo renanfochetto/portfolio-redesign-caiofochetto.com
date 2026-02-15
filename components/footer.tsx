@@ -43,15 +43,6 @@ export function Footer({ hideContact = false }: FooterProps) {
                     <Mail className="h-4 w-4" />
                     Email
                   </a>
-                  <a
-                    href="https://youtube.com/@caiofochetto"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-500 px-4 py-2.5 text-sm font-medium text-gray-400 transition-all hover:border-white hover:bg-[#FF0000] hover:text-white"
-                  >
-                    <Youtube className="h-4 w-4" />
-                    YouTube
-                  </a>
                 </div>
               </AnimatedItem>
             </div>
