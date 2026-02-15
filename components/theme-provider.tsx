@@ -19,12 +19,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // Verificar preferência salva ou usar preferência do sistema
     const savedTheme = localStorage.getItem("theme") as Theme | null;
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
+
     const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
     setTheme(initialTheme);
     applyTheme(initialTheme);
     setIsMounted(true);
   }, []);
+
+  // ✅ ADICIONAR: Aplicar tema toda vez que mudar
+  useEffect(() => {
+    if (isMounted) {
+      applyTheme(theme);
+    }
+  }, [theme, isMounted]);
 
   const applyTheme = (newTheme: Theme) => {
     const html = document.documentElement;
@@ -38,7 +45,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
-    applyTheme(newTheme);
     localStorage.setItem("theme", newTheme);
   };
 

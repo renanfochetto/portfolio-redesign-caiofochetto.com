@@ -73,7 +73,7 @@ export function CaseCard({
   tags,
   locale
 }: CaseCardProps) {
-  const { theme } = useTheme(); // ✅ Usar o mesmo hook do LogoCarousel
+  const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   // Evitar flash SSR

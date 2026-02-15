@@ -12,6 +12,16 @@ interface CaseHeroProps {
   nextCase?: CaseData;
 }
 
+// Função helper para extrair playlist ID
+function getPlaylistId(url: string): string | null {
+  try {
+    const urlObj = new URL(url);
+    return urlObj.searchParams.get('list');
+  } catch {
+    return null;
+  }
+}
+
 export function CaseHero({
   caseData,
   locale,
@@ -20,6 +30,12 @@ export function CaseHero({
 }: CaseHeroProps) {
   const title = locale === "pt" ? caseData.title_pt : caseData.title_en;
   const role = locale === "pt" ? caseData.role_pt : caseData.role_en;
+
+  // Extrair playlist ID e gerar URL de embed correta
+  const playlistId = getPlaylistId(caseData.playlist_url);
+  const embedUrl = playlistId
+    ? `https://www.youtube.com/embed/videoseries?list=${playlistId}`
+    : null;
 
   return (
     <section className="relative min-h-screen bg-background pt-20">
@@ -73,11 +89,11 @@ export function CaseHero({
       {/* Hero Video/Image */}
       <div className="mx-auto max-w-5xl px-6 pb-16">
         <div className="aspect-video w-full overflow-hidden rounded-lg bg-neutral-900">
-          {caseData.hero_type === "video" ? (
+          {caseData.hero_type === "video" && embedUrl ? (
             <iframe
               width="100%"
               height="100%"
-              src={`https://www.youtube.com/embed/?list=${caseData.playlist_url}`}
+              src={embedUrl}
               title={`${caseData.brand} case study video`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
