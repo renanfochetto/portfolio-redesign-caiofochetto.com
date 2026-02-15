@@ -44,7 +44,7 @@ export function Header() {
           ))}
           <button
             onClick={toggleTheme}
-            className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+            className="flex items-center gap-1.5 rounded-full border border-neutral-600 px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
