@@ -27,10 +27,10 @@ export function Footer({ hideContact = false }: FooterProps) {
                   {t.footer.ctaDescription}
                 </p>
 
-                {/* BOTÕES SUTIS */}
+                {/* BOTÕES COM RELEVO */}
                 <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
 
-                  {/* LinkedIn - Azul sutil */}
+                  {/* LinkedIn - Azul com relevo */}
                   <a
                     href="https://linkedin.com/in/caiofochetto"
                     target="_blank"
@@ -40,19 +40,20 @@ export function Footer({ hideContact = false }: FooterProps) {
                       rounded-full px-6 py-3 text-sm font-semibold
                       bg-gradient-to-b from-[#0A66C2] to-[#084d92]
                       text-white
-                      border-2 border-transparent
-                      hover:border-primary
-                      hover:from-[#0B75D9] hover:to-[#0A66C2]
-                      active:scale-[0.98]
+                      shadow-[0_4px_0_0_rgba(0,0,0,0.3)]
+                      hover:shadow-[0_6px_0_0_rgba(0,0,0,0.3)]
+                      hover:-translate-y-0.5
+                      active:shadow-[0_2px_0_0_rgba(0,0,0,0.3)]
+                      active:translate-y-1
                       transition-all duration-200
-                      focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
+                      focus:outline-none focus:ring-2 focus:ring-[#0A66C2] focus:ring-offset-2
                     "
                   >
                     <Linkedin className="h-4 w-4" />
                     LinkedIn
                   </a>
 
-                  {/* Email - Verde sutil */}
+                  {/* Email - Verde com relevo */}
                   <a
                     href="mailto:caiofochetto@gmail.com"
                     className="
@@ -60,12 +61,13 @@ export function Footer({ hideContact = false }: FooterProps) {
                       rounded-full px-6 py-3 text-sm font-semibold
                       bg-gradient-to-b from-emerald-500 to-emerald-600
                       text-white
-                      border-2 border-transparent
-                      hover:border-primary
-                      hover:from-emerald-400 hover:to-emerald-500
-                      active:scale-[0.98]
+                      shadow-[0_4px_0_0_rgba(0,0,0,0.25)]
+                      hover:shadow-[0_6px_0_0_rgba(0,0,0,0.25)]
+                      hover:-translate-y-0.5
+                      active:shadow-[0_2px_0_0_rgba(0,0,0,0.25)]
+                      active:translate-y-1
                       transition-all duration-200
-                      focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
+                      focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2
                     "
                   >
                     <Mail className="h-4 w-4" />
