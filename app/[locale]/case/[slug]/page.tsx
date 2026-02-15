@@ -318,20 +318,127 @@ export default function CaseStudyPage({ params }: PageProps) {
               const IconComponent = getMetricIcon(label);
 
               return (
-                <div key={index} className="rounded-lg border border-neutral-200 bg-white p-6 transition-colors hover:border-primary dark:border-neutral-800 dark:bg-neutral-900">
+                <div key={index} className="rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary">
                   {/* Ícone + Valor */}
                   <div className="flex items-center gap-3 mb-2">
                     <IconComponent className="h-6 w-6 text-primary flex-shrink-0" />
                     <p className="text-4xl font-bold text-primary md:text-5xl">{metric.value}</p>
                   </div>
-                  <p className="mt-2 text-sm font-semibold text-neutral-900 dark:text-neutral-50">{label}</p>
-                  <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">{description}</p>
+                  <p className="mt-2 text-sm font-semibold text-foreground">{label}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{description}</p>
                 </div>
               );
             })}
           </div>
         </div>
       </section>
+
+      {/* Playlist Section */}
+      {study.playlist_url && (() => {
+        // Extrair playlist ID
+        const playlistId = (() => {
+          try {
+            const url = new URL(study.playlist_url);
+            return url.searchParams.get('list');
+          } catch {
+            return null;
+          }
+        })();
+
+        if (!playlistId) return null;
+
+        const embedUrl = `https://www.youtube.com/embed/videoseries?list=${playlistId}`;
+        const playlistLabel = locale === 'pt' ? 'CONTEÚDO RELACIONADO' : 'RELATED CONTENT';
+        const viewFullLabel = locale === 'pt' ? 'Ver playlist completa no YouTube' : 'View full playlist on YouTube';
+
+        return (
+          <section className="px-6 py-16 lg:px-8">
+            <div className="mx-auto max-w-4xl">
+              <div className="flex items-center gap-2 mb-8">
+                <Play className="h-4 w-4 text-primary" />
+                <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+                  {playlistLabel}
+                </h2>
+              </div>
+
+              {/* YouTube Embed */}
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border bg-background">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={embedUrl}
+                  title={`${brandDisplay} - Playlist`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="h-full w-full"
+                />
+              </div>
+
+              {/* Link para ver no YouTube */}
+              <div className="mt-4 flex justify-center">
+                <a
+                  href={study.playlist_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+                >
+                  <span>{viewFullLabel}</span>
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
+
+      {/* Playlist Section - NOVA SEÇÃO */}
+      {study.playlist_url && (() => {
+        const playlistId = study.playlist_url.includes('list=')
+          ? new URL(study.playlist_url).searchParams.get('list')
+          : null;
+
+        if (!playlistId) return null;
+
+        const embedUrl = `https://www.youtube.com/embed/videoseries?list=${playlistId}`;
+        const playlistLabel = locale === 'pt' ? 'Conteúdo Relacionado' : 'Related Content';
+
+        return (
+          <section className="px-6 py-16 lg:px-8">
+            <div className="mx-auto max-w-4xl">
+              <div className="flex items-center gap-2 mb-8">
+                <Play className="h-4 w-4 text-primary" />
+                <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+                  {playlistLabel}
+                </h2>
+              </div>
+
+              {/* YouTube Embed */}
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border">
+                <iframe
+                  src={embedUrl}
+                  title={`${study.brand} - Playlist`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full"
+                />
+              </div>
+
+              {/* Link para ver no YouTube */}
+              <div className="mt-4 flex justify-center">
+                <a
+                  href={study.playlist_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+                >
+                  <span>{locale === 'pt' ? 'Ver playlist completa no YouTube' : 'View full playlist on YouTube'}</span>
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* Key Learnings */}
       <section className="px-6 py-16 lg:px-8">
