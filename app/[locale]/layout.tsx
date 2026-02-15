@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { notFound } from "next/navigation";
 import { I18nProvider } from "@/lib/i18n";
@@ -8,18 +7,6 @@ import { getDictionary } from "@/lib/dictionaries";
 import { locales } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/dictionaries";
 import "../globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-});
 
 const SITE_URL = "https://www.caiofochetto.com";
 
@@ -90,7 +77,6 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${inter.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -111,7 +97,7 @@ export default async function LocaleLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased">
+      <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
