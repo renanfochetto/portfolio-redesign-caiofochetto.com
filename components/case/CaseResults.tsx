@@ -51,7 +51,7 @@ export function CaseResults({ metrics, locale }: CaseResultsProps) {
   };
 
   return (
-    <section className="border-t border-border bg-neutral-900/50 py-16 dark:bg-neutral-900 md:py-24">
+    <section className="border-t border-border bg-card/50 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <p className="mb-4 text-xs font-medium uppercase tracking-widest text-primary">
           Resultados
@@ -63,7 +63,7 @@ export function CaseResults({ metrics, locale }: CaseResultsProps) {
             return (
               <div
                 key={index}
-                className="rounded-lg border border-neutral-800 bg-neutral-950 p-8 transition-all hover:border-primary/50"
+                className="rounded-lg border border-border bg-card p-8 transition-all hover:border-primary/50"
               >
                 <div className="flex items-start gap-3">
                   <IconComponent className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
