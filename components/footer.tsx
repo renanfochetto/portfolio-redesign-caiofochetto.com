@@ -12,7 +12,7 @@ export function Footer({ hideContact = false }: FooterProps) {
   const { t } = useI18n();
 
   return (
-    <footer id="contact" className="border-t border-neutral-200 px-6 py-24 lg:px-8">
+    <footer id="contact" className="border-t border-neutral-600 px-6 py-24 lg:px-8">
       <AnimatedSection className="mx-auto max-w-6xl">
 
         {/* Mostrar CTA apenas se hideContact for false */}
