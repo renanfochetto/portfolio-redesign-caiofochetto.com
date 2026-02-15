@@ -85,7 +85,7 @@ export function LogoCarousel() {
           {duplicatedLogos.map((logo, idx) => (
             <div
               key={`${logo.name}-${idx}`}
-              className="group relative h-16 w-32 flex-shrink-0 cursor-pointer items-center justify-center transition-opacity duration-300"
+              className="group relative flex h-16 w-32 flex-shrink-0 cursor-pointer items-center justify-center transition-opacity duration-300"
               style={{
                 opacity: 0.7,
               }}
@@ -100,7 +100,7 @@ export function LogoCarousel() {
                 src={`/logos/${logoFolder}/${logo.name}.svg`}
                 alt={logo.alt}
                 fill
-                className="object-contain object-center"
+                className="!relative !h-auto !w-auto object-contain object-center"
                 unoptimized={true}
                 priority={idx < 9}
               />
