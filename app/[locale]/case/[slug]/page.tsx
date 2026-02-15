@@ -1,5 +1,5 @@
 // app/[locale]/case/[slug]/page.tsx
-// VERSÃO COM LOGOS E ÍCONES NAS MÉTRICAS
+// VERSÃO FINAL: Logo esquerda + Botão direita + Companies logos corretas
 
 "use client";
 
@@ -35,13 +35,19 @@ import { Footer } from "@/components/footer";
 
 const SITE_URL = "https://www.caiofochetto.com";
 
-// Mapeamento de empresas para seus logos
+// Mapeamento de empresas para seus logos (em /public/companies/)
 const companyLogos: Record<string, string> = {
-  "Octagon": "octagon",
-  "A+E Networks": "ae",
+  "Octagon": "octagon.avif",
+  "A+E Networks": "aenetworks.avif",
+  "Jellysmack": "jellysmack.avif",
+  "Playground": "playground.avif",
+  "Portal R7": "portalr7.avif",
+  "Rede Boa Nova": "redeboanova.avif",
+  "TV Cultura": "tvcultura.avif",
+  "TV Mundo Maior": "tvmundomaior.avif",
 };
 
-// Mapeamento de brands para seus logos (mesmo do CaseCard)
+// Mapeamento de brands para seus logos (em /public/logos/white ou black)
 const brandLogos: Record<string, string> = {
   "Betfair": "betfair",
   "Budweiser": "budweiser",
@@ -106,7 +112,7 @@ export default function CaseStudyPage({ params }: PageProps) {
 
   if (!study) notFound();
 
-  // Determinar pasta de logos baseado no tema
+  // Determinar pasta de logos baseado no tema (para brands)
   const logoFolder = theme === "dark" ? "white" : "black";
 
   // Extrair dados traduzidos
@@ -121,7 +127,7 @@ export default function CaseStudyPage({ params }: PageProps) {
     ? study.brand.join(', ')
     : study.brand;
 
-  // Pegar logo da empresa
+  // Pegar logo da empresa (companies)
   const companyLogo = companyLogos[study.company];
 
   // Pegar logo da brand (se for string única)
@@ -198,19 +204,12 @@ export default function CaseStudyPage({ params }: PageProps) {
       {/* Hero */}
       <section className="px-6 pt-28 pb-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <Link
-            href={`/${locale}`}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            {sectionLabels.back}
-          </Link>
 
-          {/* Logo da Brand + Título */}
-          <div className="mt-8">
-            {/* Logo da Brand (se existir) */}
-            {brandLogo && (
-              <div className="mb-6 flex h-16 w-32 items-center justify-start">
+          {/* OPÇÃO B: Logo esquerda + Botão direita */}
+          <div className="flex items-start justify-between gap-4">
+            {/* Logo da Brand (esquerda) */}
+            {brandLogo ? (
+              <div className="flex h-16 w-32 items-center justify-start">
                 <Image
                   src={`/logos/${logoFolder}/${brandLogo}.svg`}
                   alt={`${firstBrand} logo`}
@@ -220,9 +219,23 @@ export default function CaseStudyPage({ params }: PageProps) {
                   unoptimized
                 />
               </div>
+            ) : (
+              <div className="h-16 w-32" /> // Spacer se não tiver logo
             )}
 
-            <h1 className="mt-3 text-3xl font-bold text-foreground md:text-5xl">
+            {/* Botão Voltar (direita) */}
+            <Link
+              href={`/${locale}`}
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              {sectionLabels.back}
+            </Link>
+          </div>
+
+          {/* Título */}
+          <div className="mt-8">
+            <h1 className="text-3xl font-bold text-foreground md:text-5xl">
               {title}
             </h1>
           </div>
@@ -231,21 +244,16 @@ export default function CaseStudyPage({ params }: PageProps) {
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
             {/* Esquerda: Logo da Empresa + Company + Role */}
             <div className="flex items-center gap-4">
-              {/* Logo da Empresa */}
-              {companyLogo ? (
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card p-2">
+              {/* Logo da Empresa (companies folder) */}
+              {companyLogo && (
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card p-2 overflow-hidden">
                   <Image
-                    src={`/logos/${logoFolder}/${companyLogo}.svg`}
+                    src={`/companies/${companyLogo}`}
                     alt={`${study.company} logo`}
                     width={48}
                     height={48}
                     className="h-full w-full object-contain"
-                    unoptimized
                   />
-                </div>
-              ) : (
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card">
-                  <Building2 className="h-6 w-6 text-muted-foreground" />
                 </div>
               )}
 
