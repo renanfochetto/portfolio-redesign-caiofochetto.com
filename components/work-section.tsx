@@ -62,8 +62,9 @@ export function WorkSection() {
                   metrics={metrics}
                   tags={tags}
                   locale={locale}
-                  playlistUrl={study.playlist_url}        // 👈 ADICIONAR
-                  thumbnail={study.hero_placeholder}      // 👈 ADICIONAR
+                  playlistUrl={study.playlist_url}
+                  // Usa placeholder cinza por enquanto (depois podemos adicionar thumbnails reais)
+                  thumbnail="https://via.placeholder.com/1280x720/1a1a1a/ffffff?text=Video+Preview"
                 />
               </AnimatedItem>
             );
