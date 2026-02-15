@@ -80,7 +80,7 @@ export const caseStudies: CaseData[] = [
       'Performance e métricas'
     ],
 
-    playlist_url: 'https://www.youtube.com/playlist?list=PLC85G0r1H2eGsSwmjQSpkUPFRnBxdiyuz',
+    playlist_url: 'https://www.youtube.com/@caiofochetto/playlists',
     thumbnail: '/images/cases/betfair-vasco-cruzeiro/thumbnail.jpg',
     hero_type: 'video',
     hero_placeholder: '/images/cases/betfair-vasco-cruzeiro/hero.jpg',
@@ -252,7 +252,7 @@ export const caseStudies: CaseData[] = [
       'Performance'
     ],
 
-    playlist_url: 'https://www.youtube.com/playlist?list=PLC85G0r1H2eH2_xv0yojqC88BJ8lb5-I7',
+    playlist_url: 'https://www.youtube.com/@caiofochetto/playlists',
     thumbnail: '/images/cases/formula-e/thumbnail.jpg',
     hero_type: 'video',
     hero_placeholder: '/images/cases/formula-e/hero.jpg',
