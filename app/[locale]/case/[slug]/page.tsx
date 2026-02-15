@@ -273,6 +273,63 @@ export default function CaseStudyPage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* Playlist Section */}
+      {study.playlist_url && (() => {
+        // Extrair playlist ID
+        const playlistId = (() => {
+          try {
+            const url = new URL(study.playlist_url);
+            return url.searchParams.get('list');
+          } catch {
+            return null;
+          }
+        })();
+
+        if (!playlistId) return null;
+
+        const embedUrl = `https://www.youtube.com/embed/videoseries?list=${playlistId}`;
+        const playlistLabel = locale === 'pt' ? 'CONTEÚDO RELACIONADO' : 'RELATED CONTENT';
+        const viewFullLabel = locale === 'pt' ? 'Ver playlist completa no YouTube' : 'View full playlist on YouTube';
+
+        return (
+          <section className="px-6 py-16 lg:px-8">
+            <div className="mx-auto max-w-4xl">
+              <div className="flex items-center gap-2 mb-8">
+                <Play className="h-4 w-4 text-primary" />
+                <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+                  {playlistLabel}
+                </h2>
+              </div>
+
+              {/* YouTube Embed */}
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border bg-background">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={embedUrl}
+                  title={`${brandDisplay} - Playlist`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="h-full w-full"
+                />
+              </div>
+
+              {/* Link para ver no YouTube */}
+              <div className="mt-4 flex justify-center">
+                <a
+                  href={study.playlist_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+                >
+                  <span>{viewFullLabel}</span>
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
       {/* Challenge - COLUNA (vertical) */}
       <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
@@ -333,65 +390,6 @@ export default function CaseStudyPage({ params }: PageProps) {
           </div>
         </div>
       </section>
-
-      {/* Playlist Section */}
-      {study.playlist_url && (() => {
-        // Extrair playlist ID
-        const playlistId = (() => {
-          try {
-            const url = new URL(study.playlist_url);
-            return url.searchParams.get('list');
-          } catch {
-            return null;
-          }
-        })();
-
-        if (!playlistId) return null;
-
-        const embedUrl = `https://www.youtube.com/embed/videoseries?list=${playlistId}`;
-        const playlistLabel = locale === 'pt' ? 'CONTEÚDO RELACIONADO' : 'RELATED CONTENT';
-        const viewFullLabel = locale === 'pt' ? 'Ver playlist completa no YouTube' : 'View full playlist on YouTube';
-
-        return (
-          <section className="px-6 py-16 lg:px-8">
-            <div className="mx-auto max-w-4xl">
-              <div className="flex items-center gap-2 mb-8">
-                <Play className="h-4 w-4 text-primary" />
-                <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-                  {playlistLabel}
-                </h2>
-              </div>
-
-              {/* YouTube Embed */}
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border bg-background">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={embedUrl}
-                  title={`${brandDisplay} - Playlist`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="h-full w-full"
-                />
-              </div>
-
-              {/* Link para ver no YouTube */}
-              <div className="mt-4 flex justify-center">
-                <a
-                  href={study.playlist_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
-                >
-                  <span>{viewFullLabel}</span>
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-          </section>
-        );
-      })()}
-
       {/* Key Learnings */}
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
