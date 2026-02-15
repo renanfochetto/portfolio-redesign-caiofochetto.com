@@ -62,6 +62,8 @@ interface CaseCardProps {
   }>;
   tags: string[];
   locale: string;
+  playlistUrl?: string;  // 👈 NOVA PROP
+  thumbnail?: string;    // 👈 NOVA PROP
 }
 
 export function CaseCard({
@@ -71,9 +73,11 @@ export function CaseCard({
   title,
   metrics,
   tags,
-  locale
+  locale,
+  playlistUrl,
+  thumbnail
 }: CaseCardProps) {
-  const { theme } = useTheme(); // ✅ Usar o mesmo hook do LogoCarousel
+  const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   // Evitar flash SSR
@@ -90,75 +94,100 @@ export function CaseCard({
   // Limitar métricas a 3 (as principais)
   const displayMetrics = metrics.slice(0, 3);
 
+  // Thumbnail do vídeo (usa placeholder se não tiver)
+  const videoThumbnail = thumbnail || '/images/placeholder-video.jpg';
+
   return (
     <Link
       href={`/${locale}/case/${slug}`}
       className="group relative block"
     >
-      <div className="relative overflow-hidden rounded-lg border border-border bg-card p-6 transition-all duration-300 hover:border-primary hover:bg-card/80">
+      <div className="relative overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:border-primary hover:bg-card/80">
 
-        {/* Header: LOGO APENAS + Arrow */}
-        <div className="mb-6 flex items-start justify-between">
-          {/* Logo da empresa (sem texto da marca) */}
-          {mounted && brandLogo && (
-            <div className="flex h-16 w-16 items-center justify-start">
-              <Image
-                src={`/logos/${logoFolder}/${brandLogo}.svg`}
-                alt={`${brand} logo`}
-                width={64}
-                height={64}
-                className="h-full w-auto max-w-[100px] object-contain object-left"
-                unoptimized
-              />
+        {/* Video Thumbnail com Play Icon - NOVA SEÇÃO */}
+        {playlistUrl && (
+          <div className="relative aspect-video w-full overflow-hidden bg-neutral-900">
+            <Image
+              src={videoThumbnail}
+              alt={`${title} - preview`}
+              fill
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              unoptimized
+            />
+            {/* Play Icon Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition-all duration-300 group-hover:bg-black/20">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/90 transition-transform duration-300 group-hover:scale-110">
+                <Play className="h-8 w-8 fill-white text-white" />
+              </div>
             </div>
-          )}
+          </div>
+        )}
 
-          {/* Arrow */}
-          <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
-        </div>
+        {/* Conteúdo do Card */}
+        <div className="p-6">
+          {/* Header: LOGO APENAS + Arrow */}
+          <div className="mb-6 flex items-start justify-between">
+            {/* Logo da empresa (sem texto da marca) */}
+            {mounted && brandLogo && (
+              <div className="flex h-16 w-16 items-center justify-start">
+                <Image
+                  src={`/logos/${logoFolder}/${brandLogo}.svg`}
+                  alt={`${brand} logo`}
+                  width={64}
+                  height={64}
+                  className="h-full w-auto max-w-[100px] object-contain object-left"
+                  unoptimized
+                />
+              </div>
+            )}
 
-        {/* Título */}
-        <h3 className="mb-6 text-xl font-bold leading-tight text-foreground transition-colors group-hover:text-primary md:text-2xl">
-          {title}
-        </h3>
+            {/* Arrow */}
+            <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
+          </div>
 
-        {/* Métricas com ícones variados */}
-        <div className="mb-6 grid grid-cols-3 gap-4">
-          {displayMetrics.map((metric, index) => {
-            const IconComponent = getMetricIcon(metric.label);
+          {/* Título */}
+          <h3 className="mb-6 text-xl font-bold leading-tight text-foreground transition-colors group-hover:text-primary md:text-2xl">
+            {title}
+          </h3>
 
-            return (
-              <div key={index} className="flex flex-col gap-1">
-                <div className="flex items-center gap-1.5">
-                  <IconComponent className="h-4 w-4 text-primary" />
-                  <p className="text-lg font-bold text-primary md:text-xl">
-                    {metric.value}
+          {/* Métricas com ícones variados */}
+          <div className="mb-6 grid grid-cols-3 gap-4">
+            {displayMetrics.map((metric, index) => {
+              const IconComponent = getMetricIcon(metric.label);
+
+              return (
+                <div key={index} className="flex flex-col gap-1">
+                  <div className="flex items-center gap-1.5">
+                    <IconComponent className="h-4 w-4 text-primary" />
+                    <p className="text-lg font-bold text-primary md:text-xl">
+                      {metric.value}
+                    </p>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {metric.label}
                   </p>
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  {metric.label}
-                </p>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
 
-        {/* Tags sutis */}
-        <div className="flex flex-wrap gap-2">
-          {displayTags.map((tag, index) => (
-            <span
-              key={index}
-              className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+          {/* Tags sutis */}
+          <div className="flex flex-wrap gap-2">
+            {displayTags.map((tag, index) => (
+              <span
+                key={index}
+                className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
 
-        {/* CTA (sempre visível) */}
-        <div className="mt-6 flex items-center gap-2 text-sm font-medium text-primary">
-          <span>{locale === "pt" ? "Ver case completo" : "View full case"}</span>
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          {/* CTA (sempre visível) */}
+          <div className="mt-6 flex items-center gap-2 text-sm font-medium text-primary">
+            <span>{locale === "pt" ? "Ver case completo" : "View full case"}</span>
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </div>
         </div>
 
         {/* Hover border glow */}
