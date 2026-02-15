@@ -206,7 +206,7 @@ export default function CaseStudyPage({ params }: PageProps) {
         <div className="mx-auto max-w-4xl">
 
           {/* OPÇÃO B: Logo esquerda + Botão direita */}
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center justify-between gap-4">
             {/* Logo da Brand (esquerda) */}
             {brandLogo ? (
               <div className="flex h-16 w-32 items-center justify-start">
@@ -246,13 +246,13 @@ export default function CaseStudyPage({ params }: PageProps) {
             <div className="flex items-center gap-4">
               {/* Logo da Empresa (companies folder) */}
               {companyLogo && (
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card p-2 overflow-hidden">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card overflow-hidden">
                   <Image
                     src={`/companies/${companyLogo}`}
                     alt={`${study.company} logo`}
                     width={48}
                     height={48}
-                    className="h-full w-full object-contain"
+                    className="h-full w-full object-cover"
                   />
                 </div>
               )}
