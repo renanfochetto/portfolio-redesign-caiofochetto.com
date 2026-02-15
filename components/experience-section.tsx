@@ -137,7 +137,7 @@ export function ExperienceSection() {
                   <AnimatedItem
                     key={`old-${i}`}
                     index={i}
-                    className="flex gap-4 border-b border-neutral-200 py-6"
+                    className="flex gap-4 border-b border-neutral-600 py-6"
                   >
                     <div className="flex items-center justify-center">
                       <Image
@@ -173,7 +173,7 @@ export function ExperienceSection() {
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               id="expand-button"
-              className="group flex items-center gap-2 rounded-full border border-neutral-200 px-4 py-2 transition-all hover:border-primary/50"
+              className="group flex items-center gap-2 rounded-full border border-neutral-600 px-4 py-2 transition-all hover:border-primary/50"
             >
               <span className="text-sm text-muted-foreground transition-colors group-hover:text-primary">
                 {isExpanded ? "Ver menos" : "Ver experiências anteriores"}
