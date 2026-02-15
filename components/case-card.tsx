@@ -4,6 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useTheme } from "./theme-provider";
 import {
   ArrowUpRight,
   Users,
@@ -72,45 +73,16 @@ export function CaseCard({
   tags,
   locale
 }: CaseCardProps) {
+  const { theme } = useTheme(); // ✅ Usar o mesmo hook do LogoCarousel
   const [mounted, setMounted] = useState(false);
-  const [logoFolder, setLogoFolder] = useState("white"); // Default white para dark mode
 
-  // Detectar tema pela classe 'dark' no HTML e também pelo background-color
+  // Evitar flash SSR
   useEffect(() => {
     setMounted(true);
+  }, []);
 
-    const checkTheme = () => {
-      const htmlElement = document.documentElement;
-
-      // Método 1: Verificar classe 'dark'
-      const hasDarkClass = htmlElement.classList.contains('dark');
-
-      // Método 2: Verificar data-theme attribute (alguns temas usam isso)
-      const dataTheme = htmlElement.getAttribute('data-theme');
-
-      // Método 3: Verificar computed background color do body
-      const bodyBg = window.getComputedStyle(document.body).backgroundColor;
-      const isDarkBg = bodyBg === 'rgb(0, 0, 0)' || bodyBg === 'rgb(10, 10, 10)';
-
-      // Combinar métodos (se qualquer um indicar dark, usa white logos)
-      const isDark = hasDarkClass || dataTheme === 'dark' || isDarkBg;
-      const folder = isDark ? "white" : "black";
-
-      setLogoFolder(folder);
-    };
-
-    // Check inicial com delay para garantir que DOM está pronto
-    setTimeout(checkTheme, 100);
-
-    // Observer para mudanças de tema
-    const observer = new MutationObserver(checkTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class', 'data-theme', 'style']
-    });
-
-    return () => observer.disconnect();
-  }, [brand]);
+  // Determinar pasta baseado no tema: white para dark, black para light
+  const logoFolder = theme === "dark" ? "white" : "black";
 
   // Limitar tags a 3
   const displayTags = tags.slice(0, 3);
