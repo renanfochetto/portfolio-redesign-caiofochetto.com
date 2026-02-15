@@ -53,14 +53,14 @@ export function Footer({ hideContact = false }: FooterProps) {
 
         {/* Copyright sempre visível */}
         <div className="flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground md:flex-row">
-          <p>&copy; {new Date().getFullYear()} Caio Fochetto.</p>
+          <p className="text-xs">&copy; {new Date().getFullYear()} Caio Fochetto.</p>
           <p className="text-xs">
             Desenvolvido por{" "}
             <a
               href="https://renanfochetto.dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/70 transition-colors hover:text-primary"
+              className="text-xs text-foreground/70 transition-colors hover:text-primary"
             >
               Renan Fochetto
             </a>
