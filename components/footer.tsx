@@ -58,7 +58,7 @@ export function Footer({ hideContact = false }: FooterProps) {
                     href="mailto:caiofochetto@gmail.com"
                     className="
                       inline-flex items-center justify-center gap-2 
-                      rounded-lg px-6 py-3 text-sm font-semibold
+                      rounded-full px-6 py-3 text-sm font-semibold
                       bg-gradient-to-b from-emerald-500 to-emerald-600
                       text-white
                       shadow-[0_4px_0_0_rgba(0,0,0,0.25)]
