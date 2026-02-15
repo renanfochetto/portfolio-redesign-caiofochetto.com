@@ -56,7 +56,7 @@ export function Footer({ hideContact = false }: FooterProps) {
               </AnimatedItem>
             </div>
 
-            <div className="mt-12 border-t border-neutral-400 pt-8" />
+            <div className="mt-12 border-t border-neutral-600 pt-8" />
           </>
         )}
 
