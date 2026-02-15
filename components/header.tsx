@@ -22,7 +22,7 @@ export function Header() {
   ];
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md">
+    <header className="fixed top-0 z-50 w-full border-b border-border/100 bg-background/80 backdrop-blur-md">
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link
           href={`/${locale}`}
