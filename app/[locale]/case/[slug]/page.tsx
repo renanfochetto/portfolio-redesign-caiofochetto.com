@@ -302,8 +302,8 @@ export default function CaseStudyPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Results - SEMPRE FUNDO PRETO COM ÍCONES */}
-      <section className="bg-neutral-950 px-6 py-16 lg:px-8">
+      {/* Results - Adapta ao tema */}
+      <section className="bg-neutral-100 px-6 py-16 dark:bg-neutral-950 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-2 mb-8">
             <TrendingUp className="h-4 w-4 text-primary" />
@@ -318,14 +318,14 @@ export default function CaseStudyPage({ params }: PageProps) {
               const IconComponent = getMetricIcon(label);
 
               return (
-                <div key={index} className="rounded-lg border border-neutral-800 bg-neutral-900 p-6 transition-colors hover:border-primary">
+                <div key={index} className="rounded-lg border border-neutral-200 bg-white p-6 transition-colors hover:border-primary dark:border-neutral-800 dark:bg-neutral-900">
                   {/* Ícone + Valor */}
                   <div className="flex items-center gap-3 mb-2">
                     <IconComponent className="h-6 w-6 text-primary flex-shrink-0" />
                     <p className="text-4xl font-bold text-primary md:text-5xl">{metric.value}</p>
                   </div>
-                  <p className="mt-2 text-sm font-semibold text-neutral-50">{label}</p>
-                  <p className="mt-1 text-xs text-neutral-400">{description}</p>
+                  <p className="mt-2 text-sm font-semibold text-neutral-900 dark:text-neutral-50">{label}</p>
+                  <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">{description}</p>
                 </div>
               );
             })}
