@@ -18,6 +18,24 @@ const brandLogoMap: Record<string, string> = {
   "Jellysmack": "jellysmack",
 };
 
+// Helper para extrair thumbnail da playlist do YouTube
+function getYouTubeThumbnail(playlistUrl: string): string {
+  try {
+    const url = new URL(playlistUrl);
+    const listId = url.searchParams.get('list');
+
+    if (listId) {
+      // Tenta usar thumbnail do YouTube (pode não funcionar sempre)
+      return `https://img.youtube.com/vi_webp/${listId}/mqdefault.webp`;
+    }
+  } catch (e) {
+    // Ignora erro e usa placeholder
+  }
+
+  // Fallback para placeholder
+  return 'https://via.placeholder.com/1280x720/1a1a1a/ffffff?text=Video+Preview';
+}
+
 export function WorkSection() {
   const { locale, t } = useI18n();
 
@@ -52,6 +70,9 @@ export function WorkSection() {
             // Tags já vêm prontas
             const tags = study.tags;
 
+            // Thumbnail do YouTube
+            const thumbnail = getYouTubeThumbnail(study.playlist_url);
+
             return (
               <AnimatedItem key={study.slug} index={idx}>
                 <CaseCard
@@ -63,8 +84,7 @@ export function WorkSection() {
                   tags={tags}
                   locale={locale}
                   playlistUrl={study.playlist_url}
-                  // Usa placeholder cinza por enquanto (depois podemos adicionar thumbnails reais)
-                  thumbnail="https://via.placeholder.com/1280x720/1a1a1a/ffffff?text=Video+Preview"
+                  thumbnail={thumbnail}
                 />
               </AnimatedItem>
             );
