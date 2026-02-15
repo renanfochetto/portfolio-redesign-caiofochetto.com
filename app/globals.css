@@ -66,11 +66,7 @@
   /* Firefox scrollbar */
   html {
     scrollbar-width: thin;
-    scrollbar-color: hsl(var(--primary)) hsl(var(--background));
-  }
-
-  html.light {
-    scrollbar-color: hsl(var(--primary)) hsl(var(--background));
+    scrollbar-color: rgb(var(--primary)) rgb(var(--background));
   }
 }
 
