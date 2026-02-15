@@ -60,12 +60,17 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    opacity: 0.8;
+    @apply bg-primary/80;
   }
 
   /* Firefox scrollbar */
-  * {
+  html {
     scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary)) hsl(var(--background));
+  }
+
+  html.light {
+    scrollbar-color: hsl(var(--primary)) hsl(var(--background));
   }
 }
 
