@@ -319,7 +319,7 @@ export default function CaseStudyPage({ params }: PageProps) {
               const IconComponent = getMetricIcon(label);
 
               return (
-                <div key={index} className="rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary">
+                <div key={index} className="rounded-lg border border-border bg-white p-6 transition-colors hover:border-primary dark:bg-neutral-900">
                   {/* Ícone + Valor */}
                   <div className="flex items-center gap-3 mb-2">
                     <IconComponent className="h-6 w-6 text-primary flex-shrink-0" />
