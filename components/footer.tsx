@@ -1,11 +1,11 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
-import { Linkedin, Mail, Youtube } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 import { AnimatedSection, AnimatedItem } from "./animated-section";
 
 interface FooterProps {
-  hideContact?: boolean; // Nova prop para esconder CTA
+  hideContact?: boolean;
 }
 
 export function Footer({ hideContact = false }: FooterProps) {
@@ -26,23 +26,54 @@ export function Footer({ hideContact = false }: FooterProps) {
                 <p className="mt-2 max-w-md text-base text-muted-foreground">
                   {t.footer.ctaDescription}
                 </p>
+
+                {/* BOTÕES COM RELEVO */}
                 <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
+
+                  {/* LinkedIn - Azul com relevo */}
                   <a
                     href="https://linkedin.com/in/caiofochetto"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-500 px-4 py-2.5 text-sm font-medium text-gray-400 transition-all hover:border-white hover:bg-[#0a66c2] hover:text-white"
+                    className="
+                      inline-flex items-center justify-center gap-2 
+                      rounded-full px-6 py-3 text-sm font-semibold
+                      bg-gradient-to-b from-[#0A66C2] to-[#084d92]
+                      text-white
+                      shadow-[0_4px_0_0_rgba(0,0,0,0.3)]
+                      hover:shadow-[0_6px_0_0_rgba(0,0,0,0.3)]
+                      hover:-translate-y-0.5
+                      active:shadow-[0_2px_0_0_rgba(0,0,0,0.3)]
+                      active:translate-y-1
+                      transition-all duration-200
+                      focus:outline-none focus:ring-2 focus:ring-[#0A66C2] focus:ring-offset-2
+                    "
                   >
                     <Linkedin className="h-4 w-4" />
                     LinkedIn
                   </a>
+
+                  {/* Email - Verde com relevo */}
                   <a
                     href="mailto:caiofochetto@gmail.com"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-500 px-4 py-2.5 text-sm font-medium text-gray-400 transition-all hover:border-white hover:bg-[#10b981] hover:text-white"
+                    className="
+                      inline-flex items-center justify-center gap-2 
+                      rounded-lg px-6 py-3 text-sm font-semibold
+                      bg-gradient-to-b from-emerald-500 to-emerald-600
+                      text-white
+                      shadow-[0_4px_0_0_rgba(0,0,0,0.25)]
+                      hover:shadow-[0_6px_0_0_rgba(0,0,0,0.25)]
+                      hover:-translate-y-0.5
+                      active:shadow-[0_2px_0_0_rgba(0,0,0,0.25)]
+                      active:translate-y-1
+                      transition-all duration-200
+                      focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2
+                    "
                   >
                     <Mail className="h-4 w-4" />
                     Email
                   </a>
+
                 </div>
               </AnimatedItem>
             </div>
