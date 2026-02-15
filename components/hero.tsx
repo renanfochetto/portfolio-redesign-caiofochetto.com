@@ -16,7 +16,7 @@ export function Hero() {
             <span className="text-xs font-medium text-primary">{t.hero.badge}</span>
           </div>
 
-          <h1 className="mt-8 display-2xl text-balance">
+          <h1 className="mt-8 font-display text-5xl font-bold leading-tight tracking-tight text-foreground text-balance md:text-7xl lg:text-8xl">
             {t.hero.headingLine1}
             <br />
             {t.hero.headingLine2}
