@@ -30,13 +30,12 @@ function NavigationCard({
       href={`/${locale}/case/${caseData.slug}`}
       className="group flex flex-col gap-4 rounded-lg border border-border bg-card/50 p-6 transition-all hover:border-primary hover:bg-card"
     >
-      <div className="aspect-video w-full overflow-hidden rounded bg-neutral-900">
+      <div className="aspect-video w-full overflow-hidden rounded bg-neutral-900 relative">
         <Image
           src={caseData.hero_placeholder}
           alt={`${caseData.brand} case study`}
-          width={300}
-          height={169}
-          className="h-full w-full object-cover transition-transform group-hover:scale-105"
+          fill
+          className="object-cover transition-transform group-hover:scale-105"
         />
       </div>
 
