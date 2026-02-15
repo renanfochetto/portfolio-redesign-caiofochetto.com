@@ -38,7 +38,7 @@ export function Footer({ hideContact = false }: FooterProps) {
                   </a>
                   <a
                     href="mailto:caiofochetto@gmail.com"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-500 px-4 py-2.5 text-sm font-medium text-gray-400 transition-all hover:border-white hover:bg-[#10b981] hover:text-white"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition-all border-white bg-[#10b981] text-white"
                   >
                     <Mail className="h-4 w-4" />
                     Email
