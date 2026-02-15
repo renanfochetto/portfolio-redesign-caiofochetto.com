@@ -242,12 +242,12 @@ export default function CaseStudyPage({ params }: PageProps) {
           </div>
 
           {/* Meta Info - Logo da Empresa + Company + Role + Período */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
             {/* Esquerda: Logo da Empresa + Company + Role */}
             <div className="flex items-center gap-4">
               {/* Logo da Empresa (companies folder) */}
               {companyLogo && (
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card overflow-hidden">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
                   <Image
                     src={`/companies/${companyLogo}`}
                     alt={`${study.company} logo`}
@@ -302,7 +302,7 @@ export default function CaseStudyPage({ params }: PageProps) {
               </div>
 
               {/* YouTube Embed */}
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border bg-background">
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-neutral-600 bg-background">
                 <iframe
                   width="100%"
                   height="100%"
@@ -376,7 +376,7 @@ export default function CaseStudyPage({ params }: PageProps) {
               const IconComponent = getMetricIcon(label);
 
               return (
-                <div key={index} className="rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary">
+                <div key={index} className="rounded-lg border border-neutral-600 bg-card p-6 transition-colors hover:border-primary">
                   {/* Ícone + Valor */}
                   <div className="flex items-center gap-3 mb-2">
                     <IconComponent className="h-6 w-6 text-primary flex-shrink-0" />
@@ -423,7 +423,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             {capabilities.map((capability, index) => (
               <span
                 key={index}
-                className="rounded-full border border-neutral-700 px-4 py-2 text-sm font-medium text-neutral-400 hover:border-primary hover:text-primary transition-colors"
+                className="rounded-full border border-neutral-600 px-4 py-2 text-sm font-medium text-neutral-400 hover:border-primary hover:text-primary transition-colors"
               >
                 {capability}
               </span>
@@ -434,13 +434,13 @@ export default function CaseStudyPage({ params }: PageProps) {
 
       {/* Navigation - APENAS PREV + NEXT (2 colunas) */}
       <section className="px-6 py-16 lg:px-8">
-        <div className="mx-auto max-w-4xl border-t border-border pt-12">
+        <div className="mx-auto max-w-4xl border-t border-neutral-600 pt-12">
           <div className="grid gap-6 md:grid-cols-2">
 
             {/* Previous Case */}
             <Link
               href={`/${locale}/case/${prevCase.slug}`}
-              className="group flex flex-col gap-3 rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card/50"
+              className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all hover:border-primary hover:bg-card/50"
             >
               <div className="flex items-center gap-2 text-xs font-semibold text-primary">
                 <ArrowLeft className="h-4 w-4" />
@@ -457,7 +457,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             {/* Next Case */}
             <Link
               href={`/${locale}/case/${nextCase.slug}`}
-              className="group flex flex-col gap-3 rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card/50"
+              className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all hover:border-primary hover:bg-card/50"
             >
               <div className="flex items-center justify-end gap-2 text-xs font-semibold text-primary">
                 {sectionLabels.next}
