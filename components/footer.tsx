@@ -23,7 +23,7 @@ export function Footer({ hideContact = false }: FooterProps) {
                 <h2 className="text-3xl font-bold text-foreground md:text-4xl">
                   {t.footer.cta}
                 </h2>
-                <p className="mt-2 max-w-md text-sm text-muted-foreground">
+                <p className="mt-2 max-w-md text-base text-muted-foreground">
                   {t.footer.ctaDescription}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
@@ -31,27 +31,41 @@ export function Footer({ hideContact = false }: FooterProps) {
                     href="https://linkedin.com/in/caiofochetto"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-500 px-4 py-2.5 text-sm font-medium text-gray-400 transition-all hover:border-white hover:bg-[#0a66c2] hover:text-white"
+                    className="
+    inline-flex items-center justify-center gap-2 
+    rounded-full 
+    border border-white
+    bg-[#0a66c2] 
+    hover:bg-[#0b75d9]
+    active:scale-95
+    text-white
+    px-4 py-2.5 
+    text-sm font-medium
+    transition-all duration-200
+  "
                   >
                     <Linkedin className="h-4 w-4" />
                     LinkedIn
                   </a>
                   <a
                     href="mailto:caiofochetto@gmail.com"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-500 px-4 py-2.5 text-sm font-medium text-gray-400 transition-all hover:border-white hover:bg-[#10b981] hover:text-white"
+                    className="
+    inline-flex items-center justify-center gap-2 
+    rounded-full 
+    border border-white
+    bg-[#059669] 
+    hover:bg-[#10b981]
+    active:scale-95
+    text-white
+    px-4 py-2.5 
+    text-sm font-medium
+    transition-all duration-200
+  "
                   >
                     <Mail className="h-4 w-4" />
                     Email
                   </a>
-                  <a
-                    href="https://youtube.com/@caiofochetto"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-500 px-4 py-2.5 text-sm font-medium text-gray-400 transition-all hover:border-white hover:bg-[#FF0000] hover:text-white"
-                  >
-                    <Youtube className="h-4 w-4" />
-                    YouTube
-                  </a>
+
                 </div>
               </AnimatedItem>
             </div>
@@ -62,14 +76,14 @@ export function Footer({ hideContact = false }: FooterProps) {
 
         {/* Copyright sempre visível */}
         <div className="flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground md:flex-row">
-          <p>&copy; {new Date().getFullYear()} Caio Fochetto.</p>
-          <p>
+          <p className="text-xs">&copy; {new Date().getFullYear()} Caio Fochetto.</p>
+          <p className="text-xs">
             Desenvolvido por{" "}
             <a
               href="https://renanfochetto.dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/70 transition-colors hover:text-primary"
+              className="text-xs text-foreground/70 transition-colors hover:text-primary"
             >
               Renan Fochetto
             </a>

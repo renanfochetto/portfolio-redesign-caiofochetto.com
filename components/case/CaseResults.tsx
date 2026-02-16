@@ -24,9 +24,7 @@ const metricIconMap: Record<string, any> = {
 
 function getMetricIcon(labelKey?: string) {
   if (!labelKey) return Users;
-  // Tentar match exato primeiro
   if (metricIconMap[labelKey]) return metricIconMap[labelKey];
-  // Tentar match parcial (case-insensitive)
   const lowerKey = labelKey.toLowerCase();
   for (const [key, icon] of Object.entries(metricIconMap)) {
     if (lowerKey.includes(key.toLowerCase()) || key.toLowerCase().includes(lowerKey)) {

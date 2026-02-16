@@ -1,5 +1,5 @@
 // app/[locale]/case/[slug]/page.tsx
-// VERSÃO FINAL: Logo esquerda + Botão direita + Companies logos corretas
+// VERSÃO CORRIGIDA: Cards de métricas originais + imports completos
 
 "use client";
 
@@ -30,9 +30,8 @@ import {
   BarChart3
 } from "lucide-react";
 import { Header } from "@/components/header";
-import { locales } from "@/lib/dictionaries";
-import { caseStudies, getCaseBySlug, getAllSlugs } from "@/lib/cases";
 import { Footer } from "@/components/footer";
+import { getCaseBySlug, getAllSlugs, caseStudies } from "@/lib/cases";
 
 const SITE_URL = "https://www.caiofochetto.com";
 
@@ -206,7 +205,7 @@ export default function CaseStudyPage({ params }: PageProps) {
       <section className="px-6 pt-28 pb-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
 
-          {/* OPÇÃO B: Logo esquerda + Botão direita */}
+          {/* Logo esquerda + Botão direita */}
           <div className="flex items-center justify-between gap-4">
             {/* Logo da Brand (esquerda) */}
             {brandLogo ? (
@@ -227,7 +226,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             {/* Botão Voltar (direita) */}
             <Link
               href={`/${locale}`}
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
             >
               <ArrowLeft className="h-4 w-4" />
               {sectionLabels.back}
@@ -242,12 +241,12 @@ export default function CaseStudyPage({ params }: PageProps) {
           </div>
 
           {/* Meta Info - Logo da Empresa + Company + Role + Período */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
             {/* Esquerda: Logo da Empresa + Company + Role */}
             <div className="flex items-center gap-4">
               {/* Logo da Empresa (companies folder) */}
               {companyLogo && (
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card overflow-hidden">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
                   <Image
                     src={`/companies/${companyLogo}`}
                     alt={`${study.company} logo`}
@@ -269,67 +268,6 @@ export default function CaseStudyPage({ params }: PageProps) {
               <Calendar className="h-4 w-4 text-muted-foreground" />
               <span className="font-medium text-foreground">{study.period}</span>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Challenge - COLUNA (vertical) */}
-      <section className="px-6 py-12 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="flex items-center gap-2 mb-4">
-            <Target className="h-4 w-4 text-primary" />
-            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-              {sectionLabels.challenge}
-            </h2>
-          </div>
-          <p className="text-base leading-relaxed text-muted-foreground">
-            {challenge}
-          </p>
-        </div>
-      </section>
-
-      {/* Solution - COLUNA (vertical) */}
-      <section className="px-6 py-12 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="flex items-center gap-2 mb-4">
-            <Lightbulb className="h-4 w-4 text-primary" />
-            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-              {sectionLabels.solution}
-            </h2>
-          </div>
-          <p className="text-base leading-relaxed text-muted-foreground">
-            {solution}
-          </p>
-        </div>
-      </section>
-
-      {/* Results - Adapta ao tema */}
-      <section className="px-6 py-16 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="flex items-center gap-2 mb-8">
-            <TrendingUp className="h-4 w-4 text-primary" />
-            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-              {sectionLabels.results}
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {study.metrics.map((metric, index) => {
-              const label = locale === 'pt' ? metric.label_pt : metric.label_en;
-              const description = locale === 'pt' ? metric.description_pt : metric.description_en;
-              const IconComponent = getMetricIcon(label);
-
-              return (
-                <div key={index} className="rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary">
-                  {/* Ícone + Valor */}
-                  <div className="flex items-center gap-3 mb-2">
-                    <IconComponent className="h-6 w-6 text-primary flex-shrink-0" />
-                    <p className="text-4xl font-bold text-primary md:text-5xl">{metric.value}</p>
-                  </div>
-                  <p className="mt-2 text-sm font-semibold text-foreground">{label}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">{description}</p>
-                </div>
-              );
-            })}
           </div>
         </div>
       </section>
@@ -363,7 +301,7 @@ export default function CaseStudyPage({ params }: PageProps) {
               </div>
 
               {/* YouTube Embed */}
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-border bg-background">
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-neutral-600 bg-background">
                 <iframe
                   width="100%"
                   height="100%"
@@ -391,6 +329,67 @@ export default function CaseStudyPage({ params }: PageProps) {
           </section>
         );
       })()}
+
+      {/* Challenge - COLUNA (vertical) */}
+      <section className="px-6 py-12 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex items-center gap-2 mb-4">
+            <Target className="h-4 w-4 text-primary" />
+            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.challenge}
+            </h2>
+          </div>
+          <p className="text-base leading-relaxed text-muted-foreground">
+            {challenge}
+          </p>
+        </div>
+      </section>
+
+      {/* Solution - COLUNA (vertical) */}
+      <section className="px-6 py-12 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex items-center gap-2 mb-4">
+            <Lightbulb className="h-4 w-4 text-primary" />
+            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.solution}
+            </h2>
+          </div>
+          <p className="text-base leading-relaxed text-muted-foreground">
+            {solution}
+          </p>
+        </div>
+      </section>
+
+      {/* Results - VERSÃO ORIGINAL (sem animação) */}
+      <section className="px-6 py-16 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex items-center gap-2 mb-8">
+            <TrendingUp className="h-4 w-4 text-primary" />
+            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.results}
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {study.metrics.map((metric, index) => {
+              const label = locale === 'pt' ? metric.label_pt : metric.label_en;
+              const description = locale === 'pt' ? metric.description_pt : metric.description_en;
+              const IconComponent = getMetricIcon(label);
+
+              return (
+                <div key={index} className="rounded-lg border border-neutral-600 bg-card p-6 transition-colors hover:border-primary">
+                  {/* Ícone + Valor */}
+                  <div className="flex items-center gap-3 mb-2">
+                    <IconComponent className="h-6 w-6 text-primary flex-shrink-0" />
+                    <p className="text-4xl font-bold text-primary md:text-5xl">{metric.value}</p>
+                  </div>
+                  <p className="mt-2 text-sm font-semibold text-foreground">{label}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Key Learnings */}
       <section className="px-6 py-16 lg:px-8">
@@ -425,7 +424,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             {capabilities.map((capability, index) => (
               <span
                 key={index}
-                className="rounded-full border border-neutral-700 px-4 py-2 text-sm font-medium text-neutral-400 hover:border-primary hover:text-primary transition-colors"
+                className="rounded-full border border-neutral-600 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:border-primary hover:text-primary"
               >
                 {capability}
               </span>
@@ -436,13 +435,13 @@ export default function CaseStudyPage({ params }: PageProps) {
 
       {/* Navigation - APENAS PREV + NEXT (2 colunas) */}
       <section className="px-6 py-16 lg:px-8">
-        <div className="mx-auto max-w-4xl border-t border-border pt-12">
+        <div className="mx-auto max-w-4xl border-t border-neutral-600 pt-12">
           <div className="grid gap-6 md:grid-cols-2">
 
             {/* Previous Case */}
             <Link
               href={`/${locale}/case/${prevCase.slug}`}
-              className="group flex flex-col gap-3 rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card/50"
+              className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all duration-200 hover:border-primary hover:bg-card/50 active:scale-[0.98]"
             >
               <div className="flex items-center gap-2 text-xs font-semibold text-primary">
                 <ArrowLeft className="h-4 w-4" />
@@ -459,7 +458,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             {/* Next Case */}
             <Link
               href={`/${locale}/case/${nextCase.slug}`}
-              className="group flex flex-col gap-3 rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card/50"
+              className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all duration-200 hover:border-primary hover:bg-card/50 active:scale-[0.98]"
             >
               <div className="flex items-center justify-end gap-2 text-xs font-semibold text-primary">
                 {sectionLabels.next}

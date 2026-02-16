@@ -18,39 +18,37 @@ export function AboutSection() {
           {t.about.heading}
         </h2>
 
-        <div className="mt-12 grid gap-8 md:gap-12 lg:grid-cols-[280px_1fr]">
-          <AnimatedItem index={0} className="flex justify-center md:justify-start">
+        <div className="mt-12 grid gap-12 md:gap-16 grid-cols-1 md:grid-cols-[280px_1fr]">
+          <AnimatedItem index={0} className="flex justify-center md:justify-start h-fit">
             <Image
               src="/images/foto_caio.jpeg"
               alt="Caio Fochetto em evento de marketing"
               width={280}
               height={350}
               style={{ width: "auto", height: "auto" }}
-              className="w-full max-w-sm rounded-lg object-cover shadow-lg"
+              className="rounded-lg object-cover shadow-lg"
               unoptimized={true}
               priority={false}
             />
           </AnimatedItem>
 
           <div className="space-y-4">
-            <div className="space-y-4">
-              <AnimatedItem index={1}>
-                <p className="text-base leading-relaxed text-muted-foreground">
-                  {t.about.p1}
-                </p>
-              </AnimatedItem>
-              <AnimatedItem index={2}>
-                <p className="text-base leading-relaxed text-muted-foreground">
-                  {t.about.p2}
-                </p>
-              </AnimatedItem>
-              <AnimatedItem index={3}>
-                <p className="flex items-start gap-2 text-base leading-relaxed text-muted-foreground">
-                  <Globe className="mt-1 h-4 w-4 flex-shrink-0 text-primary/60" />
-                  {t.about.p3}
-                </p>
-              </AnimatedItem>
-            </div>
+            <AnimatedItem index={1}>
+              <p className="text-base leading-relaxed text-muted-foreground">
+                {t.about.p1}
+              </p>
+            </AnimatedItem>
+            <AnimatedItem index={2}>
+              <p className="text-base leading-relaxed text-muted-foreground">
+                {t.about.p2}
+              </p>
+            </AnimatedItem>
+            <AnimatedItem index={3}>
+              <p className="flex items-start gap-2 text-base leading-relaxed text-muted-foreground">
+                <Globe className="mt-1 h-4 w-4 flex-shrink-0 text-primary/60" />
+                {t.about.p3}
+              </p>
+            </AnimatedItem>
 
             <AnimatedItem index={4} className="pt-4">
               <p className="mb-3 flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-muted-foreground">

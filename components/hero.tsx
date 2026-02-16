@@ -16,14 +16,12 @@ export function Hero() {
             <span className="text-xs font-medium text-primary">{t.hero.badge}</span>
           </div>
 
-          <h1 className="mt-8 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            <span className="text-balance">
-              {t.hero.headingLine1}
-              <br />
-              {t.hero.headingLine2}
-              <br />
-              <span className="text-primary">{t.hero.headingLine3}</span>
-            </span>
+          <h1 className="mt-8 font-display text-4xl font-bold leading-tight tracking-tight text-foreground text-balance md:text-5xl lg:text-6xl">
+            {t.hero.headingLine1}
+            <br />
+            {t.hero.headingLine2}
+            <br />
+            <span className="text-primary text-4xl md:text-5xl lg:text-6xl">{t.hero.headingLine3}</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
@@ -33,7 +31,18 @@ export function Hero() {
           <div className="mt-10">
             <a
               href="#work"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              className="
+    inline-flex items-center gap-2 
+    rounded-full 
+    bg-primary/90 
+    hover:bg-primary
+    active:scale-95
+    border
+    px-6 py-3 
+    text-sm font-medium 
+    text-primary-foreground
+    transition-all duration-200
+  "
             >
               {t.hero.cta}
               <ArrowDown className="h-4 w-4" />
