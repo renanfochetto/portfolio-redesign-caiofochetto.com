@@ -97,7 +97,8 @@ export function LogoCarousel() {
               style={{
                 opacity: 0.7,
                 width: "auto",
-                height: "56px", // Altura máxima aumentada (logos verticais ficam maiores)
+                maxWidth: "120px", // Limita largura (horizontais não ficam enormes)
+                height: "56px",     // Altura máxima (verticais usam isso)
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = "1";
