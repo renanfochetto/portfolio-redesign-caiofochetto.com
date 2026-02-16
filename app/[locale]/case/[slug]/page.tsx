@@ -424,7 +424,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             {capabilities.map((capability, index) => (
               <span
                 key={index}
-                className="rounded-full border border-neutral-600 px-4 py-2 text-sm font-medium text-neutral-400 hover:border-primary hover:text-primary transition-colors"
+                className="rounded-full border border-neutral-600 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:border-primary hover:text-primary"
               >
                 {capability}
               </span>
