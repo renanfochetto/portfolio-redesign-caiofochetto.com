@@ -18,21 +18,8 @@ export function AboutSection() {
           {t.about.heading}
         </h2>
 
-        <div className="mt-12 grid gap-8 md:gap-12 lg:grid-cols-[280px_1fr]">
-          <AnimatedItem index={0} className="flex justify-center md:justify-start">
-            <Image
-              src="/images/foto_caio.jpeg"
-              alt="Caio Fochetto em evento de marketing"
-              width={280}
-              height={350}
-              style={{ width: "auto", height: "auto" }}
-              className="w-full max-w-sm rounded-lg object-cover shadow-lg"
-              unoptimized={true}
-              priority={false}
-            />
-          </AnimatedItem>
-
-          <div className="space-y-4">
+        <div className="mt-12 grid gap-12 md:grid-cols-[1fr_280px] lg:grid-cols-[280px_1fr]">
+          <div className="order-2 md:order-2 lg:order-1 space-y-4">
             <div className="space-y-4">
               <AnimatedItem index={1}>
                 <p className="text-base leading-relaxed text-muted-foreground">
@@ -70,6 +57,19 @@ export function AboutSection() {
               </div>
             </AnimatedItem>
           </div>
+
+          <AnimatedItem index={0} className="order-1 md:order-1 lg:order-2 flex justify-center md:justify-start">
+            <Image
+              src="/images/foto_caio.jpeg"
+              alt="Caio Fochetto em evento de marketing"
+              width={280}
+              height={350}
+              style={{ width: "auto", height: "auto" }}
+              className="w-full max-w-sm rounded-lg object-cover shadow-lg"
+              unoptimized={true}
+              priority={false}
+            />
+          </AnimatedItem>
         </div>
       </AnimatedSection>
     </section>
