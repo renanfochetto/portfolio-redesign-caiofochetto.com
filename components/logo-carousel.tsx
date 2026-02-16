@@ -93,10 +93,11 @@ export function LogoCarousel() {
           {duplicatedLogos.map((logo, idx) => (
             <div
               key={`${logo.name}-${idx}`}
-              className="group flex h-12 flex-shrink-0 cursor-pointer items-center justify-center transition-opacity duration-300"
+              className="group flex flex-shrink-0 cursor-pointer items-center justify-center transition-opacity duration-300"
               style={{
                 opacity: 0.7,
                 width: "auto",
+                height: "48px", // h-12 = 48px
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = "1";
@@ -109,7 +110,7 @@ export function LogoCarousel() {
                 src={`/logos/${logoFolder}/${logo.name}.svg`}
                 alt={logo.alt}
                 width={80}
-                height={32}
+                height={48}
                 style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
                 className="object-contain object-center"
                 unoptimized={true}
