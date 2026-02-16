@@ -11,32 +11,28 @@ const experiences = [
     roleEn: "Director of Digital Content, Influencer Marketing & Talent",
     company: "Octagon",
     logo: "/companies/octagon.avif",
-    period: "2023 - 2026",
-    location: "São Paulo, BR"
+    period: "2023 - 2026"
   },
   {
     role: "Líder de Operações LATAM",
     roleEn: "LATAM Operations Lead",
     company: "Jellysmack",
     logo: "/companies/jellysmack.avif",
-    period: "2021 - 2023",
-    location: "São Paulo, BR"
+    period: "2021 - 2023"
   },
   {
     role: "Content and Product Manager",
     roleEn: "Content and Product Manager",
     company: "Playground",
     logo: "/companies/playground.avif",
-    period: "2020 - 2021",
-    location: "São Paulo, BR"
+    period: "2020 - 2021"
   },
   {
     role: "Digital Platforms Manager",
     roleEn: "Digital Platforms Manager",
     company: "A+E Networks",
     logo: "/companies/aenetworks.avif",
-    period: "2012 - 2019",
-    location: "São Paulo, BR"
+    period: "2012 - 2019"
   },
 ];
 
@@ -46,32 +42,28 @@ const experiencesOlder = [
     roleEn: "Digital Content Producer",
     company: "Portal R7",
     logo: "/companies/portalr7.avif",
-    period: "2010 - 2012",
-    location: "São Paulo, BR"
+    period: "2010 - 2012"
   },
   {
     role: "Digital Content Producer",
     roleEn: "Digital Content Producer",
     company: "TV Cultura",
     logo: "/companies/tvcultura.avif",
-    period: "2009 - 2010",
-    location: "São Paulo, BR"
+    period: "2009 - 2010"
   },
   {
     role: "Web Content Producer",
     roleEn: "Web Content Producer",
     company: "Rede Boa Nova",
     logo: "/companies/redeboanova.avif",
-    period: "2009 - 2010",
-    location: "São Paulo, BR"
+    period: "2009 - 2010"
   },
   {
     role: "TV Producer Coordinator",
     roleEn: "TV Producer Coordinator",
     company: "TV Mundo Maior",
     logo: "/companies/tvmundomaior.avif",
-    period: "2005 - 2008",
-    location: "São Paulo, BR"
+    period: "2005 - 2008"
   },
 ];
 
@@ -116,7 +108,6 @@ export function ExperienceSection() {
                   {locale === "en" ? exp.roleEn : exp.role}
                 </h3>
                 <p className="mt-1 text-sm font-medium text-primary">{exp.company}</p>
-                <p className="mt-0.5 text-sm text-muted-foreground">{exp.location}</p>
               </div>
             </AnimatedItem>
           ))}
