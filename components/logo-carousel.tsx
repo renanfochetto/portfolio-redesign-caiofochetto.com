@@ -57,7 +57,7 @@ export function LogoCarousel() {
       <div className="mt-10 border-t border-neutral-600 pt-6">
         <p className="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground">
         </p>
-        <div className="relative overflow-hidden" style={{ height: "40px" }}>
+        <div className="relative overflow-hidden" style={{ height: "56px" }}>
           {/* Placeholder vazio */}
         </div>
       </div>
@@ -97,7 +97,7 @@ export function LogoCarousel() {
               style={{
                 opacity: 0.7,
                 width: "auto",
-                height: "40px", // Altura máxima (logos se ajustam dentro)
+                height: "56px", // Altura máxima aumentada (logos verticais ficam maiores)
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = "1";
@@ -109,8 +109,8 @@ export function LogoCarousel() {
               <Image
                 src={`/logos/${logoFolder}/${logo.name}.svg`}
                 alt={logo.alt}
-                width={100}
-                height={40}
+                width={140}
+                height={56}
                 style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
                 className="object-contain object-center"
                 unoptimized={true}
