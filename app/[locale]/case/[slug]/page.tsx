@@ -441,7 +441,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             {/* Previous Case */}
             <Link
               href={`/${locale}/case/${prevCase.slug}`}
-              className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all hover:border-primary hover:bg-card/50"
+              className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all duration-200 hover:border-primary hover:bg-card/50 active:scale-[0.98]"
             >
               <div className="flex items-center gap-2 text-xs font-semibold text-primary">
                 <ArrowLeft className="h-4 w-4" />
@@ -458,7 +458,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             {/* Next Case */}
             <Link
               href={`/${locale}/case/${nextCase.slug}`}
-              className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all hover:border-primary hover:bg-card/50"
+              className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all duration-200 hover:border-primary hover:bg-card/50 active:scale-[0.98]"
             >
               <div className="flex items-center justify-end gap-2 text-xs font-semibold text-primary">
                 {sectionLabels.next}
