@@ -14,6 +14,18 @@ import { Header } from "@/components/header";
 import { locales } from "@/lib/dictionaries";
 import { caseStudies, getCaseBySlug, getAllSlugs } from "@/lib/cases";
 import { Footer } from "@/components/footer";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  CheckCircle,
+  Tag,
+  ArrowRight,
+  Target,
+  Lightbulb,
+  BookOpen,
+  Calendar,
+  Play,
+} from "lucide-react";
 
 const SITE_URL = "https://www.caiofochetto.com";
 
