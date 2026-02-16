@@ -57,7 +57,7 @@ export function LogoCarousel() {
       <div className="mt-10 border-t border-neutral-600 pt-6">
         <p className="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground">
         </p>
-        <div className="relative h-9 overflow-hidden">
+        <div className="relative overflow-hidden" style={{ height: "40px" }}>
           {/* Placeholder vazio */}
         </div>
       </div>
@@ -71,7 +71,7 @@ export function LogoCarousel() {
 
       <div className="relative overflow-hidden">
         <motion.div
-          className="flex gap-14 md:gap-20"
+          className="flex gap-16 md:gap-24"
           animate={
             prefersReducedMotion
               ? {}
@@ -96,6 +96,8 @@ export function LogoCarousel() {
               className="group flex flex-shrink-0 cursor-pointer items-center justify-center transition-opacity duration-300"
               style={{
                 opacity: 0.7,
+                width: "auto",
+                height: "40px", // Altura máxima (logos se ajustam dentro)
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = "1";
@@ -107,8 +109,9 @@ export function LogoCarousel() {
               <Image
                 src={`/logos/${logoFolder}/${logo.name}.svg`}
                 alt={logo.alt}
-                width={60}
-                height={36}
+                width={100}
+                height={40}
+                style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
                 className="object-contain object-center"
                 unoptimized={true}
                 priority={idx < 15}
