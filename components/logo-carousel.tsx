@@ -85,9 +85,10 @@ export function LogoCarousel() {
           {duplicatedLogos.map((logo, idx) => (
             <div
               key={`${logo.name}-${idx}`}
-              className="group flex h-16 w-32 flex-shrink-0 cursor-pointer items-center justify-center transition-opacity duration-300"
+              className="group flex h-16 flex-shrink-0 cursor-pointer items-center justify-center transition-opacity duration-300"
               style={{
                 opacity: 0.7,
+                width: "auto",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = "1";
