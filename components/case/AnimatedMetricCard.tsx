@@ -1,10 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { AnimatedCounter } from "@/components/animated-counter";
-import { fadeInUpVariants } from "@/lib/animations";
+import { motion } from "framer-motion";
 
 interface AnimatedMetricCardProps {
   icon: ReactNode;
@@ -21,16 +18,12 @@ export function AnimatedMetricCard({
   description,
   index,
 }: AnimatedMetricCardProps) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-
   return (
     <motion.div
-      ref={ref}
-      custom={index}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={fadeInUpVariants}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true, amount: 0.3 }}
       className="rounded-lg border transition-all hover:border-primary/50"
       style={{ 
         backgroundColor: `hsl(var(--card))`,
@@ -42,13 +35,9 @@ export function AnimatedMetricCard({
           {icon}
         </div>
         <div className="flex-1">
-          <div className="text-5xl font-bold text-primary md:text-6xl">
-            <AnimatedCounter
-              value={parseFloat(value.match(/\d+/)?.[0] || "0")}
-              suffix={value.match(/[K|M|%|+]/)?.[0] || ""}
-              duration={1.8}
-            />
-          </div>
+          <p className="text-5xl font-bold text-primary md:text-6xl">
+            {value}
+          </p>
           <p className="mt-4 text-lg font-semibold text-foreground">
             {label}
           </p>
