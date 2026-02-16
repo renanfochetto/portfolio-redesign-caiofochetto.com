@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Play, Briefcase } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { useTheme } from "./theme-provider";
 import type { ProductionCase } from "@/types/production";
 
 interface ProductionCardProps {
@@ -13,27 +14,29 @@ interface ProductionCardProps {
 
 export function ProductionCard({ case: productionCase }: ProductionCardProps) {
   const { locale } = useI18n();
+  const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const { slug, title, brand, year, type, role, tags, media } = productionCase;
+  const { slug, title, brand, year, type, role, tags } = productionCase;
 
-  // Lógica de logo (mesma dos performance cases)
-  const logoMapping: Record<string, { folder: string; file: string }> = {
-    Netflix: { folder: "netflix", file: "netflix" },
-    Natura: { folder: "natura", file: "natura" },
-    "Havaianas + Netflix": { folder: "havaianas", file: "havaianas" },
-    Playground: { folder: "playground", file: "playground" },
-    Bohemia: { folder: "bohemia", file: "bohemia" },
-    "Nestlé": { folder: "nestle", file: "nestle" },
+  // Determinar pasta baseado no tema: white para dark, black para light
+  const logoFolder = theme === "dark" ? "white" : "black";
+
+  // Lógica de logo - simplificada (nome do arquivo = nome da marca em lowercase)
+  const logoMapping: Record<string, string> = {
+    "Netflix": "netflix",
+    "Natura": "natura",
+    "Havaianas + Netflix": "havaianas",
+    "Playground": "playground",
+    "Bohemia": "bohemia",
+    "Nestlé": "nestle",
   };
 
   const brandLogo = logoMapping[brand];
-  const logoFolder = brandLogo?.folder || "default";
-  const logoFile = brandLogo?.file || "logo";
 
   // Primeiras 3 tags
   const displayTags = tags.slice(0, 3);
@@ -50,7 +53,7 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
         {mounted && brandLogo && (
           <div className="flex h-16 w-16 items-center justify-start">
             <Image
-              src={`/logos/${logoFolder}/${logoFile}.svg`}
+              src={`/logos/${logoFolder}/${brandLogo}.svg`}
               alt={`${brand} logo`}
               width={64}
               height={64}
