@@ -19,14 +19,14 @@ export function AboutSection() {
         </h2>
 
         <div className="mt-12 grid gap-12 md:gap-16 grid-cols-1 md:grid-cols-[280px_1fr]">
-          <AnimatedItem index={0} className="flex justify-center md:justify-start">
+          <AnimatedItem index={0} className="flex justify-center md:justify-start h-fit">
             <Image
               src="/images/foto_caio.jpeg"
               alt="Caio Fochetto em evento de marketing"
               width={280}
               height={350}
               style={{ width: "auto", height: "auto" }}
-              className="w-full max-w-sm rounded-lg object-cover shadow-lg"
+              className="rounded-lg object-cover shadow-lg"
               unoptimized={true}
               priority={false}
             />
