@@ -172,8 +172,16 @@ export function ExperienceSection() {
           <div className="flex justify-center pt-8">
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              id="expand-button"
-              className="group flex items-center gap-2 rounded-full border border-neutral-600 px-4 py-2 transition-all hover:border-primary/50"
+              className="
+    group 
+    flex items-center gap-2 
+    rounded-full 
+    border border-neutral-600
+    hover:border-primary
+    active:scale-95
+    px-4 py-2 
+    transition-all duration-200
+  "
             >
               <span className="text-sm text-muted-foreground transition-colors group-hover:text-primary">
                 {isExpanded ? "Ver menos" : "Ver experiências anteriores"}
