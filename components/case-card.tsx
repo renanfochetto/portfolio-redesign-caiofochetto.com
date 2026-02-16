@@ -109,7 +109,7 @@ export function CaseCard({
         active:scale-[0.98]
       ">
 
-        {/* Header: LOGO APENAS + Arrow */}
+        {/* Header: LOGO + Badge + Arrow */}
         <div className="mb-6 flex items-start justify-between">
           {/* Logo da empresa (sem texto da marca) */}
           {mounted && brandLogo && (
@@ -125,8 +125,19 @@ export function CaseCard({
             </div>
           )}
 
-          {/* Arrow */}
-          <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
+          {/* Badge Vídeo + Arrow */}
+          <div className="flex items-center gap-2">
+            {/* Video Badge - Todos os cases têm playlist */}
+            <div className="flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5">
+              <Play className="h-3 w-3 text-primary" />
+              <span className="text-xs font-medium text-primary">
+                {locale === "pt" ? "Vídeo" : "Video"}
+              </span>
+            </div>
+
+            {/* Arrow */}
+            <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
+          </div>
         </div>
 
         {/* Título */}
