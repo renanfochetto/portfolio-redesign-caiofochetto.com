@@ -42,9 +42,22 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+
+          {/* Theme toggle - PADRONIZADO */}
           <button
             onClick={toggleTheme}
-            className="flex items-center gap-1.5 rounded-full border border-neutral-600 px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+            className="
+              flex items-center gap-1.5 
+              rounded-full 
+              border border-neutral-600
+              hover:border-primary
+              active:scale-95
+              px-3 py-1 
+              text-xs font-medium 
+              text-muted-foreground
+              hover:text-primary
+              transition-all duration-200
+            "
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
@@ -53,9 +66,22 @@ export function Header() {
               <Moon className="h-3.5 w-3.5" />
             )}
           </button>
+
+          {/* Language toggle - PADRONIZADO */}
           <Link
             href={localeHref}
-            className="flex items-center gap-1.5 rounded-full border border-neutral-600 px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+            className="
+              flex items-center gap-1.5 
+              rounded-full 
+              border border-neutral-600
+              hover:border-primary
+              active:scale-95
+              px-3 py-1 
+              text-xs font-medium 
+              text-muted-foreground
+              hover:text-primary
+              transition-all duration-200
+            "
           >
             <Globe className="h-3.5 w-3.5" />
             {otherLocale.toUpperCase()}
@@ -64,9 +90,22 @@ export function Header() {
 
         {/* Mobile toggle */}
         <div className="flex items-center gap-3 md:hidden">
+
+          {/* Theme toggle mobile - PADRONIZADO */}
           <button
             onClick={toggleTheme}
-            className="flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground"
+            className="
+              flex items-center gap-1 
+              rounded-full 
+              border border-neutral-600
+              hover:border-primary
+              active:scale-95
+              px-2.5 py-1 
+              text-xs font-medium 
+              text-muted-foreground
+              hover:text-primary
+              transition-all duration-200
+            "
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
@@ -75,13 +114,28 @@ export function Header() {
               <Moon className="h-3 w-3" />
             )}
           </button>
+
+          {/* Language toggle mobile - PADRONIZADO */}
           <Link
             href={localeHref}
-            className="flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground"
+            className="
+              flex items-center gap-1 
+              rounded-full 
+              border border-neutral-600
+              hover:border-primary
+              active:scale-95
+              px-2.5 py-1 
+              text-xs font-medium 
+              text-muted-foreground
+              hover:text-primary
+              transition-all duration-200
+            "
           >
             <Globe className="h-3 w-3" />
             {otherLocale.toUpperCase()}
           </Link>
+
+          {/* Menu toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="text-foreground"
