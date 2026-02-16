@@ -71,7 +71,7 @@ export function LogoCarousel() {
 
       <div className="relative overflow-hidden">
         <motion.div
-          className="flex gap-12 md:gap-16"
+          className="flex gap-14 md:gap-20"
           animate={
             prefersReducedMotion
               ? {}
