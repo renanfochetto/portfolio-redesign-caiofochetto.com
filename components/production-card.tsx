@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Play, Briefcase } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { useTheme } from "@/components/theme-provider";
 import type { ProductionCase } from "@/types/production";
 
 interface ProductionCardProps {
@@ -13,6 +14,7 @@ interface ProductionCardProps {
 
 export function ProductionCard({ case: productionCase }: ProductionCardProps) {
   const { locale } = useI18n();
+  const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -21,19 +23,23 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
 
   const { slug, title, brand, year, type, role, tags } = productionCase;
 
-  // Lógica de logo - simplificada (nome do arquivo = nome da marca em lowercase)
-  const logoMapping: Record<string, { folder: string; file: string }> = {
-    "Netflix": { folder: "netflix", file: "netflix" },
-    "Natura": { folder: "natura", file: "natura" },
-    "Havaianas + Netflix": { folder: "havaianas", file: "havaianas" },
-    "Playground": { folder: "playground", file: "playground" },
-    "Bohemia": { folder: "bohemia", file: "bohemia" },
-    "Nestlé": { folder: "nestle", file: "nestle" },
+  // ✅ LOGO MAPPING SIMPLIFICADO - apenas nome do arquivo
+  const brandLogos: Record<string, string> = {
+    "Netflix": "netflix",
+    "Budweiser": "budweiser",
+    "HISTORY": "history",
+    "Natura": "natura",
+    "A&E": "ae",
+    "Bradesco": "bradesco",
+    "Havaianas + Netflix": "havaianas",
+    "Playground": "playground",
+    "Bohemia": "bohemia",
+    "Nestlé": "nestle",
   };
 
-  const brandLogo = logoMapping[brand];
-  const logoFolder = brandLogo?.folder || "default";
-  const logoFile = brandLogo?.file || "logo";
+  // ✅ Determinar pasta (white/black) baseado no tema
+  const logoFolder = theme === "dark" ? "white" : "black";
+  const logoFile = brandLogos[brand];
 
   // Primeiras 3 tags
   const displayTags = tags.slice(0, 3);
@@ -47,17 +53,19 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
       {/* Header: LOGO + Badge + Arrow */}
       <div className="mb-6 flex items-start justify-between">
         {/* Logo da empresa */}
-        {mounted && brandLogo && (
-          <div className="flex h-16 w-16 items-center justify-start">
+        {mounted && logoFile ? (
+          <div className="flex h-16 w-32 items-center justify-start">
             <Image
               src={`/logos/${logoFolder}/${logoFile}.svg`}
               alt={`${brand} logo`}
-              width={64}
+              width={128}
               height={64}
-              className="h-full w-auto max-w-[100px] object-contain object-left"
+              className="h-full w-auto max-w-full object-contain object-left"
               unoptimized
             />
           </div>
+        ) : (
+          <div className="h-16 w-32" /> // Spacer se não tiver logo
         )}
 
         {/* Badge Vídeo + Arrow */}
@@ -80,7 +88,7 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
         {title}
       </h3>
 
-      {/* Role + Type (diferente dos performance cards) */}
+      {/* Role + Type */}
       <div className="mb-6 space-y-2">
         {/* Role com ícone */}
         <div className="flex items-center gap-2">
@@ -96,7 +104,7 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
         </p>
       </div>
 
-      {/* Tags sutis */}
+      {/* Tags */}
       <div className="flex flex-wrap gap-2">
         {displayTags.map((tag, index) => (
           <span
