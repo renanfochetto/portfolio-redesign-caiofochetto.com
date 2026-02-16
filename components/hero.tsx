@@ -38,7 +38,7 @@ export function Hero() {
     hover:bg-primary
     active:scale-95
     border
-    border-foreground/20
+    border-foreground/80
     px-6 py-3 
     text-sm font-medium 
     text-primary-foreground
