@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Tag, Play, Calendar } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { YouTubeEmbed } from "@/components/youtube-embed";
@@ -13,6 +13,28 @@ import {
 } from "@/lib/production-cases";
 
 const SITE_URL = "https://www.caiofochetto.com";
+
+// Mapeamento de empresas para seus logos (em /public/companies/)
+const companyLogos: Record<string, string> = {
+  "Octagon": "octagon.avif",
+  "A+E Networks": "aenetworks.avif",
+  "Jellysmack": "jellysmack.avif",
+  "Playground": "playground.avif",
+  "Portal R7": "portalr7.avif",
+  "Rede Boa Nova": "redeboanova.avif",
+  "TV Cultura": "tvcultura.avif",
+  "TV Mundo Maior": "tvmundomaior.avif",
+};
+
+// Mapeamento de brands para seus logos (em /public/logos/white ou black)
+const brandLogos: Record<string, string> = {
+  "Netflix": "netflix",
+  "Budweiser": "budweiser",
+  "HISTORY": "history",
+  "Natura": "natura",
+  "A&E": "ae",
+  "Bradesco": "bradesco",
+};
 
 interface ProductionCasePageProps {
   params: Promise<{
@@ -81,183 +103,215 @@ export default async function ProductionCasePage({
   // Navigation
   const navigation = getProductionCaseNavigation(resolvedParams.slug);
 
+  // Pegar logo da brand (assumindo string única)
+  const brandLogo = brandLogos[brand];
+
+  // Section labels
+  const sectionLabels = {
+    what: "O QUE É?",
+    myRole: "MEU PAPEL",
+    capabilities: "COMPETÊNCIAS",
+    back: "Voltar",
+    previous: "Anterior",
+    next: "Próximo",
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
 
-      {/* Back Button - IDÊNTICO ao Performance */}
-      <div className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="mx-auto max-w-6xl px-6 py-4 lg:px-8">
-          <Link
-            href="/#work"
-            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span>Voltar</span>
-          </Link>
-        </div>
-      </div>
-
-      {/* Hero Video/Image - IDÊNTICO */}
-      <section className="bg-muted/30 px-6 py-12 lg:px-8 lg:py-16">
+      {/* Hero - IDÊNTICO ao Performance */}
+      <section className="px-6 pt-28 pb-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          {media.hero.type === "video" && media.hero.url ? (
-            <YouTubeEmbed
-              videoId={media.hero.url}
-              title={title}
-              placeholder={media.hero.placeholder}
-            />
-          ) : (
-            <div className="relative aspect-video overflow-hidden rounded-lg">
-              <Image
-                src={media.hero.url}
-                alt={media.hero.alt}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          )}
-        </div>
-      </section>
 
-      {/* Overview - PADRÃO VISUAL IDÊNTICO ao Performance */}
-      <section className="px-6 py-16 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          {/* Brand Name - LIME uppercase pequeno */}
-          <p className="mb-4 text-sm font-bold uppercase tracking-wider text-primary">
-            {brand}
-          </p>
+          {/* Logo esquerda + Botão direita - IDÊNTICO */}
+          <div className="flex items-center justify-between gap-4">
+            {/* Logo da Brand (esquerda) */}
+            {brandLogo ? (
+              <div className="flex h-16 w-32 items-center justify-start">
+                <Image
+                  src={`/logos/white/${brandLogo}.svg`}
+                  alt={`${brand} logo`}
+                  width={128}
+                  height={64}
+                  className="h-full w-auto max-w-full object-contain object-left"
+                  unoptimized
+                />
+              </div>
+            ) : (
+              <div className="h-16 w-32" /> // Spacer se não tiver logo
+            )}
 
-          {/* Title - Font Display Grande */}
-          <h1 className="mb-6 font-display text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
-            {title}
-          </h1>
+            {/* Botão Voltar (direita) */}
+            <Link
+              href="/#work"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              {sectionLabels.back}
+            </Link>
+          </div>
 
-          {/* Meta Grid - 3 colunas: Função | Período | Company */}
-          <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-8">
-            <div>
-              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                Função
-              </p>
-              <p className="font-semibold text-foreground">{role}</p>
+          {/* Título - IDÊNTICO (text-3xl md:text-5xl) */}
+          <div className="mt-8">
+            <h1 className="text-3xl font-bold text-foreground md:text-5xl">
+              {title}
+            </h1>
+          </div>
+
+          {/* Meta Info - Logo da Empresa + Company + Role + Período - IDÊNTICO */}
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
+            {/* Esquerda: Logo da Empresa + Company + Role */}
+            <div className="flex items-center gap-4">
+              {/* Logo da Empresa (companies folder) */}
+              {companyLogos[brand] && (
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
+                  <Image
+                    src={`/companies/${companyLogos[brand]}`}
+                    alt={`${brand} logo`}
+                    width={48}
+                    height={48}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              )}
+
+              <div>
+                <p className="text-sm font-semibold text-foreground">{brand}</p>
+                <p className="text-xs text-muted-foreground">{role}</p>
+              </div>
             </div>
-            <div>
-              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                Período
-              </p>
-              <p className="font-semibold text-foreground">{year}</p>
-            </div>
-            <div>
-              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                {type}
-              </p>
-              <p className="font-semibold text-foreground">{brand}</p>
+
+            {/* Direita: Período */}
+            <div className="flex items-center gap-2 text-sm">
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <span className="font-medium text-foreground">{year}</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* What is it? - Seção com título LIME uppercase */}
-      <section className="bg-muted/30 px-6 py-16 lg:px-8">
+      {/* Playlist/Video Section - SE EXISTIR */}
+      {media.hero.type === "video" && media.hero.url && (
+        <section className="px-6 py-16 lg:px-8">
+          <div className="mx-auto max-w-4xl">
+            <div className="flex items-center gap-2 mb-8">
+              <Play className="h-4 w-4 text-primary" />
+              <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+                CONTEÚDO RELACIONADO
+              </h2>
+            </div>
+
+            <YouTubeEmbed
+              videoId={media.hero.url}
+              title={title}
+              placeholder={media.hero.placeholder}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* What is it? - COLUNA (vertical) - IDÊNTICO ao Challenge */}
+      <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-primary">
-            O QUE É?
-          </h2>
-          <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
+          <div className="flex items-center gap-2 mb-4">
+            <Play className="h-4 w-4 text-primary" />
+            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.what}
+            </h2>
+          </div>
+          <p className="text-base leading-relaxed text-muted-foreground">
             {what}
           </p>
         </div>
       </section>
 
-      {/* My Role - Seção com título LIME uppercase */}
-      <section className="px-6 py-16 lg:px-8">
+      {/* My Role - COLUNA (vertical) - IDÊNTICO ao Solution */}
+      <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-primary">
-            MEU PAPEL
-          </h2>
-          <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
+          <div className="flex items-center gap-2 mb-4">
+            <Tag className="h-4 w-4 text-primary" />
+            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.myRole}
+            </h2>
+          </div>
+          <p className="text-base leading-relaxed text-muted-foreground">
             {myRole}
           </p>
         </div>
       </section>
 
-      {/* Competências - Pills IDÊNTICO ao Performance */}
-      <section className="bg-muted/30 px-6 py-16 lg:px-8">
+      {/* Capabilities Tags - IDÊNTICO ao Performance */}
+      <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
-          <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-primary">
-            COMPETÊNCIAS
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            {tags.map((tag, index) => (
+          <div className="mb-4 flex items-center gap-2">
+            <Tag className="h-4 w-4 text-primary" />
+            <p className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.capabilities}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {tags.map((capability, index) => (
               <span
                 key={index}
-                className="rounded-full border border-primary/30 bg-primary/5 px-4 py-2 text-sm font-medium text-primary transition-colors duration-200 hover:border-primary hover:bg-primary/10"
+                className="rounded-full border border-neutral-600 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:border-primary hover:text-primary"
               >
-                {tag}
+                {capability}
               </span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Navigation - IDÊNTICO ao Performance */}
-      <section className="border-t border-border px-6 py-12 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-8 grid gap-6 md:grid-cols-2">
-            {/* Previous */}
+      {/* Navigation - APENAS PREV + NEXT (2 colunas) - IDÊNTICO */}
+      <section className="px-6 py-16 lg:px-8">
+        <div className="mx-auto max-w-4xl border-t border-neutral-600 pt-12">
+          <div className="grid gap-6 md:grid-cols-2">
+
+            {/* Previous Case */}
             {navigation.prev && (
               <Link
                 href={`/production/${navigation.prev.slug}`}
-                className="group flex flex-col gap-3 rounded-lg border border-border bg-card p-6 transition-all duration-200 hover:border-primary hover:bg-card/80 active:scale-[0.98]"
+                className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all duration-200 hover:border-primary hover:bg-card/50 active:scale-[0.98]"
               >
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 text-xs font-semibold text-primary">
                   <ArrowLeft className="h-4 w-4" />
-                  <span>Anterior</span>
+                  {sectionLabels.previous}
                 </div>
-                <p className="font-semibold text-foreground transition-colors group-hover:text-primary">
-                  {navigation.prev.title}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {navigation.prev.brand}
-                </p>
+                <div>
+                  <p className="text-xs text-muted-foreground">{navigation.prev.brand}</p>
+                  <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors">
+                    {navigation.prev.title}
+                  </h3>
+                </div>
               </Link>
             )}
 
-            {/* Next */}
+            {/* Next Case */}
             {navigation.next && (
               <Link
                 href={`/production/${navigation.next.slug}`}
-                className="group flex flex-col gap-3 rounded-lg border border-border bg-card p-6 transition-all duration-200 hover:border-primary hover:bg-card/80 active:scale-[0.98] md:text-right"
+                className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all duration-200 hover:border-primary hover:bg-card/50 active:scale-[0.98]"
               >
-                <div className="flex items-center justify-end gap-2 text-sm text-muted-foreground">
-                  <span>Próximo</span>
+                <div className="flex items-center justify-end gap-2 text-xs font-semibold text-primary">
+                  {sectionLabels.next}
                   <ArrowRight className="h-4 w-4" />
                 </div>
-                <p className="font-semibold text-foreground transition-colors group-hover:text-primary">
-                  {navigation.next.title}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {navigation.next.brand}
-                </p>
+                <div className="text-right">
+                  <p className="text-xs text-muted-foreground">{navigation.next.brand}</p>
+                  <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors">
+                    {navigation.next.title}
+                  </h3>
+                </div>
               </Link>
             )}
-          </div>
 
-          {/* Back to Work - IDÊNTICO */}
-          <div className="text-center">
-            <Link
-              href="/#work"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary hover:text-primary active:scale-95"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Ver Todos os Cases
-            </Link>
           </div>
         </div>
       </section>
 
-      <Footer />
+      {/* Footer SEM CTA "Vamos conversar?" */}
+      <Footer hideContact={true} />
     </div>
   );
 }
