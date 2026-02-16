@@ -160,7 +160,7 @@ export function CaseCard({
           {displayTags.map((tag, index) => (
             <span
               key={index}
-              className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors duration-200 hover:border-primary hover:text-primary"
+              className="rounded-full border border-neutral-600 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:border-primary hover:text-primary"
             >
               {tag}
             </span>
