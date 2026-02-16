@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 interface AnimatedMetricCardProps {
@@ -18,12 +18,33 @@ export function AnimatedMetricCard({
   description,
   index,
 }: AnimatedMetricCardProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [index]);
+
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      viewport={{ once: true, amount: 0.3 }}
       className="rounded-lg border transition-all hover:border-primary/50"
       style={{ 
         backgroundColor: `hsl(var(--card))`,
