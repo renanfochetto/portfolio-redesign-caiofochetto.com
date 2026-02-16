@@ -34,8 +34,8 @@ export function Hero() {
               className="
     inline-flex items-center gap-2 
     rounded-full 
-    bg-primary 
-    hover:bg-primary/90
+    bg-primary/90 
+    hover:bg-primary
     active:scale-95
     border
     px-6 py-3 
