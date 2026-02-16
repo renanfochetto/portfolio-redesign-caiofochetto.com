@@ -65,6 +65,7 @@ export function Footer({ hideContact = false }: FooterProps) {
                     <Mail className="h-4 w-4" />
                     Email
                   </a>
+
                 </div>
               </AnimatedItem>
             </div>
