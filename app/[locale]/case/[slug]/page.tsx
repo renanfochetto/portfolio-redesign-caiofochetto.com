@@ -10,6 +10,7 @@ import { notFound } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/components/theme-provider";
 import { CaseResults } from "@/components/case/CaseResults";
+import { getCaseBySlug, getAllSlugs } from "@/lib/cases";
 
 const SITE_URL = "https://www.caiofochetto.com";
 
