@@ -2,7 +2,6 @@
 
 import type { CaseMetric } from "@/types/case";
 import { Users, TrendingUp, Heart, MessageCircle, Play, Eye, Star, BarChart3, Target, Zap, Megaphone, Sparkles } from "lucide-react";
-import { AnimatedMetricCard } from "./AnimatedMetricCard";
 
 const metricIconMap: Record<string, any> = {
   reach: Users,
@@ -25,9 +24,7 @@ const metricIconMap: Record<string, any> = {
 
 function getMetricIcon(labelKey?: string) {
   if (!labelKey) return Users;
-  // Tentar match exato primeiro
   if (metricIconMap[labelKey]) return metricIconMap[labelKey];
-  // Tentar match parcial (case-insensitive)
   const lowerKey = labelKey.toLowerCase();
   for (const [key, icon] of Object.entries(metricIconMap)) {
     if (lowerKey.includes(key.toLowerCase()) || key.toLowerCase().includes(lowerKey)) {
@@ -62,14 +59,29 @@ export function CaseResults({ metrics, locale }: CaseResultsProps) {
           {metrics.map((metric, index) => {
             const IconComponent = getMetricIcon(metric.label_pt || metric.label_en);
             return (
-              <AnimatedMetricCard
+              <div
                 key={index}
-                index={index}
-                icon={<IconComponent className="h-6 w-6" />}
-                value={metric.value}
-                label={getLabel(metric)}
-                description={getDescription(metric)}
-              />
+                className="rounded-lg border transition-all hover:border-primary/50"
+                style={{ 
+                  backgroundColor: `hsl(var(--card))`,
+                  borderColor: `hsl(var(--border))`
+                }}
+              >
+                <div className="flex items-start gap-3 p-8">
+                  <IconComponent className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                  <div className="flex-1">
+                    <p className="text-5xl font-bold text-primary md:text-6xl">
+                      {metric.value}
+                    </p>
+                    <p className="mt-4 text-lg font-semibold text-foreground">
+                      {getLabel(metric)}
+                    </p>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {getDescription(metric)}
+                    </p>
+                  </div>
+                </div>
+              </div>
             );
           })}
         </div>
