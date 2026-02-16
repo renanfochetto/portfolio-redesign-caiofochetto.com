@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "./theme-provider";
 
 const logos = [
+  // Performance cases logos
   { name: "ae", alt: "A+E Networks" },
   { name: "ambev", alt: "Ambev" },
   { name: "betfair", alt: "Betfair" },
@@ -15,6 +16,13 @@ const logos = [
   { name: "jellysmack", alt: "Jellysmack" },
   { name: "lifetime", alt: "Lifetime" },
   { name: "octagon", alt: "Octagon" },
+  // Production cases logos (NOVOS)
+  { name: "netflix", alt: "Netflix" },
+  { name: "natura", alt: "Natura" },
+  { name: "havaianas", alt: "Havaianas" },
+  { name: "playground", alt: "Playground" },
+  { name: "bohemia", alt: "Bohemia" },
+  { name: "nestle", alt: "Nestlé" },
 ];
 
 export function LogoCarousel() {
@@ -68,14 +76,14 @@ export function LogoCarousel() {
             prefersReducedMotion
               ? {}
               : {
-                x: [0, -2400],
+                x: [0, -3600], // Aumentado de -2400 para -3600 (15 logos * 2 * 120px aprox)
               }
           }
           transition={
             prefersReducedMotion
               ? {}
               : {
-                duration: 40,
+                duration: 60, // Aumentado de 40 para 60 (mais logos = mais tempo)
                 repeat: Infinity,
                 ease: "linear",
                 repeatType: "loop",
@@ -105,7 +113,7 @@ export function LogoCarousel() {
                 style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
                 className="object-contain object-center"
                 unoptimized={true}
-                priority={idx < 9}
+                priority={idx < 15} // Aumentado de 9 para 15
               />
             </div>
           ))}
