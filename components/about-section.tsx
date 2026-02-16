@@ -30,6 +30,18 @@ export function AboutSection() {
               unoptimized={true}
               priority={false}
             />
+          </AnimatedItem>
+
+          <div className="space-y-4">
+            <AnimatedItem index={1}>
+              <p className="text-base leading-relaxed text-muted-foreground">
+                {t.about.p1}
+              </p>
+            </AnimatedItem>
+            <AnimatedItem index={2}>
+              <p className="text-base leading-relaxed text-muted-foreground">
+                {t.about.p2}
+              </p>
             </AnimatedItem>
             <AnimatedItem index={3}>
               <p className="flex items-start gap-2 text-base leading-relaxed text-muted-foreground">
