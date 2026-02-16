@@ -1,4 +1,6 @@
 // components/case-card.tsx
+// VERSÃO PADRONIZADA: Hover + Active consistentes, sem border duplicado
+
 "use client";
 
 import Image from "next/image";
@@ -95,7 +97,17 @@ export function CaseCard({
       href={`/${locale}/case/${slug}`}
       className="group relative block"
     >
-      <div className="relative overflow-hidden rounded-lg border border-neutral-600 bg-card p-6 transition-all duration-300 hover:border-primary hover:bg-card/80">
+      {/* CARD PADRONIZADO */}
+      <div className="
+        relative overflow-hidden 
+        rounded-lg 
+        border border-neutral-600 
+        bg-card 
+        p-6 
+        transition-all duration-200
+        hover:border-primary
+        active:scale-[0.98]
+      ">
 
         {/* Header: LOGO APENAS + Arrow */}
         <div className="mb-6 flex items-start justify-between">
@@ -114,11 +126,11 @@ export function CaseCard({
           )}
 
           {/* Arrow */}
-          <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
+          <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
         </div>
 
         {/* Título */}
-        <h3 className="mb-6 text-xl font-bold leading-tight text-foreground transition-colors group-hover:text-primary md:text-2xl">
+        <h3 className="mb-6 text-xl font-bold leading-tight text-foreground transition-colors duration-200 group-hover:text-primary md:text-2xl">
           {title}
         </h3>
 
@@ -148,7 +160,7 @@ export function CaseCard({
           {displayTags.map((tag, index) => (
             <span
               key={index}
-              className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+              className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors duration-200 hover:border-primary hover:text-primary"
             >
               {tag}
             </span>
@@ -158,11 +170,9 @@ export function CaseCard({
         {/* CTA (sempre visível) */}
         <div className="mt-6 flex items-center gap-2 text-sm font-medium text-primary">
           <span>{locale === "pt" ? "Ver case completo" : "View full case"}</span>
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
         </div>
 
-        {/* Hover border glow */}
-        <div className="pointer-events-none absolute inset-0 rounded-lg border-2 border-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </div>
     </Link>
   );
