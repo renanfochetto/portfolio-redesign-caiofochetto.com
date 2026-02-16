@@ -33,17 +33,19 @@ export function Header() {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-8 md:flex">
+
+          {/* Links de navegação - PADRONIZADOS */}
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm text-muted-foreground transition-colors hover:text-primary"
             >
               {item.label}
             </Link>
           ))}
 
-          {/* Theme toggle - PADRONIZADO */}
+          {/* Theme toggle */}
           <button
             onClick={toggleTheme}
             className="
@@ -67,7 +69,7 @@ export function Header() {
             )}
           </button>
 
-          {/* Language toggle - PADRONIZADO */}
+          {/* Language toggle */}
           <Link
             href={localeHref}
             className="
@@ -91,7 +93,7 @@ export function Header() {
         {/* Mobile toggle */}
         <div className="flex items-center gap-3 md:hidden">
 
-          {/* Theme toggle mobile - PADRONIZADO */}
+          {/* Theme toggle mobile */}
           <button
             onClick={toggleTheme}
             className="
@@ -115,7 +117,7 @@ export function Header() {
             )}
           </button>
 
-          {/* Language toggle mobile - PADRONIZADO */}
+          {/* Language toggle mobile */}
           <Link
             href={localeHref}
             className="
@@ -146,7 +148,7 @@ export function Header() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - LINKS PADRONIZADOS */}
       {menuOpen && (
         <div className="border-t border-border bg-background px-6 py-4 md:hidden">
           <div className="flex flex-col gap-4">
@@ -155,7 +157,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="text-sm text-muted-foreground transition-colors hover:text-primary"
               >
                 {item.label}
               </Link>
