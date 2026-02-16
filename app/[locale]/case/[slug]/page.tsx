@@ -1,5 +1,5 @@
 // app/[locale]/case/[slug]/page.tsx
-// VERSÃO FINAL: Logo esquerda + Botão direita + Companies logos corretas
+// VERSÃO CORRIGIDA: Cards de métricas originais + imports completos
 
 "use client";
 
@@ -9,22 +9,29 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/components/theme-provider";
-import { CaseResults } from "@/components/case/CaseResults";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import { getCaseBySlug, getAllSlugs, caseStudies } from "@/lib/cases";
 import {
   ArrowLeft,
   ArrowUpRight,
-  Calendar,
-  Play,
-  Target,
-  Lightbulb,
-  BookOpen,
   CheckCircle,
   Tag,
-  ArrowRight
+  ArrowRight,
+  Target,
+  Lightbulb,
+  TrendingUp,
+  BookOpen,
+  Calendar,
+  Users,
+  Eye,
+  Heart,
+  MessageCircle,
+  DollarSign,
+  MousePointerClick,
+  Play,
+  BarChart3
 } from "lucide-react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { getCaseBySlug, getAllSlugs, caseStudies } from "@/lib/cases";
 
 const SITE_URL = "https://www.caiofochetto.com";
 
@@ -50,7 +57,38 @@ const brandLogos: Record<string, string> = {
   "Lifetime": "lifetime",
 };
 
-// Mapeamento de ícones por tipo de métrica - REMOVIDO, agora usa CaseResults
+// Mapeamento de ícones por tipo de métrica (mesmo do CaseCard)
+const getMetricIcon = (label: string) => {
+  const lowerLabel = label.toLowerCase();
+
+  if (lowerLabel.includes("alcance") || lowerLabel.includes("reach")) {
+    return Users;
+  }
+  if (lowerLabel.includes("impressões") || lowerLabel.includes("impressions")) {
+    return Eye;
+  }
+  if (lowerLabel.includes("engajamento") || lowerLabel.includes("engagement")) {
+    return Heart;
+  }
+  if (lowerLabel.includes("interações") || lowerLabel.includes("interactions")) {
+    return MessageCircle;
+  }
+  if (lowerLabel.includes("crescimento") || lowerLabel.includes("growth")) {
+    return TrendingUp;
+  }
+  if (lowerLabel.includes("receita") || lowerLabel.includes("revenue")) {
+    return DollarSign;
+  }
+  if (lowerLabel.includes("cliques") || lowerLabel.includes("ctr")) {
+    return MousePointerClick;
+  }
+  if (lowerLabel.includes("views") || lowerLabel.includes("visualizações")) {
+    return Play;
+  }
+
+  // Default
+  return BarChart3;
+};
 
 type PageProps = { params: Promise<{ locale: string; slug: string }> };
 
@@ -167,7 +205,7 @@ export default function CaseStudyPage({ params }: PageProps) {
       <section className="px-6 pt-28 pb-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
 
-          {/* OPÇÃO B: Logo esquerda + Botão direita */}
+          {/* Logo esquerda + Botão direita */}
           <div className="flex items-center justify-between gap-4">
             {/* Logo da Brand (esquerda) */}
             {brandLogo ? (
@@ -291,6 +329,7 @@ export default function CaseStudyPage({ params }: PageProps) {
           </section>
         );
       })()}
+
       {/* Challenge - COLUNA (vertical) */}
       <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
@@ -321,8 +360,37 @@ export default function CaseStudyPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Results - Usar CaseResults component com animações */}
-      <CaseResults metrics={study.metrics} locale={locale as "pt" | "en"} />
+      {/* Results - VERSÃO ORIGINAL (sem animação) */}
+      <section className="px-6 py-16 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex items-center gap-2 mb-8">
+            <TrendingUp className="h-4 w-4 text-primary" />
+            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.results}
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {study.metrics.map((metric, index) => {
+              const label = locale === 'pt' ? metric.label_pt : metric.label_en;
+              const description = locale === 'pt' ? metric.description_pt : metric.description_en;
+              const IconComponent = getMetricIcon(label);
+
+              return (
+                <div key={index} className="rounded-lg border border-neutral-600 bg-card p-6 transition-colors hover:border-primary">
+                  {/* Ícone + Valor */}
+                  <div className="flex items-center gap-3 mb-2">
+                    <IconComponent className="h-6 w-6 text-primary flex-shrink-0" />
+                    <p className="text-4xl font-bold text-primary md:text-5xl">{metric.value}</p>
+                  </div>
+                  <p className="mt-2 text-sm font-semibold text-foreground">{label}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Key Learnings */}
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
