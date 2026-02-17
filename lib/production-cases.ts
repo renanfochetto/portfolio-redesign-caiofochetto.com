@@ -193,8 +193,8 @@ export const productionCases: ProductionCase[] = [
     media: {
       thumbnail: "/images/production/bohemia-sabor-tradicoes/thumbnail.jpg",
       hero: {
-        type: "video",
-        videoId: "X72AiB9y3L0",
+        type: "video", // ✅ CORRIGIDO: "multiple" → "video"
+        videoId: "X72AiB9y3L0", // ✅ CORRIGIDO: Apenas o vídeo do passinho
         placeholder: "/images/production/bohemia-sabor-tradicoes/hero.jpg",
         alt: "Bohemia Sabor que Move Tradições documentary"
       }
@@ -261,7 +261,6 @@ export function getAllProductionCaseSlugs(): string[] {
   return productionCases.map((c) => c.slug);
 }
 
-// ✅ NAVEGAÇÃO CIRCULAR (igual Performance Cases)
 export function getProductionCaseNavigation(currentSlug: string) {
   const currentIndex = productionCases.findIndex((c) => c.slug === currentSlug);
 
@@ -269,19 +268,8 @@ export function getProductionCaseNavigation(currentSlug: string) {
     return { prev: null, next: null };
   }
 
-  // ✅ LÓGICA CIRCULAR:
-  // - Se está no primeiro (index 0), prev = último
-  // - Se está no último, next = primeiro
-  const prevIndex = currentIndex === 0
-    ? productionCases.length - 1  // Volta pro último
-    : currentIndex - 1;
+  const prev = currentIndex > 0 ? productionCases[currentIndex - 1] : null;
+  const next = currentIndex < productionCases.length - 1 ? productionCases[currentIndex + 1] : null;
 
-  const nextIndex = currentIndex === productionCases.length - 1
-    ? 0  // Volta pro primeiro
-    : currentIndex + 1;
-
-  return {
-    prev: productionCases[prevIndex],
-    next: productionCases[nextIndex],
-  };
+  return { prev, next };
 }
