@@ -1,5 +1,4 @@
-// PRODUCTION CASES - DADOS COMPLETOS
-// Baseado nas informações fornecidas
+// PRODUCTION CASES - DADOS COMPLETOS E CORRIGIDOS
 
 export const productionCases = [
   {
@@ -7,18 +6,15 @@ export const productionCases = [
     slug: "netflix-worlds-collide",
     title: "Worlds Collide: A Netflix Fan Experience",
     brand: "Netflix",
-    company: "Playground", // ✅ Empresa do cargo
-    role: "Content and Product Manager", // ✅ Cargo
+    company: "Playground",
+    role: "Content and Product Manager",
     year: "2021",
     type: "Brand Experience",
 
-    // ✅ DESCRIÇÃO BREVE (para o card)
     description: "Experiência imersiva unindo universos icônicos da Netflix para fãs brasileiros, gerando buzz orgânico nas redes sociais.",
 
-    // ✅ O QUE É? (página individual)
     what: "Experiência imersiva de marca que reuniu universos icônicos da Netflix, criando momentos compartilháveis que conectaram fãs com seus conteúdos favoritos através de instalações físicas e ativações digitais integradas.",
 
-    // ✅ MEU PAPEL (página individual)
     myRole: "Desenvolvi e executei a estratégia de conteúdo multi-sensorial, coordenando criação de conteúdo com 15+ creators, gerenciando produção on-site e orquestrando amplificação digital integrada em tempo real.",
 
     tags: [
@@ -33,8 +29,8 @@ export const productionCases = [
     media: {
       thumbnail: "/images/production/netflix-worlds-collide/thumbnail.jpg",
       hero: {
-        type: "playlist", // ✅ Playlist
-        url: "PLC85G0r1H2eGzzkHsNyKZ1uQMV7w0gNAk", // Playlist ID
+        type: "playlist",
+        url: "PLC85G0r1H2eGzzkHsNyKZ1uQMV7w0gNAk",
         placeholder: "/images/production/netflix-worlds-collide/hero.jpg",
         alt: "Netflix Worlds Collide activation"
       }
@@ -116,7 +112,7 @@ export const productionCases = [
       thumbnail: "/images/production/havaianas-follow-my-voice/thumbnail.jpg",
       hero: {
         type: "video",
-        url: "2KchK_PztnA", // Video ID
+        url: "2KchK_PztnA",
         placeholder: "/images/production/havaianas-follow-my-voice/hero.jpg",
         alt: "Havaianas Follow My Voice campaign"
       }
@@ -133,23 +129,23 @@ export const productionCases = [
     id: "passion4jazz",
     slug: "passion4jazz",
     title: "Passion4Jazz",
-    brand: "Nestlé",
+    brand: "Playground", // ✅ CORRIGIDO
     company: "Playground",
     role: "Content and Product Manager",
     year: "2021",
-    type: "Content Platform",
+    type: "Podcast",
 
-    description: "Plataforma de conteúdo premium conectando música jazz com cultura de café Nespresso.",
+    description: "Podcast sobre jazz apresentando artistas, histórias e a cultura do gênero musical.", // ✅ CORRIGIDO
 
-    what: "Plataforma de conteúdo que conectou a cultura do café premium Nespresso com a sofisticação do jazz, criando experiências imersivas que elevaram o posicionamento da marca através de música e lifestyle.",
+    what: "Podcast dedicado ao universo do jazz, explorando a história do gênero, apresentando artistas, e criando conexão com entusiastas da música através de conversas autênticas e curadoria musical de qualidade.", // ✅ CORRIGIDO
 
-    myRole: "Desenvolvimento da estratégia de conteúdo, curadoria de artistas e repertório, produção de eventos e experiências, além de gestão da plataforma digital e criação de narrativas que integraram música, café e lifestyle.",
+    myRole: "Desenvolvimento do conceito editorial do podcast, curadoria de conteúdo e artistas, gestão de produção audiovisual, e estratégia de distribuição digital focada em construir uma audiência engajada de apreciadores de jazz.", // ✅ CORRIGIDO
 
     tags: [
-      "Premium Content",
-      "Music Culture",
-      "Lifestyle Marketing",
-      "Brand Experience",
+      "Podcast Production",
+      "Music Content",
+      "Editorial Strategy",
+      "Jazz Culture",
       "Content Curation"
     ],
 
@@ -159,13 +155,13 @@ export const productionCases = [
         type: "video",
         url: "8wbdIYeAc_0",
         placeholder: "/images/production/passion4jazz/hero.jpg",
-        alt: "Passion4Jazz content platform"
+        alt: "Passion4Jazz podcast"
       }
     },
 
     seo: {
-      metaTitle: "Passion4Jazz - Content Platform | Caio Fochetto",
-      metaDescription: "Plataforma premium conectando jazz e cultura de café Nespresso através de experiências imersivas.",
+      metaTitle: "Passion4Jazz - Podcast | Caio Fochetto",
+      metaDescription: "Podcast sobre jazz apresentando artistas, histórias e a cultura do gênero musical.",
       ogImage: "/images/production/passion4jazz/og-image.jpg"
     }
   },
@@ -197,7 +193,7 @@ export const productionCases = [
     media: {
       thumbnail: "/images/production/bohemia-sabor-tradicoes/thumbnail.jpg",
       hero: {
-        type: "multiple", // ✅ Múltiplos vídeos
+        type: "multiple",
         urls: [
           "35H3XqDnacA",
           "X72AiB9y3L0"
@@ -255,57 +251,3 @@ export const productionCases = [
     }
   }
 ];
-
-// ✅ TIPOS ATUALIZADOS
-export interface ProductionCase {
-  id: string;
-  slug: string;
-  title: string;
-  brand: string;
-  company: string; // ✅ NOVO: Empresa do cargo
-  role: string;    // ✅ NOVO: Cargo
-  year: string;
-  type: string;
-  description: string; // ✅ NOVO: Descrição breve para card
-  what: string;
-  myRole: string;
-  tags: string[];
-  media: {
-    thumbnail: string;
-    hero: {
-      type: "video" | "playlist" | "multiple"; // ✅ 3 tipos
-      url?: string;      // Video único ou playlist ID
-      urls?: string[];   // Múltiplos vídeos
-      placeholder?: string;
-      alt: string;
-    };
-  };
-  seo: {
-    metaTitle: string;
-    metaDescription: string;
-    ogImage: string;
-  };
-}
-
-// ✅ HELPER FUNCTIONS
-export function getProductionCaseBySlug(slug: string): ProductionCase | null {
-  return productionCases.find(c => c.slug === slug) || null;
-}
-
-export function getAllProductionCases(): ProductionCase[] {
-  return productionCases;
-}
-
-export function getAllProductionCaseSlugs(): string[] {
-  return productionCases.map(c => c.slug);
-}
-
-export function getProductionCaseNavigation(slug: string) {
-  const index = productionCases.findIndex(c => c.slug === slug);
-  if (index === -1) return { prev: null, next: null };
-
-  const prev = index > 0 ? productionCases[index - 1] : productionCases[productionCases.length - 1];
-  const next = index < productionCases.length - 1 ? productionCases[index + 1] : productionCases[0];
-
-  return { prev, next };
-}
