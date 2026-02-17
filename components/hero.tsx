@@ -8,27 +8,31 @@ export function Hero() {
   const { t } = useI18n();
 
   return (
-    <section className="relative flex min-h-svh flex-col justify-center px-6 py-24 lg:px-8">
+    <section className="relative flex min-h-svh flex-col justify-center px-6 py-20 lg:px-8 lg:py-24">
       <AnimatedSection className="mx-auto w-full max-w-6xl">
-        <div className="mt-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5">
+        <div className="mt-4 md:mt-6">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5 md:px-4">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
             <span className="text-xs font-medium text-primary">{t.hero.badge}</span>
           </div>
 
-          <h1 className="mt-8 font-display text-4xl font-bold leading-tight tracking-tight text-foreground text-balance md:text-5xl lg:text-6xl">
+          {/* Heading - tamanhos reduzidos no mobile */}
+          <h1 className="mt-6 md:mt-8 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-foreground text-balance">
             {t.hero.headingLine1}
             <br />
             {t.hero.headingLine2}
             <br />
-            <span className="text-primary text-4xl md:text-5xl lg:text-6xl">{t.hero.headingLine3}</span>
+            <span className="text-primary">{t.hero.headingLine3}</span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          {/* Subtitle - tamanho reduzido no mobile */}
+          <p className="mt-4 md:mt-6 max-w-xl text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground">
             {t.hero.subtitle}
           </p>
 
-          <div className="mt-10">
+          {/* CTA - tamanho reduzido no mobile */}
+          <div className="mt-6 md:mt-10">
             <a
               href="#work"
               className="
@@ -39,7 +43,7 @@ export function Hero() {
                 active:scale-95
                 border
                 border-foreground/95
-                px-6 py-3 
+                px-5 py-2.5 sm:px-6 sm:py-3
                 text-sm font-medium 
                 text-primary-foreground
                 transition-all duration-200
