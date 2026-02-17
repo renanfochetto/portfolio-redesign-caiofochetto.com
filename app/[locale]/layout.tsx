@@ -114,8 +114,6 @@ export default async function LocaleLayout({
       className={`${fraunces.variable} ${spaceGrotesk.variable} ${manrope.variable}`}
       suppressHydrationWarning
     >
-      <head>
-      </head>
       <body className="font-sans antialiased">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
