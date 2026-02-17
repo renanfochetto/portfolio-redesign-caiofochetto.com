@@ -89,8 +89,9 @@ export function Header() {
               border border-neutral-600
               hover:border-primary
               active:scale-95
-              px-30 py-10 
-              text-sm font-medium 
+              px-3 py-1 
+              min-w-[44px]
+              text-xs font-medium 
               text-muted-foreground
               hover:text-primary
               transition-all duration-200
