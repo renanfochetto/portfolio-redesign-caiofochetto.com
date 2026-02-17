@@ -166,7 +166,7 @@ export function Header() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setMenuOpen(false)}
-              className="fixed inset-0 top-14 bg-background/95 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 top-14 bg-background lg:hidden"
             />
             
             {/* Menu content */}
