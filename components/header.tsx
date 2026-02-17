@@ -187,7 +187,7 @@ export function Header() {
                   <Link
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
-                    className="text-3xl font-bold text-foreground transition-colors hover:text-primary active:text-primary/80 md:text-4xl"
+                    className="text-3xl font-bold text-foreground transition-all duration-200 hover:text-primary active:text-primary/80 active:scale-95 md:text-4xl"
                   >
                     {item.label}
                   </Link>
