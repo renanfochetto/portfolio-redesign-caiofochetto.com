@@ -90,6 +90,15 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
         {title}
       </h3>
 
+      {/* ✅ DESCRIÇÃO BREVE (só mostra se existir) */}
+      {description && (
+        <p className="mb-6 text-sm leading-relaxed text-muted-foreground line-clamp-2">
+          {description}
+        </p>
+      )}
+
+
+
       {/* Role + Type */}
       <div className="mb-4 space-y-2">
         <div className="flex items-center gap-2">
@@ -102,13 +111,6 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
           {type} • {year}
         </p>
       </div>
-
-      {/* ✅ DESCRIÇÃO BREVE (só mostra se existir) */}
-      {description && (
-        <p className="mb-6 text-sm leading-relaxed text-muted-foreground line-clamp-2">
-          {description}
-        </p>
-      )}
 
       {/* Tags */}
       <div className="flex flex-wrap gap-2">
