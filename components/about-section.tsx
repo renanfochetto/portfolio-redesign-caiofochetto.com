@@ -18,12 +18,12 @@ export function AboutSection() {
           {t.about.heading}
         </h2>
 
-        {/* Grid: 1 coluna em mobile, 2 colunas a partir de 640px */}
+        {/* Grid: 1 coluna em mobile (sem foto), 2 colunas a partir de 640px (com foto) */}
         <div className="mt-12 grid gap-8 grid-cols-1 sm:grid-cols-[200px_1fr] sm:gap-10 md:grid-cols-[224px_1fr] md:gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
 
-          {/* Foto */}
-          <AnimatedItem index={0} className="flex justify-center sm:justify-start">
-            <div className="relative w-40 sm:w-full">
+          {/* Foto - oculta em mobile, visível a partir de tablet */}
+          <AnimatedItem index={0} className="hidden sm:flex justify-start">
+            <div className="relative w-full">
               <Image
                 src="/images/foto_caio.jpeg"
                 alt="Caio Fochetto em evento de marketing"
