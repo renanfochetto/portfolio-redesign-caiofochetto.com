@@ -188,7 +188,7 @@ export default function CaseStudyPage({ params }: PageProps) {
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
             <div className="flex items-center gap-3 sm:gap-4">
               {companyLogo && (
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
+                <div className="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
                   <Image
                     src={`/companies/${companyLogo}`}
                     alt={`${study.company} logo`}
@@ -200,9 +200,9 @@ export default function CaseStudyPage({ params }: PageProps) {
                 </div>
               )}
 
-              <div>
-                <p className="text-sm font-semibold text-foreground">{study.company}</p>
-                <p className="text-xs text-muted-foreground">{role}</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-semibold text-foreground truncate">{study.company}</p>
+                <p className="text-xs text-muted-foreground line-clamp-2">{role}</p>
               </div>
             </div>
 
