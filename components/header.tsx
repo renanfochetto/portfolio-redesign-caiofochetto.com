@@ -33,7 +33,7 @@ export function Header() {
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link
           href={`/${locale}`}
-          className="font-heading text-xl font-bold tracking-tight text-foreground hover:scale-102 transition-all"
+          className="font-heading text-xl font-bold tracking-tight text-foreground hover:scale-101 transition-all active:scale-98"
         >
           CAIO FOCHETTO<span className="text-primary">.</span>
         </Link>
