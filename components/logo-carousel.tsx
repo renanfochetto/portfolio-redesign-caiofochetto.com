@@ -74,13 +74,12 @@ export function LogoCarousel() {
               className="relative flex-shrink-0 transition-opacity duration-300"
               style={{
                 opacity: 0.65,
-                width: "120px",
-                height: "64px",   // ← altura maior para logos verticais
+                minWidth: "120px",
+                minHeight: "64px",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.65")}
             >
-              {/* ← fill + object-contain respeita aspect ratio de cada logo */}
               <Image
                 src={`/logos/${logoFolder}/${logo.name}.svg`}
                 alt={logo.alt}
