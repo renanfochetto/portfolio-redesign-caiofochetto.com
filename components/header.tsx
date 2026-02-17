@@ -18,13 +18,26 @@ export function Header() {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
+      // Também aplica no header fixo
+      const header = document.querySelector('header');
+      if (header) {
+        (header as HTMLElement).style.paddingRight = `${scrollbarWidth}px`;
+      }
     } else {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
+      const header = document.querySelector('header');
+      if (header) {
+        (header as HTMLElement).style.paddingRight = "";
+      }
     }
     return () => {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
+      const header = document.querySelector('header');
+      if (header) {
+        (header as HTMLElement).style.paddingRight = "";
+      }
     };
   }, [menuOpen]);
 
