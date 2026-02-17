@@ -178,7 +178,7 @@ export function Header() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setMenuOpen(false)}
-              className="fixed inset-0 top-14 z-50 bg-background lg:hidden"
+              className="fixed inset-0 top-14 z-40 bg-black/80 pointer-events-auto lg:hidden"
             />
             
             {/* Menu content */}
@@ -187,7 +187,7 @@ export function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="fixed inset-0 top-14 z-50 flex flex-col items-center justify-start pt-12 lg:hidden"
+              className="fixed inset-0 top-14 z-50 flex flex-col items-center justify-start pt-12 lg:hidden pointer-events-auto"
             >
               <div className="flex flex-col gap-8 text-center">
                 {navItems.map((item, idx) => (
