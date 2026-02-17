@@ -90,7 +90,6 @@ export function Header() {
               hover:border-primary
               active:scale-95
               px-3 py-1 
-              min-w-[44px]
               text-sm font-medium 
               text-muted-foreground
               hover:text-primary
