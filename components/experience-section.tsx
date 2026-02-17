@@ -81,6 +81,7 @@ export function ExperienceSection() {
           {t.experience.heading}
         </h2>
         <div className="mt-12 space-y-0">
+          {/* Experiências principais - SEMPRE renderizadas */}
           {experiences.map((exp, i) => (
             <AnimatedItem
               key={i}
@@ -112,51 +113,41 @@ export function ExperienceSection() {
             </AnimatedItem>
           ))}
 
-          {/* Experiências antigas expandíveis */}
-          <div
-            className={`
-              grid transition-all duration-500 ease-in-out
-              ${isExpanded
-                ? 'grid-rows-[1fr] opacity-100'
-                : 'grid-rows-[0fr] opacity-0'
-              }
-            `}
-          >
-            <div className="overflow-hidden">
-              <div className="space-y-0">
-                {experiencesOlder.map((exp, i) => (
-                  <AnimatedItem
-                    key={`old-${i}`}
-                    index={i}
-                    className="flex gap-4 border-b border-neutral-600 py-6"
-                  >
-                    <div className="flex items-center justify-center">
-                      <Image
-                        src={exp.logo}
-                        alt={`${exp.company} logo`}
-                        width={64}
-                        height={64}
-                        className="rounded object-contain"
-                        unoptimized={true}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-mono text-xs text-muted-foreground md:text-sm">
-                        {exp.period.endsWith("- ")
-                          ? `${exp.period}${t.experience.present}`
-                          : exp.period}
-                      </p>
-                      <h3 className="mt-2 flex items-center gap-2 text-lg font-semibold text-foreground">
-                        <Briefcase className="h-4 w-4 text-primary" />
-                        {locale === "en" ? exp.roleEn : exp.role}
-                      </h3>
-                      <p className="mt-1 text-sm font-medium text-primary">{exp.company}</p>
-                    </div>
-                  </AnimatedItem>
-                ))}
-              </div>
+          {/* ✅ SOLUÇÃO: Só renderiza quando expandido */}
+          {isExpanded && (
+            <div className="space-y-0">
+              {experiencesOlder.map((exp, i) => (
+                <AnimatedItem
+                  key={`old-${i}`}
+                  index={i}
+                  className="flex gap-4 border-b border-neutral-600 py-6"
+                >
+                  <div className="flex items-center justify-center">
+                    <Image
+                      src={exp.logo}
+                      alt={`${exp.company} logo`}
+                      width={64}
+                      height={64}
+                      className="rounded object-contain"
+                      unoptimized={true}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-mono text-xs text-muted-foreground md:text-sm">
+                      {exp.period.endsWith("- ")
+                        ? `${exp.period}${t.experience.present}`
+                        : exp.period}
+                    </p>
+                    <h3 className="mt-2 flex items-center gap-2 text-lg font-semibold text-foreground">
+                      <Briefcase className="h-4 w-4 text-primary" />
+                      {locale === "en" ? exp.roleEn : exp.role}
+                    </h3>
+                    <p className="mt-1 text-sm font-medium text-primary">{exp.company}</p>
+                  </div>
+                </AnimatedItem>
+              ))}
             </div>
-          </div>
+          )}
 
           {/* Botão expansor */}
           <div className="flex justify-center pt-8">
