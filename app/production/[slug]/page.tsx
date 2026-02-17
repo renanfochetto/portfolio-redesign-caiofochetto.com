@@ -1,19 +1,29 @@
-import type { Metadata } from "next";
+// app/production/[slug]/page.tsx
+// PADRÃO IDÊNTICO ao performance case page
+
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Tag, Play, Calendar, BookOpen, User } from "lucide-react";
-import { BrandLogo } from "@/components/brand-logo";
+import { useState, useEffect } from "react";
+import { YouTubeEmbed } from "@/components/youtube-embed";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  Tag,
+  Play,
+  Calendar,
+  BookOpen,
+  User,
+} from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { YouTubeEmbed } from "@/components/youtube-embed";
 import {
   getProductionCaseBySlug,
   getProductionCaseNavigation,
-  getAllProductionCaseSlugs,
 } from "@/lib/production-cases";
-
-const SITE_URL = "https://www.caiofochetto.com";
 
 // Mapeamento de empresas para seus logos (em /public/companies/)
 const companyLogos: Record<string, string> = {
@@ -41,72 +51,55 @@ const brandLogos: Record<string, string> = {
   "Playground": "playground",
 };
 
-interface ProductionCasePageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+type PageProps = { params: Promise<{ slug: string }> };
 
-// Generate static paths
-export async function generateStaticParams() {
-  const slugs = getAllProductionCaseSlugs();
-  return slugs.map((slug) => ({
-    slug,
-  }));
-}
+export default function ProductionCasePage({ params }: PageProps) {
+  const [mounted, setMounted] = useState(false);
+  const [logoFolder, setLogoFolder] = useState("white"); // default dark mode
+  const [resolvedParams, setResolvedParams] = useState<{ slug: string } | null>(null);
 
-// Generate metadata
-export async function generateMetadata({
-  params,
-}: ProductionCasePageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const productionCase = getProductionCaseBySlug(resolvedParams.slug);
+  useEffect(() => {
+    setMounted(true);
+    params.then(setResolvedParams);
 
-  if (!productionCase) {
-    return {
-      title: "Case Not Found",
+    // Detecção de tema — MutationObserver idêntico ao CaseCard
+    const checkTheme = () => {
+      const html = document.documentElement;
+
+      const hasDarkClass = html.classList.contains("dark");
+      const dataTheme = html.getAttribute("data-theme");
+      const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+      const isDarkBg = bodyBg === "rgb(0, 0, 0)" || bodyBg === "rgb(10, 10, 10)";
+
+      const isDark = hasDarkClass || dataTheme === "dark" || isDarkBg;
+      setLogoFolder(isDark ? "white" : "black");
     };
+
+    setTimeout(checkTheme, 100);
+
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "data-theme", "style"],
+    });
+
+    return () => observer.disconnect();
+  }, [params]);
+
+  if (!mounted || !resolvedParams) {
+    return null;
   }
 
-  return {
-    title: productionCase.seo.metaTitle,
-    description: productionCase.seo.metaDescription,
-    openGraph: {
-      title: productionCase.seo.metaTitle,
-      description: productionCase.seo.metaDescription,
-      images: [productionCase.seo.ogImage],
-      type: "website",
-      locale: "pt_BR",
-      siteName: "Caio Fochetto Portfolio",
-      url: `${SITE_URL}/production/${resolvedParams.slug}`,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: productionCase.seo.metaTitle,
-      description: productionCase.seo.metaDescription,
-      images: [productionCase.seo.ogImage],
-    },
-    alternates: {
-      canonical: `${SITE_URL}/production/${resolvedParams.slug}`,
-    },
-  };
-}
+  const { slug } = resolvedParams;
+  const productionCase = getProductionCaseBySlug(slug);
 
-export default async function ProductionCasePage({
-  params,
-}: ProductionCasePageProps) {
-  const resolvedParams = await params;
-  const productionCase = getProductionCaseBySlug(resolvedParams.slug);
+  if (!productionCase) notFound();
 
-  if (!productionCase) {
-    notFound();
-  }
+  const { title, brand, company, year, role, what, myRole, tags, media } = productionCase;
+  const navigation = getProductionCaseNavigation(slug);
 
-  const { title, brand, company, year, type, role, what, myRole, tags, media } =
-    productionCase;
-
-  const navigation = getProductionCaseNavigation(resolvedParams.slug);
   const brandLogo = brandLogos[brand];
+  const companyLogo = companyLogos[company];
 
   const sectionLabels = {
     what: "O QUE É?",
@@ -126,22 +119,29 @@ export default async function ProductionCasePage({
       <section className="px-6 pt-28 pb-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
 
-          {/* Brand logo (esquerda) + Botão Voltar (direita) */}
+          {/* Logo esquerda + Botão Voltar direita */}
           <div className="flex items-center justify-between gap-4">
+            {/* Logo da Brand (esquerda) — mesma lógica do performance */}
             {brandLogo ? (
-              <BrandLogo
-                brandLogo={brandLogo}
-                brand={brand}
-                width={128}
-                height={64}
-              />
+              <div className="flex h-16 w-32 items-center justify-start">
+                <Image
+                  src={`/logos/${logoFolder}/${brandLogo}.svg`}
+                  alt={`${brand} logo`}
+                  width={128}
+                  height={64}
+                  className="h-full object-contain object-left"
+                  style={{ width: "auto", maxWidth: "100%" }}
+                  unoptimized
+                />
+              </div>
             ) : (
               <div className="h-16 w-32" />
             )}
 
+            {/* Botão Voltar (direita) */}
             <Link
               href="/#work"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-all hover:text-primary active:scale-95"
             >
               <ArrowLeft className="h-4 w-4" />
               {sectionLabels.back}
@@ -158,18 +158,18 @@ export default async function ProductionCasePage({
           {/* Meta Info: Company logo + nome + role | Ano */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
             <div className="flex items-center gap-4">
-              {companyLogos[company] && (
+              {companyLogo && (
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
                   <Image
-                    src={`/companies/${companyLogos[company]}`}
+                    src={`/companies/${companyLogo}`}
                     alt={`${company} logo`}
                     width={48}
                     height={48}
-                    className="h-full w-full object-cover"
+                    className="h-full object-cover"
+                    style={{ width: "auto" }}
                   />
                 </div>
               )}
-
               <div>
                 <p className="text-sm font-semibold text-foreground">{company}</p>
                 <p className="text-xs text-muted-foreground">{role}</p>
@@ -184,7 +184,7 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* Playlist/Video Section - Renderiza todos os tipos */}
+      {/* Playlist/Video Section */}
       {media.hero.type && (media.hero.videoId || media.hero.videoIds) && (
         <section className="px-6 py-16 lg:px-8">
           <div className="mx-auto max-w-4xl">
@@ -194,7 +194,6 @@ export default async function ProductionCasePage({
                 {sectionLabels.relatedContent}
               </h2>
             </div>
-
             <YouTubeEmbed
               type={media.hero.type}
               videoId={media.hero.videoId}
@@ -215,9 +214,7 @@ export default async function ProductionCasePage({
               {sectionLabels.what}
             </h2>
           </div>
-          <p className="text-base leading-relaxed text-muted-foreground">
-            {what}
-          </p>
+          <p className="text-base leading-relaxed text-muted-foreground">{what}</p>
         </div>
       </section>
 
@@ -230,9 +227,7 @@ export default async function ProductionCasePage({
               {sectionLabels.myRole}
             </h2>
           </div>
-          <p className="text-base leading-relaxed text-muted-foreground">
-            {myRole}
-          </p>
+          <p className="text-base leading-relaxed text-muted-foreground">{myRole}</p>
         </div>
       </section>
 
@@ -263,7 +258,6 @@ export default async function ProductionCasePage({
         <div className="mx-auto max-w-4xl border-t border-neutral-600 pt-12">
           <div className="grid gap-6 md:grid-cols-2">
 
-            {/* Previous Case */}
             {navigation.prev && (
               <Link
                 href={`/production/${navigation.prev.slug}`}
@@ -282,7 +276,6 @@ export default async function ProductionCasePage({
               </Link>
             )}
 
-            {/* Next Case */}
             {navigation.next && (
               <Link
                 href={`/production/${navigation.next.slug}`}
