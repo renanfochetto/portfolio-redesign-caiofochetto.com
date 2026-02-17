@@ -1,5 +1,6 @@
 // app/production/[slug]/page.tsx
-// VERSÃO FINAL MOBILE: Vídeo full-width + Logo uniforme
+// VERSÃO FINAL: Logo uniforme + Ano oculto mobile + Vídeo full-width
+
 "use client";
 
 import Image from "next/image";
@@ -121,7 +122,7 @@ export default function ProductionCasePage({ params }: PageProps) {
             </h1>
           </div>
 
-          {/* Meta Info - Logo UNIFORME (mesmo padrão do case de performance) */}
+          {/* ✅ Meta Info - Logo uniforme + Ano oculto em mobile */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
             <div className="flex items-center gap-3 sm:gap-4">
               {companyLogo && (
@@ -136,13 +137,15 @@ export default function ProductionCasePage({ params }: PageProps) {
                   />
                 </div>
               )}
+
               <div>
                 <p className="text-sm font-semibold text-foreground">{company}</p>
                 <p className="text-xs text-muted-foreground">{role}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-sm">
+            {/* Ano - APENAS tablet+ */}
+            <div className="hidden sm:flex items-center gap-2 text-sm">
               <Calendar className="h-4 w-4 text-muted-foreground" />
               <span className="font-medium text-foreground">{year}</span>
             </div>
@@ -150,7 +153,7 @@ export default function ProductionCasePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ✅ VÍDEO FULL-WIDTH EM MOBILE */}
+      {/* Playlist/Video - Full-width mobile */}
       {media.hero.type && (media.hero.videoId || media.hero.videoIds) && (
         <section className="px-0 sm:px-6 py-12 sm:py-16 lg:px-8">
           <div className="mx-auto w-full sm:max-w-4xl">
@@ -163,7 +166,6 @@ export default function ProductionCasePage({ params }: PageProps) {
               </div>
             </div>
 
-            {/* YouTubeEmbed wrapper - full-width em mobile */}
             <div className="sm:rounded-lg overflow-hidden border-0 sm:border sm:border-neutral-600">
               <YouTubeEmbed
                 type={media.hero.type}
