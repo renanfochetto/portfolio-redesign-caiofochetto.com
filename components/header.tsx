@@ -5,7 +5,7 @@ import { useI18n } from "@/lib/i18n";
 import { Menu, X, Globe, Moon, Sun } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "./theme-provider";
-import { motion } from "framer-motion"; // ✅ IMPORT ADICIONADO
+import { motion } from "framer-motion";
 
 export function Header() {
   const { locale, t } = useI18n();
@@ -23,7 +23,6 @@ export function Header() {
   ];
 
   return (
-    // ✅ MOTION.HEADER COM ANIMAÇÃO
     <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -31,9 +30,10 @@ export function Header() {
       className="fixed top-0 z-50 w-full border-b border-neutral-600 bg-background/80 backdrop-blur-md"
     >
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+        {/* Título com hover e active */}
         <Link
           href={`/${locale}`}
-          className="font-heading text-xl font-bold tracking-tight text-foreground"
+          className="font-heading text-xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-primary active:scale-95"
         >
           CAIO FOCHETTO<span className="text-primary">.</span>
         </Link>
@@ -41,7 +41,7 @@ export function Header() {
         {/* Desktop nav */}
         <div className="hidden items-center gap-8 md:flex">
 
-          {/* Links de navegação - PADRONIZADOS */}
+          {/* Links de navegação */}
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -155,7 +155,7 @@ export function Header() {
         </div>
       </nav>
 
-      {/* Mobile menu - LINKS PADRONIZADOS */}
+      {/* Mobile menu */}
       {menuOpen && (
         <div className="border-t border-border bg-background px-6 py-4 md:hidden">
           <div className="flex flex-col gap-4">
