@@ -1,36 +1,6 @@
-// PRODUCTION CASES - DADOS COMPLETOS
+// PRODUCTION CASES - DADOS COMPLETOS E CORRIGIDOS
 
-export interface ProductionCase {
-  id: string;
-  slug: string;
-  title: string;
-  brand: string;
-  company: string;
-  role: string;
-  year: string;
-  type: string;
-  description: string;
-  what: string;
-  myRole: string;
-  tags: string[];
-  media: {
-    thumbnail: string;
-    hero: {
-      type: "video" | "playlist" | "multiple";
-      url?: string;
-      urls?: string[];
-      placeholder?: string;
-      alt: string;
-    };
-  };
-  seo: {
-    metaTitle: string;
-    metaDescription: string;
-    ogImage: string;
-  };
-}
-
-export const productionCases: ProductionCase[] = [
+export const productionCases = [
   {
     id: "netflix-worlds-collide",
     slug: "netflix-worlds-collide",
@@ -40,10 +10,22 @@ export const productionCases: ProductionCase[] = [
     role: "Content and Product Manager",
     year: "2021",
     type: "Brand Experience",
+
     description: "Experiência imersiva unindo universos icônicos da Netflix para fãs brasileiros, gerando buzz orgânico nas redes sociais.",
+
     what: "Experiência imersiva de marca que reuniu universos icônicos da Netflix, criando momentos compartilháveis que conectaram fãs com seus conteúdos favoritos através de instalações físicas e ativações digitais integradas.",
+
     myRole: "Desenvolvi e executei a estratégia de conteúdo multi-sensorial, coordenando criação de conteúdo com 15+ creators, gerenciando produção on-site e orquestrando amplificação digital integrada em tempo real.",
-    tags: ["Brand Experience", "Influencer Marketing", "Event Production", "Social Media Strategy", "Content Creation", "UGC Activation"],
+
+    tags: [
+      "Brand Experience",
+      "Influencer Marketing",
+      "Event Production",
+      "Social Media Strategy",
+      "Content Creation",
+      "UGC Activation"
+    ],
+
     media: {
       thumbnail: "/images/production/netflix-worlds-collide/thumbnail.jpg",
       hero: {
@@ -53,12 +35,14 @@ export const productionCases: ProductionCase[] = [
         alt: "Netflix Worlds Collide activation"
       }
     },
+
     seo: {
       metaTitle: "Netflix Worlds Collide - Brand Experience | Caio Fochetto",
       metaDescription: "Experiência imersiva Netflix gerando buzz orgânico através de instalações físicas e ativações com creators.",
       ogImage: "/images/production/netflix-worlds-collide/og-image.jpg"
     }
   },
+
   {
     id: "natura-todo-dia",
     slug: "natura-todo-dia",
@@ -68,10 +52,21 @@ export const productionCases: ProductionCase[] = [
     role: "Content and Product Manager",
     year: "2021",
     type: "Content Series",
+
     description: "Série de conteúdo conectando Natura com rotinas diárias dos brasileiros através de storytelling autêntico.",
+
     what: "Série de conteúdo estratégico que traduziu os valores de sustentabilidade e bem-estar da Natura em narrativas do dia a dia, criando conexão emocional com o público através de histórias reais e autênticas.",
+
     myRole: "Liderança completa da estratégia de conteúdo, desde conceituação até execução, incluindo direcionamento criativo, gestão de produção e coordenação com creators para garantir autenticidade e alinhamento com valores da marca.",
-    tags: ["Content Strategy", "Brand Storytelling", "Sustainability", "Creator Partnerships", "Social Impact"],
+
+    tags: [
+      "Content Strategy",
+      "Brand Storytelling",
+      "Sustainability",
+      "Creator Partnerships",
+      "Social Impact"
+    ],
+
     media: {
       thumbnail: "/images/production/natura-todo-dia/thumbnail.jpg",
       hero: {
@@ -81,12 +76,14 @@ export const productionCases: ProductionCase[] = [
         alt: "Natura Todo Dia content series"
       }
     },
+
     seo: {
       metaTitle: "Natura Todo Dia - Content Series | Caio Fochetto",
       metaDescription: "Série de conteúdo conectando Natura com rotinas brasileiras através de storytelling autêntico e sustentável.",
       ogImage: "/images/production/natura-todo-dia/og-image.jpg"
     }
   },
+
   {
     id: "havaianas-follow-my-voice",
     slug: "havaianas-follow-my-voice",
@@ -96,10 +93,21 @@ export const productionCases: ProductionCase[] = [
     role: "Content and Product Manager",
     year: "2022",
     type: "Music Campaign",
+
     description: "Campanha musical celebrando individualidade e expressão pessoal através de vozes autênticas.",
+
     what: "Campanha que celebrou a individualidade e autenticidade através da música, conectando a marca Havaianas com expressões culturais brasileiras e criando momentos de identificação emocional com o público jovem.",
+
     myRole: "Gestão end-to-end do projeto, incluindo desenvolvimento da narrativa musical, coordenação de produção audiovisual, seleção e direção de talentos, e estratégia de distribuição multi-plataforma.",
-    tags: ["Music Marketing", "Brand Campaign", "Youth Culture", "Content Production", "Cultural Relevance"],
+
+    tags: [
+      "Music Marketing",
+      "Brand Campaign",
+      "Youth Culture",
+      "Content Production",
+      "Cultural Relevance"
+    ],
+
     media: {
       thumbnail: "/images/production/havaianas-follow-my-voice/thumbnail.jpg",
       hero: {
@@ -109,40 +117,55 @@ export const productionCases: ProductionCase[] = [
         alt: "Havaianas Follow My Voice campaign"
       }
     },
+
     seo: {
       metaTitle: "Havaianas Follow My Voice - Music Campaign | Caio Fochetto",
       metaDescription: "Campanha musical celebrando individualidade através de vozes autênticas e expressões culturais brasileiras.",
       ogImage: "/images/production/havaianas-follow-my-voice/og-image.jpg"
     }
   },
+
   {
     id: "passion4jazz",
     slug: "passion4jazz",
     title: "Passion4Jazz",
-    brand: "Nestlé",
+    brand: "Playground", // ✅ CORRIGIDO
     company: "Playground",
     role: "Content and Product Manager",
     year: "2021",
-    type: "Content Platform",
-    description: "Plataforma de conteúdo premium conectando música jazz com cultura de café Nespresso.",
-    what: "Plataforma de conteúdo que conectou a cultura do café premium Nespresso com a sofisticação do jazz, criando experiências imersivas que elevaram o posicionamento da marca através de música e lifestyle.",
-    myRole: "Desenvolvimento da estratégia de conteúdo, curadoria de artistas e repertório, produção de eventos e experiências, além de gestão da plataforma digital e criação de narrativas que integraram música, café e lifestyle.",
-    tags: ["Premium Content", "Music Culture", "Lifestyle Marketing", "Brand Experience", "Content Curation"],
+    type: "Podcast",
+
+    description: "Podcast sobre jazz apresentando artistas, histórias e a cultura do gênero musical.", // ✅ CORRIGIDO
+
+    what: "Podcast dedicado ao universo do jazz, explorando a história do gênero, apresentando artistas, e criando conexão com entusiastas da música através de conversas autênticas e curadoria musical de qualidade.", // ✅ CORRIGIDO
+
+    myRole: "Desenvolvimento do conceito editorial do podcast, curadoria de conteúdo e artistas, gestão de produção audiovisual, e estratégia de distribuição digital focada em construir uma audiência engajada de apreciadores de jazz.", // ✅ CORRIGIDO
+
+    tags: [
+      "Podcast Production",
+      "Music Content",
+      "Editorial Strategy",
+      "Jazz Culture",
+      "Content Curation"
+    ],
+
     media: {
       thumbnail: "/images/production/passion4jazz/thumbnail.jpg",
       hero: {
         type: "video",
         url: "8wbdIYeAc_0",
         placeholder: "/images/production/passion4jazz/hero.jpg",
-        alt: "Passion4Jazz content platform"
+        alt: "Passion4Jazz podcast"
       }
     },
+
     seo: {
-      metaTitle: "Passion4Jazz - Content Platform | Caio Fochetto",
-      metaDescription: "Plataforma premium conectando jazz e cultura de café Nespresso através de experiências imersivas.",
+      metaTitle: "Passion4Jazz - Podcast | Caio Fochetto",
+      metaDescription: "Podcast sobre jazz apresentando artistas, histórias e a cultura do gênero musical.",
       ogImage: "/images/production/passion4jazz/og-image.jpg"
     }
   },
+
   {
     id: "bohemia-sabor-tradicoes",
     slug: "bohemia-sabor-tradicoes",
@@ -152,25 +175,41 @@ export const productionCases: ProductionCase[] = [
     role: "Content and Product Manager",
     year: "2022",
     type: "Cultural Content",
+
     description: "Série documental explorando tradições culinárias brasileiras e sua conexão com cerveja artesanal.",
+
     what: "Série documental que explorou tradições culinárias regionais brasileiras, conectando a herança artesanal da Bohemia com gastronomia local e criando narrativas que celebraram cultura, sabor e autenticidade.",
+
     myRole: "Liderança criativa e estratégica do projeto, incluindo research de tradições regionais, desenvolvimento de roteiro, direção de produção audiovisual, e criação de estratégia de distribuição que maximizou relevância cultural.",
-    tags: ["Documentary Content", "Cultural Marketing", "Food & Beverage", "Regional Storytelling", "Craft Heritage"],
+
+    tags: [
+      "Documentary Content",
+      "Cultural Marketing",
+      "Food & Beverage",
+      "Regional Storytelling",
+      "Craft Heritage"
+    ],
+
     media: {
       thumbnail: "/images/production/bohemia-sabor-tradicoes/thumbnail.jpg",
       hero: {
         type: "multiple",
-        urls: ["35H3XqDnacA", "X72AiB9y3L0"],
+        urls: [
+          "35H3XqDnacA",
+          "X72AiB9y3L0"
+        ],
         placeholder: "/images/production/bohemia-sabor-tradicoes/hero.jpg",
         alt: "Bohemia Sabor que Move Tradições documentary"
       }
     },
+
     seo: {
       metaTitle: "Bohemia Sabor que Move Tradições - Documentary | Caio Fochetto",
       metaDescription: "Série documental explorando tradições culinárias brasileiras e conexão com cerveja artesanal.",
       ogImage: "/images/production/bohemia-sabor-tradicoes/og-image.jpg"
     }
   },
+
   {
     id: "cozinha-emergencia",
     slug: "cozinha-emergencia",
@@ -180,10 +219,21 @@ export const productionCases: ProductionCase[] = [
     role: "Content and Product Manager",
     year: "2022",
     type: "Entertainment Content",
+
     description: "Conteúdo de entretenimento transformando desafios culinários em momentos divertidos e compartilháveis.",
+
     what: "Formato de entretenimento que transformou situações culinárias desafiadoras em conteúdo divertido e educativo, criando conexão com o público através de humor, praticidade e produtos Nestlé de forma natural e contextualizada.",
+
     myRole: "Conceituação e desenvolvimento do formato, direção criativa, gestão de produção audiovisual, coordenação de talentos/apresentadores, e estratégia de distribuição focada em engajamento e viralização orgânica.",
-    tags: ["Entertainment Content", "Food Content", "Product Integration", "Social Video", "Edutainment"],
+
+    tags: [
+      "Entertainment Content",
+      "Food Content",
+      "Product Integration",
+      "Social Video",
+      "Edutainment"
+    ],
+
     media: {
       thumbnail: "/images/production/cozinha-emergencia/thumbnail.jpg",
       hero: {
@@ -193,6 +243,7 @@ export const productionCases: ProductionCase[] = [
         alt: "Cozinha de Emergência entertainment content"
       }
     },
+
     seo: {
       metaTitle: "Cozinha de Emergência - Entertainment Content | Caio Fochetto",
       metaDescription: "Formato de entretenimento transformando desafios culinários em conteúdo divertido e compartilhável.",
@@ -200,26 +251,3 @@ export const productionCases: ProductionCase[] = [
     }
   }
 ];
-
-// Helper functions
-export function getProductionCaseBySlug(slug: string): ProductionCase | null {
-  return productionCases.find(c => c.slug === slug) || null;
-}
-
-export function getAllProductionCases(): ProductionCase[] {
-  return productionCases;
-}
-
-export function getAllProductionCaseSlugs(): string[] {
-  return productionCases.map(c => c.slug);
-}
-
-export function getProductionCaseNavigation(slug: string) {
-  const index = productionCases.findIndex(c => c.slug === slug);
-  if (index === -1) return { prev: null, next: null };
-
-  const prev = index > 0 ? productionCases[index - 1] : productionCases[productionCases.length - 1];
-  const next = index < productionCases.length - 1 ? productionCases[index + 1] : productionCases[0];
-
-  return { prev, next };
-}
