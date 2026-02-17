@@ -12,13 +12,11 @@ export function Header() {
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Desabilita scroll quando menu está aberto E compensa shift da scrollbar
   useEffect(() => {
     if (menuOpen) {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
-      // Também aplica no header fixo
       const header = document.querySelector('header');
       if (header) {
         (header as HTMLElement).style.paddingRight = `${scrollbarWidth}px`;
@@ -59,7 +57,6 @@ export function Header() {
       className="fixed top-0 z-50 w-full border-b border-neutral-600 bg-background/80 backdrop-blur-md"
     >
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-        {/* Título com hover e active */}
         <Link
           href={`/${locale}`}
           className="font-heading text-xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-primary active:scale-95"
@@ -69,7 +66,6 @@ export function Header() {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-8 md:flex">
-          {/* Links de navegação */}
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -127,30 +123,8 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile/Tablet toggle */}
-        <div className="flex items-center gap-3 md:hidden">
-          {/* Language toggle mobile */}
-          <Link
-            href={localeHref}
-            className="
-              flex items-center justify-center gap-1 
-              rounded-full 
-              border border-neutral-600
-              hover:border-primary
-              active:scale-95
-              px-2.5 py-1 
-              min-w-[36px]
-              text-xs font-medium 
-              text-muted-foreground
-              hover:text-primary
-              transition-all duration-200
-            "
-          >
-            <Globe className="h-3 w-3" />
-            {otherLocale.toUpperCase()}
-          </Link>
-
-          {/* Menu toggle */}
+        {/* Mobile - apenas hamburguer */}
+        <div className="flex items-center md:hidden">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="text-foreground transition-all duration-200"
@@ -161,7 +135,7 @@ export function Header() {
         </div>
       </nav>
 
-      {/* Mobile/Tablet fullscreen menu */}
+      {/* Mobile fullscreen menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -172,9 +146,9 @@ export function Header() {
             className="fixed left-0 right-0 top-14 z-40 bg-background md:hidden"
             style={{ height: 'calc(100vh - 3.5rem)' }}
           >
-            <div className="flex h-full flex-col items-center justify-between gap-8 px-6 py-8 text-center">
+            <div className="flex h-full flex-col items-center justify-between px-6 py-8">
               {/* Navigation links */}
-              <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-8 text-center">
                 {navItems.map((item, idx) => (
                   <motion.div
                     key={item.href}
@@ -185,7 +159,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
-                      className="text-3xl font-bold text-foreground transition-all duration-200 hover:text-primary active:text-primary/80 active:scale-95 md:text-4xl"
+                      className="text-3xl font-bold text-foreground transition-all duration-200 hover:text-primary active:text-primary/80 active:scale-95"
                     >
                       {item.label}
                     </Link>
@@ -202,9 +176,7 @@ export function Header() {
               >
                 {/* Theme toggle */}
                 <button
-                  onClick={() => {
-                    toggleTheme();
-                  }}
+                  onClick={toggleTheme}
                   className="
                     flex items-center justify-center gap-2
                     rounded-full 
