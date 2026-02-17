@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useI18n } from "@/lib/i18n";
 import { Menu, X, Globe, Moon, Sun } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "./theme-provider";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -11,6 +11,18 @@ export function Header() {
   const { locale, t } = useI18n();
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Desabilita scroll quando menu está aberto
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [menuOpen]);
 
   const otherLocale = locale === "pt" ? "en" : "pt";
   const localeHref = `/${otherLocale}`;
@@ -166,7 +178,7 @@ export function Header() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setMenuOpen(false)}
-              className="fixed inset-0 top-14 bg-background lg:hidden"
+              className="fixed inset-0 top-14 z-50 bg-background lg:hidden"
             />
             
             {/* Menu content */}
@@ -175,7 +187,7 @@ export function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="fixed inset-0 top-14 z-40 flex flex-col items-center justify-start pt-12 lg:hidden"
+              className="fixed inset-0 top-14 z-50 flex flex-col items-center justify-start pt-12 lg:hidden"
             >
               <div className="flex flex-col gap-8 text-center">
                 {navItems.map((item, idx) => (
