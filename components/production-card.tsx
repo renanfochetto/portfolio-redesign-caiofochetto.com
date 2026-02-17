@@ -124,7 +124,7 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
       </div>
 
       {/* ✅ LINK "Ver case completo" - EMBAIXO DAS TAGS */}
-      <div className="flex items-center gap-2 text-sm font-medium text-foreground transition-colors duration-200 group-hover:text-primary">
+      <div className="flex items-center gap-2 text-sm font-medium text-primary transition-colors duration-200 group-hover:text-primary">
         <span>
           {locale === "pt" ? "Ver case completo" : "View full case"}
         </span>
