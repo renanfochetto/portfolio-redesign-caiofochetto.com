@@ -1,21 +1,21 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
-import { Linkedin, Mail, Youtube } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 import { AnimatedSection, AnimatedItem } from "./animated-section";
 
 interface FooterProps {
-  hideContact?: boolean; // Nova prop para esconder CTA
+  hideContact?: boolean;
 }
 
 export function Footer({ hideContact = false }: FooterProps) {
   const { t } = useI18n();
 
   return (
-    <footer id="contact" className="border-t border-neutral-600 px-6 py-24 lg:px-8">
+    <footer id="contact" className="border-t border-neutral-600 px-6 py-12 md:py-16 lg:py-24 lg:px-8">
       <AnimatedSection className="mx-auto max-w-6xl">
 
-        {/* Mostrar CTA apenas se hideContact for false */}
+        {/* CTA section - só mostra se hideContact for false */}
         {!hideContact && (
           <>
             <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
@@ -32,17 +32,17 @@ export function Footer({ hideContact = false }: FooterProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="
-    inline-flex items-center justify-center gap-2 
-    rounded-full 
-    border border-white
-    bg-[#0a66c2] 
-    hover:bg-[#0b75d9]
-    active:scale-95
-    text-white
-    px-4 py-2.5 
-    text-sm font-medium
-    transition-all duration-200
-  "
+                      inline-flex items-center justify-center gap-2 
+                      rounded-full 
+                      border border-white
+                      bg-[#0a66c2] 
+                      hover:bg-[#0b75d9]
+                      active:scale-95
+                      text-white
+                      px-4 py-2.5 
+                      text-sm font-medium
+                      transition-all duration-200
+                    "
                   >
                     <Linkedin className="h-4 w-4" />
                     LinkedIn
@@ -50,22 +50,21 @@ export function Footer({ hideContact = false }: FooterProps) {
                   <a
                     href="mailto:caiofochetto@gmail.com"
                     className="
-    inline-flex items-center justify-center gap-2 
-    rounded-full 
-    border border-white
-    bg-[#059669] 
-    hover:bg-[#10b981]
-    active:scale-95
-    text-white
-    px-4 py-2.5 
-    text-sm font-medium
-    transition-all duration-200
-  "
+                      inline-flex items-center justify-center gap-2 
+                      rounded-full 
+                      border border-white
+                      bg-[#059669] 
+                      hover:bg-[#10b981]
+                      active:scale-95
+                      text-white
+                      px-4 py-2.5 
+                      text-sm font-medium
+                      transition-all duration-200
+                    "
                   >
                     <Mail className="h-4 w-4" />
                     Email
                   </a>
-
                 </div>
               </AnimatedItem>
             </div>
