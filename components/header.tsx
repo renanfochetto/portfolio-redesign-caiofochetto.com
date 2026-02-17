@@ -3,14 +3,41 @@
 import Link from "next/link";
 import { useI18n } from "@/lib/i18n";
 import { Menu, X, Globe, Moon, Sun } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "./theme-provider";
-import { motion } from "framer-motion"; // ✅ IMPORT ADICIONADO
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Header() {
   const { locale, t } = useI18n();
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (menuOpen) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      const header = document.querySelector('header');
+      if (header) {
+        (header as HTMLElement).style.paddingRight = `${scrollbarWidth}px`;
+      }
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+      const header = document.querySelector('header');
+      if (header) {
+        (header as HTMLElement).style.paddingRight = "";
+      }
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+      const header = document.querySelector('header');
+      if (header) {
+        (header as HTMLElement).style.paddingRight = "";
+      }
+    };
+  }, [menuOpen]);
 
   const otherLocale = locale === "pt" ? "en" : "pt";
   const localeHref = `/${otherLocale}`;
@@ -23,7 +50,6 @@ export function Header() {
   ];
 
   return (
-    // ✅ MOTION.HEADER COM ANIMAÇÃO
     <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -33,15 +59,13 @@ export function Header() {
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link
           href={`/${locale}`}
-          className="font-heading text-xl font-bold tracking-tight text-foreground"
+          className="font-heading text-xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-primary active:scale-95"
         >
           CAIO FOCHETTO<span className="text-primary">.</span>
         </Link>
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-8 md:flex">
-
-          {/* Links de navegação - PADRONIZADOS */}
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -56,12 +80,13 @@ export function Header() {
           <button
             onClick={toggleTheme}
             className="
-              flex items-center gap-1.5 
+              flex items-center justify-center gap-1.5 
               rounded-full 
               border border-neutral-600
               hover:border-primary
               active:scale-95
               px-3 py-1 
+              min-w-[44px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
@@ -80,12 +105,13 @@ export function Header() {
           <Link
             href={localeHref}
             className="
-              flex items-center gap-1.5 
+              flex items-center justify-center gap-1.5 
               rounded-full 
               border border-neutral-600
               hover:border-primary
               active:scale-95
               px-3 py-1 
+              min-w-[44px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
@@ -97,57 +123,11 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile toggle */}
-        <div className="flex items-center gap-3 md:hidden">
-
-          {/* Theme toggle mobile */}
-          <button
-            onClick={toggleTheme}
-            className="
-              flex items-center gap-1 
-              rounded-full 
-              border border-neutral-600
-              hover:border-primary
-              active:scale-95
-              px-2.5 py-1 
-              text-xs font-medium 
-              text-muted-foreground
-              hover:text-primary
-              transition-all duration-200
-            "
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? (
-              <Sun className="h-3 w-3" />
-            ) : (
-              <Moon className="h-3 w-3" />
-            )}
-          </button>
-
-          {/* Language toggle mobile */}
-          <Link
-            href={localeHref}
-            className="
-              flex items-center gap-1 
-              rounded-full 
-              border border-neutral-600
-              hover:border-primary
-              active:scale-95
-              px-2.5 py-1 
-              text-xs font-medium 
-              text-muted-foreground
-              hover:text-primary
-              transition-all duration-200
-            "
-          >
-            <Globe className="h-3 w-3" />
-            {otherLocale.toUpperCase()}
-          </Link>
-
-          {/* Menu toggle */}
+        {/* Mobile - apenas hamburguer */}
+        <div className="flex items-center md:hidden">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="text-foreground"
+            className="text-foreground transition-all duration-200"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -155,23 +135,99 @@ export function Header() {
         </div>
       </nav>
 
-      {/* Mobile menu - LINKS PADRONIZADOS */}
-      {menuOpen && (
-        <div className="border-t border-border bg-background px-6 py-4 md:hidden">
-          <div className="flex flex-col gap-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className="text-sm text-muted-foreground transition-colors hover:text-primary"
+      {/* Mobile fullscreen menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed left-0 right-0 top-14 z-40 bg-background md:hidden"
+            style={{ height: 'calc(100vh - 3.5rem)' }}
+          >
+            <div className="flex h-full flex-col items-center justify-between px-6 py-8">
+              {/* Navigation links */}
+              <div className="flex flex-col gap-8 text-center">
+                {navItems.map((item, idx) => (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: idx * 0.05 }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-3xl font-bold text-foreground transition-all duration-200 hover:text-primary active:text-primary/80 active:scale-95"
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Theme and language toggles */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
+                className="flex flex-col items-center gap-4 border-t border-neutral-600 pt-8 w-full"
               >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+                {/* Theme toggle */}
+                <button
+                  onClick={toggleTheme}
+                  className="
+                    flex items-center justify-center gap-2
+                    rounded-full 
+                    border border-neutral-600
+                    hover:border-primary
+                    active:scale-95
+                    px-4 py-2
+                    text-sm font-medium 
+                    text-muted-foreground
+                    hover:text-primary
+                    transition-all duration-200
+                  "
+                  aria-label="Toggle theme"
+                >
+                  {theme === "dark" ? (
+                    <>
+                      <Sun className="h-4 w-4" />
+                      <span>Light Mode</span>
+                    </>
+                  ) : (
+                    <>
+                      <Moon className="h-4 w-4" />
+                      <span>Dark Mode</span>
+                    </>
+                  )}
+                </button>
+
+                {/* Language toggle */}
+                <Link
+                  href={localeHref}
+                  className="
+                    flex items-center justify-center gap-2
+                    rounded-full 
+                    border border-neutral-600
+                    hover:border-primary
+                    active:scale-95
+                    px-4 py-2
+                    text-sm font-medium 
+                    text-muted-foreground
+                    hover:text-primary
+                    transition-all duration-200
+                  "
+                >
+                  <Globe className="h-4 w-4" />
+                  <span>{otherLocale.toUpperCase()}</span>
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }
