@@ -5,7 +5,7 @@ import { useI18n } from "@/lib/i18n";
 import { Menu, X, Globe, Moon, Sun } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "./theme-provider";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Header() {
   const { locale, t } = useI18n();
@@ -97,8 +97,8 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile toggle */}
-        <div className="flex items-center gap-3 md:hidden">
+        {/* Mobile/Tablet toggle */}
+        <div className="flex items-center gap-3 lg:hidden">
 
           {/* Theme toggle mobile */}
           <button
@@ -147,7 +147,7 @@ export function Header() {
           {/* Menu toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="text-foreground"
+            className="text-foreground transition-all duration-200"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -155,23 +155,50 @@ export function Header() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="border-t border-border bg-background px-6 py-4 md:hidden">
-          <div className="flex flex-col gap-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className="text-sm text-muted-foreground transition-colors hover:text-primary"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Mobile/Tablet fullscreen menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMenuOpen(false)}
+              className="fixed inset-0 top-14 bg-background/95 backdrop-blur-sm lg:hidden"
+            />
+            
+            {/* Menu content */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="fixed inset-0 top-14 z-40 flex flex-col items-center justify-start pt-12 lg:hidden"
+            >
+              <div className="flex flex-col gap-8 text-center">
+                {navItems.map((item, idx) => (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: idx * 0.05 }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-3xl font-bold text-foreground transition-colors hover:text-primary active:text-primary/80 md:text-4xl"
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }
