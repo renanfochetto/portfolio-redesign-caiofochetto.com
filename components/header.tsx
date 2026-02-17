@@ -129,31 +129,6 @@ export function Header() {
 
         {/* Mobile/Tablet toggle */}
         <div className="flex items-center gap-3 md:hidden">
-          {/* Theme toggle mobile */}
-          <button
-            onClick={toggleTheme}
-            className="
-              flex items-center justify-center gap-1 
-              rounded-full 
-              border border-neutral-600
-              hover:border-primary
-              active:scale-95
-              px-2.5 py-1 
-              min-w-[36px]
-              text-xs font-medium 
-              text-muted-foreground
-              hover:text-primary
-              transition-all duration-200
-            "
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? (
-              <Sun className="h-3 w-3" />
-            ) : (
-              <Moon className="h-3 w-3" />
-            )}
-          </button>
-
           {/* Language toggle mobile */}
           <Link
             href={localeHref}
@@ -197,23 +172,86 @@ export function Header() {
             className="fixed left-0 right-0 top-14 z-40 bg-background md:hidden"
             style={{ height: 'calc(100vh - 3.5rem)' }}
           >
-            <div className="flex h-full flex-col items-center justify-center gap-8 text-center">
-              {navItems.map((item, idx) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: idx * 0.05 }}
-                >
-                  <Link
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="text-3xl font-bold text-foreground transition-all duration-200 hover:text-primary active:text-primary/80 active:scale-95 md:text-4xl"
+            <div className="flex h-full flex-col items-center justify-between gap-8 px-6 py-8 text-center">
+              {/* Navigation links */}
+              <div className="flex flex-col gap-8">
+                {navItems.map((item, idx) => (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: idx * 0.05 }}
                   >
-                    {item.label}
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-3xl font-bold text-foreground transition-all duration-200 hover:text-primary active:text-primary/80 active:scale-95 md:text-4xl"
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Theme and language toggles */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
+                className="flex flex-col items-center gap-4 border-t border-neutral-600 pt-8 w-full"
+              >
+                {/* Theme toggle */}
+                <button
+                  onClick={() => {
+                    toggleTheme();
+                  }}
+                  className="
+                    flex items-center justify-center gap-2
+                    rounded-full 
+                    border border-neutral-600
+                    hover:border-primary
+                    active:scale-95
+                    px-4 py-2
+                    text-sm font-medium 
+                    text-muted-foreground
+                    hover:text-primary
+                    transition-all duration-200
+                  "
+                  aria-label="Toggle theme"
+                >
+                  {theme === "dark" ? (
+                    <>
+                      <Sun className="h-4 w-4" />
+                      <span>Light Mode</span>
+                    </>
+                  ) : (
+                    <>
+                      <Moon className="h-4 w-4" />
+                      <span>Dark Mode</span>
+                    </>
+                  )}
+                </button>
+
+                {/* Language toggle */}
+                <Link
+                  href={localeHref}
+                  className="
+                    flex items-center justify-center gap-2
+                    rounded-full 
+                    border border-neutral-600
+                    hover:border-primary
+                    active:scale-95
+                    px-4 py-2
+                    text-sm font-medium 
+                    text-muted-foreground
+                    hover:text-primary
+                    transition-all duration-200
+                  "
+                >
+                  <Globe className="h-4 w-4" />
+                  <span>{otherLocale.toUpperCase()}</span>
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}
