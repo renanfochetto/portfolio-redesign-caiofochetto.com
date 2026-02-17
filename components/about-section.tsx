@@ -18,20 +18,25 @@ export function AboutSection() {
           {t.about.heading}
         </h2>
 
-        <div className="mt-12 grid gap-12 md:gap-16 grid-cols-1 md:grid-cols-[280px_1fr]">
-          <AnimatedItem index={0} className="flex justify-center md:justify-start h-fit">
-            <Image
-              src="/images/foto_caio.jpeg"
-              alt="Caio Fochetto em evento de marketing"
-              width={280}
-              height={350}
-              style={{ width: "auto", height: "auto" }}
-              className="rounded-lg object-cover shadow-lg"
-              unoptimized={true}
-              priority={false}
-            />
+        {/* Grid: 1 coluna em mobile/tablet, 2 colunas em desktop */}
+        <div className="mt-12 grid gap-12 grid-cols-1 lg:grid-cols-[280px_1fr] lg:gap-16">
+
+          {/* Foto - centralizada e controlada por largura */}
+          <AnimatedItem index={0} className="flex justify-center lg:justify-start">
+            <div className="relative w-48 md:w-56 lg:w-full">
+              <Image
+                src="/images/foto_caio.jpeg"
+                alt="Caio Fochetto em evento de marketing"
+                width={280}
+                height={350}
+                className="rounded-lg object-cover shadow-lg w-full h-auto"
+                unoptimized={true}
+                priority={false}
+              />
+            </div>
           </AnimatedItem>
 
+          {/* Texto */}
           <div className="space-y-4">
             <AnimatedItem index={1}>
               <p className="text-base leading-relaxed text-muted-foreground">
