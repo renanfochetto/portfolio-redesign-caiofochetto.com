@@ -18,11 +18,11 @@ export function AboutSection() {
           {t.about.heading}
         </h2>
 
-        {/* Grid: 1 coluna em mobile/tablet, 2 colunas em desktop */}
-        <div className="mt-12 grid gap-12 grid-cols-1 lg:grid-cols-[280px_1fr] lg:gap-16">
+        {/* Grid: 1 coluna em mobile, 2 colunas a partir de tablet */}
+        <div className="mt-12 grid gap-12 grid-cols-1 md:grid-cols-[224px_1fr] md:gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
 
-          {/* Foto - centralizada e controlada por largura */}
-          <AnimatedItem index={0} className="flex justify-center lg:justify-start">
+          {/* Foto - centralizada em mobile, alinhada esquerda em tablet+ */}
+          <AnimatedItem index={0} className="flex justify-center md:justify-start">
             <div className="relative w-48 md:w-56 lg:w-full">
               <Image
                 src="/images/foto_caio.jpeg"
