@@ -17,10 +17,10 @@ export function Header() {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     };
   }, [menuOpen]);
 
@@ -52,7 +52,6 @@ export function Header() {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-8 md:flex">
-
           {/* Links de navegação */}
           {navItems.map((item) => (
             <Link
@@ -110,8 +109,7 @@ export function Header() {
         </div>
 
         {/* Mobile/Tablet toggle */}
-        <div className="flex items-center gap-3 lg:hidden">
-
+        <div className="flex items-center gap-3 md:hidden">
           {/* Theme toggle mobile */}
           <button
             onClick={toggleTheme}
@@ -170,45 +168,32 @@ export function Header() {
       {/* Mobile/Tablet fullscreen menu */}
       <AnimatePresence>
         {menuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              onClick={() => setMenuOpen(false)}
-              className="fixed inset-0 top-14 z-40 bg-black/80 pointer-events-auto lg:hidden"
-            />
-            
-            {/* Menu content */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="fixed inset-0 top-14 z-50 flex flex-col items-center justify-start pt-12 lg:hidden pointer-events-auto"
-            >
-              <div className="flex flex-col gap-8 text-center">
-                {navItems.map((item, idx) => (
-                  <motion.div
-                    key={item.href}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: idx * 0.05 }}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed inset-x-0 top-14 bottom-0 z-40 bg-background flex flex-col items-center justify-start pt-12 md:hidden overflow-y-auto"
+          >
+            <div className="flex flex-col gap-8 text-center">
+              {navItems.map((item, idx) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: idx * 0.05 }}
+                >
+                  <Link
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-3xl font-bold text-foreground transition-colors hover:text-primary active:text-primary/80 md:text-4xl"
                   >
-                    <Link
-                      href={item.href}
-                      onClick={() => setMenuOpen(false)}
-                      className="text-3xl font-bold text-foreground transition-colors hover:text-primary active:text-primary/80 md:text-4xl"
-                    >
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </>
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.header>
