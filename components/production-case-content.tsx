@@ -108,9 +108,10 @@ export function ProductionCaseContent({ productionCase }: ProductionCaseContentP
                   title={productionCase.title}
                   placeholder={productionCase.media.hero.placeholder}
                 />
-              ) : productionCase.media.hero.type === "playlist" ? (
+              ) : productionCase.media.hero.type == "playlist" ? (
                 <YouTubeEmbed
-                  playlistId={productionCase.media.hero.videoId}
+                  type="playlist"
+                  videoId={productionCase.media.hero.videoId}
                   title={productionCase.title}
                   placeholder={productionCase.media.hero.placeholder}
                 />
