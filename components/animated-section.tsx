@@ -17,7 +17,7 @@ export function AnimatedSection({
   staggerChildren = false,
 }: AnimatedSectionProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const isInView = useInView(ref, { once: true, amount: 0.15 });
   const shouldReduce = prefersReducedMotion();
 
   const variants = staggerChildren ? containerVariants : fadeInUpVariants;

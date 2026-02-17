@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { notFound } from "next/navigation";
 import { I18nProvider } from "@/lib/i18n";
 import { ThemeProvider } from "@/components/theme-provider";
+import { PageTransition } from "@/components/page-transition"; // ✅ IMPORT ADICIONADO
 import { getDictionary } from "@/lib/dictionaries";
 import { locales } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/dictionaries";
@@ -116,7 +117,7 @@ export default async function LocaleLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>
+      <body className="font-sans antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -137,7 +138,10 @@ export default async function LocaleLayout({
           }}
         />
         <I18nProvider locale={locale as Locale}>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            {/* ✅ PAGETRANSITION wrapper adicionado */}
+            <PageTransition>{children}</PageTransition>
+          </ThemeProvider>
         </I18nProvider>
         <Analytics />
       </body>

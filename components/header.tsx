@@ -5,6 +5,7 @@ import { useI18n } from "@/lib/i18n";
 import { Menu, X, Globe, Moon, Sun } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "./theme-provider";
+import { motion } from "framer-motion"; // ✅ IMPORT ADICIONADO
 
 export function Header() {
   const { locale, t } = useI18n();
@@ -22,7 +23,13 @@ export function Header() {
   ];
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-neutral-600 bg-background/80 backdrop-blur-md">
+    // ✅ MOTION.HEADER COM ANIMAÇÃO
+    <motion.header
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="fixed top-0 z-50 w-full border-b border-neutral-600 bg-background/80 backdrop-blur-md"
+    >
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link
           href={`/${locale}`}
@@ -165,6 +172,6 @@ export function Header() {
           </div>
         </div>
       )}
-    </header>
+    </motion.header>
   );
 }
