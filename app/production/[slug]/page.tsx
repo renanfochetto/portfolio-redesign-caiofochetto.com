@@ -1,300 +1,275 @@
-import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Tag, Play, Calendar, BookOpen, User } from "lucide-react";
-import { Footer } from "@/components/footer";
-import { YouTubeEmbed } from "@/components/youtube-embed";
-import {
+# PROMPT PARA V0: Navigation Helpers - Production Cases
+
+## CONTEXTO
+Criar funções helper para navegação ISOLADA entre production cases. A navegação NUNCA deve misturar performance e production cases.
+
+## CRITICAL RULE
+```
+Performance ↔ Performance ONLY
+Production ↔ Production ONLY
+```
+
+---
+
+## HELPER FUNCTIONS
+```typescript
+// lib/production-cases.ts
+import productionCasesData from "@/data/production-cases.json";
+import type { ProductionCase } from "@/types";
+
+/**
+ * Get all production cases
+ */
+export function getAllProductionCases(): ProductionCase[] {
+  return productionCasesData.cases as ProductionCase[];
+}
+
+/**
+ * Get single production case by slug
+ */
+export function getProductionCaseBySlug(
+  slug: string
+): ProductionCase | undefined {
+  const cases = getAllProductionCases();
+  return cases.find((c) => c.slug === slug);
+}
+
+/**
+ * Get navigation for production case
+ * CRITICAL: Returns ONLY production cases (isolated)
+ */
+export function getProductionCaseNavigation(currentSlug: string): {
+  prev: { slug: string; title: string; brand: string } | null;
+  next: { slug: string; title: string; brand: string } | null;
+} {
+  const cases = getAllProductionCases();
+  const currentIndex = cases.findIndex((c) => c.slug === currentSlug);
+
+  if (currentIndex === -1) {
+    return { prev: null, next: null };
+  }
+
+  const prev =
+    currentIndex > 0
+      ? {
+          slug: cases[currentIndex - 1].slug,
+          title: cases[currentIndex - 1].title,
+          brand: cases[currentIndex - 1].brand,
+        }
+      : null;
+
+  const next =
+    currentIndex < cases.length - 1
+      ? {
+          slug: cases[currentIndex + 1].slug,
+          title: cases[currentIndex + 1].title,
+          brand: cases[currentIndex + 1].brand,
+        }
+      : null;
+
+  return { prev, next };
+}
+
+/**
+ * Generate static params for Next.js
+ */
+export function generateProductionCaseParams() {
+  const cases = getAllProductionCases();
+  return cases.map((c) => ({ slug: c.slug }));
+}
+```
+
+---
+
+## USAGE IN PAGES
+
+### Production Case Page:
+```tsx
+import { 
   getProductionCaseBySlug,
-  getProductionCaseNavigation,
-  getAllProductionCaseSlugs,
+  getProductionCaseNavigation 
 } from "@/lib/production-cases";
 
-const SITE_URL = "https://www.caiofochetto.com";
+export default function ProductionCasePage({ params }) {
+  const productionCase = getProductionCaseBySlug(params.slug);
+  const navigation = getProductionCaseNavigation(params.slug);
+  
+  // navigation.prev → só production
+  // navigation.next → só production
+}
+```
 
-const companyLogos: Record<string, string> = {
-  "Octagon": "octagon.avif",
-  "A+E Networks": "aenetworks.avif",
-  "Jellysmack": "jellysmack.avif",
-  "Playground": "playground.avif",
-  "Portal R7": "portalr7.avif",
-  "Rede Boa Nova": "redeboanova.avif",
-  "TV Cultura": "tvcultura.avif",
-  "TV Mundo Maior": "tvmundomaior.avif",
-};
+### Performance Case Page (não muda):
+```tsx
+import { 
+  getCaseBySlug,
+  getCaseNavigation 
+} from "@/lib/cases";
 
-const brandLogos: Record<string, string> = {
-  "Netflix": "netflix",
-  "Budweiser": "budweiser",
-  "HISTORY": "history",
-  "Natura": "natura",
-  "A&E": "ae",
-  "Bradesco": "bradesco",
-  "Havaianas": "havaianas",
-  "Bohemia": "bohemia",
-  "Nestlé": "nestle",
-  "Playground": "playground",
-};
+export default function CasePage({ params }) {
+  const caseData = getCaseBySlug(params.slug);
+  const navigation = getCaseNavigation(params.slug);
+  
+  // navigation.prev → só performance
+  // navigation.next → só performance
+}
+```
 
-interface ProductionCasePageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+---
+
+## STATIC PARAMS GENERATION
+
+### For Production Cases:
+```tsx
+// app/production/[slug]/page.tsx
+import { generateProductionCaseParams } from "@/lib/production-cases";
+
+export function generateStaticParams() {
+  return generateProductionCaseParams();
+}
+```
+
+### For Performance Cases (já existe):
+```tsx
+// app/case/[slug]/page.tsx
+import { generateCaseParams } from "@/lib/cases";
+
+export function generateStaticParams() {
+  return generateCaseParams();
+}
+```
+
+---
+
+## SEPARATION GUARANTEE
+
+### File Structure:
+```
+/lib
+  ├─ cases.ts           → Performance helpers
+  └─ production-cases.ts → Production helpers (NOVO)
+
+/data
+  ├─ cases.json         → 6 performance cases
+  └─ production-cases.json → 6 production cases (NOVO)
+
+/app
+  ├─ case/[slug]        → Performance pages
+  └─ production/[slug]  → Production pages (NOVO)
+```
+
+### Navigation Flow:
+```
+PERFORMANCE:
+Betfair → Formula E → Budweiser → HISTORY → A&E → Lifetime
+  ↑                                                      ↓
+  └──────────────────────────────────────────────────────┘
+  (loops dentro de performance cases)
+
+PRODUCTION:
+Netflix → Natura → Havaianas → Jazz → Bohemia → Nestlé
+  ↑                                                    ↓
+  └────────────────────────────────────────────────────┘
+  (loops dentro de production cases)
+
+❌ NUNCA: Betfair → Netflix
+```
+
+---
+
+## TYPE DEFINITIONS
+```typescript
+// types/index.ts
+
+// Performance Case (já existe)
+export interface Case {
+  id: string;
+  slug: string;
+  title: string;
+  // ... resto dos campos
 }
 
-export async function generateStaticParams() {
-  const slugs = getAllProductionCaseSlugs();
-  return slugs.map((slug) => ({
-    slug,
-  }));
-}
-
-export async function generateMetadata({
-  params,
-}: ProductionCasePageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const productionCase = getProductionCaseBySlug(resolvedParams.slug);
-
-  if (!productionCase) {
-    return {
-      title: "Case Not Found",
+// Production Case (NOVO)
+export interface ProductionCase {
+  id: string;
+  slug: string;
+  title: string;
+  brand: string;
+  year: string;
+  type: string;
+  role: string;
+  what: string;
+  myRole: string;
+  tags: string[];
+  media: {
+    thumbnail: string;
+    hero: {
+      type: "video" | "image";
+      url: string;
+      placeholder?: string;
+      alt: string;
     };
-  }
-
-  return {
-    title: productionCase.seo.metaTitle,
-    description: productionCase.seo.metaDescription,
-    openGraph: {
-      title: productionCase.seo.metaTitle,
-      description: productionCase.seo.metaDescription,
-      images: [productionCase.seo.ogImage],
-      type: "website",
-      locale: "pt_BR",
-      siteName: "Caio Fochetto Portfolio",
-      url: `${SITE_URL}/production/${resolvedParams.slug}`,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: productionCase.seo.metaTitle,
-      description: productionCase.seo.metaDescription,
-      images: [productionCase.seo.ogImage],
-    },
-    alternates: {
-      canonical: `${SITE_URL}/production/${resolvedParams.slug}`,
-    },
+    gallery?: Array<{
+      type: "image" | "video";
+      url: string;
+      alt?: string;
+      caption?: string;
+    }>;
+  };
+  seo: {
+    metaTitle: string;
+    metaDescription: string;
+    ogImage: string;
   };
 }
 
-export default async function ProductionCasePage({
-  params,
-}: ProductionCasePageProps) {
-  const resolvedParams = await params;
-  const productionCase = getProductionCaseBySlug(resolvedParams.slug);
+// Navigation types
+export interface CaseNavigation {
+  prev: {
+    slug: string;
+    title: string;
+    brand: string;
+  } | null;
+  next: {
+    slug: string;
+    title: string;
+    brand: string;
+  } | null;
+}
+```
 
-  if (!productionCase) {
-    notFound();
+---
+
+## ERROR HANDLING
+```typescript
+export function getProductionCaseBySlug(slug: string): ProductionCase | undefined {
+  const cases = getAllProductionCases();
+  const foundCase = cases.find((c) => c.slug === slug);
+  
+  if (!foundCase) {
+    console.warn(`Production case not found: ${slug}`);
+    return undefined;
   }
-
-  const { title, brand, company, year, type, role, what, myRole, tags, media } =
-    productionCase;
-
-  const navigation = getProductionCaseNavigation(resolvedParams.slug);
-  const brandLogo = brandLogos[brand];
-
-  const sectionLabels = {
-    what: "O QUE É?",
-    myRole: "MEU PAPEL",
-    capabilities: "COMPETÊNCIAS",
-    relatedContent: "CONTEÚDO RELACIONADO",
-    back: "Voltar",
-    previous: "Anterior",
-    next: "Próximo",
-  };
-
-  return (
-    <div className="min-h-screen bg-background text-foreground">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "VideoObject",
-            name: title,
-            description: what,
-            uploadDate: year,
-          }),
-        }}
-      />
-    </div>
-  ) : (
-    <div className="h-16 w-32" />
-  )
+  
+  return foundCase;
 }
+```
 
-<Link
-  href="/#work"
-  className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-all hover:text-primary active:scale-95"
->
-  <ArrowLeft className="h-4 w-4" />
-  {sectionLabels.back}
-</Link>
-          </div >
+---
 
-          <div className="mt-8">
-            <h1 className="text-3xl font-bold text-foreground md:text-5xl">
-              {title}
-            </h1>
-          </div>
+## TAREFA PARA V0:
 
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
-            <div className="flex items-center gap-4">
-              {companyLogos[company] && (
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
-                  <Image
-                    src={`/companies/${companyLogos[company]}`}
-                    alt={`${company} logo`}
-                    width={48}
-                    height={48}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              )}
+1. Criar `/lib/production-cases.ts` com todas as funções
+2. Adicionar `ProductionCase` interface em `/types/index.ts`
+3. Garantir separação total (performance ≠ production)
+4. Implementar error handling
+5. Adicionar static params generation
+6. Testar navegação ISOLADA
 
-              <div>
-                <p className="text-sm font-semibold text-foreground">{company}</p>
-                <p className="text-xs text-muted-foreground">{role}</p>
-              </div>
-            </div>
+**CRÍTICO:**
+- NUNCA misturar performance e production
+- Navigation loops dentro do próprio tipo
+- Arquivos/pastas/rotas separados
+- Types separados
 
-            <div className="flex items-center gap-2 text-sm">
-              <Calendar className="h-4 w-4 text-muted-foreground" />
-              <span className="font-medium text-foreground">{year}</span>
-            </div>
-          </div>
-        </div >
-      </section >
-
-  {/* ✅ PLAYLIST/VIDEO SECTION - Renderiza TODOS os tipos */ }
-{
-  media.hero.type && (media.hero.videoId || media.hero.videoIds) && (
-    <section className="px-6 py-16 lg:px-8">
-      <div className="mx-auto max-w-4xl">
-        <div className="flex items-center gap-2 mb-8">
-          <Play className="h-4 w-4 text-primary" />
-          <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-            {sectionLabels.relatedContent}
-          </h2>
-        </div>
-
-        <YouTubeEmbed
-          type={media.hero.type}
-          videoId={media.hero.videoId}
-          videoIds={media.hero.videoIds}
-          title={title}
-          placeholder={media.hero.placeholder}
-        />
-      </div>
-    </section>
-  )
-}
-
-{/* O QUE É? */ }
-<section className="px-6 py-12 lg:px-8">
-  <div className="mx-auto max-w-4xl">
-    <div className="flex items-center gap-2 mb-4">
-      <BookOpen className="h-4 w-4 text-primary" />
-      <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-        {sectionLabels.what}
-      </h2>
-    </div>
-    <p className="text-base leading-relaxed text-muted-foreground">
-      {what}
-    </p>
-  </div>
-</section>
-
-{/* MEU PAPEL */ }
-<section className="px-6 py-12 lg:px-8">
-  <div className="mx-auto max-w-4xl">
-    <div className="flex items-center gap-2 mb-4">
-      <User className="h-4 w-4 text-primary" />
-      <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-        {sectionLabels.myRole}
-      </h2>
-    </div>
-    <p className="text-base leading-relaxed text-muted-foreground">
-      {myRole}
-    </p>
-  </div>
-</section>
-
-{/* COMPETÊNCIAS */ }
-<section className="px-6 py-16 lg:px-8">
-  <div className="mx-auto max-w-4xl">
-    <div className="mb-4 flex items-center gap-2">
-      <Tag className="h-4 w-4 text-primary" />
-      <p className="text-xs font-medium uppercase tracking-widest text-primary">
-        {sectionLabels.capabilities}
-      </p>
-    </div>
-    <div className="flex flex-wrap gap-2">
-      {tags.map((capability, index) => (
-        <span
-          key={index}
-          className="rounded-full border border-neutral-600 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:border-primary hover:text-primary"
-        >
-          {capability}
-        </span>
-      ))}
-    </div>
-  </div>
-</section>
-
-{/* Navigation */ }
-      <section className="px-6 py-16 lg:px-8">
-        <div className="mx-auto max-w-4xl border-t border-neutral-600 pt-12">
-          <div className="grid gap-6 md:grid-cols-2">
-            {navigation.prev && (
-              <Link
-                href={`/production/${navigation.prev.slug}`}
-                className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all duration-200 hover:border-primary hover:bg-card/50 active:scale-[0.98]"
-              >
-                <div className="flex items-center gap-2 text-xs font-semibold text-primary">
-                  <ArrowLeft className="h-4 w-4" />
-                  {sectionLabels.previous}
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">{navigation.prev.brand}</p>
-                  <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors">
-                    {navigation.prev.title}
-                  </h3>
-                </div>
-              </Link>
-            )}
-
-            {navigation.next && (
-              <Link
-                href={`/production/${navigation.next.slug}`}
-                className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all duration-200 hover:border-primary hover:bg-card/50 active:scale-[0.98]"
-              >
-                <div className="flex items-center justify-end gap-2 text-xs font-semibold text-primary">
-                  {sectionLabels.next}
-                  <ArrowRight className="h-4 w-4" />
-                </div>
-                <div className="text-right">
-                  <p className="text-xs text-muted-foreground">{navigation.next.brand}</p>
-                  <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors">
-                    {navigation.next.title}
-                  </h3>
-                </div>
-              </Link>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <Footer hideContact={true} />
-    </div >
-  );
-}
+Gere o código completo com todos os helpers e types.
