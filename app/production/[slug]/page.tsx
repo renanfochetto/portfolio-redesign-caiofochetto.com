@@ -1,17 +1,15 @@
 // app/production/[slug]/page.tsx
-// PADRÃO IDÊNTICO ao performance case page
-
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useTheme } from "@/components/theme-provider";
 import { YouTubeEmbed } from "@/components/youtube-embed";
 import {
   ArrowLeft,
   ArrowRight,
-  ArrowUpRight,
   Tag,
   Play,
   Calendar,
@@ -25,7 +23,6 @@ import {
   getProductionCaseNavigation,
 } from "@/lib/production-cases";
 
-// Mapeamento de empresas para seus logos (em /public/companies/)
 const companyLogos: Record<string, string> = {
   "Octagon": "octagon.avif",
   "A+E Networks": "aenetworks.avif",
@@ -37,7 +34,6 @@ const companyLogos: Record<string, string> = {
   "TV Mundo Maior": "tvmundomaior.avif",
 };
 
-// Mapeamento de brands para seus logos (em /public/logos/white ou black)
 const brandLogos: Record<string, string> = {
   "Netflix": "netflix",
   "Budweiser": "budweiser",
@@ -54,50 +50,26 @@ const brandLogos: Record<string, string> = {
 type PageProps = { params: Promise<{ slug: string }> };
 
 export default function ProductionCasePage({ params }: PageProps) {
+  const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [logoFolder, setLogoFolder] = useState("white"); // default dark mode
   const [resolvedParams, setResolvedParams] = useState<{ slug: string } | null>(null);
 
   useEffect(() => {
     setMounted(true);
     params.then(setResolvedParams);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    // Detecção de tema — MutationObserver idêntico ao CaseCard
-    const checkTheme = () => {
-      const html = document.documentElement;
-
-      const hasDarkClass = html.classList.contains("dark");
-      const dataTheme = html.getAttribute("data-theme");
-      const bodyBg = window.getComputedStyle(document.body).backgroundColor;
-      const isDarkBg = bodyBg === "rgb(0, 0, 0)" || bodyBg === "rgb(10, 10, 10)";
-
-      const isDark = hasDarkClass || dataTheme === "dark" || isDarkBg;
-      setLogoFolder(isDark ? "white" : "black");
-    };
-
-    setTimeout(checkTheme, 100);
-
-    const observer = new MutationObserver(checkTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class", "data-theme", "style"],
-    });
-
-    return () => observer.disconnect();
-  }, [params]);
-
-  if (!mounted || !resolvedParams) {
-    return null;
-  }
+  if (!mounted || !resolvedParams) return null;
 
   const { slug } = resolvedParams;
   const productionCase = getProductionCaseBySlug(slug);
-
   if (!productionCase) notFound();
+
+  // Mesma lógica exata da performance page
+  const logoFolder = theme === "dark" ? "white" : "black";
 
   const { title, brand, company, year, role, what, myRole, tags, media } = productionCase;
   const navigation = getProductionCaseNavigation(slug);
-
   const brandLogo = brandLogos[brand];
   const companyLogo = companyLogos[company];
 
@@ -121,7 +93,6 @@ export default function ProductionCasePage({ params }: PageProps) {
 
           {/* Logo esquerda + Botão Voltar direita */}
           <div className="flex items-center justify-between gap-4">
-            {/* Logo da Brand (esquerda) — mesma lógica do performance */}
             {brandLogo ? (
               <div className="flex h-16 w-32 items-center justify-start">
                 <Image
@@ -138,7 +109,6 @@ export default function ProductionCasePage({ params }: PageProps) {
               <div className="h-16 w-32" />
             )}
 
-            {/* Botão Voltar (direita) */}
             <Link
               href="/#work"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-all hover:text-primary active:scale-95"
@@ -155,7 +125,7 @@ export default function ProductionCasePage({ params }: PageProps) {
             </h1>
           </div>
 
-          {/* Meta Info: Company logo + nome + role | Ano */}
+          {/* Meta Info */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
             <div className="flex items-center gap-4">
               {companyLogo && (
@@ -184,7 +154,7 @@ export default function ProductionCasePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Playlist/Video Section */}
+      {/* Playlist/Video */}
       {media.hero.type && (media.hero.videoId || media.hero.videoIds) && (
         <section className="px-6 py-16 lg:px-8">
           <div className="mx-auto max-w-4xl">
@@ -257,7 +227,6 @@ export default function ProductionCasePage({ params }: PageProps) {
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl border-t border-neutral-600 pt-12">
           <div className="grid gap-6 md:grid-cols-2">
-
             {navigation.prev && (
               <Link
                 href={`/production/${navigation.prev.slug}`}
@@ -293,7 +262,6 @@ export default function ProductionCasePage({ params }: PageProps) {
                 </div>
               </Link>
             )}
-
           </div>
         </div>
       </section>
