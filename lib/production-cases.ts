@@ -1,24 +1,20 @@
-// PRODUCTION CASES - DADOS COMPLETOS
-// Baseado nas informações fornecidas
+import type { ProductionCase } from "@/types/production";
 
-export const productionCases = [
+export const productionCases: ProductionCase[] = [
   {
     id: "netflix-worlds-collide",
     slug: "netflix-worlds-collide",
     title: "Worlds Collide: A Netflix Fan Experience",
     brand: "Netflix",
-    company: "Playground", // ✅ Empresa do cargo
-    role: "Content and Product Manager", // ✅ Cargo
+    company: "Playground",
+    role: "Content and Product Manager",
     year: "2021",
     type: "Brand Experience",
 
-    // ✅ DESCRIÇÃO BREVE (para o card)
     description: "Experiência imersiva unindo universos icônicos da Netflix para fãs brasileiros, gerando buzz orgânico nas redes sociais.",
 
-    // ✅ O QUE É? (página individual)
     what: "Experiência imersiva de marca que reuniu universos icônicos da Netflix, criando momentos compartilháveis que conectaram fãs com seus conteúdos favoritos através de instalações físicas e ativações digitais integradas.",
 
-    // ✅ MEU PAPEL (página individual)
     myRole: "Desenvolvi e executei a estratégia de conteúdo multi-sensorial, coordenando criação de conteúdo com 15+ creators, gerenciando produção on-site e orquestrando amplificação digital integrada em tempo real.",
 
     tags: [
@@ -33,8 +29,8 @@ export const productionCases = [
     media: {
       thumbnail: "/images/production/netflix-worlds-collide/thumbnail.jpg",
       hero: {
-        type: "playlist", // ✅ Playlist
-        url: "PLC85G0r1H2eGzzkHsNyKZ1uQMV7w0gNAk", // Playlist ID
+        type: "playlist",
+        videoId: "PLC85G0r1H2eGzzkHsNyKZ1uQMV7w0gNAk",
         placeholder: "/images/production/netflix-worlds-collide/hero.jpg",
         alt: "Netflix Worlds Collide activation"
       }
@@ -75,7 +71,7 @@ export const productionCases = [
       thumbnail: "/images/production/natura-todo-dia/thumbnail.jpg",
       hero: {
         type: "playlist",
-        url: "PLC85G0r1H2eHLW3RERfHtGEudzLnYCVBx",
+        videoId: "PLC85G0r1H2eHLW3RERfHtGEudzLnYCVBx",
         placeholder: "/images/production/natura-todo-dia/hero.jpg",
         alt: "Natura Todo Dia content series"
       }
@@ -116,7 +112,7 @@ export const productionCases = [
       thumbnail: "/images/production/havaianas-follow-my-voice/thumbnail.jpg",
       hero: {
         type: "video",
-        url: "2KchK_PztnA", // Video ID
+        videoId: "2KchK_PztnA",
         placeholder: "/images/production/havaianas-follow-my-voice/hero.jpg",
         alt: "Havaianas Follow My Voice campaign"
       }
@@ -149,7 +145,7 @@ export const productionCases = [
       "Podcast Production",
       "Music Content",
       "Editorial Strategy",
-      "Brand Experience",
+      "Jazz Culture",
       "Content Curation"
     ],
 
@@ -157,15 +153,15 @@ export const productionCases = [
       thumbnail: "/images/production/passion4jazz/thumbnail.jpg",
       hero: {
         type: "video",
-        url: "8wbdIYeAc_0",
+        videoId: "8wbdIYeAc_0",
         placeholder: "/images/production/passion4jazz/hero.jpg",
-        alt: "Passion4Jazz content platform"
+        alt: "Passion4Jazz podcast"
       }
     },
 
     seo: {
-      metaTitle: "Passion4Jazz - Content Platform | Caio Fochetto",
-      metaDescription: "Plataforma premium conectando jazz e cultura de café Nespresso através de experiências imersivas.",
+      metaTitle: "Passion4Jazz - Podcast | Caio Fochetto",
+      metaDescription: "Podcast sobre jazz apresentando artistas, histórias e a cultura do gênero musical.",
       ogImage: "/images/production/passion4jazz/og-image.jpg"
     }
   },
@@ -197,11 +193,8 @@ export const productionCases = [
     media: {
       thumbnail: "/images/production/bohemia-sabor-tradicoes/thumbnail.jpg",
       hero: {
-        type: "multiple", // ✅ Múltiplos vídeos
-        urls: [
-          "35H3XqDnacA",
-          "X72AiB9y3L0"
-        ],
+        type: "multiple",
+        videoIds: ["35H3XqDnacA", "X72AiB9y3L0"],
         placeholder: "/images/production/bohemia-sabor-tradicoes/hero.jpg",
         alt: "Bohemia Sabor que Move Tradições documentary"
       }
@@ -242,7 +235,7 @@ export const productionCases = [
       thumbnail: "/images/production/cozinha-emergencia/thumbnail.jpg",
       hero: {
         type: "video",
-        url: "F_yfWIWH1R0",
+        videoId: "F_yfWIWH1R0",
         placeholder: "/images/production/cozinha-emergencia/hero.jpg",
         alt: "Cozinha de Emergência entertainment content"
       }
@@ -256,56 +249,27 @@ export const productionCases = [
   }
 ];
 
-// ✅ TIPOS ATUALIZADOS
-export interface ProductionCase {
-  id: string;
-  slug: string;
-  title: string;
-  brand: string;
-  company: string; // ✅ NOVO: Empresa do cargo
-  role: string;    // ✅ NOVO: Cargo
-  year: string;
-  type: string;
-  description: string; // ✅ NOVO: Descrição breve para card
-  what: string;
-  myRole: string;
-  tags: string[];
-  media: {
-    thumbnail: string;
-    hero: {
-      type: "video" | "playlist" | "multiple"; // ✅ 3 tipos
-      url?: string;      // Video único ou playlist ID
-      urls?: string[];   // Múltiplos vídeos
-      placeholder?: string;
-      alt: string;
-    };
-  };
-  seo: {
-    metaTitle: string;
-    metaDescription: string;
-    ogImage: string;
-  };
-}
-
-// ✅ HELPER FUNCTIONS
-export function getProductionCaseBySlug(slug: string): ProductionCase | null {
-  return productionCases.find(c => c.slug === slug) || null;
-}
-
 export function getAllProductionCases(): ProductionCase[] {
   return productionCases;
 }
 
-export function getAllProductionCaseSlugs(): string[] {
-  return productionCases.map(c => c.slug);
+export function getProductionCaseBySlug(slug: string): ProductionCase | undefined {
+  return productionCases.find((c) => c.slug === slug);
 }
 
-export function getProductionCaseNavigation(slug: string) {
-  const index = productionCases.findIndex(c => c.slug === slug);
-  if (index === -1) return { prev: null, next: null };
+export function getAllProductionCaseSlugs(): string[] {
+  return productionCases.map((c) => c.slug);
+}
 
-  const prev = index > 0 ? productionCases[index - 1] : productionCases[productionCases.length - 1];
-  const next = index < productionCases.length - 1 ? productionCases[index + 1] : productionCases[0];
+export function getProductionCaseNavigation(currentSlug: string) {
+  const currentIndex = productionCases.findIndex((c) => c.slug === currentSlug);
+
+  if (currentIndex === -1) {
+    return { prev: null, next: null };
+  }
+
+  const prev = currentIndex > 0 ? productionCases[currentIndex - 1] : null;
+  const next = currentIndex < productionCases.length - 1 ? productionCases[currentIndex + 1] : null;
 
   return { prev, next };
 }
