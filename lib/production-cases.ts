@@ -1,6 +1,6 @@
-// PRODUCTION CASES - DADOS COMPLETOS E CORRIGIDOS
+import type { ProductionCase } from "@/types/production";
 
-export const productionCases = [
+export const productionCases: ProductionCase[] = [
   {
     id: "netflix-worlds-collide",
     slug: "netflix-worlds-collide",
@@ -30,7 +30,7 @@ export const productionCases = [
       thumbnail: "/images/production/netflix-worlds-collide/thumbnail.jpg",
       hero: {
         type: "playlist",
-        url: "PLC85G0r1H2eGzzkHsNyKZ1uQMV7w0gNAk",
+        videoId: "PLC85G0r1H2eGzzkHsNyKZ1uQMV7w0gNAk",
         placeholder: "/images/production/netflix-worlds-collide/hero.jpg",
         alt: "Netflix Worlds Collide activation"
       }
@@ -71,7 +71,7 @@ export const productionCases = [
       thumbnail: "/images/production/natura-todo-dia/thumbnail.jpg",
       hero: {
         type: "playlist",
-        url: "PLC85G0r1H2eHLW3RERfHtGEudzLnYCVBx",
+        videoId: "PLC85G0r1H2eHLW3RERfHtGEudzLnYCVBx",
         placeholder: "/images/production/natura-todo-dia/hero.jpg",
         alt: "Natura Todo Dia content series"
       }
@@ -112,7 +112,7 @@ export const productionCases = [
       thumbnail: "/images/production/havaianas-follow-my-voice/thumbnail.jpg",
       hero: {
         type: "video",
-        url: "2KchK_PztnA",
+        videoId: "2KchK_PztnA",
         placeholder: "/images/production/havaianas-follow-my-voice/hero.jpg",
         alt: "Havaianas Follow My Voice campaign"
       }
@@ -129,17 +129,17 @@ export const productionCases = [
     id: "passion4jazz",
     slug: "passion4jazz",
     title: "Passion4Jazz",
-    brand: "Playground", // ✅ CORRIGIDO
+    brand: "Playground",
     company: "Playground",
     role: "Content and Product Manager",
     year: "2021",
     type: "Podcast",
 
-    description: "Podcast sobre jazz apresentando artistas, histórias e a cultura do gênero musical.", // ✅ CORRIGIDO
+    description: "Podcast sobre jazz apresentando artistas, histórias e a cultura do gênero musical.",
 
-    what: "Podcast dedicado ao universo do jazz, explorando a história do gênero, apresentando artistas, e criando conexão com entusiastas da música através de conversas autênticas e curadoria musical de qualidade.", // ✅ CORRIGIDO
+    what: "Podcast dedicado ao universo do jazz, explorando a história do gênero, apresentando artistas, e criando conexão com entusiastas da música através de conversas autênticas e curadoria musical de qualidade.",
 
-    myRole: "Desenvolvimento do conceito editorial do podcast, curadoria de conteúdo e artistas, gestão de produção audiovisual, e estratégia de distribuição digital focada em construir uma audiência engajada de apreciadores de jazz.", // ✅ CORRIGIDO
+    myRole: "Desenvolvimento do conceito editorial do podcast, curadoria de conteúdo e artistas, gestão de produção audiovisual, e estratégia de distribuição digital focada em construir uma audiência engajada de apreciadores de jazz.",
 
     tags: [
       "Podcast Production",
@@ -153,7 +153,7 @@ export const productionCases = [
       thumbnail: "/images/production/passion4jazz/thumbnail.jpg",
       hero: {
         type: "video",
-        url: "8wbdIYeAc_0",
+        videoId: "8wbdIYeAc_0",
         placeholder: "/images/production/passion4jazz/hero.jpg",
         alt: "Passion4Jazz podcast"
       }
@@ -193,11 +193,8 @@ export const productionCases = [
     media: {
       thumbnail: "/images/production/bohemia-sabor-tradicoes/thumbnail.jpg",
       hero: {
-        type: "multiple",
-        urls: [
-          "35H3XqDnacA",
-          "X72AiB9y3L0"
-        ],
+        type: "video",
+        videoId: "X72AiB9y3L0",
         placeholder: "/images/production/bohemia-sabor-tradicoes/hero.jpg",
         alt: "Bohemia Sabor que Move Tradições documentary"
       }
@@ -238,7 +235,7 @@ export const productionCases = [
       thumbnail: "/images/production/cozinha-emergencia/thumbnail.jpg",
       hero: {
         type: "video",
-        url: "F_yfWIWH1R0",
+        videoId: "F_yfWIWH1R0",
         placeholder: "/images/production/cozinha-emergencia/hero.jpg",
         alt: "Cozinha de Emergência entertainment content"
       }
@@ -251,3 +248,40 @@ export const productionCases = [
     }
   }
 ];
+
+export function getAllProductionCases(): ProductionCase[] {
+  return productionCases;
+}
+
+export function getProductionCaseBySlug(slug: string): ProductionCase | undefined {
+  return productionCases.find((c) => c.slug === slug);
+}
+
+export function getAllProductionCaseSlugs(): string[] {
+  return productionCases.map((c) => c.slug);
+}
+
+// ✅ NAVEGAÇÃO CIRCULAR (igual Performance Cases)
+export function getProductionCaseNavigation(currentSlug: string) {
+  const currentIndex = productionCases.findIndex((c) => c.slug === currentSlug);
+
+  if (currentIndex === -1) {
+    return { prev: null, next: null };
+  }
+
+  // ✅ LÓGICA CIRCULAR:
+  // - Se está no primeiro (index 0), prev = último
+  // - Se está no último, next = primeiro
+  const prevIndex = currentIndex === 0
+    ? productionCases.length - 1  // Volta pro último
+    : currentIndex - 1;
+
+  const nextIndex = currentIndex === productionCases.length - 1
+    ? 0  // Volta pro primeiro
+    : currentIndex + 1;
+
+  return {
+    prev: productionCases[prevIndex],
+    next: productionCases[nextIndex],
+  };
+}

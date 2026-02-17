@@ -104,19 +104,26 @@ export function ProductionCaseContent({ productionCase }: ProductionCaseContentP
             <div className="overflow-hidden rounded-lg">
               {productionCase.media.hero.type === "video" ? (
                 <YouTubeEmbed
-                  videoId={productionCase.media.hero.url}
+                  videoId={productionCase.media.hero.videoId || ""}
+                  title={productionCase.title}
+                  placeholder={productionCase.media.hero.placeholder}
+                />
+              ) : productionCase.media.hero.type === "playlist" ? (
+                <YouTubeEmbed
+                  playlistId={productionCase.media.hero.videoId}
                   title={productionCase.title}
                   placeholder={productionCase.media.hero.placeholder}
                 />
               ) : (
-                <div className="relative aspect-video">
-                  <Image
-                    src={productionCase.media.hero.url}
-                    alt={productionCase.media.hero.alt}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+                <div className="space-y-4">
+                  {productionCase.media.hero.videoIds?.map((videoId, idx) => (
+                    <YouTubeEmbed
+                      key={idx}
+                      videoId={videoId}
+                      title={`${productionCase.title} - Part ${idx + 1}`}
+                      placeholder={productionCase.media.hero.placeholder}
+                    />
+                  ))}
                 </div>
               )}
             </div>

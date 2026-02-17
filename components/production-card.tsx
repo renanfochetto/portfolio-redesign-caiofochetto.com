@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Play, Briefcase } from "lucide-react";
+import { ArrowUpRight, Play, Briefcase, ArrowRight } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useTheme } from "@/components/theme-provider";
 import type { ProductionCase } from "@/types/production";
@@ -33,6 +33,7 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
     "Havaianas": "havaianas",
     "Bohemia": "bohemia",
     "Nestlé": "nestle",
+    "Playground": "playground",
   };
 
   const logoFolder = theme === "dark" ? "white" : "black";
@@ -111,7 +112,7 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
       </div>
 
       {/* Tags */}
-      <div className="flex flex-wrap gap-2">
+      <div className="mb-6 flex flex-wrap gap-2">
         {displayTags.map((tag, index) => (
           <span
             key={index}
@@ -122,12 +123,12 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
         ))}
       </div>
 
-      {/* ✅ LINK "Ver case completo" - IGUAL PERFORMANCE */}
-      <div className="mb-6 flex items-center gap-2 text-sm font-medium text-foreground transition-colors duration-200 group-hover:text-primary">
+      {/* ✅ LINK "Ver case completo" - EMBAIXO DAS TAGS */}
+      <div className="flex items-center gap-2 text-sm font-medium text-primary transition-colors duration-200 group-hover:text-primary">
         <span>
           {locale === "pt" ? "Ver case completo" : "View full case"}
         </span>
-        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+        <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
       </div>
     </Link>
   );

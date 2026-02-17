@@ -151,7 +151,6 @@ export function ExperienceSection() {
                         {locale === "en" ? exp.roleEn : exp.role}
                       </h3>
                       <p className="mt-1 text-sm font-medium text-primary">{exp.company}</p>
-                      <p className="mt-0.5 text-sm text-muted-foreground">{exp.location}</p>
                     </div>
                   </AnimatedItem>
                 ))}

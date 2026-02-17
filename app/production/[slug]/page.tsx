@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Tag, Play, Calendar } from "lucide-react";
+import { ArrowLeft, ArrowRight, Tag, Play, Calendar, BookOpen, User } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { YouTubeEmbed } from "@/components/youtube-embed";
@@ -14,7 +14,6 @@ import {
 
 const SITE_URL = "https://www.caiofochetto.com";
 
-// Mapeamento de empresas para seus logos (em /public/companies/)
 const companyLogos: Record<string, string> = {
   "Octagon": "octagon.avif",
   "A+E Networks": "aenetworks.avif",
@@ -26,7 +25,6 @@ const companyLogos: Record<string, string> = {
   "TV Mundo Maior": "tvmundomaior.avif",
 };
 
-// Mapeamento de brands para seus logos (em /public/logos/white ou black)
 const brandLogos: Record<string, string> = {
   "Netflix": "netflix",
   "Budweiser": "budweiser",
@@ -34,6 +32,10 @@ const brandLogos: Record<string, string> = {
   "Natura": "natura",
   "A&E": "ae",
   "Bradesco": "bradesco",
+  "Havaianas": "havaianas",
+  "Bohemia": "bohemia",
+  "Nestlé": "nestle",
+  "Playground": "playground",
 };
 
 interface ProductionCasePageProps {
@@ -42,7 +44,6 @@ interface ProductionCasePageProps {
   }>;
 }
 
-// Generate static paths
 export async function generateStaticParams() {
   const slugs = getAllProductionCaseSlugs();
   return slugs.map((slug) => ({
@@ -50,7 +51,6 @@ export async function generateStaticParams() {
   }));
 }
 
-// Generate metadata
 export async function generateMetadata({
   params,
 }: ProductionCasePageProps): Promise<Metadata> {
@@ -97,20 +97,17 @@ export default async function ProductionCasePage({
     notFound();
   }
 
-  const { title, brand, year, type, role, what, myRole, tags, media } =
+  const { title, brand, company, year, type, role, what, myRole, tags, media } =
     productionCase;
 
-  // Navigation
   const navigation = getProductionCaseNavigation(resolvedParams.slug);
-
-  // Pegar logo da brand (assumindo string única)
   const brandLogo = brandLogos[brand];
 
-  // Section labels
   const sectionLabels = {
     what: "O QUE É?",
     myRole: "MEU PAPEL",
     capabilities: "COMPETÊNCIAS",
+    relatedContent: "CONTEÚDO RELACIONADO",
     back: "Voltar",
     previous: "Anterior",
     next: "Próximo",
@@ -120,13 +117,10 @@ export default async function ProductionCasePage({
     <div className="min-h-screen bg-background text-foreground">
       <Header />
 
-      {/* Hero - IDÊNTICO ao Performance */}
+      {/* Hero */}
       <section className="px-6 pt-28 pb-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
-
-          {/* Logo esquerda + Botão direita - IDÊNTICO */}
           <div className="flex items-center justify-between gap-4">
-            {/* Logo da Brand (esquerda) */}
             {brandLogo ? (
               <div className="flex h-16 w-32 items-center justify-start">
                 <Image
@@ -139,10 +133,9 @@ export default async function ProductionCasePage({
                 />
               </div>
             ) : (
-              <div className="h-16 w-32" /> // Spacer se não tiver logo
+              <div className="h-16 w-32" />
             )}
 
-            {/* Botão Voltar (direita) */}
             <Link
               href="/#work"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
@@ -152,23 +145,19 @@ export default async function ProductionCasePage({
             </Link>
           </div>
 
-          {/* Título - IDÊNTICO (text-3xl md:text-5xl) */}
           <div className="mt-8">
             <h1 className="text-3xl font-bold text-foreground md:text-5xl">
               {title}
             </h1>
           </div>
 
-          {/* Meta Info - Logo da Empresa + Company + Role + Período - IDÊNTICO */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
-            {/* Esquerda: Logo da Empresa + Company + Role */}
             <div className="flex items-center gap-4">
-              {/* Logo da Empresa (companies folder) */}
-              {companyLogos[brand] && (
+              {companyLogos[company] && (
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
                   <Image
-                    src={`/companies/${companyLogos[brand]}`}
-                    alt={`${brand} logo`}
+                    src={`/companies/${companyLogos[company]}`}
+                    alt={`${company} logo`}
                     width={48}
                     height={48}
                     className="h-full w-full object-cover"
@@ -177,12 +166,11 @@ export default async function ProductionCasePage({
               )}
 
               <div>
-                <p className="text-sm font-semibold text-foreground">{brand}</p>
+                <p className="text-sm font-semibold text-foreground">{company}</p>
                 <p className="text-xs text-muted-foreground">{role}</p>
               </div>
             </div>
 
-            {/* Direita: Período */}
             <div className="flex items-center gap-2 text-sm">
               <Calendar className="h-4 w-4 text-muted-foreground" />
               <span className="font-medium text-foreground">{year}</span>
@@ -191,19 +179,21 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* Playlist/Video Section - SE EXISTIR */}
-      {media.hero.type === "video" && media.hero.url && (
+      {/* ✅ PLAYLIST/VIDEO SECTION - Renderiza TODOS os tipos */}
+      {media.hero.type && (media.hero.videoId || media.hero.videoIds) && (
         <section className="px-6 py-16 lg:px-8">
           <div className="mx-auto max-w-4xl">
             <div className="flex items-center gap-2 mb-8">
               <Play className="h-4 w-4 text-primary" />
               <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-                CONTEÚDO RELACIONADO
+                {sectionLabels.relatedContent}
               </h2>
             </div>
 
             <YouTubeEmbed
-              videoId={media.hero.url}
+              type={media.hero.type}
+              videoId={media.hero.videoId}
+              videoIds={media.hero.videoIds}
               title={title}
               placeholder={media.hero.placeholder}
             />
@@ -211,11 +201,11 @@ export default async function ProductionCasePage({
         </section>
       )}
 
-      {/* What is it? - COLUNA (vertical) - IDÊNTICO ao Challenge */}
+      {/* O QUE É? */}
       <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-2 mb-4">
-            <Play className="h-4 w-4 text-primary" />
+            <BookOpen className="h-4 w-4 text-primary" />
             <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
               {sectionLabels.what}
             </h2>
@@ -226,11 +216,11 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* My Role - COLUNA (vertical) - IDÊNTICO ao Solution */}
+      {/* MEU PAPEL */}
       <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-2 mb-4">
-            <Tag className="h-4 w-4 text-primary" />
+            <User className="h-4 w-4 text-primary" />
             <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
               {sectionLabels.myRole}
             </h2>
@@ -241,7 +231,7 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* Capabilities Tags - IDÊNTICO ao Performance */}
+      {/* COMPETÊNCIAS */}
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="mb-4 flex items-center gap-2">
@@ -263,12 +253,10 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* Navigation - APENAS PREV + NEXT (2 colunas) - IDÊNTICO */}
+      {/* Navigation */}
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl border-t border-neutral-600 pt-12">
           <div className="grid gap-6 md:grid-cols-2">
-
-            {/* Previous Case */}
             {navigation.prev && (
               <Link
                 href={`/production/${navigation.prev.slug}`}
@@ -287,7 +275,6 @@ export default async function ProductionCasePage({
               </Link>
             )}
 
-            {/* Next Case */}
             {navigation.next && (
               <Link
                 href={`/production/${navigation.next.slug}`}
@@ -305,12 +292,10 @@ export default async function ProductionCasePage({
                 </div>
               </Link>
             )}
-
           </div>
         </div>
       </section>
 
-      {/* Footer SEM CTA "Vamos conversar?" */}
       <Footer hideContact={true} />
     </div>
   );

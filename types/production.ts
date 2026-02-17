@@ -1,8 +1,9 @@
 export interface ProductionCaseMedia {
   thumbnail: string;
   hero: {
-    type: "video" | "image";
-    url: string;
+    type: "video" | "playlist" | "multiple"; // ✅ 3 tipos agora
+    videoId?: string;      // ✅ Para playlist OU video único
+    videoIds?: string[];   // ✅ Para múltiplos vídeos
     placeholder?: string;
     alt: string;
   };
@@ -28,11 +29,13 @@ export interface ProductionCase {
   // Informações básicas
   title: string;
   brand: string;
+  company: string;        // ✅ ADICIONADO - Empresa onde trabalhava (Playground)
   year: string;
   type: string;
 
   // Conteúdo principal
   role: string;
+  description: string;    // ✅ ADICIONADO - Descrição breve para cards
   what: string;
   myRole: string;
 

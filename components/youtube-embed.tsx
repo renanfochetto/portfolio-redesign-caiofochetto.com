@@ -1,17 +1,22 @@
-import { Play } from "lucide-react";
-
 interface YouTubeEmbedProps {
-  type: "video" | "playlist" | "multiple";
-  url?: string;      // Video ID ou Playlist ID
-  urls?: string[];   // Array de Video IDs (para type="multiple")
+  type?: "video" | "playlist" | "multiple";
+  videoId?: string;      // Video ID único ou Playlist ID
+  videoIds?: string[];   // Array de Video IDs (para múltiplos)
   title: string;
   placeholder?: string;
 }
 
-export function YouTubeEmbed({ type, url, urls, title, placeholder }: YouTubeEmbedProps) {
+export function YouTubeEmbed({
+  type = "video",
+  videoId,
+  videoIds,
+  title,
+  placeholder
+}: YouTubeEmbedProps) {
+
   // TIPO 1: Playlist
-  if (type === "playlist" && url) {
-    const embedUrl = `https://www.youtube-nocookie.com/embed/videoseries?list=${url}`;
+  if (type === "playlist" && videoId) {
+    const embedUrl = `https://www.youtube-nocookie.com/embed/videoseries?list=${videoId}`;
 
     return (
       <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-neutral-600 bg-background">
@@ -29,8 +34,8 @@ export function YouTubeEmbed({ type, url, urls, title, placeholder }: YouTubeEmb
   }
 
   // TIPO 2: Vídeo único
-  if (type === "video" && url) {
-    const embedUrl = `https://www.youtube-nocookie.com/embed/${url}`;
+  if (type === "video" && videoId) {
+    const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}`;
 
     return (
       <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-neutral-600 bg-background">
@@ -48,22 +53,22 @@ export function YouTubeEmbed({ type, url, urls, title, placeholder }: YouTubeEmb
   }
 
   // TIPO 3: Múltiplos vídeos (grid 2 colunas)
-  if (type === "multiple" && urls && urls.length > 0) {
+  if (type === "multiple" && videoIds && videoIds.length > 0) {
     return (
       <div className="grid gap-6 md:grid-cols-2">
-        {urls.map((videoId, index) => {
-          const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}`;
+        {videoIds.map((id, index) => {
+          const embedUrl = `https://www.youtube-nocookie.com/embed/${id}`;
 
           return (
             <div
-              key={videoId}
+              key={id}
               className="relative aspect-video w-full overflow-hidden rounded-lg border border-neutral-600 bg-background"
             >
               <iframe
                 width="100%"
                 height="100%"
                 src={embedUrl}
-                title={`${title} - Part ${index + 1}`}
+                title={`${title} - Parte ${index + 1}`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="h-full w-full"
@@ -75,7 +80,7 @@ export function YouTubeEmbed({ type, url, urls, title, placeholder }: YouTubeEmb
     );
   }
 
-  // Fallback: Placeholder
+  // Fallback: Placeholder ou nada
   return placeholder ? (
     <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-neutral-600 bg-muted">
       <img
@@ -83,9 +88,6 @@ export function YouTubeEmbed({ type, url, urls, title, placeholder }: YouTubeEmb
         alt={title}
         className="h-full w-full object-cover"
       />
-      <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-        <Play className="h-16 w-16 text-white opacity-80" />
-      </div>
     </div>
   ) : null;
 }
