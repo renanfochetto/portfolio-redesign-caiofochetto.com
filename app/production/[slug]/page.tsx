@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Tag, Play, Calendar, BookOpen, User } from "lucide-react";
-import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { YouTubeEmbed } from "@/components/youtube-embed";
 import {
@@ -115,22 +114,18 @@ export default async function ProductionCasePage({
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
-
-      {/* Hero */}
-      <section className="px-6 pt-28 pb-16 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="flex items-center justify-between gap-4">
-            {brandLogo ? (
-              <div className="flex h-16 w-32 items-center justify-start">
-                <Image
-                  src={`/logos/white/${brandLogo}.svg`}
-                  alt={`${brand} logo`}
-                  width={128}
-                  height={64}
-                  className="h-full w-auto max-w-full object-contain object-left"
-                  unoptimized
-                />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            name: title,
+            description: what,
+            uploadDate: year,
+          }),
+        }}
+      />
               </div>
             ) : (
               <div className="h-16 w-32" />
