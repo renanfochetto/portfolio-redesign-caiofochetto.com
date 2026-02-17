@@ -1,4 +1,5 @@
 // app/production/[slug]/page.tsx
+// VERSÃO FINAL MOBILE: Vídeo full-width + Logo uniforme
 "use client";
 
 import Image from "next/image";
@@ -57,7 +58,7 @@ export default function ProductionCasePage({ params }: PageProps) {
   useEffect(() => {
     setMounted(true);
     params.then(setResolvedParams);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [params]);
 
   if (!mounted || !resolvedParams) return null;
 
@@ -65,9 +66,7 @@ export default function ProductionCasePage({ params }: PageProps) {
   const productionCase = getProductionCaseBySlug(slug);
   if (!productionCase) notFound();
 
-  // Mesma lógica exata da performance page
   const logoFolder = theme === "dark" ? "white" : "black";
-
   const { title, brand, company, year, role, what, myRole, tags, media } = productionCase;
   const navigation = getProductionCaseNavigation(slug);
   const brandLogo = brandLogos[brand];
@@ -90,8 +89,6 @@ export default function ProductionCasePage({ params }: PageProps) {
       {/* Hero */}
       <section className="px-6 pt-28 pb-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
-
-          {/* Logo esquerda + Botão Voltar direita */}
           <div className="flex items-center justify-between gap-4">
             {brandLogo ? (
               <div className="flex h-16 w-32 items-center justify-start">
@@ -100,8 +97,8 @@ export default function ProductionCasePage({ params }: PageProps) {
                   alt={`${brand} logo`}
                   width={128}
                   height={64}
-                  className="h-full object-contain object-left"
-                  style={{ width: "auto", maxWidth: "100%" }}
+                  className="h-full w-auto object-contain object-left"
+                  style={{ maxWidth: "100%" }}
                   unoptimized
                 />
               </div>
@@ -118,16 +115,15 @@ export default function ProductionCasePage({ params }: PageProps) {
             </Link>
           </div>
 
-          {/* Título */}
           <div className="mt-8">
             <h1 className="text-3xl font-bold text-foreground md:text-5xl">
               {title}
             </h1>
           </div>
 
-          {/* Meta Info */}
+          {/* Meta Info - Logo UNIFORME (mesmo padrão do case de performance) */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
               {companyLogo && (
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
                   <Image
@@ -135,8 +131,8 @@ export default function ProductionCasePage({ params }: PageProps) {
                     alt={`${company} logo`}
                     width={48}
                     height={48}
-                    className="h-full object-cover"
-                    style={{ width: "auto" }}
+                    className="h-full w-auto object-cover"
+                    unoptimized
                   />
                 </div>
               )}
@@ -154,23 +150,29 @@ export default function ProductionCasePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Playlist/Video */}
+      {/* ✅ VÍDEO FULL-WIDTH EM MOBILE */}
       {media.hero.type && (media.hero.videoId || media.hero.videoIds) && (
-        <section className="px-6 py-16 lg:px-8">
-          <div className="mx-auto max-w-4xl">
-            <div className="flex items-center gap-2 mb-8">
-              <Play className="h-4 w-4 text-primary" />
-              <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-                {sectionLabels.relatedContent}
-              </h2>
+        <section className="px-0 sm:px-6 py-12 sm:py-16 lg:px-8">
+          <div className="mx-auto w-full sm:max-w-4xl">
+            <div className="px-6 sm:px-0 mb-6 sm:mb-8">
+              <div className="flex items-center gap-2">
+                <Play className="h-4 w-4 text-primary" />
+                <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+                  {sectionLabels.relatedContent}
+                </h2>
+              </div>
             </div>
-            <YouTubeEmbed
-              type={media.hero.type}
-              videoId={media.hero.videoId}
-              videoIds={media.hero.videoIds}
-              title={title}
-              placeholder={media.hero.placeholder}
-            />
+
+            {/* YouTubeEmbed wrapper - full-width em mobile */}
+            <div className="sm:rounded-lg overflow-hidden border-0 sm:border sm:border-neutral-600">
+              <YouTubeEmbed
+                type={media.hero.type}
+                videoId={media.hero.videoId}
+                videoIds={media.hero.videoIds}
+                title={title}
+                placeholder={media.hero.placeholder}
+              />
+            </div>
           </div>
         </section>
       )}
