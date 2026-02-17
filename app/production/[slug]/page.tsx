@@ -77,9 +77,9 @@ export default async function ProductionCasePage({ params }: { params: Promise<{
             <div className="grid gap-8 md:grid-cols-2">
               {/* Video */}
               <div className="aspect-video overflow-hidden rounded-lg border border-border">
-                {media.hero.type === "video" && media.hero.url && (
+                {media.hero.type === "video" && media.hero.videoId && (
                   <YouTubeEmbed
-                    videoId={media.hero.url}
+                    videoId={media.hero.videoId}
                     title={title}
                     placeholder={media.hero.placeholder}
                   />
