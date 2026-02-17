@@ -12,11 +12,13 @@ export function Header() {
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Desabilita scroll quando menu está aberto E compensa shift da scrollbar
   useEffect(() => {
     if (menuOpen) {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
+      // Também aplica no header fixo
       const header = document.querySelector('header');
       if (header) {
         (header as HTMLElement).style.paddingRight = `${scrollbarWidth}px`;
@@ -57,6 +59,7 @@ export function Header() {
       className="fixed top-0 z-50 w-full border-b border-neutral-600 bg-background/80 backdrop-blur-md"
     >
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+        {/* Título com hover e active */}
         <Link
           href={`/${locale}`}
           className="font-heading text-xl font-bold tracking-tight text-foreground transition-colors duration-200 hover:text-primary active:scale-95"
@@ -66,6 +69,7 @@ export function Header() {
 
         {/* Desktop nav */}
         <div className="hidden items-center gap-8 md:flex">
+          {/* Links de navegação */}
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -80,12 +84,13 @@ export function Header() {
           <button
             onClick={toggleTheme}
             className="
-              flex items-center justify-center
+              flex items-center justify-center gap-1.5 
               rounded-full 
               border border-neutral-600
               hover:border-primary
               active:scale-95
-              w-10 h-7
+              px-3 py-1 
+              min-w-[44px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
@@ -104,19 +109,20 @@ export function Header() {
           <Link
             href={localeHref}
             className="
-              flex items-center justify-center
+              flex items-center justify-center gap-1.5 
               rounded-full 
               border border-neutral-600
               hover:border-primary
               active:scale-95
-              w-10 h-7
+              px-3 py-1 
+              min-w-[44px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
               transition-all duration-200
             "
           >
-            <Globe className="h-3.5 w-3.5 mr-1" />
+            <Globe className="h-3.5 w-3.5" />
             {otherLocale.toUpperCase()}
           </Link>
         </div>
@@ -127,12 +133,13 @@ export function Header() {
           <button
             onClick={toggleTheme}
             className="
-              flex items-center justify-center
+              flex items-center justify-center gap-1 
               rounded-full 
               border border-neutral-600
               hover:border-primary
               active:scale-95
-              w-9 h-6
+              px-2.5 py-1 
+              min-w-[36px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
@@ -151,19 +158,20 @@ export function Header() {
           <Link
             href={localeHref}
             className="
-              flex items-center justify-center
+              flex items-center justify-center gap-1 
               rounded-full 
               border border-neutral-600
               hover:border-primary
               active:scale-95
-              w-9 h-6
+              px-2.5 py-1 
+              min-w-[36px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
               transition-all duration-200
             "
           >
-            <Globe className="h-3 w-3 mr-0.5" />
+            <Globe className="h-3 w-3" />
             {otherLocale.toUpperCase()}
           </Link>
 
