@@ -84,12 +84,13 @@ export function Header() {
           <button
             onClick={toggleTheme}
             className="
-              flex items-center gap-1.5 
+              flex items-center justify-center gap-1.5 
               rounded-full 
               border border-neutral-600
               hover:border-primary
               active:scale-95
               px-3 py-1 
+              min-w-[44px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
@@ -108,12 +109,13 @@ export function Header() {
           <Link
             href={localeHref}
             className="
-              flex items-center gap-1.5 
+              flex items-center justify-center gap-1.5 
               rounded-full 
               border border-neutral-600
               hover:border-primary
               active:scale-95
               px-3 py-1 
+              min-w-[44px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
@@ -131,12 +133,13 @@ export function Header() {
           <button
             onClick={toggleTheme}
             className="
-              flex items-center gap-1 
+              flex items-center justify-center gap-1 
               rounded-full 
               border border-neutral-600
               hover:border-primary
               active:scale-95
               px-2.5 py-1 
+              min-w-[36px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
@@ -155,12 +158,13 @@ export function Header() {
           <Link
             href={localeHref}
             className="
-              flex items-center gap-1 
+              flex items-center justify-center gap-1 
               rounded-full 
               border border-neutral-600
               hover:border-primary
               active:scale-95
               px-2.5 py-1 
+              min-w-[36px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
