@@ -216,7 +216,8 @@ export default function CaseStudyPage({ params }: PageProps) {
                   alt={`${firstBrand} logo`}
                   width={128}
                   height={64}
-                  className="h-full w-auto max-w-full object-contain object-left"
+                  className="h-full object-contain object-left"
+                  style={{ width: "auto", maxWidth: "100%" }}
                   unoptimized
                 />
               </div>
