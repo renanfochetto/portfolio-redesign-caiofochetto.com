@@ -96,9 +96,8 @@ export function LogoCarousel() {
               className="group flex flex-shrink-0 cursor-pointer items-center justify-center transition-opacity duration-300"
               style={{
                 opacity: 0.7,
-                width: "auto",
-                maxWidth: "120px", // Limita largura (horizontais não ficam enormes)
-                height: "56px",     // Altura máxima (verticais usam isso)
+                width: "140px",
+                height: "56px",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = "1";
@@ -112,7 +111,6 @@ export function LogoCarousel() {
                 alt={logo.alt}
                 width={140}
                 height={56}
-                style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
                 className="object-contain object-center"
                 unoptimized={true}
                 priority={idx < 15}
