@@ -91,11 +91,10 @@ export function CaseCard({
                 alt={`${brand} logo`}
                 width={64}
                 height={64}
-                className="h-full object-contain object-left"
-                style={{ width: "auto", maxWidth: "100px" }}
+                style={{ width: "auto", height: "100%", maxWidth: "100px" }}
+                className="object-contain object-left"
                 unoptimized
-              />
-            </div>
+              />            </div>
           )}
 
           {/* Badge + Arrow */}
