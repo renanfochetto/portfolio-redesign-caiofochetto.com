@@ -1,5 +1,5 @@
 // app/[locale]/case/[slug]/page.tsx
-// VERSÃO FINAL MOBILE: Logo uniforme + Vídeo full-width
+// VERSÃO FINAL: Logo uniforme (padrão production) + Ano oculto mobile
 
 "use client";
 
@@ -107,9 +107,6 @@ export default function CaseStudyPage({ params }: PageProps) {
       results: "Resultados",
       learnings: "Principais Aprendizados",
       capabilities: "Competências",
-      role: "Função",
-      period: "Período",
-      company: "Empresa",
       back: "Voltar",
       previous: "Anterior",
       next: "Próximo"
@@ -120,9 +117,6 @@ export default function CaseStudyPage({ params }: PageProps) {
       results: "Results",
       learnings: "Key Learnings",
       capabilities: "Capabilities",
-      role: "Role",
-      period: "Period",
-      company: "Company",
       back: "Back",
       previous: "Previous",
       next: "Next"
@@ -190,7 +184,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             </h1>
           </div>
 
-          {/* ✅ LOGO UNIFORME - mesmo padrão do production case */}
+          {/* ✅ Meta Info - Logo uniforme + Ano oculto em mobile */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
             <div className="flex items-center gap-3 sm:gap-4">
               {companyLogo && (
@@ -212,7 +206,8 @@ export default function CaseStudyPage({ params }: PageProps) {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-sm">
+            {/* Ano - APENAS tablet+ */}
+            <div className="hidden sm:flex items-center gap-2 text-sm">
               <Calendar className="h-4 w-4 text-muted-foreground" />
               <span className="font-medium text-foreground">{study.period}</span>
             </div>
@@ -220,7 +215,7 @@ export default function CaseStudyPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ✅ VÍDEO FULL-WIDTH EM MOBILE */}
+      {/* Playlist Section - Vídeo full-width mobile */}
       {study.playlist_url && (() => {
         const playlistId = (() => {
           try {
