@@ -2,25 +2,68 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Tag, Calendar, User, Briefcase } from "lucide-react";
+import { ArrowLeft, ArrowRight, Tag, Play, Calendar, BookOpen, User } from "lucide-react";
+import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { YouTubeEmbed } from "@/components/youtube-embed";
-import { getProductionCaseBySlug, getAllProductionCaseSlugs, getProductionCaseNavigation } from "@/lib/production-cases";
+import {
+  getProductionCaseBySlug,
+  getProductionCaseNavigation,
+  getAllProductionCaseSlugs,
+} from "@/lib/production-cases";
 
+const SITE_URL = "https://www.caiofochetto.com";
+
+// Mapeamento de empresas para seus logos (em /public/companies/)
+const companyLogos: Record<string, string> = {
+  "Octagon": "octagon.avif",
+  "A+E Networks": "aenetworks.avif",
+  "Jellysmack": "jellysmack.avif",
+  "Playground": "playground.avif",
+  "Portal R7": "portalr7.avif",
+  "Rede Boa Nova": "redeboanova.avif",
+  "TV Cultura": "tvcultura.avif",
+  "TV Mundo Maior": "tvmundomaior.avif",
+};
+
+// Mapeamento de brands para seus logos (em /public/logos/white ou black)
+const brandLogos: Record<string, string> = {
+  "Netflix": "netflix",
+  "Budweiser": "budweiser",
+  "HISTORY": "history",
+  "Natura": "natura",
+  "A&E": "ae",
+  "Bradesco": "bradesco",
+  "Havaianas": "havaianas",
+  "Bohemia": "bohemia",
+  "Nestlé": "nestle",
+  "Playground": "playground",
+};
+
+interface ProductionCasePageProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
+// Generate static paths
 export async function generateStaticParams() {
-  return getAllProductionCaseSlugs().map(slug => ({
+  const slugs = getAllProductionCaseSlugs();
+  return slugs.map((slug) => ({
     slug,
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const productionCase = getProductionCaseBySlug(slug);
+// Generate metadata
+export async function generateMetadata({
+  params,
+}: ProductionCasePageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const productionCase = getProductionCaseBySlug(resolvedParams.slug);
 
   if (!productionCase) {
     return {
-      title: "Caso não encontrado",
-      description: "Caso de produção não encontrado",
+      title: "Case Not Found",
     };
   }
 
@@ -28,162 +71,244 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: productionCase.seo.metaTitle,
     description: productionCase.seo.metaDescription,
     openGraph: {
+      title: productionCase.seo.metaTitle,
+      description: productionCase.seo.metaDescription,
       images: [productionCase.seo.ogImage],
+      type: "website",
+      locale: "pt_BR",
+      siteName: "Caio Fochetto Portfolio",
+      url: `${SITE_URL}/production/${resolvedParams.slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: productionCase.seo.metaTitle,
+      description: productionCase.seo.metaDescription,
+      images: [productionCase.seo.ogImage],
+    },
+    alternates: {
+      canonical: `${SITE_URL}/production/${resolvedParams.slug}`,
     },
   };
 }
 
-export default async function ProductionCasePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const productionCase = getProductionCaseBySlug(slug);
+export default async function ProductionCasePage({
+  params,
+}: ProductionCasePageProps) {
+  const resolvedParams = await params;
+  const productionCase = getProductionCaseBySlug(resolvedParams.slug);
 
   if (!productionCase) {
     notFound();
   }
 
-  const { prev, next } = getProductionCaseNavigation(slug);
-  const { title, brand, role, year, type, what, myRole, tags, media } = productionCase;
+  const { title, brand, company, year, type, role, what, myRole, tags, media } =
+    productionCase;
+
+  const navigation = getProductionCaseNavigation(resolvedParams.slug);
+  const brandLogo = brandLogos[brand];
+
+  const sectionLabels = {
+    what: "O QUE É?",
+    myRole: "MEU PAPEL",
+    capabilities: "COMPETÊNCIAS",
+    relatedContent: "CONTEÚDO RELACIONADO",
+    back: "Voltar",
+    previous: "Anterior",
+    next: "Próximo",
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "VideoObject",
-            name: title,
-            description: what,
-            uploadDate: year,
-          }),
-        }}
-      />
+      <Header />
 
-      <main className="relative">
-        {/* Hero Video Section */}
-        <section className="relative bg-card/50 py-12 md:py-20">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="mb-8 flex items-center justify-between">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
-              >
-                <ArrowLeft className="h-4 w-4" />
-                Voltar
-              </Link>
-              <span className="text-xs font-medium uppercase tracking-widest text-primary">Produção</span>
-            </div>
+      {/* Hero */}
+      <section className="px-6 pt-28 pb-16 lg:px-8">
+        <div className="mx-auto max-w-4xl">
 
-            <div className="grid gap-8 md:grid-cols-2">
-              {/* Video */}
-              <div className="aspect-video overflow-hidden rounded-lg border border-border">
-                {media.hero.type === "video" && media.hero.videoId && (
-                  <YouTubeEmbed
-                    videoId={media.hero.videoId}
-                    title={title}
-                    placeholder={media.hero.placeholder}
+          {/* Brand logo (esquerda) + Botão Voltar (direita) */}
+          <div className="flex items-center justify-between gap-4">
+            {brandLogo ? (
+              <div className="flex h-16 w-32 items-center justify-start">
+                <Image
+                  src={`/logos/white/${brandLogo}.svg`}
+                  alt={`${brand} logo`}
+                  width={128}
+                  height={64}
+                  className="h-full w-auto max-w-full object-contain object-left"
+                  unoptimized
+                />
+              </div>
+            ) : (
+              <div className="h-16 w-32" />
+            )}
+
+            <Link
+              href="/#work"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              {sectionLabels.back}
+            </Link>
+          </div>
+
+          {/* Título */}
+          <div className="mt-8">
+            <h1 className="text-3xl font-bold text-foreground md:text-5xl">
+              {title}
+            </h1>
+          </div>
+
+          {/* Meta Info: Company logo + nome + role | Ano */}
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
+            <div className="flex items-center gap-4">
+              {companyLogos[company] && (
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
+                  <Image
+                    src={`/companies/${companyLogos[company]}`}
+                    alt={`${company} logo`}
+                    width={48}
+                    height={48}
+                    className="h-full w-full object-cover"
                   />
-                )}
-              </div>
-
-              {/* Info */}
-              <div>
-                <h1 className="text-4xl font-bold text-foreground md:text-5xl">{title}</h1>
-                <div className="mt-6 space-y-4">
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Empresa</p>
-                    <p className="mt-1 text-lg font-semibold text-foreground">{brand}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Cargo</p>
-                    <div className="mt-1 flex items-center gap-2">
-                      <Briefcase className="h-4 w-4 text-primary" />
-                      <p className="font-semibold text-foreground">{role}</p>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Tipo</p>
-                    <p className="mt-1 text-foreground">{type}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Ano</p>
-                    <p className="mt-1 text-foreground">{year}</p>
-                  </div>
                 </div>
+              )}
+
+              <div>
+                <p className="text-sm font-semibold text-foreground">{company}</p>
+                <p className="text-xs text-muted-foreground">{role}</p>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* What Section */}
-        <section className="border-t border-border px-6 py-12 md:py-20">
-          <div className="mx-auto max-w-2xl">
-            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">O que é</h2>
-            <p className="mt-6 text-lg leading-relaxed text-foreground">{what}</p>
-          </div>
-        </section>
-
-        {/* My Role Section */}
-        <section className="border-t border-border bg-card/50 px-6 py-12 md:py-20">
-          <div className="mx-auto max-w-2xl">
-            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">Meu Role</h2>
-            <p className="mt-6 text-lg leading-relaxed text-foreground">{myRole}</p>
-          </div>
-        </section>
-
-        {/* Tags */}
-        {tags.length > 0 && (
-          <section className="border-t border-border px-6 py-12">
-            <div className="mx-auto max-w-2xl">
-              <h3 className="text-xs font-medium uppercase tracking-widest text-primary">Tags</h3>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-neutral-600 px-3 py-1 text-xs font-medium text-muted-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Navigation */}
-        <section className="border-t border-border px-6 py-12">
-          <div className="mx-auto max-w-6xl">
-            <div className="grid gap-8 md:grid-cols-2">
-              {prev && (
-                <Link
-                  href={`/production/${prev.slug}`}
-                  className="group flex items-center justify-between rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card/50"
-                >
-                  <ArrowLeft className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
-                  <div className="text-right">
-                    <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Anterior</p>
-                    <p className="mt-1 font-semibold text-foreground">{prev.title}</p>
-                  </div>
-                </Link>
-              )}
-              {next && (
-                <Link
-                  href={`/production/${next.slug}`}
-                  className="group flex items-center justify-between rounded-lg border border-border p-6 transition-all hover:border-primary hover:bg-card/50"
-                >
-                  <div className="text-left">
-                    <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Próximo</p>
-                    <p className="mt-1 font-semibold text-foreground">{next.title}</p>
-                  </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
-                </Link>
-              )}
+            <div className="flex items-center gap-2 text-sm">
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <span className="font-medium text-foreground">{year}</span>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
-      <Footer />
+      {/* Playlist/Video Section - Renderiza todos os tipos */}
+      {media.hero.type && (media.hero.videoId || media.hero.videoIds) && (
+        <section className="px-6 py-16 lg:px-8">
+          <div className="mx-auto max-w-4xl">
+            <div className="flex items-center gap-2 mb-8">
+              <Play className="h-4 w-4 text-primary" />
+              <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+                {sectionLabels.relatedContent}
+              </h2>
+            </div>
+
+            <YouTubeEmbed
+              type={media.hero.type}
+              videoId={media.hero.videoId}
+              videoIds={media.hero.videoIds}
+              title={title}
+              placeholder={media.hero.placeholder}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* O QUE É? */}
+      <section className="px-6 py-12 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex items-center gap-2 mb-4">
+            <BookOpen className="h-4 w-4 text-primary" />
+            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.what}
+            </h2>
+          </div>
+          <p className="text-base leading-relaxed text-muted-foreground">
+            {what}
+          </p>
+        </div>
+      </section>
+
+      {/* MEU PAPEL */}
+      <section className="px-6 py-12 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex items-center gap-2 mb-4">
+            <User className="h-4 w-4 text-primary" />
+            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.myRole}
+            </h2>
+          </div>
+          <p className="text-base leading-relaxed text-muted-foreground">
+            {myRole}
+          </p>
+        </div>
+      </section>
+
+      {/* COMPETÊNCIAS */}
+      <section className="px-6 py-16 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-4 flex items-center gap-2">
+            <Tag className="h-4 w-4 text-primary" />
+            <p className="text-xs font-medium uppercase tracking-widest text-primary">
+              {sectionLabels.capabilities}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {tags.map((capability, index) => (
+              <span
+                key={index}
+                className="rounded-full border border-neutral-600 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:border-primary hover:text-primary"
+              >
+                {capability}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Navigation */}
+      <section className="px-6 py-16 lg:px-8">
+        <div className="mx-auto max-w-4xl border-t border-neutral-600 pt-12">
+          <div className="grid gap-6 md:grid-cols-2">
+
+            {/* Previous Case */}
+            {navigation.prev && (
+              <Link
+                href={`/production/${navigation.prev.slug}`}
+                className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all duration-200 hover:border-primary hover:bg-card/50 active:scale-[0.98]"
+              >
+                <div className="flex items-center gap-2 text-xs font-semibold text-primary">
+                  <ArrowLeft className="h-4 w-4" />
+                  {sectionLabels.previous}
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">{navigation.prev.brand}</p>
+                  <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors">
+                    {navigation.prev.title}
+                  </h3>
+                </div>
+              </Link>
+            )}
+
+            {/* Next Case */}
+            {navigation.next && (
+              <Link
+                href={`/production/${navigation.next.slug}`}
+                className="group flex flex-col gap-3 rounded-lg border border-neutral-600 p-6 transition-all duration-200 hover:border-primary hover:bg-card/50 active:scale-[0.98]"
+              >
+                <div className="flex items-center justify-end gap-2 text-xs font-semibold text-primary">
+                  {sectionLabels.next}
+                  <ArrowRight className="h-4 w-4" />
+                </div>
+                <div className="text-right">
+                  <p className="text-xs text-muted-foreground">{navigation.next.brand}</p>
+                  <h3 className="mt-1 line-clamp-2 text-base font-bold text-foreground group-hover:text-primary transition-colors">
+                    {navigation.next.title}
+                  </h3>
+                </div>
+              </Link>
+            )}
+
+          </div>
+        </div>
+      </section>
+
+      <Footer hideContact={true} />
     </div>
   );
 }
