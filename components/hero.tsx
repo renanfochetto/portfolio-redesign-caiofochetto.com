@@ -17,13 +17,16 @@ export function Hero() {
             <span className="text-xs font-medium text-primary md:text-sm">{t.hero.badge}</span>
           </div>
 
-          {/* Heading PRINCIPAL */}
+          {/* Heading PRINCIPAL - todas as linhas com MESMO tamanho */}
           <h1 className="font-display text-3xl font-bold leading-tight tracking-tight text-foreground text-balance sm:text-4xl md:text-5xl lg:text-7xl">
             {t.hero.headingLine1}
             <br />
             {t.hero.headingLine2}
             <br />
-            <span className="text-primary">{t.hero.headingLine3}</span>
+            {/* Forçar mesmo tamanho que as linhas acima */}
+            <span className="text-primary text-3xl sm:text-4xl md:text-5xl lg:text-7xl">
+              {t.hero.headingLine3}
+            </span>
           </h1>
 
           {/* Subtitle/Descrição */}
