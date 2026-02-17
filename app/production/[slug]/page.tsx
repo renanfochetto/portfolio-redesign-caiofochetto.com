@@ -34,6 +34,10 @@ const brandLogos: Record<string, string> = {
   "Natura": "natura",
   "A&E": "ae",
   "Bradesco": "bradesco",
+  "Havaianas": "havaianas",
+  "Bohemia": "bohemia",
+  "Nestlé": "nestle",
+  "Playground": "playground",
 };
 
 interface ProductionCasePageProps {
@@ -97,13 +101,14 @@ export default async function ProductionCasePage({
     notFound();
   }
 
-  const { title, brand, year, type, role, what, myRole, tags, media } =
+  // ✅ EXTRAIR COMPANY dos dados
+  const { title, brand, company, year, type, role, what, myRole, tags, media } =
     productionCase;
 
   // Navigation
   const navigation = getProductionCaseNavigation(resolvedParams.slug);
 
-  // Pegar logo da brand (assumindo string única)
+  // Pegar logo da brand
   const brandLogo = brandLogos[brand];
 
   // Section labels
@@ -120,11 +125,11 @@ export default async function ProductionCasePage({
     <div className="min-h-screen bg-background text-foreground">
       <Header />
 
-      {/* Hero - IDÊNTICO ao Performance */}
+      {/* Hero */}
       <section className="px-6 pt-28 pb-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
 
-          {/* Logo esquerda + Botão direita - IDÊNTICO */}
+          {/* Logo esquerda + Botão direita */}
           <div className="flex items-center justify-between gap-4">
             {/* Logo da Brand (esquerda) */}
             {brandLogo ? (
@@ -139,7 +144,7 @@ export default async function ProductionCasePage({
                 />
               </div>
             ) : (
-              <div className="h-16 w-32" /> // Spacer se não tiver logo
+              <div className="h-16 w-32" />
             )}
 
             {/* Botão Voltar (direita) */}
@@ -152,23 +157,23 @@ export default async function ProductionCasePage({
             </Link>
           </div>
 
-          {/* Título - IDÊNTICO (text-3xl md:text-5xl) */}
+          {/* Título */}
           <div className="mt-8">
             <h1 className="text-3xl font-bold text-foreground md:text-5xl">
               {title}
             </h1>
           </div>
 
-          {/* Meta Info - Logo da Empresa + Company + Role + Período - IDÊNTICO */}
+          {/* ✅ META INFO CORRIGIDO - Usa COMPANY ao invés de BRAND */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
-            {/* Esquerda: Logo da Empresa + Company + Role */}
+            {/* Esquerda: Logo da EMPRESA + Nome da EMPRESA + Role */}
             <div className="flex items-center gap-4">
-              {/* Logo da Empresa (companies folder) */}
-              {companyLogos[brand] && (
+              {/* Logo da EMPRESA (usando company) */}
+              {companyLogos[company] && (
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
                   <Image
-                    src={`/companies/${companyLogos[brand]}`}
-                    alt={`${brand} logo`}
+                    src={`/companies/${companyLogos[company]}`}
+                    alt={`${company} logo`}
                     width={48}
                     height={48}
                     className="h-full w-full object-cover"
@@ -177,7 +182,8 @@ export default async function ProductionCasePage({
               )}
 
               <div>
-                <p className="text-sm font-semibold text-foreground">{brand}</p>
+                {/* Nome da EMPRESA (não brand) */}
+                <p className="text-sm font-semibold text-foreground">{company}</p>
                 <p className="text-xs text-muted-foreground">{role}</p>
               </div>
             </div>
@@ -211,7 +217,7 @@ export default async function ProductionCasePage({
         </section>
       )}
 
-      {/* What is it? - COLUNA (vertical) - IDÊNTICO ao Challenge */}
+      {/* What is it? */}
       <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-2 mb-4">
@@ -226,7 +232,7 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* My Role - COLUNA (vertical) - IDÊNTICO ao Solution */}
+      {/* My Role */}
       <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-2 mb-4">
@@ -241,7 +247,7 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* Capabilities Tags - IDÊNTICO ao Performance */}
+      {/* Capabilities Tags */}
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="mb-4 flex items-center gap-2">
@@ -263,7 +269,7 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* Navigation - APENAS PREV + NEXT (2 colunas) - IDÊNTICO */}
+      {/* Navigation */}
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl border-t border-neutral-600 pt-12">
           <div className="grid gap-6 md:grid-cols-2">
@@ -310,7 +316,6 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* Footer SEM CTA "Vamos conversar?" */}
       <Footer hideContact={true} />
     </div>
   );
