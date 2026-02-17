@@ -43,9 +43,9 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
       aria-label={`Ver detalhes de ${title} - ${role}`}
       className="group block rounded-lg border border-neutral-600 bg-card p-4 sm:p-6 transition-all duration-200 hover:border-primary active:scale-[0.98]"
     >
-      {/* Header: LOGO + Badge + Arrow */}
+      {/* Header: LOGO + Badge (+ Arrow apenas em tablet+) */}
       <div className="mb-4 sm:mb-6 flex items-start justify-between gap-2">
-        {/* Logo container responsivo */}
+        {/* Logo */}
         <div className="flex h-12 w-24 sm:h-16 sm:w-32 items-center justify-start flex-shrink-0">
           {mounted && logoFile ? (
             <Image
@@ -66,7 +66,7 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
           )}
         </div>
 
-        {/* Badge + Arrow */}
+        {/* Badge + Arrow (arrow oculta em mobile) */}
         <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
           <div className="flex items-center gap-1 sm:gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-2 py-1 sm:px-3 sm:py-1.5">
             <Play className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-primary" />
@@ -74,7 +74,8 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
               {locale === "pt" ? "Vídeo" : "Video"}
             </span>
           </div>
-          <ArrowUpRight className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
+          {/* Seta decorativa - APENAS em tablet+ */}
+          <ArrowUpRight className="hidden sm:block h-5 w-5 text-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
         </div>
       </div>
 
@@ -115,7 +116,7 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
         ))}
       </div>
 
-      {/* Link "Ver case completo" */}
+      {/* CTA - seta funcional SEMPRE visível */}
       <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-primary transition-colors duration-200 group-hover:text-primary">
         <span>
           {locale === "pt" ? "Ver case completo" : "View full case"}
