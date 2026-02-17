@@ -3,13 +3,15 @@
 import { useI18n } from "@/lib/i18n";
 import { ArrowDown } from "lucide-react";
 import { LogoCarousel } from "./logo-carousel";
+import { AnimatedSection } from "./animated-section"; // ✅ IMPORT ADICIONADO
 
 export function Hero() {
   const { t } = useI18n();
 
   return (
     <section className="relative flex min-h-screen flex-col justify-between px-6 py-24 lg:px-8">
-      <div className="mx-auto w-full max-w-6xl flex-1 flex flex-col justify-center">
+      {/* ✅ ANIMATEDSECTION aplicado ao conteúdo principal */}
+      <AnimatedSection className="mx-auto w-full max-w-6xl flex-1 flex flex-col justify-center">
         <div className="mt-6">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
@@ -50,13 +52,14 @@ export function Hero() {
             </a>
           </div>
         </div>
-      </div>
+      </AnimatedSection>
 
-      <div className="mx-auto w-full max-w-6xl">
+      {/* ✅ ANIMATEDSECTION aplicado ao logo carousel */}
+      <AnimatedSection className="mx-auto w-full max-w-6xl">
         <div className="mt-12 pt-6">
           <LogoCarousel />
         </div>
-      </div>
+      </AnimatedSection>
     </section>
   );
 }
