@@ -8,15 +8,13 @@ export const prefersReducedMotion = () => {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 };
 
-// ✅ VERSÃO MELHORADA: Suporta decimais
 export function useCounter(
   value: number,
   duration: number = 2,
-  decimals: number = 0 // ✅ NOVO: número de decimais
+  decimals: number = 0
 ) {
   const count = useMotionValue(0);
 
-  // ✅ CORRIGIDO: Não arredondar sempre, respeitar decimais
   const formatted = useTransform(count, (latest) => {
     if (decimals > 0) {
       return parseFloat(latest.toFixed(decimals));
@@ -52,14 +50,18 @@ export function useCounter(
   return displayValue;
 }
 
+// ✅ VALORES EXAGERADOS PARA TESTE
 export const fadeInUpVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: {
+    opacity: 0,
+    y: 100  // ✅ EXAGERADO: era 20, agora 100px
+  },
   visible: (custom = 0) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
-      delay: custom * 0.1,
+      duration: 1.2,  // ✅ EXAGERADO: era 0.6s, agora 1.2s (bem lento)
+      delay: custom * 0.3,  // ✅ EXAGERADO: era 0.1s, agora 0.3s entre cada
       ease: "easeOut",
     },
   }),
@@ -70,7 +72,7 @@ export const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.3,  // ✅ EXAGERADO: era 0.1s, agora 0.3s
     },
   },
 };
