@@ -94,12 +94,11 @@ export function ExperienceSection() {
                 <Image
                   src={exp.logo}
                   alt={`${exp.company} logo`}
-                  width={48}
-                  height={48}
+                  width={64}
+                  height={64}
                   className="w-12 h-12 sm:w-16 sm:h-16 rounded object-contain"
                   unoptimized={true}
-                />
-              </div>
+                />              </div>
 
               {/* Conteúdo */}
               <div className="flex-1 min-w-0">
