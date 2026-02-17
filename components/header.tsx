@@ -173,9 +173,10 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-x-0 top-14 bottom-0 z-40 bg-background flex flex-col items-center justify-start pt-12 md:hidden overflow-y-auto"
+            className="fixed left-0 right-0 top-14 z-40 bg-background md:hidden"
+            style={{ height: 'calc(100vh - 3.5rem)' }}
           >
-            <div className="flex flex-col gap-8 text-center">
+            <div className="flex h-full flex-col items-center justify-center gap-8 text-center">
               {navItems.map((item, idx) => (
                 <motion.div
                   key={item.href}
