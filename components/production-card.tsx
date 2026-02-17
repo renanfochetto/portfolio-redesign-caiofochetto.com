@@ -21,9 +21,9 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
     setMounted(true);
   }, []);
 
-  const { slug, title, brand, year, type, role, tags } = productionCase;
+  const { slug, title, brand, year, type, role, description, tags } = productionCase;
 
-  // ✅ LOGO MAPPING SIMPLIFICADO - apenas nome do arquivo
+  // Logo mapping
   const brandLogos: Record<string, string> = {
     "Netflix": "netflix",
     "Budweiser": "budweiser",
@@ -31,13 +31,12 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
     "Natura": "natura",
     "A&E": "ae",
     "Bradesco": "bradesco",
-    "Havaianas + Netflix": "havaianas",
+    "Havaianas": "havaianas",
     "Playground": "playground",
     "Bohemia": "bohemia",
     "Nestlé": "nestle",
   };
 
-  // ✅ Determinar pasta (white/black) baseado no tema
   const logoFolder = theme === "dark" ? "white" : "black";
   const logoFile = brandLogos[brand];
 
@@ -65,12 +64,11 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
             />
           </div>
         ) : (
-          <div className="h-16 w-32" /> // Spacer se não tiver logo
+          <div className="h-16 w-32" />
         )}
 
         {/* Badge Vídeo + Arrow */}
         <div className="flex items-center gap-2">
-          {/* Video Badge */}
           <div className="flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5">
             <Play className="h-3 w-3 text-primary" />
             <span className="text-xs font-medium text-primary">
@@ -78,7 +76,6 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
             </span>
           </div>
 
-          {/* Arrow */}
           <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
         </div>
       </div>
@@ -89,20 +86,22 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
       </h3>
 
       {/* Role + Type */}
-      <div className="mb-6 space-y-2">
-        {/* Role com ícone */}
+      <div className="mb-4 space-y-2">
         <div className="flex items-center gap-2">
           <Briefcase className="h-4 w-4 text-primary" />
           <p className="text-sm font-semibold text-foreground">
             {role}
           </p>
         </div>
-
-        {/* Type + Year */}
         <p className="text-sm text-muted-foreground">
           {type} • {year}
         </p>
       </div>
+
+      {/* ✅ DESCRIÇÃO BREVE (NOVO) */}
+      <p className="mb-6 text-sm leading-relaxed text-muted-foreground line-clamp-2">
+        {description}
+      </p>
 
       {/* Tags */}
       <div className="flex flex-wrap gap-2">
