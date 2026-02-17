@@ -139,7 +139,7 @@ export function Header() {
               hover:border-primary
               active:scale-95
               px-2.5 py-1 
-              min-w-[36px]
+              min-w-[44px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
@@ -164,7 +164,7 @@ export function Header() {
               hover:border-primary
               active:scale-95
               px-2.5 py-1 
-              min-w-[36px]
+              min-w-[44px]
               text-xs font-medium 
               text-muted-foreground
               hover:text-primary
