@@ -17,8 +17,8 @@ export function Hero() {
             <span className="text-xs font-medium text-primary">{t.hero.badge}</span>
           </div>
 
-          {/* Heading - tamanhos reduzidos no mobile */}
-          <h1 className="mt-6 md:mt-8 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-foreground text-balance">
+          {/* Heading PRINCIPAL - MAIOR */}
+          <h1 className="mt-6 md:mt-8 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-foreground text-balance">
             {t.hero.headingLine1}
             <br />
             {t.hero.headingLine2}
@@ -26,12 +26,12 @@ export function Hero() {
             <span className="text-primary">{t.hero.headingLine3}</span>
           </h1>
 
-          {/* Subtitle - tamanho reduzido no mobile */}
-          <p className="mt-4 md:mt-6 max-w-xl text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground">
+          {/* Subtitle/Descrição - MENOR */}
+          <p className="mt-4 md:mt-6 max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground">
             {t.hero.subtitle}
           </p>
 
-          {/* CTA - tamanho reduzido no mobile */}
+          {/* CTA */}
           <div className="mt-6 md:mt-10">
             <a
               href="#work"
