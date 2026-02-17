@@ -1,281 +1,24 @@
 // PRODUCTION CASES - DADOS COMPLETOS
-// Baseado nas informações fornecidas
 
-export const productionCases = [
-  {
-    id: "netflix-worlds-collide",
-    slug: "netflix-worlds-collide",
-    title: "Worlds Collide: A Netflix Fan Experience",
-    brand: "Netflix",
-    company: "Playground", // ✅ Empresa do cargo
-    role: "Content and Product Manager", // ✅ Cargo
-    year: "2021",
-    type: "Brand Experience",
-
-    // ✅ DESCRIÇÃO BREVE (para o card)
-    description: "Experiência imersiva unindo universos icônicos da Netflix para fãs brasileiros, gerando buzz orgânico nas redes sociais.",
-
-    // ✅ O QUE É? (página individual)
-    what: "Experiência imersiva de marca que reuniu universos icônicos da Netflix, criando momentos compartilháveis que conectaram fãs com seus conteúdos favoritos através de instalações físicas e ativações digitais integradas.",
-
-    // ✅ MEU PAPEL (página individual)
-    myRole: "Desenvolvi e executei a estratégia de conteúdo multi-sensorial, coordenando criação de conteúdo com 15+ creators, gerenciando produção on-site e orquestrando amplificação digital integrada em tempo real.",
-
-    tags: [
-      "Brand Experience",
-      "Influencer Marketing",
-      "Event Production",
-      "Social Media Strategy",
-      "Content Creation",
-      "UGC Activation"
-    ],
-
-    media: {
-      thumbnail: "/images/production/netflix-worlds-collide/thumbnail.jpg",
-      hero: {
-        type: "playlist", // ✅ Playlist
-        url: "PLC85G0r1H2eGzzkHsNyKZ1uQMV7w0gNAk", // Playlist ID
-        placeholder: "/images/production/netflix-worlds-collide/hero.jpg",
-        alt: "Netflix Worlds Collide activation"
-      }
-    },
-
-    seo: {
-      metaTitle: "Netflix Worlds Collide - Brand Experience | Caio Fochetto",
-      metaDescription: "Experiência imersiva Netflix gerando buzz orgânico através de instalações físicas e ativações com creators.",
-      ogImage: "/images/production/netflix-worlds-collide/og-image.jpg"
-    }
-  },
-
-  {
-    id: "natura-todo-dia",
-    slug: "natura-todo-dia",
-    title: "Natura Todo Dia",
-    brand: "Natura",
-    company: "Playground",
-    role: "Content and Product Manager",
-    year: "2021",
-    type: "Content Series",
-
-    description: "Série de conteúdo conectando Natura com rotinas diárias dos brasileiros através de storytelling autêntico.",
-
-    what: "Série de conteúdo estratégico que traduziu os valores de sustentabilidade e bem-estar da Natura em narrativas do dia a dia, criando conexão emocional com o público através de histórias reais e autênticas.",
-
-    myRole: "Liderança completa da estratégia de conteúdo, desde conceituação até execução, incluindo direcionamento criativo, gestão de produção e coordenação com creators para garantir autenticidade e alinhamento com valores da marca.",
-
-    tags: [
-      "Content Strategy",
-      "Brand Storytelling",
-      "Sustainability",
-      "Creator Partnerships",
-      "Social Impact"
-    ],
-
-    media: {
-      thumbnail: "/images/production/natura-todo-dia/thumbnail.jpg",
-      hero: {
-        type: "playlist",
-        url: "PLC85G0r1H2eHLW3RERfHtGEudzLnYCVBx",
-        placeholder: "/images/production/natura-todo-dia/hero.jpg",
-        alt: "Natura Todo Dia content series"
-      }
-    },
-
-    seo: {
-      metaTitle: "Natura Todo Dia - Content Series | Caio Fochetto",
-      metaDescription: "Série de conteúdo conectando Natura com rotinas brasileiras através de storytelling autêntico e sustentável.",
-      ogImage: "/images/production/natura-todo-dia/og-image.jpg"
-    }
-  },
-
-  {
-    id: "havaianas-follow-my-voice",
-    slug: "havaianas-follow-my-voice",
-    title: "Follow My Voice",
-    brand: "Havaianas",
-    company: "Playground",
-    role: "Content and Product Manager",
-    year: "2022",
-    type: "Music Campaign",
-
-    description: "Campanha musical celebrando individualidade e expressão pessoal através de vozes autênticas.",
-
-    what: "Campanha que celebrou a individualidade e autenticidade através da música, conectando a marca Havaianas com expressões culturais brasileiras e criando momentos de identificação emocional com o público jovem.",
-
-    myRole: "Gestão end-to-end do projeto, incluindo desenvolvimento da narrativa musical, coordenação de produção audiovisual, seleção e direção de talentos, e estratégia de distribuição multi-plataforma.",
-
-    tags: [
-      "Music Marketing",
-      "Brand Campaign",
-      "Youth Culture",
-      "Content Production",
-      "Cultural Relevance"
-    ],
-
-    media: {
-      thumbnail: "/images/production/havaianas-follow-my-voice/thumbnail.jpg",
-      hero: {
-        type: "video",
-        url: "2KchK_PztnA", // Video ID
-        placeholder: "/images/production/havaianas-follow-my-voice/hero.jpg",
-        alt: "Havaianas Follow My Voice campaign"
-      }
-    },
-
-    seo: {
-      metaTitle: "Havaianas Follow My Voice - Music Campaign | Caio Fochetto",
-      metaDescription: "Campanha musical celebrando individualidade através de vozes autênticas e expressões culturais brasileiras.",
-      ogImage: "/images/production/havaianas-follow-my-voice/og-image.jpg"
-    }
-  },
-
-  {
-    id: "passion4jazz",
-    slug: "passion4jazz",
-    title: "Passion4Jazz",
-    brand: "Nestlé",
-    company: "Playground",
-    role: "Content and Product Manager",
-    year: "2021",
-    type: "Content Platform",
-
-    description: "Plataforma de conteúdo premium conectando música jazz com cultura de café Nespresso.",
-
-    what: "Plataforma de conteúdo que conectou a cultura do café premium Nespresso com a sofisticação do jazz, criando experiências imersivas que elevaram o posicionamento da marca através de música e lifestyle.",
-
-    myRole: "Desenvolvimento da estratégia de conteúdo, curadoria de artistas e repertório, produção de eventos e experiências, além de gestão da plataforma digital e criação de narrativas que integraram música, café e lifestyle.",
-
-    tags: [
-      "Premium Content",
-      "Music Culture",
-      "Lifestyle Marketing",
-      "Brand Experience",
-      "Content Curation"
-    ],
-
-    media: {
-      thumbnail: "/images/production/passion4jazz/thumbnail.jpg",
-      hero: {
-        type: "video",
-        url: "8wbdIYeAc_0",
-        placeholder: "/images/production/passion4jazz/hero.jpg",
-        alt: "Passion4Jazz content platform"
-      }
-    },
-
-    seo: {
-      metaTitle: "Passion4Jazz - Content Platform | Caio Fochetto",
-      metaDescription: "Plataforma premium conectando jazz e cultura de café Nespresso através de experiências imersivas.",
-      ogImage: "/images/production/passion4jazz/og-image.jpg"
-    }
-  },
-
-  {
-    id: "bohemia-sabor-tradicoes",
-    slug: "bohemia-sabor-tradicoes",
-    title: "Sabor que Move Tradições",
-    brand: "Bohemia",
-    company: "Playground",
-    role: "Content and Product Manager",
-    year: "2022",
-    type: "Cultural Content",
-
-    description: "Série documental explorando tradições culinárias brasileiras e sua conexão com cerveja artesanal.",
-
-    what: "Série documental que explorou tradições culinárias regionais brasileiras, conectando a herança artesanal da Bohemia com gastronomia local e criando narrativas que celebraram cultura, sabor e autenticidade.",
-
-    myRole: "Liderança criativa e estratégica do projeto, incluindo research de tradições regionais, desenvolvimento de roteiro, direção de produção audiovisual, e criação de estratégia de distribuição que maximizou relevância cultural.",
-
-    tags: [
-      "Documentary Content",
-      "Cultural Marketing",
-      "Food & Beverage",
-      "Regional Storytelling",
-      "Craft Heritage"
-    ],
-
-    media: {
-      thumbnail: "/images/production/bohemia-sabor-tradicoes/thumbnail.jpg",
-      hero: {
-        type: "multiple", // ✅ Múltiplos vídeos
-        urls: [
-          "35H3XqDnacA",
-          "X72AiB9y3L0"
-        ],
-        placeholder: "/images/production/bohemia-sabor-tradicoes/hero.jpg",
-        alt: "Bohemia Sabor que Move Tradições documentary"
-      }
-    },
-
-    seo: {
-      metaTitle: "Bohemia Sabor que Move Tradições - Documentary | Caio Fochetto",
-      metaDescription: "Série documental explorando tradições culinárias brasileiras e conexão com cerveja artesanal.",
-      ogImage: "/images/production/bohemia-sabor-tradicoes/og-image.jpg"
-    }
-  },
-
-  {
-    id: "cozinha-emergencia",
-    slug: "cozinha-emergencia",
-    title: "Cozinha de Emergência",
-    brand: "Nestlé",
-    company: "Playground",
-    role: "Content and Product Manager",
-    year: "2022",
-    type: "Entertainment Content",
-
-    description: "Conteúdo de entretenimento transformando desafios culinários em momentos divertidos e compartilháveis.",
-
-    what: "Formato de entretenimento que transformou situações culinárias desafiadoras em conteúdo divertido e educativo, criando conexão com o público através de humor, praticidade e produtos Nestlé de forma natural e contextualizada.",
-
-    myRole: "Conceituação e desenvolvimento do formato, direção criativa, gestão de produção audiovisual, coordenação de talentos/apresentadores, e estratégia de distribuição focada em engajamento e viralização orgânica.",
-
-    tags: [
-      "Entertainment Content",
-      "Food Content",
-      "Product Integration",
-      "Social Video",
-      "Edutainment"
-    ],
-
-    media: {
-      thumbnail: "/images/production/cozinha-emergencia/thumbnail.jpg",
-      hero: {
-        type: "video",
-        url: "F_yfWIWH1R0",
-        placeholder: "/images/production/cozinha-emergencia/hero.jpg",
-        alt: "Cozinha de Emergência entertainment content"
-      }
-    },
-
-    seo: {
-      metaTitle: "Cozinha de Emergência - Entertainment Content | Caio Fochetto",
-      metaDescription: "Formato de entretenimento transformando desafios culinários em conteúdo divertido e compartilhável.",
-      ogImage: "/images/production/cozinha-emergencia/og-image.jpg"
-    }
-  }
-];
-
-// ✅ TIPOS ATUALIZADOS
 export interface ProductionCase {
   id: string;
   slug: string;
   title: string;
   brand: string;
-  company: string; // ✅ NOVO: Empresa do cargo
-  role: string;    // ✅ NOVO: Cargo
+  company: string;
+  role: string;
   year: string;
   type: string;
-  description: string; // ✅ NOVO: Descrição breve para card
+  description: string;
   what: string;
   myRole: string;
   tags: string[];
   media: {
     thumbnail: string;
     hero: {
-      type: "video" | "playlist" | "multiple"; // ✅ 3 tipos
-      url?: string;      // Video único ou playlist ID
-      urls?: string[];   // Múltiplos vídeos
+      type: "video" | "playlist" | "multiple";
+      url?: string;
+      urls?: string[];
       placeholder?: string;
       alt: string;
     };
@@ -287,7 +30,178 @@ export interface ProductionCase {
   };
 }
 
-// ✅ HELPER FUNCTIONS
+export const productionCases: ProductionCase[] = [
+  {
+    id: "netflix-worlds-collide",
+    slug: "netflix-worlds-collide",
+    title: "Worlds Collide: A Netflix Fan Experience",
+    brand: "Netflix",
+    company: "Playground",
+    role: "Content and Product Manager",
+    year: "2021",
+    type: "Brand Experience",
+    description: "Experiência imersiva unindo universos icônicos da Netflix para fãs brasileiros, gerando buzz orgânico nas redes sociais.",
+    what: "Experiência imersiva de marca que reuniu universos icônicos da Netflix, criando momentos compartilháveis que conectaram fãs com seus conteúdos favoritos através de instalações físicas e ativações digitais integradas.",
+    myRole: "Desenvolvi e executei a estratégia de conteúdo multi-sensorial, coordenando criação de conteúdo com 15+ creators, gerenciando produção on-site e orquestrando amplificação digital integrada em tempo real.",
+    tags: ["Brand Experience", "Influencer Marketing", "Event Production", "Social Media Strategy", "Content Creation", "UGC Activation"],
+    media: {
+      thumbnail: "/images/production/netflix-worlds-collide/thumbnail.jpg",
+      hero: {
+        type: "playlist",
+        url: "PLC85G0r1H2eGzzkHsNyKZ1uQMV7w0gNAk",
+        placeholder: "/images/production/netflix-worlds-collide/hero.jpg",
+        alt: "Netflix Worlds Collide activation"
+      }
+    },
+    seo: {
+      metaTitle: "Netflix Worlds Collide - Brand Experience | Caio Fochetto",
+      metaDescription: "Experiência imersiva Netflix gerando buzz orgânico através de instalações físicas e ativações com creators.",
+      ogImage: "/images/production/netflix-worlds-collide/og-image.jpg"
+    }
+  },
+  {
+    id: "natura-todo-dia",
+    slug: "natura-todo-dia",
+    title: "Natura Todo Dia",
+    brand: "Natura",
+    company: "Playground",
+    role: "Content and Product Manager",
+    year: "2021",
+    type: "Content Series",
+    description: "Série de conteúdo conectando Natura com rotinas diárias dos brasileiros através de storytelling autêntico.",
+    what: "Série de conteúdo estratégico que traduziu os valores de sustentabilidade e bem-estar da Natura em narrativas do dia a dia, criando conexão emocional com o público através de histórias reais e autênticas.",
+    myRole: "Liderança completa da estratégia de conteúdo, desde conceituação até execução, incluindo direcionamento criativo, gestão de produção e coordenação com creators para garantir autenticidade e alinhamento com valores da marca.",
+    tags: ["Content Strategy", "Brand Storytelling", "Sustainability", "Creator Partnerships", "Social Impact"],
+    media: {
+      thumbnail: "/images/production/natura-todo-dia/thumbnail.jpg",
+      hero: {
+        type: "playlist",
+        url: "PLC85G0r1H2eHLW3RERfHtGEudzLnYCVBx",
+        placeholder: "/images/production/natura-todo-dia/hero.jpg",
+        alt: "Natura Todo Dia content series"
+      }
+    },
+    seo: {
+      metaTitle: "Natura Todo Dia - Content Series | Caio Fochetto",
+      metaDescription: "Série de conteúdo conectando Natura com rotinas brasileiras através de storytelling autêntico e sustentável.",
+      ogImage: "/images/production/natura-todo-dia/og-image.jpg"
+    }
+  },
+  {
+    id: "havaianas-follow-my-voice",
+    slug: "havaianas-follow-my-voice",
+    title: "Follow My Voice",
+    brand: "Havaianas",
+    company: "Playground",
+    role: "Content and Product Manager",
+    year: "2022",
+    type: "Music Campaign",
+    description: "Campanha musical celebrando individualidade e expressão pessoal através de vozes autênticas.",
+    what: "Campanha que celebrou a individualidade e autenticidade através da música, conectando a marca Havaianas com expressões culturais brasileiras e criando momentos de identificação emocional com o público jovem.",
+    myRole: "Gestão end-to-end do projeto, incluindo desenvolvimento da narrativa musical, coordenação de produção audiovisual, seleção e direção de talentos, e estratégia de distribuição multi-plataforma.",
+    tags: ["Music Marketing", "Brand Campaign", "Youth Culture", "Content Production", "Cultural Relevance"],
+    media: {
+      thumbnail: "/images/production/havaianas-follow-my-voice/thumbnail.jpg",
+      hero: {
+        type: "video",
+        url: "2KchK_PztnA",
+        placeholder: "/images/production/havaianas-follow-my-voice/hero.jpg",
+        alt: "Havaianas Follow My Voice campaign"
+      }
+    },
+    seo: {
+      metaTitle: "Havaianas Follow My Voice - Music Campaign | Caio Fochetto",
+      metaDescription: "Campanha musical celebrando individualidade através de vozes autênticas e expressões culturais brasileiras.",
+      ogImage: "/images/production/havaianas-follow-my-voice/og-image.jpg"
+    }
+  },
+  {
+    id: "passion4jazz",
+    slug: "passion4jazz",
+    title: "Passion4Jazz",
+    brand: "Nestlé",
+    company: "Playground",
+    role: "Content and Product Manager",
+    year: "2021",
+    type: "Content Platform",
+    description: "Plataforma de conteúdo premium conectando música jazz com cultura de café Nespresso.",
+    what: "Plataforma de conteúdo que conectou a cultura do café premium Nespresso com a sofisticação do jazz, criando experiências imersivas que elevaram o posicionamento da marca através de música e lifestyle.",
+    myRole: "Desenvolvimento da estratégia de conteúdo, curadoria de artistas e repertório, produção de eventos e experiências, além de gestão da plataforma digital e criação de narrativas que integraram música, café e lifestyle.",
+    tags: ["Premium Content", "Music Culture", "Lifestyle Marketing", "Brand Experience", "Content Curation"],
+    media: {
+      thumbnail: "/images/production/passion4jazz/thumbnail.jpg",
+      hero: {
+        type: "video",
+        url: "8wbdIYeAc_0",
+        placeholder: "/images/production/passion4jazz/hero.jpg",
+        alt: "Passion4Jazz content platform"
+      }
+    },
+    seo: {
+      metaTitle: "Passion4Jazz - Content Platform | Caio Fochetto",
+      metaDescription: "Plataforma premium conectando jazz e cultura de café Nespresso através de experiências imersivas.",
+      ogImage: "/images/production/passion4jazz/og-image.jpg"
+    }
+  },
+  {
+    id: "bohemia-sabor-tradicoes",
+    slug: "bohemia-sabor-tradicoes",
+    title: "Sabor que Move Tradições",
+    brand: "Bohemia",
+    company: "Playground",
+    role: "Content and Product Manager",
+    year: "2022",
+    type: "Cultural Content",
+    description: "Série documental explorando tradições culinárias brasileiras e sua conexão com cerveja artesanal.",
+    what: "Série documental que explorou tradições culinárias regionais brasileiras, conectando a herança artesanal da Bohemia com gastronomia local e criando narrativas que celebraram cultura, sabor e autenticidade.",
+    myRole: "Liderança criativa e estratégica do projeto, incluindo research de tradições regionais, desenvolvimento de roteiro, direção de produção audiovisual, e criação de estratégia de distribuição que maximizou relevância cultural.",
+    tags: ["Documentary Content", "Cultural Marketing", "Food & Beverage", "Regional Storytelling", "Craft Heritage"],
+    media: {
+      thumbnail: "/images/production/bohemia-sabor-tradicoes/thumbnail.jpg",
+      hero: {
+        type: "multiple",
+        urls: ["35H3XqDnacA", "X72AiB9y3L0"],
+        placeholder: "/images/production/bohemia-sabor-tradicoes/hero.jpg",
+        alt: "Bohemia Sabor que Move Tradições documentary"
+      }
+    },
+    seo: {
+      metaTitle: "Bohemia Sabor que Move Tradições - Documentary | Caio Fochetto",
+      metaDescription: "Série documental explorando tradições culinárias brasileiras e conexão com cerveja artesanal.",
+      ogImage: "/images/production/bohemia-sabor-tradicoes/og-image.jpg"
+    }
+  },
+  {
+    id: "cozinha-emergencia",
+    slug: "cozinha-emergencia",
+    title: "Cozinha de Emergência",
+    brand: "Nestlé",
+    company: "Playground",
+    role: "Content and Product Manager",
+    year: "2022",
+    type: "Entertainment Content",
+    description: "Conteúdo de entretenimento transformando desafios culinários em momentos divertidos e compartilháveis.",
+    what: "Formato de entretenimento que transformou situações culinárias desafiadoras em conteúdo divertido e educativo, criando conexão com o público através de humor, praticidade e produtos Nestlé de forma natural e contextualizada.",
+    myRole: "Conceituação e desenvolvimento do formato, direção criativa, gestão de produção audiovisual, coordenação de talentos/apresentadores, e estratégia de distribuição focada em engajamento e viralização orgânica.",
+    tags: ["Entertainment Content", "Food Content", "Product Integration", "Social Video", "Edutainment"],
+    media: {
+      thumbnail: "/images/production/cozinha-emergencia/thumbnail.jpg",
+      hero: {
+        type: "video",
+        url: "F_yfWIWH1R0",
+        placeholder: "/images/production/cozinha-emergencia/hero.jpg",
+        alt: "Cozinha de Emergência entertainment content"
+      }
+    },
+    seo: {
+      metaTitle: "Cozinha de Emergência - Entertainment Content | Caio Fochetto",
+      metaDescription: "Formato de entretenimento transformando desafios culinários em conteúdo divertido e compartilhável.",
+      ogImage: "/images/production/cozinha-emergencia/og-image.jpg"
+    }
+  }
+];
+
+// Helper functions
 export function getProductionCaseBySlug(slug: string): ProductionCase | null {
   return productionCases.find(c => c.slug === slug) || null;
 }
