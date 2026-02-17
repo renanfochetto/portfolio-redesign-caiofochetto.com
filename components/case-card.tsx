@@ -1,5 +1,5 @@
 // components/case-card.tsx
-// VERSÃO PADRONIZADA: Hover + Active consistentes, sem border duplicado
+// VERSÃO COM ANIMATEDCOUNTER: Métricas animadas
 
 "use client";
 
@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useTheme } from "./theme-provider";
+import { AnimatedCounter } from "./animated-counter"; // ✅ IMPORT ADICIONADO
 import {
   ArrowUpRight,
   Users,
@@ -127,7 +128,7 @@ export function CaseCard({
 
           {/* Badge Vídeo + Arrow */}
           <div className="flex items-center gap-2">
-            {/* Video Badge - Todos os cases têm playlist */}
+            {/* Video Badge */}
             <div className="flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5">
               <Play className="h-3 w-3 text-primary" />
               <span className="text-xs font-medium text-primary">
@@ -145,7 +146,7 @@ export function CaseCard({
           {title}
         </h3>
 
-        {/* Métricas com ícones variados */}
+        {/* ✅ MÉTRICAS COM ANIMATEDCOUNTER */}
         <div className="mb-6 grid grid-cols-3 gap-4">
           {displayMetrics.map((metric, index) => {
             const IconComponent = getMetricIcon(metric.label);
@@ -154,9 +155,13 @@ export function CaseCard({
               <div key={index} className="flex flex-col gap-1">
                 <div className="flex items-center gap-1.5">
                   <IconComponent className="h-4 w-4 text-primary" />
-                  <p className="text-lg font-bold text-primary md:text-xl">
-                    {metric.value}
-                  </p>
+
+                  {/* ✅ ANIMATEDCOUNTER APLICADO */}
+                  <AnimatedCounter
+                    value={metric.value}
+                    duration={2}
+                    className="text-lg font-bold text-primary md:text-xl"
+                  />
                 </div>
                 <p className="text-xs text-muted-foreground">
                   {metric.label}
