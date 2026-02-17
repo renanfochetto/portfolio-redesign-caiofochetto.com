@@ -528,3 +528,7 @@ export function getCaseBySlug(slug: string): CaseData | undefined {
 export function getAllSlugs(): string[] {
   return caseStudies.map(c => c.slug)
 }
+
+export function getAllCases(): CaseData[] {
+  return caseStudies
+}
