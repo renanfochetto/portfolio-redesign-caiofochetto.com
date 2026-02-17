@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Tag, Play, Calendar } from "lucide-react";
+import { ArrowLeft, ArrowRight, Tag, Play, Calendar, BookOpen, User } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { YouTubeEmbed } from "@/components/youtube-embed";
@@ -101,7 +101,6 @@ export default async function ProductionCasePage({
     notFound();
   }
 
-  // ✅ EXTRAIR COMPANY dos dados
   const { title, brand, company, year, type, role, what, myRole, tags, media } =
     productionCase;
 
@@ -164,11 +163,11 @@ export default async function ProductionCasePage({
             </h1>
           </div>
 
-          {/* ✅ META INFO CORRIGIDO - Usa COMPANY ao invés de BRAND */}
+          {/* Meta Info */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
             {/* Esquerda: Logo da EMPRESA + Nome da EMPRESA + Role */}
             <div className="flex items-center gap-4">
-              {/* Logo da EMPRESA (usando company) */}
+              {/* Logo da EMPRESA */}
               {companyLogos[company] && (
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
                   <Image
@@ -182,7 +181,6 @@ export default async function ProductionCasePage({
               )}
 
               <div>
-                {/* Nome da EMPRESA (não brand) */}
                 <p className="text-sm font-semibold text-foreground">{company}</p>
                 <p className="text-xs text-muted-foreground">{role}</p>
               </div>
@@ -201,6 +199,7 @@ export default async function ProductionCasePage({
       {media.hero.type === "video" && media.hero.url && (
         <section className="px-6 py-16 lg:px-8">
           <div className="mx-auto max-w-4xl">
+            {/* ✅ ÍCONE PLAY para PLAYLIST */}
             <div className="flex items-center gap-2 mb-8">
               <Play className="h-4 w-4 text-primary" />
               <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
@@ -217,11 +216,11 @@ export default async function ProductionCasePage({
         </section>
       )}
 
-      {/* What is it? */}
+      {/* O QUE É? - ✅ ÍCONE BOOKOPEN */}
       <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-2 mb-4">
-            <Play className="h-4 w-4 text-primary" />
+            <BookOpen className="h-4 w-4 text-primary" />
             <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
               {sectionLabels.what}
             </h2>
@@ -232,11 +231,11 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* My Role */}
+      {/* MEU PAPEL - ✅ ÍCONE USER */}
       <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-2 mb-4">
-            <Tag className="h-4 w-4 text-primary" />
+            <User className="h-4 w-4 text-primary" />
             <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
               {sectionLabels.myRole}
             </h2>
@@ -247,7 +246,7 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* Capabilities Tags */}
+      {/* COMPETÊNCIAS - ✅ ÍCONE TAG (mantido) */}
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="mb-4 flex items-center gap-2">
