@@ -193,8 +193,8 @@ export const productionCases: ProductionCase[] = [
     media: {
       thumbnail: "/images/production/bohemia-sabor-tradicoes/thumbnail.jpg",
       hero: {
-        type: "multiple",
-        videoIds: ["35H3XqDnacA", "X72AiB9y3L0"],
+        type: "video", // ✅ CORRIGIDO: "multiple" → "video"
+        videoId: "X72AiB9y3L0", // ✅ CORRIGIDO: Apenas o vídeo do passinho
         placeholder: "/images/production/bohemia-sabor-tradicoes/hero.jpg",
         alt: "Bohemia Sabor que Move Tradições documentary"
       }
