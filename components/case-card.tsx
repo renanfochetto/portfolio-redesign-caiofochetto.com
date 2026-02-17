@@ -120,7 +120,7 @@ export function CaseCard({
                 alt={`${brand} logo`}
                 width={64}
                 height={64}
-                className="h-full w-auto max-w-[100px] object-contain object-left"
+                className="h-full object-contain object-left"
                 style={{ width: "auto", maxWidth: "100px" }}
                 unoptimized
               />
