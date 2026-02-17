@@ -81,7 +81,7 @@ export function CaseCard({
         active:scale-[0.98]
       ">
 
-        {/* Header: LOGO + Badge + Arrow */}
+        {/* Header: LOGO + Badge (+ Arrow apenas em tablet+) */}
         <div className="mb-4 sm:mb-6 flex items-start justify-between">
           {/* Logo */}
           {mounted && brandLogo && (
@@ -94,10 +94,11 @@ export function CaseCard({
                 style={{ width: "auto", height: "100%", maxWidth: "100px" }}
                 className="object-contain object-left"
                 unoptimized
-              />            </div>
+              />
+            </div>
           )}
 
-          {/* Badge + Arrow */}
+          {/* Badge + Arrow (arrow oculta em mobile) */}
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-2.5 py-1 sm:px-3 sm:py-1.5">
               <Play className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-primary" />
@@ -105,7 +106,8 @@ export function CaseCard({
                 {locale === "pt" ? "Vídeo" : "Video"}
               </span>
             </div>
-            <ArrowUpRight className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
+            {/* Seta decorativa - APENAS em tablet+ */}
+            <ArrowUpRight className="hidden sm:block h-5 w-5 text-muted-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-primary" />
           </div>
         </div>
 
@@ -136,7 +138,7 @@ export function CaseCard({
           })}
         </div>
 
-        {/* Tags - menores no mobile */}
+        {/* Tags */}
         <div className="flex flex-wrap gap-1.5 sm:gap-2">
           {displayTags.map((tag, index) => (
             <span
@@ -148,7 +150,7 @@ export function CaseCard({
           ))}
         </div>
 
-        {/* CTA */}
+        {/* CTA - seta funcional SEMPRE visível */}
         <div className="mt-4 sm:mt-6 flex items-center gap-2 text-xs sm:text-sm font-medium text-primary">
           <span>{locale === "pt" ? "Ver case completo" : "View full case"}</span>
           <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
