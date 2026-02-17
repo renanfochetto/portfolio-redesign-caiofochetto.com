@@ -14,7 +14,6 @@ import {
 
 const SITE_URL = "https://www.caiofochetto.com";
 
-// Mapeamento de empresas para seus logos (em /public/companies/)
 const companyLogos: Record<string, string> = {
   "Octagon": "octagon.avif",
   "A+E Networks": "aenetworks.avif",
@@ -26,7 +25,6 @@ const companyLogos: Record<string, string> = {
   "TV Mundo Maior": "tvmundomaior.avif",
 };
 
-// Mapeamento de brands para seus logos (em /public/logos/white ou black)
 const brandLogos: Record<string, string> = {
   "Netflix": "netflix",
   "Budweiser": "budweiser",
@@ -46,7 +44,6 @@ interface ProductionCasePageProps {
   }>;
 }
 
-// Generate static paths
 export async function generateStaticParams() {
   const slugs = getAllProductionCaseSlugs();
   return slugs.map((slug) => ({
@@ -54,7 +51,6 @@ export async function generateStaticParams() {
   }));
 }
 
-// Generate metadata
 export async function generateMetadata({
   params,
 }: ProductionCasePageProps): Promise<Metadata> {
@@ -104,17 +100,14 @@ export default async function ProductionCasePage({
   const { title, brand, company, year, type, role, what, myRole, tags, media } =
     productionCase;
 
-  // Navigation
   const navigation = getProductionCaseNavigation(resolvedParams.slug);
-
-  // Pegar logo da brand
   const brandLogo = brandLogos[brand];
 
-  // Section labels
   const sectionLabels = {
     what: "O QUE É?",
     myRole: "MEU PAPEL",
     capabilities: "COMPETÊNCIAS",
+    relatedContent: "CONTEÚDO RELACIONADO",
     back: "Voltar",
     previous: "Anterior",
     next: "Próximo",
@@ -127,10 +120,7 @@ export default async function ProductionCasePage({
       {/* Hero */}
       <section className="px-6 pt-28 pb-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
-
-          {/* Logo esquerda + Botão direita */}
           <div className="flex items-center justify-between gap-4">
-            {/* Logo da Brand (esquerda) */}
             {brandLogo ? (
               <div className="flex h-16 w-32 items-center justify-start">
                 <Image
@@ -146,7 +136,6 @@ export default async function ProductionCasePage({
               <div className="h-16 w-32" />
             )}
 
-            {/* Botão Voltar (direita) */}
             <Link
               href="/#work"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
@@ -156,18 +145,14 @@ export default async function ProductionCasePage({
             </Link>
           </div>
 
-          {/* Título */}
           <div className="mt-8">
             <h1 className="text-3xl font-bold text-foreground md:text-5xl">
               {title}
             </h1>
           </div>
 
-          {/* Meta Info */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
-            {/* Esquerda: Logo da EMPRESA + Nome da EMPRESA + Role */}
             <div className="flex items-center gap-4">
-              {/* Logo da EMPRESA */}
               {companyLogos[company] && (
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
                   <Image
@@ -186,7 +171,6 @@ export default async function ProductionCasePage({
               </div>
             </div>
 
-            {/* Direita: Período */}
             <div className="flex items-center gap-2 text-sm">
               <Calendar className="h-4 w-4 text-muted-foreground" />
               <span className="font-medium text-foreground">{year}</span>
@@ -195,20 +179,21 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* Playlist/Video Section - SE EXISTIR */}
-      {media.hero.type === "video" && media.hero.url && (
+      {/* ✅ PLAYLIST/VIDEO SECTION - Renderiza TODOS os tipos */}
+      {media.hero.type && (media.hero.videoId || media.hero.videoIds) && (
         <section className="px-6 py-16 lg:px-8">
           <div className="mx-auto max-w-4xl">
-            {/* ✅ ÍCONE PLAY para PLAYLIST */}
             <div className="flex items-center gap-2 mb-8">
               <Play className="h-4 w-4 text-primary" />
               <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-                CONTEÚDO RELACIONADO
+                {sectionLabels.relatedContent}
               </h2>
             </div>
 
             <YouTubeEmbed
-              videoId={media.hero.url}
+              type={media.hero.type}
+              videoId={media.hero.videoId}
+              videoIds={media.hero.videoIds}
               title={title}
               placeholder={media.hero.placeholder}
             />
@@ -216,7 +201,7 @@ export default async function ProductionCasePage({
         </section>
       )}
 
-      {/* O QUE É? - ✅ ÍCONE BOOKOPEN */}
+      {/* O QUE É? */}
       <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-2 mb-4">
@@ -231,7 +216,7 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* MEU PAPEL - ✅ ÍCONE USER */}
+      {/* MEU PAPEL */}
       <section className="px-6 py-12 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-2 mb-4">
@@ -246,7 +231,7 @@ export default async function ProductionCasePage({
         </div>
       </section>
 
-      {/* COMPETÊNCIAS - ✅ ÍCONE TAG (mantido) */}
+      {/* COMPETÊNCIAS */}
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="mb-4 flex items-center gap-2">
@@ -272,8 +257,6 @@ export default async function ProductionCasePage({
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl border-t border-neutral-600 pt-12">
           <div className="grid gap-6 md:grid-cols-2">
-
-            {/* Previous Case */}
             {navigation.prev && (
               <Link
                 href={`/production/${navigation.prev.slug}`}
@@ -292,7 +275,6 @@ export default async function ProductionCasePage({
               </Link>
             )}
 
-            {/* Next Case */}
             {navigation.next && (
               <Link
                 href={`/production/${navigation.next.slug}`}
@@ -310,7 +292,6 @@ export default async function ProductionCasePage({
                 </div>
               </Link>
             )}
-
           </div>
         </div>
       </section>
