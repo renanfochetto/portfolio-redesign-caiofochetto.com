@@ -286,3 +286,26 @@ export interface ProductionCase {
     ogImage: string;
   };
 }
+
+// ✅ HELPER FUNCTIONS
+export function getProductionCaseBySlug(slug: string): ProductionCase | null {
+  return productionCases.find(c => c.slug === slug) || null;
+}
+
+export function getAllProductionCases(): ProductionCase[] {
+  return productionCases;
+}
+
+export function getAllProductionCaseSlugs(): string[] {
+  return productionCases.map(c => c.slug);
+}
+
+export function getProductionCaseNavigation(slug: string) {
+  const index = productionCases.findIndex(c => c.slug === slug);
+  if (index === -1) return { prev: null, next: null };
+
+  const prev = index > 0 ? productionCases[index - 1] : productionCases[productionCases.length - 1];
+  const next = index < productionCases.length - 1 ? productionCases[index + 1] : productionCases[0];
+
+  return { prev, next };
+}

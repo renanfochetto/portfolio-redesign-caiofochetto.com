@@ -104,8 +104,6 @@ export function WorkSection() {
                 <AnimatedItem key={prodCase.slug} index={idx}>
                   <ProductionCard
                     case={prodCase}
-                    brandLogoMap={productionBrandLogoMap}
-                    locale={locale}
                   />
                 </AnimatedItem>
               ))}
