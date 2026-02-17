@@ -21,7 +21,9 @@
   "work": {
     "sectionLabel": "Selected work",
     "heading": "Cases that drive results",
-    "viewCase": "View full case"
+    "viewCase": "View full case",
+    "togglePerformance": "Performance",
+    "toggleProduction": "Production"
   },
   "experience": {
     "sectionLabel": "Career",

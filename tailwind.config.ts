@@ -22,9 +22,9 @@ export default {
         input: "rgb(var(--input) / <alpha-value>)",
       },
       fontFamily: {
-        display: ["var(--font-display)", "Fraunces", "serif"],
-        heading: ["var(--font-heading)", "Space Grotesk", "sans-serif"],
-        sans: ["var(--font-body)", "Manrope", "sans-serif"],
+        display: ["var(--font-display)"],
+        heading: ["var(--font-heading)"],
+        sans: ["var(--font-sans)", "Manrope", "sans-serif"],
         mono: ["Geist Mono", "monospace"],
       },
       fontSize: {

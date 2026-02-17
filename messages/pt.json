@@ -21,7 +21,9 @@
   "work": {
     "sectionLabel": "Trabalhos selecionados",
     "heading": "Cases que geram resultado",
-    "viewCase": "Ver case completo"
+    "viewCase": "Ver case completo",
+    "togglePerformance": "Performance",
+    "toggleProduction": "Produção"
   },
   "experience": {
     "sectionLabel": "Trajetória",
