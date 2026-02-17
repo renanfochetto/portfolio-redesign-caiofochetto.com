@@ -39,11 +39,11 @@ export function Work() {
             <>
               {performanceCases.map((caseItem) => (
                 <CaseCard
-                  key={caseItem.id}
+                  key={caseItem.slug}
                   slug={caseItem.slug}
-                  brand={caseItem.brand}
-                  brandLogo={caseItem.brandLogo}
-                  title={caseItem.title}
+                  brand={typeof caseItem.brand === "string" ? caseItem.brand : caseItem.brand[0]}
+                  brandLogo={caseItem.brand instanceof Array ? caseItem.brand[0].toLowerCase() : (typeof caseItem.brand === "string" ? caseItem.brand.toLowerCase() : undefined)}
+                  title={caseItem.title_pt}
                   metrics={caseItem.metrics}
                   tags={caseItem.tags}
                   locale={locale}
@@ -54,10 +54,12 @@ export function Work() {
             <>
               {productionCases.map((caseItem) => (
                 <ProductionCard
-                  key={caseItem.id}
-                  slug={caseItem.slug}
-                  brand={caseItem.brand}
-                  brandLogo={caseItem.brandLogo}
+                  key={caseItem.slug}
+                  case={caseItem}
+                />
+              ))}
+            </>
+          )}
                   title={caseItem.title}
                   metrics={caseItem.metrics}
                   tags={caseItem.tags}
