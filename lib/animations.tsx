@@ -50,18 +50,18 @@ export function useCounter(
   return displayValue;
 }
 
-// ✅ VALORES INTERMEDIÁRIOS (Visível mas elegante)
+// ✅ VALORES SUTIS PROFISSIONAIS (Originais)
 export const fadeInUpVariants = {
   hidden: {
     opacity: 0,
-    y: 40  // ✅ 40px = Visível sem ser exagerado
+    y: 20  // ✅ Sutil: 20px
   },
   visible: (custom = 0) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,  // ✅ 0.8s = Perceptível mas não lento demais
-      delay: custom * 0.15,  // ✅ 0.15s = Stagger perceptível
+      duration: 0.6,  // ✅ Rápido mas suave
+      delay: custom * 0.1,  // ✅ Stagger discreto
       ease: "easeOut",
     },
   }),
@@ -72,7 +72,7 @@ export const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,  // ✅ 0.15s = Cascata perceptível
+      staggerChildren: 0.1,  // ✅ Cascata sutil
     },
   },
 };
