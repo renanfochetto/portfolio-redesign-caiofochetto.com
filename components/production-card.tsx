@@ -128,7 +128,7 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
         <span>
           {locale === "pt" ? "Ver case completo" : "View full case"}
         </span>
-        <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+        <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-1" />
       </div>
     </Link>
   );
