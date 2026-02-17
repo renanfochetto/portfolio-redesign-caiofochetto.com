@@ -133,22 +133,22 @@ export const productionCases = [
     id: "passion4jazz",
     slug: "passion4jazz",
     title: "Passion4Jazz",
-    brand: "Nestlé",
+    brand: "Playground",
     company: "Playground",
     role: "Content and Product Manager",
     year: "2021",
-    type: "Content Platform",
+    type: "Podcast",
 
-    description: "Plataforma de conteúdo premium conectando música jazz com cultura de café Nespresso.",
+    description: "Podcast sobre jazz apresentando artistas, histórias e a cultura do gênero musical.",
 
-    what: "Plataforma de conteúdo que conectou a cultura do café premium Nespresso com a sofisticação do jazz, criando experiências imersivas que elevaram o posicionamento da marca através de música e lifestyle.",
+    what: "Podcast dedicado ao universo do jazz, explorando a história do gênero, apresentando artistas, e criando conexão com entusiastas da música através de conversas autênticas e curadoria musical de qualidade.",
 
-    myRole: "Desenvolvimento da estratégia de conteúdo, curadoria de artistas e repertório, produção de eventos e experiências, além de gestão da plataforma digital e criação de narrativas que integraram música, café e lifestyle.",
+    myRole: "Desenvolvimento do conceito editorial do podcast, curadoria de conteúdo e artistas, gestão de produção audiovisual, e estratégia de distribuição digital focada em construir uma audiência engajada de apreciadores de jazz.",
 
     tags: [
-      "Premium Content",
-      "Music Culture",
-      "Lifestyle Marketing",
+      "Podcast Production",
+      "Music Content",
+      "Editorial Strategy",
       "Brand Experience",
       "Content Curation"
     ],
