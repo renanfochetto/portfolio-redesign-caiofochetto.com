@@ -126,19 +126,20 @@ export default async function ProductionCasePage({
           }),
         }}
       />
-              </div>
-            ) : (
-              <div className="h-16 w-32" />
-            )}
+    </div>
+  ) : (
+    <div className="h-16 w-32" />
+  )
+}
 
-            <Link
-              href="/#work"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              {sectionLabels.back}
-            </Link>
-          </div>
+<Link
+  href="/#work"
+  className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-all hover:text-primary active:scale-95"
+>
+  <ArrowLeft className="h-4 w-4" />
+  {sectionLabels.back}
+</Link>
+          </div >
 
           <div className="mt-8">
             <h1 className="text-3xl font-bold text-foreground md:text-5xl">
@@ -171,84 +172,86 @@ export default async function ProductionCasePage({
               <span className="font-medium text-foreground">{year}</span>
             </div>
           </div>
+        </div >
+      </section >
+
+  {/* ✅ PLAYLIST/VIDEO SECTION - Renderiza TODOS os tipos */ }
+{
+  media.hero.type && (media.hero.videoId || media.hero.videoIds) && (
+    <section className="px-6 py-16 lg:px-8">
+      <div className="mx-auto max-w-4xl">
+        <div className="flex items-center gap-2 mb-8">
+          <Play className="h-4 w-4 text-primary" />
+          <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+            {sectionLabels.relatedContent}
+          </h2>
         </div>
-      </section>
 
-      {/* ✅ PLAYLIST/VIDEO SECTION - Renderiza TODOS os tipos */}
-      {media.hero.type && (media.hero.videoId || media.hero.videoIds) && (
-        <section className="px-6 py-16 lg:px-8">
-          <div className="mx-auto max-w-4xl">
-            <div className="flex items-center gap-2 mb-8">
-              <Play className="h-4 w-4 text-primary" />
-              <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-                {sectionLabels.relatedContent}
-              </h2>
-            </div>
+        <YouTubeEmbed
+          type={media.hero.type}
+          videoId={media.hero.videoId}
+          videoIds={media.hero.videoIds}
+          title={title}
+          placeholder={media.hero.placeholder}
+        />
+      </div>
+    </section>
+  )
+}
 
-            <YouTubeEmbed
-              type={media.hero.type}
-              videoId={media.hero.videoId}
-              videoIds={media.hero.videoIds}
-              title={title}
-              placeholder={media.hero.placeholder}
-            />
-          </div>
-        </section>
-      )}
+{/* O QUE É? */ }
+<section className="px-6 py-12 lg:px-8">
+  <div className="mx-auto max-w-4xl">
+    <div className="flex items-center gap-2 mb-4">
+      <BookOpen className="h-4 w-4 text-primary" />
+      <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+        {sectionLabels.what}
+      </h2>
+    </div>
+    <p className="text-base leading-relaxed text-muted-foreground">
+      {what}
+    </p>
+  </div>
+</section>
 
-      {/* O QUE É? */}
-      <section className="px-6 py-12 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="flex items-center gap-2 mb-4">
-            <BookOpen className="h-4 w-4 text-primary" />
-            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-              {sectionLabels.what}
-            </h2>
-          </div>
-          <p className="text-base leading-relaxed text-muted-foreground">
-            {what}
-          </p>
-        </div>
-      </section>
+{/* MEU PAPEL */ }
+<section className="px-6 py-12 lg:px-8">
+  <div className="mx-auto max-w-4xl">
+    <div className="flex items-center gap-2 mb-4">
+      <User className="h-4 w-4 text-primary" />
+      <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
+        {sectionLabels.myRole}
+      </h2>
+    </div>
+    <p className="text-base leading-relaxed text-muted-foreground">
+      {myRole}
+    </p>
+  </div>
+</section>
 
-      {/* MEU PAPEL */}
-      <section className="px-6 py-12 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="flex items-center gap-2 mb-4">
-            <User className="h-4 w-4 text-primary" />
-            <h2 className="text-xs font-medium uppercase tracking-widest text-primary">
-              {sectionLabels.myRole}
-            </h2>
-          </div>
-          <p className="text-base leading-relaxed text-muted-foreground">
-            {myRole}
-          </p>
-        </div>
-      </section>
+{/* COMPETÊNCIAS */ }
+<section className="px-6 py-16 lg:px-8">
+  <div className="mx-auto max-w-4xl">
+    <div className="mb-4 flex items-center gap-2">
+      <Tag className="h-4 w-4 text-primary" />
+      <p className="text-xs font-medium uppercase tracking-widest text-primary">
+        {sectionLabels.capabilities}
+      </p>
+    </div>
+    <div className="flex flex-wrap gap-2">
+      {tags.map((capability, index) => (
+        <span
+          key={index}
+          className="rounded-full border border-neutral-600 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:border-primary hover:text-primary"
+        >
+          {capability}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
 
-      {/* COMPETÊNCIAS */}
-      <section className="px-6 py-16 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-4 flex items-center gap-2">
-            <Tag className="h-4 w-4 text-primary" />
-            <p className="text-xs font-medium uppercase tracking-widest text-primary">
-              {sectionLabels.capabilities}
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((capability, index) => (
-              <span
-                key={index}
-                className="rounded-full border border-neutral-600 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:border-primary hover:text-primary"
-              >
-                {capability}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Navigation */}
+{/* Navigation */ }
       <section className="px-6 py-16 lg:px-8">
         <div className="mx-auto max-w-4xl border-t border-neutral-600 pt-12">
           <div className="grid gap-6 md:grid-cols-2">
@@ -292,6 +295,6 @@ export default async function ProductionCasePage({
       </section>
 
       <Footer hideContact={true} />
-    </div>
+    </div >
   );
 }
