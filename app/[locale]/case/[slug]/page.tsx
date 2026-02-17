@@ -1,5 +1,5 @@
 // app/[locale]/case/[slug]/page.tsx
-// VERSÃO COM CORREÇÕES MOBILE: Logo proporcional + Vídeo full-width
+// VERSÃO FINAL MOBILE: Logo uniforme + Vídeo full-width
 
 "use client";
 
@@ -81,13 +81,10 @@ export default function CaseStudyPage({ params }: PageProps) {
     params.then(setResolvedParams);
   }, [params]);
 
-  if (!mounted || !resolvedParams) {
-    return null;
-  }
+  if (!mounted || !resolvedParams) return null;
 
   const { locale, slug } = resolvedParams;
   const study = getCaseBySlug(slug);
-
   if (!study) notFound();
 
   const logoFolder = theme === "dark" ? "white" : "black";
@@ -193,18 +190,17 @@ export default function CaseStudyPage({ params }: PageProps) {
             </h1>
           </div>
 
-          {/* ✅ CORREÇÃO 1: Logo sem distorção */}
+          {/* ✅ LOGO UNIFORME - mesmo padrão do production case */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-600 pt-6">
             <div className="flex items-center gap-3 sm:gap-4">
               {companyLogo && (
-                <div className="flex h-10 w-20 sm:h-12 sm:w-24 items-center justify-center rounded-lg border border-neutral-600 bg-card px-2">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-neutral-600 bg-card overflow-hidden">
                   <Image
                     src={`/companies/${companyLogo}`}
                     alt={`${study.company} logo`}
-                    width={64}
+                    width={48}
                     height={48}
-                    className="max-h-full w-auto object-contain"
-                    style={{ maxWidth: "100%" }}
+                    className="h-full w-auto object-cover"
                     unoptimized
                   />
                 </div>
@@ -224,7 +220,7 @@ export default function CaseStudyPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ✅ CORREÇÃO 2: Vídeo full-width em mobile */}
+      {/* ✅ VÍDEO FULL-WIDTH EM MOBILE */}
       {study.playlist_url && (() => {
         const playlistId = (() => {
           try {
