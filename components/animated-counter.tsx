@@ -5,7 +5,7 @@ import { useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 interface AnimatedCounterProps {
-  value: string | number; // ✅ Agora aceita string OU number
+  value: string | number;
   duration?: number;
   className?: string;
 }
@@ -32,7 +32,7 @@ export function AnimatedCounter({
     }
   }, [isInView]);
 
-  // ✅ PARSE da string para extrair número, prefixo e sufixo
+  // Parse da string para extrair número, prefixo e sufixo
   const parseValue = (val: string | number) => {
     // Se já for number, retorna direto
     if (typeof val === "number") {
@@ -66,11 +66,11 @@ export function AnimatedCounter({
 
   const { number, prefix, suffix, decimals } = parseValue(value);
 
-  // ✅ Usar o useCounter existente
-  const displayNumber = useCounter(hasStarted ? number : 0, duration);
+  // ✅ Passar decimals para o useCounter
+  const displayNumber = useCounter(hasStarted ? number : 0, duration, decimals);
   const shouldReduce = prefersReducedMotion();
 
-  // ✅ Formatar com decimais corretos
+  // Formatar com decimais corretos
   const formattedNumber = decimals > 0
     ? (shouldReduce ? number : displayNumber).toFixed(decimals)
     : Math.floor(shouldReduce ? number : displayNumber).toString();
