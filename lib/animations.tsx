@@ -8,17 +8,27 @@ export const prefersReducedMotion = () => {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 };
 
+// ✅ VERSÃO MELHORADA: Suporta decimais
 export function useCounter(
   value: number,
-  duration: number = 2
+  duration: number = 2,
+  decimals: number = 0 // ✅ NOVO: número de decimais
 ) {
   const count = useMotionValue(0);
-  const rounded = useTransform(count, latest => Math.round(latest));
+
+  // ✅ CORRIGIDO: Não arredondar sempre, respeitar decimais
+  const formatted = useTransform(count, (latest) => {
+    if (decimals > 0) {
+      return parseFloat(latest.toFixed(decimals));
+    }
+    return Math.round(latest);
+  });
+
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
     const shouldReduce = prefersReducedMotion();
-    
+
     if (shouldReduce) {
       setDisplayValue(value);
       return;
@@ -29,7 +39,7 @@ export function useCounter(
       ease: "easeOut",
     });
 
-    const unsubscribe = rounded.on("change", (latest) => {
+    const unsubscribe = formatted.on("change", (latest) => {
       setDisplayValue(latest);
     });
 
@@ -37,7 +47,7 @@ export function useCounter(
       animation.stop();
       unsubscribe();
     };
-  }, [value, duration, count, rounded]);
+  }, [value, duration, decimals, count, formatted]);
 
   return displayValue;
 }
