@@ -21,24 +21,22 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
     setMounted(true);
   }, []);
 
-  const { slug, title, brand, year, type, role, description, tags } = productionCase;
+  const { slug, title, brand, year, type, role, tags } = productionCase;
 
-  // Logo mapping
+  // ✅ DESCRIÇÃO: usar o campo 'description' se existir, senão fallback vazio
+  const description = productionCase.description || "";
+
+  // ✅ LOGO MAPPING - apenas as brands que REALMENTE têm logo
   const brandLogos: Record<string, string> = {
     "Netflix": "netflix",
-    "Budweiser": "budweiser",
-    "HISTORY": "history",
     "Natura": "natura",
-    "A&E": "ae",
-    "Bradesco": "bradesco",
     "Havaianas": "havaianas",
-    "Playground": "playground",
     "Bohemia": "bohemia",
     "Nestlé": "nestle",
   };
 
   const logoFolder = theme === "dark" ? "white" : "black";
-  const logoFile = brandLogos[brand];
+  const logoFile = brandLogos[brand]; // undefined se não existir
 
   // Primeiras 3 tags
   const displayTags = tags.slice(0, 3);
@@ -51,9 +49,9 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
     >
       {/* Header: LOGO + Badge + Arrow */}
       <div className="mb-6 flex items-start justify-between">
-        {/* Logo da empresa */}
-        {mounted && logoFile ? (
-          <div className="flex h-16 w-32 items-center justify-start">
+        {/* Logo da Brand (APENAS se existir no mapping) */}
+        <div className="flex h-16 w-32 items-center justify-start">
+          {mounted && logoFile ? (
             <Image
               src={`/logos/${logoFolder}/${logoFile}.svg`}
               alt={`${brand} logo`}
@@ -61,11 +59,18 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
               height={64}
               className="h-full w-auto max-w-full object-contain object-left"
               unoptimized
+              onError={(e) => {
+                // ✅ Fallback se imagem não carregar
+                e.currentTarget.style.display = 'none';
+              }}
             />
-          </div>
-        ) : (
-          <div className="h-16 w-32" />
-        )}
+          ) : (
+            // ✅ Fallback: mostrar nome da brand se não tiver logo
+            <span className="text-sm font-bold text-primary uppercase tracking-wider">
+              {brand}
+            </span>
+          )}
+        </div>
 
         {/* Badge Vídeo + Arrow */}
         <div className="flex items-center gap-2">
@@ -98,10 +103,12 @@ export function ProductionCard({ case: productionCase }: ProductionCardProps) {
         </p>
       </div>
 
-      {/* ✅ DESCRIÇÃO BREVE (NOVO) */}
-      <p className="mb-6 text-sm leading-relaxed text-muted-foreground line-clamp-2">
-        {description}
-      </p>
+      {/* ✅ DESCRIÇÃO BREVE (só mostra se existir) */}
+      {description && (
+        <p className="mb-6 text-sm leading-relaxed text-muted-foreground line-clamp-2">
+          {description}
+        </p>
+      )}
 
       {/* Tags */}
       <div className="flex flex-wrap gap-2">
