@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useState, useEffect } from "react";
+import { AnimatedCounter } from "@/components/animated-counter";
 import { useTheme } from "@/components/theme-provider";
 import {
   ArrowLeft,
@@ -380,8 +381,11 @@ export default function CaseStudyPage({ params }: PageProps) {
                   {/* Ícone + Valor */}
                   <div className="flex items-center gap-3 mb-2">
                     <IconComponent className="h-6 w-6 text-primary flex-shrink-0" />
-                    <p className="text-4xl font-bold text-primary md:text-5xl">{metric.value}</p>
-                  </div>
+                    <AnimatedCounter
+                      value={metric.value}
+                      duration={2}
+                      className="text-4xl font-bold text-primary md:text-5xl"
+                    />                  </div>
                   <p className="mt-2 text-sm font-semibold text-foreground">{label}</p>
                   <p className="mt-1 text-xs text-muted-foreground">{description}</p>
                 </div>
