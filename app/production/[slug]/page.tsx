@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Tag, Play, Calendar, BookOpen, User } from "lucide-react";
+import { BrandLogo } from "@/components/brand-logo";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { YouTubeEmbed } from "@/components/youtube-embed";
@@ -128,23 +129,19 @@ export default async function ProductionCasePage({
           {/* Brand logo (esquerda) + Botão Voltar (direita) */}
           <div className="flex items-center justify-between gap-4">
             {brandLogo ? (
-              <div className="flex h-16 w-32 items-center justify-start">
-                <Image
-                  src={`/logos/white/${brandLogo}.svg`}
-                  alt={`${brand} logo`}
-                  width={128}
-                  height={64}
-                  className="h-full w-auto max-w-full object-contain object-left"
-                  unoptimized
-                />
-              </div>
+              <BrandLogo
+                brandLogo={brandLogo}
+                brand={brand}
+                width={128}
+                height={64}
+              />
             ) : (
               <div className="h-16 w-32" />
             )}
 
             <Link
               href="/#work"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-all hover:text-primary active:scale-95"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
             >
               <ArrowLeft className="h-4 w-4" />
               {sectionLabels.back}
