@@ -13,7 +13,7 @@ type WorkView = "performance" | "production";
 export function Work() {
   const { t, locale } = useI18n();
   const [view, setView] = useState<WorkView>("performance");
-  
+
   const performanceCases = getAllCases();
   const productionCases = getAllProductionCases();
 
@@ -30,10 +30,10 @@ export function Work() {
           </h2>
         </div>
 
-        {/* Toggle - centralizado */}
+        {/* Toggle */}
         <WorkToggle value={view} onChange={setView} />
 
-        {/* Cases Grid - muda baseado no view */}
+        {/* Cases Grid */}
         <div className="grid gap-6 md:grid-cols-2 md:gap-8">
           {view === "performance" ? (
             <>
@@ -41,10 +41,23 @@ export function Work() {
                 <CaseCard
                   key={caseItem.slug}
                   slug={caseItem.slug}
-                  brand={typeof caseItem.brand === "string" ? caseItem.brand : caseItem.brand[0]}
-                  brandLogo={caseItem.brand instanceof Array ? caseItem.brand[0].toLowerCase() : (typeof caseItem.brand === "string" ? caseItem.brand.toLowerCase() : undefined)}
-                  title={caseItem.title_pt}
-                  metrics={caseItem.metrics}
+                  brand={
+                    typeof caseItem.brand === "string"
+                      ? caseItem.brand
+                      : caseItem.brand[0]
+                  }
+                  brandLogo={
+                    caseItem.brand instanceof Array
+                      ? caseItem.brand[0].toLowerCase()
+                      : typeof caseItem.brand === "string"
+                        ? caseItem.brand.toLowerCase()
+                        : undefined
+                  }
+                  title={locale === "pt" ? caseItem.title_pt : caseItem.title_en}
+                  metrics={caseItem.metrics.map((m) => ({
+                    value: m.value,
+                    label: locale === "pt" ? m.label_pt : m.label_en,
+                  }))}
                   tags={caseItem.tags}
                   locale={locale}
                 />
@@ -56,14 +69,6 @@ export function Work() {
                 <ProductionCard
                   key={caseItem.slug}
                   case={caseItem}
-                />
-              ))}
-            </>
-          )}
-                  title={caseItem.title}
-                  metrics={caseItem.metrics}
-                  tags={caseItem.tags}
-                  locale={locale}
                 />
               ))}
             </>
