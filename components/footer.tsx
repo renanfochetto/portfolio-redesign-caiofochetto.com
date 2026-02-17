@@ -73,8 +73,8 @@ export function Footer({ hideContact = false }: FooterProps) {
           </>
         )}
 
-        {/* Copyright sempre visível */}
-        <div className="flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground md:flex-row">
+        {/* Copyright sempre visível - sempre em linha */}
+        <div className="flex flex-row flex-wrap items-center justify-center sm:justify-between gap-2 sm:gap-4 text-xs text-muted-foreground">
           <p className="text-xs">&copy; {new Date().getFullYear()} Caio Fochetto.</p>
           <p className="text-xs">
             Desenvolvido por{" "}
